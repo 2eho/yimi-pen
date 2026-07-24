@@ -19,5 +19,7 @@ content/audio/**/*.ogg
 !content/audio/**/.gitkeep
 # L0 TTS cache (regenerable)
 content/audio/diy/cache/
+# local agent memory (Lite Demo)
+docs/pi/
 # local DIY experiments (keep examples in repo; ignore heavy user dumps if any)
 *.local.json
