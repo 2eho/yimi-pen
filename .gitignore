@@ -17,5 +17,7 @@ content/audio/**/*.mp3
 content/audio/**/*.wav
 content/audio/**/*.ogg
 !content/audio/**/.gitkeep
+# L0 TTS cache (regenerable)
+content/audio/diy/cache/
 # local DIY experiments (keep examples in repo; ignore heavy user dumps if any)
 *.local.json

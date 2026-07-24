@@ -109,6 +109,11 @@ export interface AudioBackend {
   stop(): Promise<void>;
 }
 
+export interface ConsoleAudioBackendOptions {
+  /** Try to play real files via OS (Windows PowerShell MediaPlayer). Default true. */
+  systemPlay?: boolean;
+}
+
 /** Console backend for device simulator / tests. */
 export class ConsoleAudioBackend implements AudioBackend {
   private timer: ReturnType<typeof setTimeout> | null = null;
@@ -116,6 +121,11 @@ export class ConsoleAudioBackend implements AudioBackend {
   private remainingMs = 0;
   private startedAt = 0;
   private hooks: { onEnd: () => void; onError: (message: string) => void } | null = null;
+  private systemPlay: boolean;
+
+  constructor(options: ConsoleAudioBackendOptions = {}) {
+    this.systemPlay = options.systemPlay ?? true;
+  }
 
   async play(
     uri: string,
@@ -123,18 +133,21 @@ export class ConsoleAudioBackend implements AudioBackend {
   ): Promise<void> {
     await this.stop();
     this.hooks = hooks;
-    this.remainingMs = 1200;
+    this.remainingMs = 1800;
     this.startedAt = Date.now();
     this.paused = false;
-    // diy:tts:* is transcript-only (no mp3) for DIY MVP
+    // diy:tts:* is transcript-only stub (run npm run diy:speak first)
     if (uri.startsWith("diy:tts:") || uri.includes("diy:tts:")) {
       const voice =
         uri.includes("?voice=") ? uri.split("?voice=")[1] : undefined;
       console.log(
-        `[audio] speak (亲情音色 TTS stub${voice ? ` voice=${decodeURIComponent(voice)}` : ""}) ${uri.split("?")[0]}`,
+        `[audio] speak (TTS stub — run: npm run diy:speak -- --oid …)${voice ? ` voice=${decodeURIComponent(voice)}` : ""}`,
       );
     } else {
       console.log(`[audio] play ${uri}`);
+      if (this.systemPlay && looksLikeLocalFile(uri)) {
+        void systemPlayFile(uri).catch(() => undefined);
+      }
     }
     this.timer = setTimeout(() => {
       this.timer = null;
@@ -169,4 +182,37 @@ export class ConsoleAudioBackend implements AudioBackend {
     this.paused = false;
     this.hooks = null;
   }
+}
+
+function looksLikeLocalFile(uri: string): boolean {
+  return (
+    /^[a-zA-Z]:[\\/]/.test(uri) ||
+    uri.startsWith("/") ||
+    uri.endsWith(".mp3") ||
+    uri.endsWith(".wav")
+  );
+}
+
+async function systemPlayFile(file: string): Promise<void> {
+  const { spawn } = await import("node:child_process");
+  const ps = `
+$p = ${JSON.stringify(file)}
+if (-not (Test-Path -LiteralPath $p)) { exit 0 }
+Add-Type -AssemblyName presentationCore
+$mp = New-Object System.Windows.Media.MediaPlayer
+$mp.Open([uri]$p)
+$mp.Volume = 1
+$mp.Play()
+Start-Sleep -Milliseconds 500
+$guard = 0
+while ($mp.NaturalDuration.HasTimeSpan -eq $false -and $guard -lt 20) { Start-Sleep -Milliseconds 100; $guard++ }
+if ($mp.NaturalDuration.HasTimeSpan) {
+  while ($mp.Position -lt $mp.NaturalDuration.TimeSpan) { Start-Sleep -Milliseconds 150 }
+} else { Start-Sleep -Seconds 2 }
+$mp.Close()
+`;
+  spawn("powershell", ["-NoProfile", "-Command", ps], {
+    stdio: "ignore",
+    detached: true,
+  }).unref();
 }

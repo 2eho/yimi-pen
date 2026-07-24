@@ -12,6 +12,8 @@
     "dev:admin": "npm run dev -w @yimi-pen/admin-web",
     "dev:sim": "npm run dev -w @yimi-pen/device-sim",
     "validate:books": "node scripts/validate-books.mjs",
+    "tts": "node scripts/tts-l0.mjs",
+    "diy:speak": "node scripts/diy-speak.mjs",
     "test": "npm run test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "tsc -b"

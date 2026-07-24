@@ -33,6 +33,17 @@ mode free
 
 DIY 绑定见 [diy-bind.md](./diy-bind.md)。
 
+### L0 系统音（真出声）
+
+```bash
+pip install edge-tts
+npm run diy:speak -- --oid YIMI-DIY-BANANA
+npm run dev:sim
+# tap oid:YIMI-DIY-BANANA
+```
+
+详见 [tts-l0.md](./tts-l0.md)。
+
 WebSocket：`ws://127.0.0.1:7788`
 
 ## 内容台

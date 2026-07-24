@@ -11,19 +11,21 @@
       "clips": [
         {
           "id": "diy-yimi-diy-banana-1",
-          "uri": "diy:tts:diy-yimi-diy-banana-1?voice=voice-mom",
+          "uri": "diy/cache/d0055e40e32f68ad.mp3",
           "mediaType": "voice",
           "transcript": "我是一根香香的香蕉！",
           "weight": 2,
-          "language": "zh-CN"
+          "language": "zh-CN",
+          "voiceProfileId": "voice-mom"
         },
         {
           "id": "diy-yimi-diy-banana-2",
-          "uri": "diy:tts:diy-yimi-diy-banana-2?voice=voice-mom",
+          "uri": "diy/cache/e37ca0fbf9d9d0e4.mp3",
           "mediaType": "voice",
           "transcript": "嘿，别把我捏软咯！",
           "weight": 1,
-          "language": "zh-CN"
+          "language": "zh-CN",
+          "voiceProfileId": "voice-mom"
         }
       ],
       "createdAt": 0,
