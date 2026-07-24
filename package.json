@@ -15,6 +15,7 @@
     "tts": "node scripts/tts-l0.mjs",
     "diy:speak": "node scripts/diy-speak.mjs",
     "tts:l1": "node scripts/tts-l1.mjs",
+    "voice:enroll": "node scripts/enroll-voice-sample.mjs",
     "test": "npm run test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "tsc -b"

@@ -6,14 +6,22 @@
       "id": "voice-mom",
       "displayName": "妈妈",
       "role": "mom",
-      "status": "ready",
-      "samples": [],
+      "status": "collecting",
+      "samples": [
+        {
+          "id": "smp-1",
+          "uri": "voices/voice-mom/sample-1.mp3",
+          "durationMs": 3000,
+          "promptText": "今天天气真好，我们一起出去玩吧。",
+          "createdAt": 1784854352973
+        }
+      ],
       "minSamples": 5,
       "language": "zh-CN",
       "createdAt": 0,
-      "updatedAt": 0,
-      "consentAt": 0,
-      "notes": "样例档案：真复刻 TTS 未接入前，仅标记音色名"
+      "updatedAt": 1784854352973,
+      "consentAt": 1784854352973,
+      "notes": "样例档案：真复刻 TTS 未接入前，仅标记音色名 | sample via L0 placeholder; replace with mic for real L1"
     },
     {
       "id": "voice-dad",

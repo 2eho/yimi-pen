@@ -39,14 +39,23 @@ VoiceProfile 样本 wav
 ## 命令
 
 ```bash
-# 探测后端
+# 探测后端（含 mock）
 npm run tts:l1 -- --probe
 
-# 复刻合成（需已安装可选后端 + 参考音频）
-npm run tts:l1 -- --text "我是香香的香蕉" --ref content/audio/voices/voice-mom/sample-1.wav --out content/audio/diy/cache/l1-demo.wav
+# 占位录入样本（L0 生成假样本，仅打通路径；真复刻请用麦克风）
+npm run voice:enroll -- --profile voice-mom
 
-# 指定后端
-npm run tts:l1 -- --backend openvoice --text "..." --ref sample.wav --out out.wav
+# mock 流水线（不是真复刻）
+npm run tts:l1 -- --backend mock --allow-mock \
+  --text "我是香香的香蕉" \
+  --profile voice-mom \
+  --out content/audio/diy/cache/l1-demo.wav
+
+# DIY 绑定：先 L1 再回落 L0
+npm run diy:speak -- --oid YIMI-DIY-BANANA --engine l1 --allow-mock --force
+
+# 真复刻（需已安装可选后端 + 参考音频）
+npm run tts:l1 -- --text "我是香香的香蕉" --ref content/audio/voices/voice-mom/sample-1.wav --out content/audio/diy/cache/l1-demo.wav
 ```
 
 ### 环境变量
@@ -62,10 +71,12 @@ npm run tts:l1 -- --backend openvoice --text "..." --ref sample.wav --out out.wa
 
 | backend | 脚本 | 说明 |
 |---------|------|------|
-| `openvoice` | `scripts/l1/backends/openvoice_infer.py` | 若 `import openvoice` 成功则调；否则 exit 2 |
-| `cosyvoice` | `scripts/l1/backends/cosyvoice_infer.py` | 同上，占位探测 |
-| `gpt-sovits` | `scripts/l1/backends/gptsovits_infer.py` | 占位；需用户自备 WebUI/API |
-| `none` | — | 仅探测，不合成 |
+| `mock` | `scripts/l1/backends/mock_infer.py` | **始终可用**；SAPI/蜂鸣验证管线，**不是复刻** |
+| `openvoice` | `scripts/l1/backends/openvoice_infer.py` | 若 import 成功；需 checkpoint |
+| `cosyvoice` | `scripts/l1/backends/cosyvoice_infer.py` | 占位 + 探测 |
+| `gpt-sovits` | `scripts/l1/backends/gptsovits_infer.py` | 外置 API |
+
+`auto` 默认只试真后端；加 `--allow-mock` 或 `YIMI_L1_ALLOW_MOCK=1` 才把 mock 放进 auto。
 
 安装示例（**可选、体积大、可能要 GPU**，勿写进默认 `package.json` deps）：
 
