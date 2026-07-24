@@ -190,3 +190,13 @@
 - 商标检索与主体形态  
 - Gen1 硬件 RFQ / 贴纸打样  
 - 工程：safety 钩子、装包校验 stub  
+
+## 14. GitHub 细分调研（数值/选型/行动）
+
+见 **[research/github-survey-2026.md](./research/github-survey-2026.md)**：
+
+- 点读固件/OID：开源极稀 → 逻辑层自研 + 方案商 RFQ  
+- 亲情音色：GPT-SoVITS / OpenVoice / CosyVoice 等阶梯选型  
+- 系统音：Piper  
+- 安全：须自建中文幼儿词表  
+- 印刷：调试可用 QR，真 OID 无开源  

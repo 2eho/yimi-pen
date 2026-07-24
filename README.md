@@ -84,6 +84,7 @@ yimi-pen/
 | [硬件与 OID](docs/hardware-oid.md) | 笔、贴纸、延迟、装包 |
 | [商业边界](docs/business-boundary.md) | 开源免费 vs 可收费 |
 | [缺口清单](docs/gaps.md) | 尚未尽事项 |
+| [GitHub 技术调研](docs/research/github-survey-2026.md) | 选型/数值/行动细分 |
 | [产品定位](docs/product-vision.md) | 对标 JoJo / 非讯飞路线 |
 | [社区与内容生态](docs/community-ecosystem.md) | Pack Hub、版权、发现 |
 | [双 DIY 路径](docs/diy-dual-path.md) | 贴纸万物点读 + 拍照成书 |
