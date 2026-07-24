@@ -1,0 +1,15 @@
+Yimi Pen (益米点读笔)
+Copyright 2026 Yimi Pen Contributors
+
+This product is an independent open-source project.
+It is NOT affiliated with, endorsed by, or sponsored by Xiaomi Inc.,
+Mijia (米家), or any Xiaomi subsidiary.
+
+"Mi-home friendly" in documentation means optional, community-built
+interoperability hooks (e.g. local LAN status, Home Assistant style
+MQTT/HTTP bridges). It does not imply official Mijia certification
+or use of Xiaomi trademarks in product branding without permission.
+
+Third-party book content, IP characters, and audio remain the property
+of their respective rights holders. Community packs must declare their
+own license in pack.meta.json.

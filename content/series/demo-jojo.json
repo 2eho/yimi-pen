@@ -1,0 +1,26 @@
+{
+  "ip": {
+    "id": "demo-jojo",
+    "name": "Demo JoJo",
+    "mascot": "jojo",
+    "tagline": "点一点，听故事、唱儿歌（对标小鸡球球/宝贝JoJo，非学段教辅笔）"
+  },
+  "series": [
+    {
+      "id": "series-bedtime",
+      "ipId": "demo-jojo",
+      "title": "晚安故事",
+      "ageMin": 2,
+      "ageMax": 5,
+      "bookIds": ["jojo-bedtime-01"]
+    },
+    {
+      "id": "series-cognition",
+      "ipId": "demo-jojo",
+      "title": "第一次认知",
+      "ageMin": 1,
+      "ageMax": 4,
+      "bookIds": []
+    }
+  ]
+}

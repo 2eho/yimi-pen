@@ -1,0 +1,34 @@
+{
+  "registryFormat": 1,
+  "name": "yimi-official-index",
+  "description": "益米官方样例与社区包索引（本仓维护）",
+  "packs": [
+    {
+      "id": "sample-demo-abc",
+      "title": "ABC First Words",
+      "source": { "type": "local", "path": "content/books/demo-abc" },
+      "license": "Apache-2.0",
+      "tags": ["official-sample", "cognition", "en"],
+      "ageMin": 3,
+      "ageMax": 6
+    },
+    {
+      "id": "sample-jojo-bedtime-01",
+      "title": "JoJo 的晚安星星",
+      "source": { "type": "local", "path": "content/books/jojo-bedtime-01" },
+      "license": "Apache-2.0",
+      "tags": ["official-sample", "story", "song", "zh-CN"],
+      "ageMin": 2,
+      "ageMax": 5
+    },
+    {
+      "id": "community-template",
+      "title": "社区投稿模板",
+      "source": { "type": "local", "path": "content/packs/community-template" },
+      "license": "CC0-1.0",
+      "tags": ["template", "community"],
+      "ageMin": 2,
+      "ageMax": 6
+    }
+  ]
+}

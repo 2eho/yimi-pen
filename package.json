@@ -1,0 +1,45 @@
+{
+  "name": "yimi-pen",
+  "version": "0.1.0",
+  "private": false,
+  "description": "益米 Yimi Pen — open-source kids IP talking-pen platform (community content packs, Mi-home friendly hooks; not affiliated with Xiaomi)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev:admin": "npm run dev -w @yimi-pen/admin-web",
+    "dev:sim": "npm run dev -w @yimi-pen/device-sim",
+    "validate:books": "node scripts/validate-books.mjs",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "tsc -b"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2eho/yimi-pen"
+  },
+  "bugs": {
+    "url": "https://github.com/2eho/yimi-pen/issues"
+  },
+  "homepage": "https://github.com/2eho/yimi-pen#readme",
+  "keywords": [
+    "yimi",
+    "益米",
+    "talking-pen",
+    "point-read",
+    "kids",
+    "open-source",
+    "oid",
+    "mi-home-friendly"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+.turbo/
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+coverage/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.tsbuildinfo
+content/audio/**/*.mp3
+content/audio/**/*.wav
+content/audio/**/*.ogg
+!content/audio/**/.gitkeep
+# local DIY experiments (keep examples in repo; ignore heavy user dumps if any)
+*.local.json

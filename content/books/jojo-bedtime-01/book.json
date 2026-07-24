@@ -1,0 +1,145 @@
+{
+  "id": "jojo-bedtime-01",
+  "title": "JoJo 的晚安星星",
+  "isbn": "978-0000000002",
+  "language": "zh-CN",
+  "version": "1.0.0",
+  "coverUri": "cover.png",
+  "seriesId": "series-bedtime",
+  "ipId": "demo-jojo",
+  "theme": "story",
+  "playModes": ["free", "story"],
+  "metadata": {
+    "age": "2-5",
+    "style": "kids-ip",
+    "benchmark": "chick-ball / baby-jojo style (not textbook pen)"
+  },
+  "pages": [
+    {
+      "id": "jojo-p1",
+      "bookId": "jojo-bedtime-01",
+      "pageNumber": 1,
+      "width": 210,
+      "height": 210,
+      "hotspots": [
+        {
+          "id": "hs-jojo",
+          "pageId": "jojo-p1",
+          "oid": "JOJO-0101",
+          "label": "JoJo",
+          "kind": "character",
+          "characterId": "jojo",
+          "playPolicy": "random_one",
+          "bounds": { "x": 70, "y": 80, "width": 70, "height": 90 },
+          "clips": [
+            {
+              "id": "clip-jojo-hi",
+              "uri": "jojo-bedtime-01/jojo-hi.mp3",
+              "mediaType": "voice",
+              "weight": 2,
+              "language": "zh-CN",
+              "transcript": "嗨！我是 JoJo，我们一起找星星吧！"
+            },
+            {
+              "id": "clip-jojo-laugh",
+              "uri": "jojo-bedtime-01/jojo-laugh.mp3",
+              "mediaType": "voice",
+              "weight": 1,
+              "language": "zh-CN",
+              "transcript": "嘿嘿，你点到我啦！"
+            }
+          ],
+          "tags": ["mascot", "character"]
+        },
+        {
+          "id": "hs-star",
+          "pageId": "jojo-p1",
+          "oid": "JOJO-0102",
+          "label": "星星",
+          "kind": "object",
+          "playPolicy": "replace",
+          "bounds": { "x": 150, "y": 30, "width": 40, "height": 40 },
+          "clips": [
+            {
+              "id": "clip-star",
+              "uri": "jojo-bedtime-01/star-twinkle.mp3",
+              "mediaType": "sfx",
+              "language": "zh-CN",
+              "transcript": "一闪一闪亮晶晶"
+            }
+          ],
+          "tags": ["object", "sfx"]
+        },
+        {
+          "id": "hs-moon",
+          "pageId": "jojo-p1",
+          "oid": "JOJO-0103",
+          "label": "月亮",
+          "kind": "object",
+          "bounds": { "x": 20, "y": 20, "width": 50, "height": 50 },
+          "clips": [
+            {
+              "id": "clip-moon",
+              "uri": "jojo-bedtime-01/moon.mp3",
+              "mediaType": "voice",
+              "transcript": "月亮婆婆说：该睡觉咯。"
+            }
+          ],
+          "tags": ["object"]
+        },
+        {
+          "id": "hs-story",
+          "pageId": "jojo-p1",
+          "oid": "JOJO-0199",
+          "label": "听故事",
+          "kind": "story",
+          "playPolicy": "queue",
+          "bounds": { "x": 10, "y": 170, "width": 50, "height": 30 },
+          "clips": [
+            {
+              "id": "clip-narration-1",
+              "uri": "jojo-bedtime-01/narration-p1.mp3",
+              "mediaType": "narration",
+              "transcript": "晚上，JoJo 抬起头，天上有一颗最亮的星星……"
+            }
+          ],
+          "tags": ["mode-story"]
+        },
+        {
+          "id": "hs-song",
+          "pageId": "jojo-p1",
+          "oid": "JOJO-0188",
+          "label": "儿歌",
+          "kind": "song",
+          "bounds": { "x": 150, "y": 170, "width": 50, "height": 30 },
+          "clips": [
+            {
+              "id": "clip-lullaby",
+              "uri": "jojo-bedtime-01/lullaby-snip.mp3",
+              "mediaType": "song",
+              "transcript": "小星星儿歌片段"
+            }
+          ],
+          "tags": ["song"]
+        },
+        {
+          "id": "hs-egg",
+          "pageId": "jojo-p1",
+          "oid": "JOJO-0177",
+          "label": "彩蛋枕头",
+          "kind": "egg",
+          "bounds": { "x": 100, "y": 150, "width": 30, "height": 25 },
+          "clips": [
+            {
+              "id": "clip-egg-snore",
+              "uri": "jojo-bedtime-01/snore.mp3",
+              "mediaType": "sfx",
+              "transcript": "呼噜噜……"
+            }
+          ],
+          "tags": ["easter-egg"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "packFormat": 1,
+  "id": "community-template",
+  "title": "社区主题包模板",
+  "description": "复制本目录结构开始创作。请替换为你的原创内容与许可证。",
+  "version": "0.1.0",
+  "authors": ["yimi-community"],
+  "rightsHolder": "Yimi Pen Contributors",
+  "license": "CC0-1.0",
+  "ageMin": 2,
+  "ageMax": 6,
+  "languages": ["zh-CN"],
+  "tags": ["template", "community"],
+  "ipId": null,
+  "bookIds": ["template-hello"],
+  "homepage": "https://github.com/2eho/yimi-pen",
+  "yimi": {
+    "minEngine": "0.1.0",
+    "miHomeFriendly": false
+  }
+}

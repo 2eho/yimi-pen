@@ -1,0 +1,42 @@
+{
+  "id": "template-hello",
+  "title": "模板：点一点问好",
+  "language": "zh-CN",
+  "version": "0.1.0",
+  "theme": "scene",
+  "playModes": ["free"],
+  "metadata": {
+    "style": "kids-ip",
+    "note": "社区模板 — 请替换文案与音频"
+  },
+  "pages": [
+    {
+      "id": "tpl-p1",
+      "bookId": "template-hello",
+      "pageNumber": 1,
+      "width": 200,
+      "height": 200,
+      "hotspots": [
+        {
+          "id": "hs-hello",
+          "pageId": "tpl-p1",
+          "oid": "YIMI-TPL-001",
+          "label": "问好",
+          "kind": "character",
+          "playPolicy": "random_one",
+          "bounds": { "x": 50, "y": 50, "width": 100, "height": 100 },
+          "clips": [
+            {
+              "id": "clip-hello-1",
+              "uri": "template-hello/hello.mp3",
+              "mediaType": "voice",
+              "weight": 1,
+              "transcript": "你好呀，欢迎来到益米点读！"
+            }
+          ],
+          "tags": ["template"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>益米点读笔 · 内容台</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>益米 Yimi Pen</h1>
+      <p class="sub">开源点读 · 社区内容台 · 非小米官方</p>
+    </header>
+    <main>
+      <section class="panel">
+        <div class="row">
+          <h2>图书 / 主题包</h2>
+          <button id="btn-refresh" type="button">刷新</button>
+        </div>
+        <ul id="book-list" class="book-list"></ul>
+      </section>
+      <section class="panel" id="detail" hidden>
+        <h2 id="detail-title">—</h2>
+        <pre id="detail-json"></pre>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

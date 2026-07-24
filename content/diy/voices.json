@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "defaultProfileId": "voice-mom",
+  "profiles": [
+    {
+      "id": "voice-mom",
+      "displayName": "妈妈",
+      "role": "mom",
+      "status": "ready",
+      "samples": [],
+      "minSamples": 5,
+      "language": "zh-CN",
+      "createdAt": 0,
+      "updatedAt": 0,
+      "consentAt": 0,
+      "notes": "样例档案：真复刻 TTS 未接入前，仅标记音色名"
+    },
+    {
+      "id": "voice-dad",
+      "displayName": "爸爸",
+      "role": "dad",
+      "status": "collecting",
+      "samples": [],
+      "minSamples": 5,
+      "language": "zh-CN",
+      "createdAt": 0,
+      "updatedAt": 0,
+      "notes": "样例：录入样本后 status→ready"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "demo-abc",
+  "title": "ABC First Words",
+  "isbn": "978-0000000001",
+  "language": "en",
+  "version": "1.0.0",
+  "coverUri": "cover.png",
+  "metadata": {
+    "publisher": "Point Read Sample",
+    "age": "3-6"
+  },
+  "pages": [
+    {
+      "id": "demo-abc-p1",
+      "bookId": "demo-abc",
+      "pageNumber": 1,
+      "width": 210,
+      "height": 297,
+      "previewUri": "pages/p1.png",
+      "hotspots": [
+        {
+          "id": "hs-apple",
+          "pageId": "demo-abc-p1",
+          "oid": "OID-1001",
+          "label": "Apple",
+          "bounds": { "x": 20, "y": 40, "width": 60, "height": 50 },
+          "clips": [
+            {
+              "id": "clip-apple",
+              "uri": "demo-abc/apple.mp3",
+              "durationMs": 1200,
+              "language": "en",
+              "transcript": "Apple"
+            }
+          ],
+          "tags": ["fruit", "letter-a"]
+        },
+        {
+          "id": "hs-ball",
+          "pageId": "demo-abc-p1",
+          "oid": "OID-1002",
+          "label": "Ball",
+          "bounds": { "x": 100, "y": 40, "width": 60, "height": 50 },
+          "clips": [
+            {
+              "id": "clip-ball",
+              "uri": "demo-abc/ball.mp3",
+              "durationMs": 1000,
+              "language": "en",
+              "transcript": "Ball"
+            }
+          ],
+          "tags": ["toy", "letter-b"]
+        },
+        {
+          "id": "hs-cat",
+          "pageId": "demo-abc-p1",
+          "oid": "OID-1003",
+          "label": "Cat",
+          "bounds": { "x": 20, "y": 120, "width": 60, "height": 50 },
+          "polygon": [
+            { "x": 20, "y": 120 },
+            { "x": 80, "y": 120 },
+            { "x": 80, "y": 170 },
+            { "x": 20, "y": 170 }
+          ],
+          "clips": [
+            {
+              "id": "clip-cat",
+              "uri": "demo-abc/cat.mp3",
+              "durationMs": 1100,
+              "language": "en",
+              "transcript": "Cat"
+            }
+          ],
+          "tags": ["animal", "letter-c"]
+        }
+      ]
+    },
+    {
+      "id": "demo-abc-p2",
+      "bookId": "demo-abc",
+      "pageNumber": 2,
+      "width": 210,
+      "height": 297,
+      "hotspots": [
+        {
+          "id": "hs-dog",
+          "pageId": "demo-abc-p2",
+          "oid": "OID-2001",
+          "label": "Dog",
+          "bounds": { "x": 30, "y": 50, "width": 80, "height": 70 },
+          "clips": [
+            {
+              "id": "clip-dog",
+              "uri": "demo-abc/dog.mp3",
+              "durationMs": 1300,
+              "language": "en",
+              "transcript": "Dog"
+            }
+          ],
+          "tags": ["animal", "letter-d"]
+        }
+      ]
+    }
+  ]
+}

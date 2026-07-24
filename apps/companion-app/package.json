@@ -1,0 +1,9 @@
+{
+  "name": "@yimi-pen/companion-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Companion app placeholder (mobile/desktop shell)",
+  "scripts": {
+    "dev": "node -e \"console.log('[companion-app] placeholder — connect to device-sim via protocol package')\""
+  }
+}
