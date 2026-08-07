@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "profile": "snapshot-operation-transcript-v1",
+  "snapshots": [
+    {
+      "key": "snapshot-v1",
+      "sourceDirectory": "hardware/evt0/snapshot-v1/design",
+      "snapshotId": "design:yimi-snapshot-v1",
+      "contentRevision": "snapshot-v1@0.1.0",
+      "releaseState": "design-fixture",
+      "firstActionCooldownMs": 0,
+      "requiredBytes": 9749
+    },
+    {
+      "key": "snapshot-v2",
+      "sourceDirectory": "hardware/evt0/snapshot-v1/design",
+      "snapshotId": "design:yimi-snapshot-v2",
+      "contentRevision": "snapshot-v2@0.1.0",
+      "releaseState": "design-fixture",
+      "firstActionCooldownMs": 100,
+      "requiredBytes": 9751
+    },
+    {
+      "key": "snapshot-v3",
+      "sourceDirectory": "hardware/evt0/snapshot-v1/design",
+      "snapshotId": "design:yimi-snapshot-v3",
+      "contentRevision": "snapshot-v3@0.1.0",
+      "releaseState": "design-fixture",
+      "firstActionCooldownMs": 200,
+      "requiredBytes": 9751
+    }
+  ],
+  "devices": [
+    {
+      "id": "main",
+      "storageFreeBytes": 4194304,
+      "allowDesignFixtures": true
+    },
+    {
+      "id": "small",
+      "storageFreeBytes": 1,
+      "allowDesignFixtures": true
+    },
+    {
+      "id": "release",
+      "storageFreeBytes": 4194304,
+      "allowDesignFixtures": false
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "SCN-01",
+      "description": "factory provision",
+      "device": "main",
+      "operation": {
+        "op": "provision",
+        "snapshot": "snapshot-v1"
+      },
+      "expected": {
+        "active": "A",
+        "lastGood": "A",
+        "generation": 1,
+        "snapshot": "design:yimi-snapshot-v1",
+        "error": null
+      }
+    },
+    {
+      "id": "SCN-02",
+      "description": "successful stage verify activate",
+      "device": "main",
+      "operation": {
+        "op": "install",
+        "snapshot": "snapshot-v2"
+      },
+      "expected": {
+        "active": "B",
+        "lastGood": "A",
+        "generation": 2,
+        "snapshot": "design:yimi-snapshot-v2",
+        "error": null
+      }
+    },
+    {
+      "id": "SCN-03",
+      "description": "corrupt staged file keeps active snapshot",
+      "device": "main",
+      "operation": {
+        "op": "install",
+        "snapshot": "snapshot-v3",
+        "fault": {
+          "type": "corrupt-file",
+          "filePath": "actions.json"
+        },
+        "recoverAfterError": "status"
+      },
+      "expected": {
+        "active": "B",
+        "lastGood": "A",
+        "generation": 2,
+        "snapshot": "design:yimi-snapshot-v2",
+        "error": "FILE_HASH_MISMATCH"
+      }
+    },
+    {
+      "id": "SCN-04",
+      "description": "power loss during staging",
+      "device": "main",
+      "operation": {
+        "op": "install",
+        "snapshot": "snapshot-v3",
+        "fault": {
+          "type": "power-loss-during-staging",
+          "afterFileCount": 1
+        },
+        "recoverAfterError": "boot-repair"
+      },
+      "expected": {
+        "active": "B",
+        "lastGood": "A",
+        "generation": 2,
+        "snapshot": "design:yimi-snapshot-v2",
+        "error": "SIMULATED_POWER_LOSS"
+      }
+    },
+    {
+      "id": "SCN-05",
+      "description": "power loss before atomic head commit",
+      "device": "main",
+      "operation": {
+        "op": "install",
+        "snapshot": "snapshot-v3",
+        "fault": {
+          "type": "power-loss-before-head-commit"
+        },
+        "recoverAfterError": "boot-repair"
+      },
+      "expected": {
+        "active": "B",
+        "lastGood": "A",
+        "generation": 2,
+        "snapshot": "design:yimi-snapshot-v2",
+        "error": "SIMULATED_POWER_LOSS"
+      }
+    },
+    {
+      "id": "SCN-06",
+      "description": "second successful activation",
+      "device": "main",
+      "operation": {
+        "op": "install",
+        "snapshot": "snapshot-v3"
+      },
+      "expected": {
+        "active": "A",
+        "lastGood": "B",
+        "generation": 3,
+        "snapshot": "design:yimi-snapshot-v3",
+        "error": null
+      }
+    },
+    {
+      "id": "SCN-07",
+      "description": "boot validation rolls back to last-good",
+      "device": "main",
+      "operation": {
+        "op": "corrupt-active-and-boot",
+        "filePath": "actions.json"
+      },
+      "expected": {
+        "active": "B",
+        "lastGood": "B",
+        "generation": 4,
+        "snapshot": "design:yimi-snapshot-v2",
+        "error": null
+      }
+    },
+    {
+      "id": "SCN-08",
+      "description": "capacity preflight rejects oversized snapshot",
+      "device": "small",
+      "operation": {
+        "op": "provision",
+        "snapshot": "snapshot-v1"
+      },
+      "expected": {
+        "active": null,
+        "lastGood": null,
+        "generation": 0,
+        "snapshot": null,
+        "error": "INSUFFICIENT_SPACE"
+      }
+    },
+    {
+      "id": "SCN-09",
+      "description": "release mode rejects design fixture",
+      "device": "release",
+      "operation": {
+        "op": "provision",
+        "snapshot": "snapshot-v1"
+      },
+      "expected": {
+        "active": null,
+        "lastGood": null,
+        "generation": 0,
+        "snapshot": null,
+        "error": "DESIGN_FIXTURE_NOT_RELEASE"
+      }
+    }
+  ]
+}

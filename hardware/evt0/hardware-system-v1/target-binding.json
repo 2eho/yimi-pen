@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "profile": "hardware-system-target-binding-v1",
+  "topologyRef": {
+    "path": "hardware/evt0/hardware-system-v1/topology.json",
+    "sha256": "98a87a1de9ee8dfa52ec68ebd00afbbf23fa3c18e0c2a75e34ba09da4a9c4e5f"
+  },
+  "targetIdentity": {
+    "state": "UNRESOLVED",
+    "intakeSelector": {
+      "templatePath": "hardware/evt0/intake-v1/board-oid-kit.template.json",
+      "recordsDirectory": "hardware/evt0/intake-v1/records",
+      "intakeKind": "board-oid-kit",
+      "purchasePlanItemId": "MB1",
+      "candidateId": "MB1-CANDIDATE-A",
+      "requiredDisposition": "ACCEPTED_BOARD_TARGET",
+      "minimumMatchingSamples": 2
+    },
+    "observationRefs": [
+      "vendor",
+      "boardMpn",
+      "pcbRev",
+      "headMpn",
+      "headRev",
+      "firmwareVersion",
+      "supplyEvidence"
+    ],
+    "testRefs": [
+      "KIT-IDENTITY",
+      "KIT-SUPPLY"
+    ],
+    "releaseGateRefs": [
+      "RG-BOARD-TARGET-FROZEN",
+      "RG-BOARD-SUPPLY-VERIFIED"
+    ]
+  },
+  "interfaceBindings": [
+    {
+      "interfaceId": "IF-OID-OPTICAL",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["codeTool", "printProfile", "headMechanical"],
+      "testRefs": ["KIT-24CODE", "KIT-NEGATIVE"],
+      "releaseGateRefs": ["RG-OID-CODE-TOOL-FROZEN", "RG-OID-PHYSICAL-MAP-ASSIGNED", "RG-OID-TWO-HEAD-TWO-PRINT-MATRIX-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Exact code tool, print profile, and head operating envelope are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-OID-EVENT",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["headMpn", "headRev", "eventInterface", "timestampObservability"],
+      "testRefs": ["KIT-IDENTITY", "KIT-24CODE", "KIT-LATENCY"],
+      "releaseGateRefs": ["RG-BOARD-TARGET-FROZEN", "RG-OID-TWO-HEAD-TWO-PRINT-MATRIX-PASSED", "RG-POINT-READ-LATENCY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Head identity, target event transport, and timing observability are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-STORAGE",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["storage", "storageDurabilityContract"],
+      "testRefs": ["KIT-STORAGE-POWERLOSS", "KIT-OFFLINE"],
+      "releaseGateRefs": ["RG-TARGET-STORAGE-DURABILITY-PASSED", "RG-OFFLINE-POINT-READ-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Target storage topology, electrical boundary, and durability contract are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-AUDIO-SIGNAL",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["audioPath", "audioTimestampClass", "timestampObservability"],
+      "testRefs": ["KIT-AUDIO-TIMESTAMP", "KIT-LATENCY"],
+      "releaseGateRefs": ["RG-TARGET-AUDIO-PROFILE-VERIFIED", "RG-POINT-READ-LATENCY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Target audio path and output timestamp class are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-USB-DATA",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["usbData", "transportStreamContract"],
+      "testRefs": ["KIT-TRANSPORT-STREAM", "KIT-DEVICELINK-TRANSACTION"],
+      "releaseGateRefs": ["RG-DEVICELINK-PHYSICAL-TRANSPORT-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "USB data mode, framing boundary, and stream behavior are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-USB-POWER",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["usbData", "powerPath"],
+      "testRefs": ["KIT-POWER"],
+      "releaseGateRefs": ["RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Target USB power and charge-path limits are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-BATTERY-POWER",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["powerPath"],
+      "testRefs": ["KIT-POWER", "KIT-STORAGE-POWERLOSS"],
+      "releaseGateRefs": ["RG-TARGET-FORM-RELIABILITY-PASSED", "RG-TARGET-STORAGE-DURABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Battery protection, charge, sensing, and power-loss boundaries are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-BOARD-POWER",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["powerPath", "mcu"],
+      "testRefs": ["KIT-POWER", "KIT-OFFLINE"],
+      "releaseGateRefs": ["RG-BOARD-TARGET-FROZEN", "RG-OFFLINE-POINT-READ-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Target rails, sequencing, load, and peak-current behavior are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-AUDIO-POWER",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["powerPath", "audioPath"],
+      "testRefs": ["KIT-POWER", "KIT-AUDIO-TIMESTAMP"],
+      "releaseGateRefs": ["RG-TARGET-AUDIO-PROFILE-VERIFIED", "RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Audio supply topology and measured load behavior are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-CONTROL",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["eventInterface", "boardDimensions"],
+      "testRefs": ["KIT-C-REFERENCE", "KIT-RUST-PERIPHERALS"],
+      "releaseGateRefs": ["RG-TWO-BOARD-PORT-HIL-PASSED", "RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Control pins, electrical behavior, and target-form placement are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-STATUS",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["eventInterface", "boardDimensions"],
+      "testRefs": ["KIT-C-REFERENCE", "KIT-RUST-PERIPHERALS"],
+      "releaseGateRefs": ["RG-TWO-BOARD-PORT-HIL-PASSED", "RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Status-output electrical behavior and target-form placement are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-DIAGNOSTIC",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": [
+        "buildCli",
+        "flashCli",
+        "firmwareOwnership",
+        "firmwareVersion",
+        "rustExecutionRoute",
+        "rustTargetTriple",
+        "rustToolchain",
+        "halOrOs",
+        "cAbiContract",
+        "ffiConcurrencyContract",
+        "providerOwnership",
+        "abiLayoutProbe",
+        "oidQueueEvidence",
+        "nativeRustPeripheralReach",
+        "unsafeBoundaryPolicy"
+      ],
+      "testRefs": [
+        "KIT-TOOLCHAIN",
+        "KIT-C-REFERENCE",
+        "KIT-RUST-BOOT",
+        "KIT-RUST-PERIPHERALS",
+        "KIT-ABI-LAYOUT",
+        "KIT-PROVIDER-OWNERSHIP",
+        "KIT-QUEUE-OVERFLOW",
+        "KIT-RUST-REPRO",
+        "KIT-C-RUST-DIFF"
+      ],
+      "releaseGateRefs": ["RG-TARGET-TOOLCHAIN-SEALED", "RG-PLATFORM-ABI-HIL-PASSED", "RG-C-RUST-DIFFERENTIAL-PASSED", "RG-TWO-BOARD-PORT-HIL-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Target debug, flash, trace, ABI, and Rust reachability paths are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-WIRELESS",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["wireless"],
+      "testRefs": ["KIT-OFFLINE"],
+      "releaseGateRefs": ["RG-OFFLINE-POINT-READ-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Target wireless presence and isolation from the offline hot path are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-HEAD-MECHANICAL",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["headMpn", "headRev", "headMechanical"],
+      "testRefs": ["KIT-IDENTITY", "KIT-24CODE"],
+      "releaseGateRefs": ["RG-BOARD-TARGET-FROZEN", "RG-OID-TWO-HEAD-TWO-PRINT-MATRIX-PASSED", "RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Head envelope, work distance, angle, connector, and mounting datum are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-BOARD-MECHANICAL",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["boardMpn", "pcbRev", "boardDimensions"],
+      "testRefs": ["KIT-IDENTITY"],
+      "releaseGateRefs": ["RG-BOARD-TARGET-FROZEN", "RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Exact target board identity, revision, envelope, and mounting datum are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-AUDIO-ACOUSTIC",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["audioPath", "boardDimensions"],
+      "testRefs": ["KIT-LATENCY", "KIT-POWER"],
+      "releaseGateRefs": ["RG-TARGET-AUDIO-PROFILE-VERIFIED", "RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Speaker boundary, acoustic profile, and target enclosure interaction are pending physical evidence."
+    },
+    {
+      "interfaceId": "IF-USB-MECHANICAL",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["usbData", "boardDimensions"],
+      "testRefs": ["KIT-IDENTITY", "KIT-POWER"],
+      "releaseGateRefs": ["RG-BOARD-TARGET-FROZEN", "RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Connector placement, opening, retention, and target-form access are pending intake evidence."
+    },
+    {
+      "interfaceId": "IF-USER-IO-MECHANICAL",
+      "state": "TARGET_EVIDENCE_PENDING",
+      "observationRefs": ["boardDimensions"],
+      "testRefs": ["KIT-IDENTITY", "KIT-RUST-PERIPHERALS"],
+      "releaseGateRefs": ["RG-TWO-BOARD-PORT-HIL-PASSED", "RG-TARGET-FORM-RELIABILITY-PASSED"],
+      "edaReadiness": "BLOCKED_TARGET_EVIDENCE",
+      "blocker": "Control and indicator geometry, force path, and target-form usability are pending physical evidence."
+    }
+  ],
+  "eda": {
+    "readiness": "SYSTEM_SKELETON_ONLY",
+    "systemSkeletonReady": true,
+    "chipLevelReady": false,
+    "permittedWork": ["HIERARCHY", "BLOCK_DIAGRAM", "INTERFACE_LABELS"],
+    "blockedWork": ["SYMBOL_SELECTION", "PIN_MAPPING", "PHYSICAL_NET_NAMING", "POWER_RAIL_VALUES", "CONNECTOR_SELECTION", "PCB_LAYOUT"],
+    "entryGateRefs": ["RG-BOARD-TARGET-FROZEN", "RG-BOARD-SUPPLY-VERIFIED", "RG-OID-CODE-TOOL-FROZEN"]
+  }
+}

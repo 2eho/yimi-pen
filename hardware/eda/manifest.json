@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "project": "yimi-pen",
+  "stage": "Gen1 EVT-0",
+  "eda": {
+    "product": "JLCEDA Pro",
+    "version": "3.2.149",
+    "projectName": "UNSET",
+    "projectRevision": "UNFROZEN",
+    "exportedAt": null
+  },
+  "codexBridge": {
+    "package": "easyeda-mcp-pro",
+    "version": "0.35.4",
+    "host": "127.0.0.1",
+    "port": 49620,
+    "profile": "core",
+    "scopes": [
+      "diagnostics:read",
+      "schematic:read",
+      "bom:read",
+      "checks:read",
+      "pcb:read"
+    ],
+    "rawExecution": false,
+    "designWrite": false,
+    "ordering": false
+  },
+  "release": {
+    "boardTarget": "UNFROZEN",
+    "pcbRevision": "UNFROZEN",
+    "oidHeadRevision": "UNFROZEN",
+    "firmwareVersion": "UNFROZEN",
+    "hardwareRevision": "UNFROZEN",
+    "bomRevision": "UNFROZEN",
+    "erc": "NOT_RUN",
+    "drc": "NOT_RUN",
+    "bomDiff": "NOT_RUN"
+  },
+  "artifacts": []
+}

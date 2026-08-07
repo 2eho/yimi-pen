@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "profile": "release-gate-legacy-inventory-v1",
+  "activeLegacyIds": [
+    "BOARD_C_REFERENCE_RUST_DIFFERENTIAL_PENDING",
+    "BOARD_DEVICELINK_PHYSICAL_PROFILE_PENDING",
+    "BOARD_MANIFEST_PARSER_HIL_PENDING",
+    "BOARD_PLATFORM_ABI_PROVIDER_PENDING",
+    "BOARD_PORT_NOT_IMPLEMENTED",
+    "BOARD_STORAGE_DURABILITY_PENDING",
+    "BOARD_TARGET_UNFROZEN",
+    "DEVICELINK_PHYSICAL_TRANSPORT_PENDING",
+    "OID_CODE_TOOL_UNFROZEN",
+    "OID_PHYSICAL_MAP_PENDING",
+    "PHYSICAL_CODES_UNASSIGNED",
+    "PHYSICAL_C_RUST_DIFFERENTIAL_PENDING",
+    "PHYSICAL_DEVICELINK_RECONNECT_PENDING",
+    "PHYSICAL_HIL_PENDING",
+    "PHYSICAL_LATENCY_RUN_PENDING",
+    "PRODUCTION_CONFIRMATION_TRUST_PENDING",
+    "SNAPSHOT_RUST_EXECUTION_MODEL_PENDING",
+    "TARGET_AUDIO_CAPABILITIES_UNVERIFIED",
+    "TARGET_AUDIO_PROFILE_PENDING",
+    "TARGET_STORAGE_DURABILITY_PENDING",
+    "TWO_BOARD_HIL_PENDING",
+    "TWO_HEAD_TWO_PRINT_MATRIX_PENDING"
+  ],
+  "mechanismIds": [
+    {
+      "id": "RELEASE_GATE_CATALOG_PENDING",
+      "reason": "Catalog implementation state; putting it in its own catalog would be self-referential."
+    },
+    {
+      "id": "RELEASE_GATE_RECEIPT_PENDING",
+      "reason": "Receipt migration mechanism; release quality is expressed by missing canonical gate receipts."
+    }
+  ],
+  "closedIntegrationIds": [
+    "FAMILY_REVISION_BUILD_REQUEST_SPLIT_PENDING"
+  ]
+}

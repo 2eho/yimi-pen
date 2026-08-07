@@ -2,8 +2,30 @@
   "name": "@yimi-pen/companion-app",
   "version": "0.1.0",
   "private": true,
-  "description": "Companion app placeholder (mobile/desktop shell)",
+  "type": "module",
+  "description": "Local family-library composition root and fixture-only authorized Snapshot host flow",
   "scripts": {
-    "dev": "node -e \"console.log('[companion-app] placeholder — connect to device-sim via protocol package')\""
+    "dev": "node src/run-acceptance.mjs",
+    "pretest": "npm run build -w @yimi-pen/audio",
+    "test": "node src/run-acceptance.mjs && node src/prelisten/run-prelisten-acceptance.mjs && node src/prelisten/run-host-audio-acceptance.mjs && node src/prelisten/run-verified-prelisten-acceptance.mjs && node src/authoring/run-authoring-acceptance.mjs && node src/authoring/run-capture-authoring-acceptance.mjs && node src/authoring/run-authoring-product-shell-acceptance.mjs && node src/authoring/run-authoring-task-recovery-acceptance.mjs && node src/desktop-authoring/run-desktop-authoring-task-acceptance.mjs && node src/authoring/run-tts-source-adapter-acceptance.mjs && node src/asset-vault/run-asset-vault-maintenance-acceptance.mjs && node src/asset-vault/run-asset-vault-recovery-acceptance.mjs && node src/family-workspace/run-family-workspace-acceptance.mjs && node src/family-workspace-lifecycle/run-family-workspace-lifecycle-acceptance.mjs",
+    "prevalidate": "npm run build -w @yimi-pen/audio",
+    "validate": "node src/run-acceptance.mjs && node src/prelisten/run-prelisten-acceptance.mjs && node src/prelisten/run-host-audio-acceptance.mjs && node src/prelisten/run-verified-prelisten-acceptance.mjs && node src/authoring/run-authoring-acceptance.mjs && node src/authoring/run-capture-authoring-acceptance.mjs && node src/authoring/run-authoring-product-shell-acceptance.mjs && node src/authoring/run-authoring-task-recovery-acceptance.mjs && node src/desktop-authoring/run-desktop-authoring-task-acceptance.mjs && node src/authoring/run-tts-source-adapter-acceptance.mjs && node src/asset-vault/run-asset-vault-maintenance-acceptance.mjs && node src/asset-vault/run-asset-vault-recovery-acceptance.mjs && node src/family-workspace/run-family-workspace-acceptance.mjs && node src/family-workspace-lifecycle/run-family-workspace-lifecycle-acceptance.mjs",
+    "test:authoring-product-shell": "node src/authoring/run-authoring-product-shell-acceptance.mjs",
+    "test:authoring-task-recovery": "node src/authoring/run-authoring-task-recovery-acceptance.mjs",
+    "test:tts-source-adapter": "node src/authoring/run-tts-source-adapter-acceptance.mjs",
+    "test:capture-authoring": "node src/authoring/run-capture-authoring-acceptance.mjs",
+    "test:asset-vault-maintenance": "node src/asset-vault/run-asset-vault-maintenance-acceptance.mjs",
+    "test:asset-vault-recovery": "node src/asset-vault/run-asset-vault-recovery-acceptance.mjs",
+    "test:family-workspace": "node src/family-workspace/run-family-workspace-acceptance.mjs",
+    "test:family-workspace-lifecycle": "node src/family-workspace-lifecycle/run-family-workspace-lifecycle-acceptance.mjs",
+    "test:desktop-authoring-task": "node src/desktop-authoring/run-desktop-authoring-task-acceptance.mjs",
+    "verify:real-prelisten": "node src/prelisten/run-real-prelisten.mjs",
+    "verify:real-authored": "node src/authoring/run-real-authored-flow.mjs"
+  },
+  "dependencies": {
+    "@yimi-pen/audio": "0.1.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

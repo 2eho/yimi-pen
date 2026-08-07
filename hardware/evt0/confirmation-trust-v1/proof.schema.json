@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/family-confirmation-proof-v1.json",
+  "title": "Yimi signed family confirmation proof v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profile", "proofId", "claims", "signature"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "family-confirmation-proof-v1" },
+    "proofId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/proofId" },
+    "claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type", "signatureProfile", "algorithm", "issuerId", "kid", "trustPolicyId",
+        "fixtureOnly", "purpose", "audience", "familyLibraryId", "familyRevisionId",
+        "buildPlanId", "buildSubjectSha256", "previewId", "sourceSha256",
+        "presentationPolicyVersion", "presentationTranscriptSha256", "confirmationId",
+        "confirmationSemanticSha256", "decision", "scope", "guardianAuthority",
+        "challengeId", "challengeNonce", "issuedAt", "confirmedAt", "expiresAt"
+      ],
+      "properties": {
+        "type": { "const": "YIMI_CONFIRMATION_TRUST_V1" },
+        "signatureProfile": { "const": "Ed25519+JCS-prefix-v1" },
+        "algorithm": { "const": "Ed25519" },
+        "issuerId": { "const": "confirmation-trust-provider" },
+        "kid": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/kid" },
+        "trustPolicyId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/policyId" },
+        "fixtureOnly": { "type": "boolean" },
+        "purpose": { "const": "snapshot-build" },
+        "audience": { "const": "yimi-family-alpha-compiler" },
+        "familyLibraryId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/familyLibraryId" },
+        "familyRevisionId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256Id" },
+        "buildPlanId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/buildPlanId" },
+        "buildSubjectSha256": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" },
+        "previewId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256Id" },
+        "sourceSha256": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" },
+        "presentationPolicyVersion": { "const": "family-alpha-v1" },
+        "presentationTranscriptSha256": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" },
+        "confirmationId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/confirmationId" },
+        "confirmationSemanticSha256": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" },
+        "decision": { "const": "confirmed" },
+        "scope": { "const": "all-bindings" },
+        "guardianAuthority": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["authorityRevisionId", "guardianSubjectRef", "role"],
+          "properties": {
+            "authorityRevisionId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/authorityRevisionId" },
+            "guardianSubjectRef": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/guardianSubjectRef" },
+            "role": { "enum": ["parent", "guardian"] }
+          }
+        },
+        "challengeId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/challengeId" },
+        "challengeNonce": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/base64url128" },
+        "issuedAt": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/rfc3339" },
+        "confirmedAt": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/rfc3339" },
+        "expiresAt": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/rfc3339" }
+      }
+    },
+    "signature": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/ed25519Signature" }
+  }
+}

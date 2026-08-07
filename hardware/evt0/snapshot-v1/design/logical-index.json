@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "physicalMapStatus": "unassigned",
+  "entries": [
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-001",
+      "actionId": "action-001"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-002",
+      "actionId": "action-002"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-003",
+      "actionId": "action-003"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-004",
+      "actionId": "action-004"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-005",
+      "actionId": "action-005"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-006",
+      "actionId": "action-006"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-007",
+      "actionId": "action-007"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-008",
+      "actionId": "action-008"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-009",
+      "actionId": "action-009"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-010",
+      "actionId": "action-010"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-011",
+      "actionId": "action-011"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-012",
+      "actionId": "action-012"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-013",
+      "actionId": "action-013"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-014",
+      "actionId": "action-014"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-015",
+      "actionId": "action-015"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-016",
+      "actionId": "action-016"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-017",
+      "actionId": "action-017"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-018",
+      "actionId": "action-018"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-019",
+      "actionId": "action-019"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-020",
+      "actionId": "action-020"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-021",
+      "actionId": "action-021"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-022",
+      "actionId": "action-022"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-023",
+      "actionId": "action-023"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-EVT0-024",
+      "actionId": "action-024"
+    }
+  ]
+}

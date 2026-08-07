@@ -1,0 +1,40 @@
+# Current Context
+
+- Implementation boundary: `SW-PRODUCTION-AUTHORITY-TRANSACTION-ADAPTER-01` is design accepted and implementation-ready. The evidence worker exited and final primary-evidence bytes are accepted; runtime begins after ordinary fresh hash verification immediately before implementation. Provider/framework/OS/hardware-neutral boundaries are frozen, while stable modules and the protected ReleaseGate runner remain unchanged. Hardware impact remains `NONE` with `BOARD_TARGET=UNRESOLVED`.
+
+- Updated: 2026-08-05
+- Project: yimi-pen
+- Project phase: scoped-build
+- Memory landing policy: ask-by-default
+- Lite demo activation phrase: 启用外挂记忆
+- Natural start phrase: 启动外挂记忆
+- Explicit safe phrase: 本会话启用外挂记忆
+- Legacy compatibility phrase: 启动lite demo
+- Active goals: 同一仓库有两个显式任务；root `hardware-p0` 负责硬件执行，`tasks/system-product-rd` 负责软件执行。两线隔离写入、同步读取：各自不恢复或改写对方工作，但每包启动/收口/复排读取对方已验收增量，沿版本化接口交换影响。
+- Active task pointers: `docs/codex/active-task.md`（独立 hardware-p0 owner）；`docs/codex/tasks/system-product-rd/active-task.md`（本线程 software owner）；`docs/codex/tasks/production-authority-transaction-adapter/active-task.md`（当前 implementation-ready child）。
+- Selected owner route: 本线程最新显式目标命中 `system-product-rd`；并行 `hardware-p0` 保留自己的active anchor和文件范围。
+- Stable/protected behavior: `packages/*/src`、admin-web/device-sim、compiler、public Pack、Family Alpha、ExecutionModel v1、WeightedRandom v2 和 FamilyRepository 公开语义保持；新增能力优先进入 companion adapter/组合根并复用既有合同。
+- Memory hygiene: one-off requests, pressure, failures and short replies stay task-local or revisable unless the user uses explicit absolute wording.
+- Evidence links: Lifecycle 28/28（`06ab29d8…3e7eabb`）；Desktop Authoring 93/93（`bc28adad…b9b24`）；Authoring Task Recovery 22/22（`7c9535fc…fbc76059`）、Authoring Product Shell 33/33（`e4dd6694…d88eeb`）、TTS 41/41（原始 package seal `d2488e26…67a5db`；最终 dependency-bound aggregate `3421b0de…d0cdd5b`）、FamilyRepository 16/16 + 16/16 + boundaries 13/13 + 14/14 + zero-side-effect 9/9 + 9/9（`96433369…3b019f`）、FamilyWorkspace 34/34（`094f7607…37254`）、asset-vault recovery 70/70（`65c2923a…b474`）；authority qualification 84/84, qualification ID `5713eab48f5c6e801cbdd9c9a9817da99fe2738193626fea08c3869906dafa69`, stable across full validation; post-full binding ID `ae39275c4bb41e50b7e3fd81271be56d5e34d7dfbbdeff0621fedd4023346542`; confirmation trust 17/17 SHA `e5dbed3b527e7703a06654ab9927254f0a24ead65ce309a3f47b61c16d7a1fdc`; release-gate conformance 22/22 SHA `9637fab1d788bd7da17f850d562b5d1a3feec0c0d570fa5279c9caac054c0c0d`; fresh rerank `build/software-next-package-rerank-2026-08-05-authority-closeout.md` is the current software ranking. `npm run validate:full` passed exactly once: Architecture 717/717, HardwareSystem 425/425, Product baseline 231/231, Rust firmware 12/12, host-run `eeab585d4048654e18607b12bf75b40b03d651924f48cb086d28ea0d88ee80e4`, source-set 535 files SHA `bbfeb88ec75189a8c6b5f003d6e00f80862e4cfcb650b2369db6080e2fae1530`, ReleaseDecision 15 pass/0 fail/19 missing, decision SHA `16c333b05a755b9c9d661cbdb169650939932d0716450205776a3c113188fa4e`, report SHA `bacc003910476089367e3aea69689818d57a618e87afe669c23b6cd8ffa70593`, `releaseReady=false`。
+- Current packages: 软件线程已完成 Family authoring、DirectShow CapturePort、asset-vault maintenance/recovery、FamilyWorkspace composition、`SW-AUTHORING-PRODUCT-SHELL-01A`、`SW-TTS-SOURCE-ADAPTER-01`、`SW-AUTHORING-TASK-RECOVERY-01`、`SW-DESKTOP-AUTHORING-UI-ADAPTER-01`、`SW-FAMILY-WORKSPACE-LIFECYCLE-01` 与 `SW-PRODUCTION-AUTHORITY-QUALIFICATION-01`；`SW-PRODUCTION-AUTHORITY-TRANSACTION-ADAPTER-01` design accepted/implementation-ready, runtime code not yet written. The exact next modules live under `tools/product-transaction/` and import zero stable domains; transaction durability, product replay store, lock/lease, provider authority, production receipt, and target binding retain independent evidence gates. 硬件线程由根anchor持有，本线程只读增量并记录影响。
+- Hardware input snapshot (2026-08-05 HIL closeout): HIL validator 36/36 SHA `51f36cb346452b7db963324cc719b75d836f313ed3310d6e3c83215694d9b58b`; selftest baseline 36/36, 41/43 rejected and two benign accepted SHA `c1eed685c414a63cb1fe1c41eea0b139373cdbec59fed97f14988de21f30827f`; `BOARD_TARGET=UNRESOLVED`, 18/18 bindings `TARGET_EVIDENCE_PENDING`, target-binding SHA `ccb6efefadc6b438646c69160bc882229465b3639c130aa044a08330de35e202`; `hardwareImpact=NONE`, `offlineReady=false`. HIL worker exited successfully and no hardware writer is active.
+- Next step: perform ordinary fresh hashes for all three audits and cited target/HIL/release inputs, then begin the bounded runtime implementation under `tools/product-transaction/` using the package-owned fixture composition root and deterministic runner. Desktop rendering, cross-process lease (`SW-CROSS-PROCESS-WRITER-LEASE-01`), OS key-store, family authority, DeviceDelivery, and board/target binding remain separate evidence gates.
+- Do not assume: assigned 物理码、host surrogate、Schema 通过或自声明 hash 均不代表实物/量产证据。
+- Task routing: 软件系统/Family/authoring/高复用命中 `system-product-rd`；硬件/OID/EDA/采购执行命中 root `hardware-p0`；“硬件变化影响软件/双线并进”同时读取两个anchor，但只由当前执行线写入自己的范围。共享工作树时，sealed source-set 漂移先归因到并行写入再判定。
+
+## Hardware HIL raw-evidence capture closeout
+
+- `HW-HIL-RAW-EVIDENCE-CAPTURE-LANE-V1` revision `1.0.0` is complete as a proposed hardware-only owner extension. It defines exactly one `HIL_RAW_TEST` lane and references only the two existing USB/control-status `PROPOSED_ONLY` method IDs.
+- The current evidence-capture profile remains four lanes with no HIL lane; adoption is `false` and `PENDING_OWNER_EXTENSION`. The capture-index template has zero artifacts/results and keeps target, physical, session, tool, clock, custody, calibration, qualification and ReleaseGate fields null/pending.
+ - Targeted validator: `36/36` (`51f36cb346452b7db963324cc719b75d836f313ed3310d6e3c83215694d9b58b`); selftest baseline `36/36`, `41/43` mutations rejected and two benign cases accepted (`c1eed685c414a63cb1fe1c41eea0b139373cdbec59fed97f14988de21f30827f`). Software remains read-only with `hardwareImpact=NONE`, `BOARD_TARGET=UNRESOLVED`; external actions remain ahead of any new autonomous package.
+
+ - Integrated hardware reports at close: fixture validation 117/117 `eac8f8fd2faab8821113d60b2108b6a143f1036a5bdb144e2887a2f1e57bde01`, fixture selftest `9df0d71eb489deab08ff78753d4154f57299ceda0aeaed99f8360503aa2e201e`; method-gap validation 26/26 `1f323663bd81eec6d579a3c56fe27cf6652326ce2124c2203a6f729f6623fc8b`, selftest `b9d9f88cd61901006749b59b413fcd7609ac2d69f76d8d6b2640ac47b7e78a44`; contract validation 38/38 `b30f263ed46382c7307058c3a4d114c2321b4e95b5aedf8940b5bf6f5f53459`, selftest `2c3834a1d9d16406977ac66c141f36165b6246d283c2d40d7ac5c02826953252`.
+
+- Final integrated report refresh: fixture validation 117/117 `eac8f8fd2faab8821113d60b2108b6a143f1036a5bdb144e2887a2f1e57bde01`; fixture selftest `9df0d71eb489deab08ff78753d4154f57299ceda0aeaed99f8360503aa2e201e`; method-gap validation 26/26 `1f323663bd81eec6d579a3c56fe27cf6652326ce2124c2203a6f729f6623fc8b`; method-gap selftest `b9d9f88cd61901006749b59b413fcd7609ac2d69f76d8d6b2640ac47b7e78a44`; contract validation 38/38 `b30f263ed46382c7307058c3a4d114c2321b4e95b5aedf8940b5bf6f5f53459`; contract selftest `2c3834a1d9d16406977ac66c141f36165b6246d283c2d40d7ac5c02826953252`.
+
+## Maintenance-decoupling repair
+
+- Removed root `package.json` from strict implementation identities. Package-owned schemas, template, README and two scripts remain byte/SHA locked.
+- Added semantic npm wiring checks: exact validator/selftest commands and one ordered placement in `validate:hardware-rd` immediately after the fixture-method-contract pair.
+- Targeted validator: 36/36; selftest baseline 36/36 with 41/43 rejected mutations and 2 benign cases (unrelated npm script addition and software route progression) accepted.
+- Validation report SHA-256: `51f36cb346452b7db963324cc719b75d836f313ed3310d6e3c83215694d9b58b`; selftest report SHA-256: `c1eed685c414a63cb1fe1c41eea0b139373cdbec59fed97f14988de21f30827f`.

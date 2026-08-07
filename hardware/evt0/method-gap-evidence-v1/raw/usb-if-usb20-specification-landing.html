@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html  lang="en" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8" />
+<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-125638489-1", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");</script>
+<meta name="Generator" content="Drupal 8 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>/**
+ * Default Variables.
+ *
+ * Modify this file to provide default Bootstrap Framework variables. The
+ * Bootstrap Framework will not override any variables defined here because it
+ * uses the `!default` flag which will only set their default if not already
+ * defined here.
+ *
+ * You can copy existing variables directly from the following file:
+ * ./THEMENAME/bootstrap/assets/stylesheets/_variables.scss
+ */
+.main-menu .level-two {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0px, transparent 17px); }
+
+.main-menu .level-three {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0px, transparent 17px); }
+  .main-menu .level-three:after, .main-menu .level-three:before {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0px, transparent 17px); }
+
+.nav &gt; li &gt; a:focus {
+  background-color: transparent; }
+
+.navbar-toggle {
+  border: 1px solid #e8f2ff;
+  transition: all 0.15s ease-out;
+  min-height: 34px;
+  margin-right: 0; }
+  .navbar-toggle .icon-bar {
+    transition: all 0.15s ease-out; }
+  .navbar-toggle[aria-expanded='true'] span.icon-bar {
+    margin-top: 0;
+    background-color: #ef3e42; }
+    .navbar-toggle[aria-expanded='true'] span.icon-bar:nth-of-type(2) {
+      transform: rotateZ(45deg); }
+    .navbar-toggle[aria-expanded='true'] span.icon-bar:nth-of-type(3) {
+      margin-top: -2px;
+      transform: rotateZ(-45deg); }
+    .navbar-toggle[aria-expanded='true'] span.icon-bar:last-child {
+      display: none; }
+  .navbar-toggle[aria-expanded='true']:hover .icon-bar {
+    background-color: #f36d70; }
+  .navbar-toggle:active:hover {
+    box-shadow: inset 0 0 9px rgba(0, 0, 0, 0.25); }
+  .navbar-toggle:hover {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    border-color: #e8f2ff; }
+    .navbar-toggle:hover .icon-bar {
+      background-color: #1372ff; }
+  .navbar-toggle .icon-bar {
+    background-color: #005295; }
+
+.main-menu {
+  margin: 0;
+  padding: 0; }
+  .main-menu a {
+    padding: 0.5em; }
+  .main-menu .sub-menu {
+    padding: 0.25em 0; }
+    .main-menu .sub-menu &gt; li &gt; a {
+      font-size: 0.85em; }
+  .main-menu:not(.navify-init) .level-two {
+    display: none;
+    height: 0; }
+  .main-menu .level-two {
+    background-color: #e8f2ff;
+    border-bottom: 1px solid #8cb4ee; }
+    .main-menu .level-two .caret {
+      border-color: #8cb4ee; }
+    .main-menu .level-two li {
+      position: static; }
+  .main-menu .level-three {
+    position: absolute;
+    background-color: #cfe4ff;
+    border-bottom: 1px solid #8cb4ee;
+    display: flex;
+    width: auto;
+    top: 100%;
+    right: 0;
+    justify-content: center; }
+    .main-menu .level-three li {
+      flex: 0 0 auto;
+      width: auto; }
+    .main-menu .level-three:before, .main-menu .level-three:after {
+      height: calc(100% + 1px);
+      background-color: #cfe4ff;
+      border-bottom: 1px solid #8cb4ee;
+      display: none; }
+  .main-menu li {
+    border-radius: 3px; }
+    .main-menu li .caret {
+      border-color: #e8f2ff;
+      color: #005295;
+      border-radius: 3px; }
+      .main-menu li .caret:hover {
+        background-color: #005295; }
+    .main-menu li.active {
+      box-shadow: inset 0 0 9px rgba(0, 0, 0, 0.25); }
+    .main-menu li.open &gt; .caret {
+      background-color: #1372ff;
+      color: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
+      border-color: #1372ff; }
+      .main-menu li.open &gt; .caret:hover {
+        background-color: #005295;
+        color: #ffffff; }
+  .main-menu a:hover {
+    color: #ef3e42;
+    background-color: transparent; }
+  @media (max-width: 1200px) {
+    .main-menu {
+      margin: 0 -15px; }
+      .main-menu li {
+        border-radius: 0; }
+      .main-menu .level-two {
+        flex-wrap: wrap; }
+      .main-menu &gt; li,
+      .main-menu .level-two &gt; li {
+        display: block;
+        position: relative;
+        width: 100%;
+        margin-right: 1em; }
+        .main-menu &gt; li:last-child,
+        .main-menu .level-two &gt; li:last-child {
+          margin-right: 0; }
+        .main-menu &gt; li.open &gt; .sub-menu,
+        .main-menu .level-two &gt; li.open &gt; .sub-menu {
+          height: 100%; }
+      .main-menu .sub-menu {
+        height: 0;
+        position: relative;
+        padding: 0; }
+      .main-menu .level-two &gt; li &gt; a {
+        padding-left: 1.5em; }
+      .main-menu .level-three {
+        flex-direction: column; }
+        .main-menu .level-three:before, .main-menu .level-three:after {
+          display: none;
+          content: none; }
+        .main-menu .level-three &gt; li &gt; a {
+          padding-left: 2em; } }
+
+@media (max-width: 1200px) {
+  .navbar {
+    padding: 0; }
+  .navbar-header {
+    padding: 0 0.5em; }
+  .navbar-collapse li.active {
+    box-shadow: none; }
+  .navbar-collapse a {
+    min-height: 27px;
+    padding: 10px 15px;
+    display: block;
+    text-align: left;
+    width: calc(100% - 55px); }
+    .navbar-collapse a:hover {
+      background-color: #005295;
+      color: #ffffff; }
+      .navbar-collapse a:hover + .caret {
+        background-color: #ffffff; }
+  .navbar-collapse li .caret {
+    min-width: 35px;
+    min-height: 35px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 0.35em;
+    right: 0.25em;
+    border: 1px solid #e8f2ff; }
+    .navbar-collapse li .caret:hover {
+      border-color: #e8f2ff; }
+  .navbar-collapse .navbar-right {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+    .navbar-collapse .navbar-right:before, .navbar-collapse .navbar-right:after {
+      display: none; } }
+</style>
+<link rel="shortcut icon" href="/sites/default/files/usb-favicon-logo-square.jpg" type="image/jpeg" />
+<link rel="canonical" href="https://www.usb.org/document-library/usb-20-specification" />
+<link rel="shortlink" href="https://www.usb.org/node/1852" />
+<link rel="revision" href="https://www.usb.org/document-library/usb-20-specification" />
+
+    <title>USB 2.0 Specification | USB-IF</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600i,700" rel="stylesheet">
+    <link rel="stylesheet" media="all" href="/sites/default/files/css/css_xD19ZRLZqhZTnzqzuKf0U4LwfrJ5F2KjT1g6fYkK99w.css" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_ycj6mdwKxF-weTtmoolDxxdeq020vmTM7efdW7Kjc30.css" />
+
+    
+<!--[if lte IE 8]>
+<script src="/core/assets/vendor/html5shiv/html5shiv.min.js?v=3.7.3"></script>
+<![endif]-->
+
+  </head>
+  <body class="page-node-1852 path-node page-node-type-usb-document navbar-is-fixed-top has-glyphicons">
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Skip to main content
+    </a>
+    <div id="screen-overlay">
+      <div id="screen-overlay__modal">
+        <a href="#0" id="screen-overlay__close"></a>
+      </div>
+    </div>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+                    <div class="search-overlay">
+        <div class="container">
+          
+
+
+
+  <div class="region region-search-overlay"
+    >
+    <section class="custom-search-block-form block block-custom-search clearfix" role="search" data-drupal-selector="custom-search-block-form" id="block-customsearchform">
+  
+    
+
+      <form action="/document-library/usb-20-specification" method="post" id="custom-search-block-form" accept-charset="UTF-8">
+  <div class="form-item js-form-item form-type-search js-form-type-search form-item-keys js-form-item-keys form-no-label form-group">
+      <label for="edit-keys" class="control-label sr-only">Search this site</label>
+  
+  
+  <input title="Enter the terms you wish to search for." class="custom_search-keys form-search form-control" data-drupal-selector="edit-keys" placeholder="Search" type="search" id="edit-keys" name="keys" value="" size="15" maxlength="128" data-toggle="tooltip" />
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-atiyow7u4-mdokjrvwyvlt61kbqypwpb2a7xq62aex0" type="hidden" name="form_build_id" value="form-ATIyow7U4-MdOkJrvwYvLt61KBqyPwpb2A7xq62AEX0" /><input data-drupal-selector="edit-custom-search-block-form" type="hidden" name="form_id" value="custom_search_block_form" /><div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button js-form-submit form-submit btn-default btn" type="submit" id="edit-submit" value="Go" name="">Go</button></div>
+
+</form>
+
+  </section>
+
+
+  </div>
+
+        </div>
+      </div>
+        <header class="navbar navbar-fixed-top" id="navbar" role="banner">
+              <div class="container">
+                <div class="navbar-header">
+          
+
+
+
+  <div class="region region-navigation"
+    >
+    <div class="logo-modal">
+    <span class="logo-modal__close-link"></span>
+            
+      <div class="field field--name-field-logo-link field--type-field-collection field--label-hidden field--items">
+              <div class="field--item">
+
+
+<div class="logo-modal__logo-link">
+  <a href="/">
+      
+      
+            <div class="field field--name-field-link-title field--type-string field--label-hidden field--item">Home</div>
+      
+  </a>
+</div></div>
+              <div class="field--item">
+
+
+<div class="logo-modal__logo-link">
+  <a href="/usb4">
+      
+      
+            <div class="field field--name-field-link-title field--type-string field--label-hidden field--item">USB4®</div>
+      
+  </a>
+</div></div>
+              <div class="field--item">
+
+
+<div class="logo-modal__logo-link">
+  <a href="/usb-32-0">
+      
+      
+            <div class="field field--name-field-link-title field--type-string field--label-hidden field--item">USB 3.2</div>
+      
+  </a>
+</div></div>
+              <div class="field--item">
+
+
+<div class="logo-modal__logo-link">
+  <a href="/usb-charger-pd">
+      
+      
+            <div class="field field--name-field-link-title field--type-string field--label-hidden field--item">USB Charger</div>
+      
+  </a>
+</div></div>
+              <div class="field--item">
+
+
+<div class="logo-modal__logo-link">
+  <a href="/usb-type-cr-cable-and-connector-specification">
+      
+      
+            <div class="field field--name-field-link-title field--type-string field--label-hidden field--item">USB Type-C®</div>
+      
+  </a>
+</div></div>
+          </div>
+  
+    </div>      <a class="logo navbar-btn pull-left" href="/" title="Home" rel="home">
+      <img src="/sites/default/files/USB_Enabling_Connections_30th_3-Color_Logo_RGB.png" alt="Home" />
+    </a>
+      
+  </div>
+
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+                  </div>
+
+                          <div id="navbar-collapse" class="navbar-collapse collapse">
+            
+
+
+
+  <div class="region region-navigation-collapsible"
+    >
+    <nav role="navigation" aria-labelledby="block-usb-website-theme-main-menu-menu" id="block-usb-website-theme-main-menu">
+            <h2 class="sr-only" id="block-usb-website-theme-main-menu-menu">Main navigation</h2>
+
+      
+
+  
+              <ul class="menu main-menu level-one" id="main-menu">
+                                                      <li class="has-submenu">
+                <a href="/about">
+                  About USB-IF
+                </a>
+                                                  
+                <ul class="sub-menu level-two">
+                                                          <li>
+                  <a href="/members" data-drupal-link-system-path="node/157">Members</a>
+                                              </li>
+                      </ul>
+              
+                              </li>
+                                                  <li class="has-submenu">
+                <a href="/developers">
+                  Developers
+                </a>
+                                                  
+                <ul class="sub-menu level-two">
+                                                          <li>
+                  <a href="/getting-vendor-id" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/1809">Request a Vendor ID</a>
+                                              </li>
+                                                    <li>
+                  <a href="/defined-class-codes" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/1824">Defined Class Codes</a>
+                                              </li>
+                                                    <li>
+                  <a href="/hid" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/1825">Human Interface Devices (HID)</a>
+                                              </li>
+                                                    <li>
+                  <a href="/bos-descriptor-types" data-drupal-link-system-path="node/2289">BOS Descriptor Types</a>
+                                              </li>
+                                                    <li class="has-submenu">
+                  <a href="/technologies" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/1814">Technologies</a>
+                                                    
+                  <ul class="sub-menu level-three">
+                                                            <li>
+                  <a href="/usb4" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/1995">USB4®</a>
+                                              </li>
+                                                    <li>
+                  <a href="/usb-32-0" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/259">USB 3.2</a>
+                                              </li>
+                                                    <li>
+                  <a href="/usb-charger-pd" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/261">USB Charger (USB PD)</a>
+                                              </li>
+                                                    <li>
+                  <a href="/usb-type-cr-cable-and-connector-specification" data-drupal-link-system-path="node/572">USB Type-C®</a>
+                                              </li>
+                      </ul>
+              
+                              </li>
+                                                    <li>
+                  <a href="/authentication" data-drupal-link-system-path="node/1951">Authentication</a>
+                                              </li>
+                      </ul>
+              
+                              </li>
+                                                  <li class="has-submenu">
+                <a href="/compliance">
+                  Compliance
+                </a>
+                                                  
+                <ul class="sub-menu level-two">
+                                                          <li>
+                  <a href="/usb4compliance" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/2207">USB4®</a>
+                                              </li>
+                                                    <li>
+                  <a href="/usb-32" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/589">USB 3.2</a>
+                                              </li>
+                                                    <li>
+                  <a href="/usb2" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/594">USB 2.0</a>
+                                              </li>
+                                                    <li>
+                  <a href="/usbc" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/595">USB Type-C</a>
+                                              </li>
+                                                    <li>
+                  <a href="/cable_connector" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/596">Cables and Connectors</a>
+                                              </li>
+                                                    <li>
+                  <a href="/compliancetools" data-drupal-link-system-path="node/2225">Compliance Tools</a>
+                                              </li>
+                                                    <li class="has-submenu">
+                  <a href="/labs" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/582">Test Labs</a>
+                                                    
+                  <ul class="sub-menu level-three">
+                                                            <li>
+                  <a href="/pil" data-drupal-link-system-path="node/1795">PIL Lab</a>
+                                              </li>
+                      </ul>
+              
+                              </li>
+                                                    <li>
+                  <a href="/estore" title="" id="" name="" rel="" style="" target="_blank" accesskey="" data-drupal-link-system-path="node/1812">USB-IF eStore</a>
+                                              </li>
+                                                    <li>
+                  <a href="/request_XID" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/583">Request an XID</a>
+                                              </li>
+                                                    <li>
+                  <a href="/euconformity" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/2311">EU Conformity (IEC 62680)</a>
+                                              </li>
+                      </ul>
+              
+                              </li>
+                                                    <li>
+                  <a href="/logo-license" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/1811">Logo License Request</a>
+                                              </li>
+                                                  <li class="has-submenu">
+                <a href="/usb-press-room">
+                  Pressroom
+                </a>
+                                                  
+                <ul class="sub-menu level-two">
+                                                          <li>
+                  <a href="/upcoming-events" title="Events" data-drupal-link-system-path="upcoming-events">Upcoming Events</a>
+                                              </li>
+                                                    <li>
+                  <a href="/pressroom/usb-press-releases" data-drupal-link-system-path="pressroom/usb-press-releases">USB-IF Press Releases</a>
+                                              </li>
+                                                    <li>
+                  <a href="/pressroom/member-press-releases" data-drupal-link-system-path="pressroom/member-press-releases">Member Press Releases</a>
+                                              </li>
+                                                    <li>
+                  <a href="/pressroom/articles" data-drupal-link-system-path="pressroom/articles">Articles</a>
+                                              </li>
+                      </ul>
+              
+                              </li>
+                                                    <li>
+                  <a href="/documents" title="Document Library" data-drupal-link-system-path="documents">Document Library</a>
+                                              </li>
+                                                  <li class="has-submenu">
+                <a href="">
+                  Products
+                </a>
+                                                  
+                <ul class="sub-menu level-two">
+                                                          <li>
+                  <a href="/products" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/258">Certified Product List</a>
+                                              </li>
+                                                    <li>
+                  <a href="/eu-conformity-list-iec-62680" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/2310">EU Conformity List (IEC 62680)</a>
+                                              </li>
+                      </ul>
+              
+                              </li>
+                      </ul>
+              
+
+
+  </nav>
+<nav role="navigation" aria-labelledby="block-usb-website-theme-account-menu-menu" id="block-usb-website-theme-account-menu">
+            <h2 class="sr-only" id="block-usb-website-theme-account-menu-menu">User account menu</h2>
+
+      
+      <ul class="menu menu--account nav navbar-nav navbar-right">
+                      <li class="first">
+                                        <a href="/caslogin" title="Member Login" id="" name="" rel="" class="member-login" style="" target="" accesskey="" data-drupal-link-system-path="caslogin">Member Login</a>
+              </li>
+                      <li class="last">
+                                        <a href="/search" title="Search" id="" name="" rel="" class="search" style="" target="" accesskey="" data-drupal-link-system-path="search">Search</a>
+              </li>
+        </ul>
+  
+
+  </nav>
+
+  </div>
+
+          </div>
+                        </div>
+          </header>
+  
+
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+                  
+            
+                  <section class="col-xs-12 col-md-7 col-lg-8">
+
+                
+                                      
+
+
+
+  <div class="region region-breadcrumbs"
+    >
+      
+
+  </div>
+
+                  
+                
+                                      
+
+
+
+
+                  
+                          <a id="main-content"></a>
+          
+
+
+
+  <div class="region region-content"
+    >
+        <div
+        >
+          <h1 class="page-header"><span>USB 2.0 Specification</span>
+</h1>
+
+    </div>
+  <article data-history-node-id="1852" role="article" about="/document-library/usb-20-specification" class="usb-document full clearfix">
+  
+    
+
+  
+  <div class="content">
+    
+            <div class="field field--name-field-date- field--type-datetime field--label-hidden field--item"><time datetime="2025-06-03T12:00:00Z">06/03/2025</time>
+</div>
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>LEGAL DISCLAIMER</p>
+
+<p>THIS SPECIFICATION IS PROVIDED "AS IS" AND WITHOUT ANY WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED. WITHOUT LIMITATION, THERE IS NO WARRANTY OF NON-INFRINGEMENT, NO WARRANTY OF MERCHANTABILITY, AND NO WARRANTY OF FITNESS FOR A PARTICULAR PURPOSE. ALL WARRANTIES ARE EXPRESSLY DISCLAIMED.</p>
+
+<p>USER ASSUMES THE FULL RISK OF USING THIS SPECIFICATION. IN NO EVENT SHALL USB-IF BE LIABLE FOR ANY ACTUAL, DIRECT, INDIRECT, PUNITIVE, OR CONSEQUENTIAL DAMAGES ARISING FROM SUCH USE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+</div>
+      
+      <div class="field field--name-field-document-category field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item">Specification</div>
+          </div>
+  
+      <div class="field field--name-field-document-type field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item">Base Specification</div>
+          </div>
+  
+  <div class="field field--name-field-technology field--type-entity-reference field--label-above">
+    <div class="field--label">Technology</div>
+          <div class="field--items">
+              <div class="field--item"><a href="/taxonomy/term/40" hreflang="en">USB 2.0</a></div>
+              </div>
+      </div>
+
+  </div>
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                              <aside class="col-xs-12 col-md-5 col-lg-4" role="complementary">
+            
+
+
+  
+  <div class="region region-sidebar-right"
+    >
+    <section class="views-element-container block block-views block-views-blockusb-documents-block-1 clearfix" id="block-document-sidebar">
+  
+    
+
+      <div class="form-group"><div class="view view-usb-documents view-id-usb_documents view-display-id-block_1 js-view-dom-id-38c5cf531b0a91d57da333dacee701f58c7df631689fcd49501559cb59785337">
+  
+    
+      
+      <div class="view-content">
+          <div><div class="views-field views-field-field-file document__sidebar__file"><div class="field-content"><span class="file file--mime-application-zip file--package-x-generic icon-before"><span class="file-icon"><span class="icon glyphicon glyphicon-compressed text-primary" aria-hidden="true"></span></span><span class="file-link"><a href="https://www.usb.org/sites/default/files/usb_20_20250603.zip" type="application/zip; length=14489344" title="Open archive in new window" target="_blank" data-toggle="tooltip" data-placement="bottom">usb_20_20250603.zip</a></span><span class="file-size">13.82 MB</span></span></div></div><div class="views-field views-field-field-file-contents"><h3 class="views-label views-label-field-file-contents">File Contents</h3><div class="field-content"><ol style="font:400 13.3333px arial, sans-serif; color:#000000; letter-spacing:normal; orphans:2; text-align:start; text-transform:none; white-space:normal; widows:2; word-spacing:0px; -webkit-text-stroke-width:0px; background-color:#ffffff; text-decoration-style:initial; text-decoration-color:initial">
+	<li style="font:400 10pt arial, sans-serif">The Original USB 2.0 specification released on April 27, 2000</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 Adopters Agreement</li>
+	<li style="font:400 10pt arial, sans-serif">Errata to the USB 2.0 specification as of December 7, 2000</li>
+	<li style="font:400 10pt arial, sans-serif">Mini-B connector Engineering Change Notice to the USB 2.0 specification</li>
+	<li style="font:400 10pt arial, sans-serif">Pull-up/pull-down Resistors Engineering Change Notice to the USB 2.0 specification</li>
+	<li style="font:400 10pt arial, sans-serif">Errata to the USB 2.0 specification as of May 28, 2002</li>
+	<li style="font:400 10pt arial, sans-serif">Interface Association Descriptor Engineering Change Notice to the USB 2.0 specification</li>
+	<li style="font:400 10pt arial, sans-serif">Rounded Chamfer Engineering Change Notice to the USB 2.0 specification as of October 8, 2003</li>
+	<li style="font:400 10pt arial, sans-serif">Unicode Engineering Change Notice to the USB 2.0 specification as of February 21, 2005</li>
+	<li style="font:400 10pt arial, sans-serif">Inter-Chip USB Supplement Revision 1.0 as of March 13, 2006</li>
+	<li style="font:400 10pt arial, sans-serif">Micro-USB Cables and Connectors Specification Revision 1.01 as of April 4, 2007 and corresponding Adopters Agreement</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 Link Power Management Addendum Engineering Change Notice to the USB 2.0 specification as of July 16, 2007</li>
+	<li style="font:400 10pt arial, sans-serif">High-Speed Inter-Chip USB Electrical Specification Revision 1.0 as of September 23, 2007</li>
+	<li style="font:400 10pt arial, sans-serif">Suspend Current Limit Changes Engineering Change Notice to the USB 2.0 Specification as of April 9, 2008</li>
+	<li style="font:400 10pt arial, sans-serif">5V Short Circuit Withstand Requirement Change Engineering Change Notice to the USB 2.0 Specification as of December 22, 2008</li>
+	<li style="font:400 10pt arial, sans-serif">Device Capacitance Engineering Change Notice to the USB 2.0 Specification as of December 22, 2008</li>
+	<li style="font:400 10pt arial, sans-serif">Material Change Engineering Change Notice to the USB 2.0 Specification as of December 22, 2008</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 Phase-locked SOFs Engineering Change Notice to the USB 2.0 Specification as of December 22, 2008</li>
+	<li style="font:400 10pt arial, sans-serif">Micro-USB Micro-B ID Pin Resistance and Tolerance stack-up between D+ and D- Engineering Change Notice to the MicroUSB Specification to the USB 2.0 Specification, Revision 1.01 as of December 22, 2008</li>
+	<li style="font:400 10pt arial, sans-serif">Quad Type Cable Additional for Micro USB ECN as of December 29, 2009</li>
+	<li style="font:400 10pt arial, sans-serif"><font face="Arial">Clarification on the Chamfer on USB 2.0 Micro Connectors ECN as of March 23, 2010</font></li>
+	<li style="font:400 10pt arial, sans-serif"><font face="Arial">Maximum Unmating Force Value Definition to USB 2.0 Micro Connectors ECN as of March 23, 2010</font></li>
+	<li style="font:400 10pt arial, sans-serif">"On-The-Go Supplement to the USB 2.0 Specification" Adopters Agreement</li>
+	<li style="font:400 10pt arial, sans-serif">USB TEST_MODE Selector Values ECN as of July 26, 2010</li>
+	<li style="font:400 10pt arial, sans-serif">Errata for USB 2.0 ECN:  Link Power Management (LPM) - 7/2007 as of October 11, 2011</li>
+	<li style="font:400 10pt arial, sans-serif">On-The-Go and Embedded Host Supplement to the USB Revision 2.0 Specification, Revision 2.0 version 1.1a as of July 27, 2012</li>
+	<li style="font:400 10pt arial, sans-serif">HSIC ECN as of May 21, 2012</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 Connect Timing ECN Update as of April 4, 2013</li>
+	<li style="font:400 10pt arial, sans-serif">HSIC Disconnect Supplement ECN as of September 18, 2013</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 VBUS Max Limit ECN as of August 11, 2014</li>
+	<li style="font:400 10pt arial, sans-serif">USB OTG EH ECN Maximum Vbus Voltage dated November 26, 2014</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 DC Resistance as of October 8, 2021</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 Double Isochronous IN Bandwidth ECN as of June 4, 2024</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 eUSB2 Repeater ECN as of September 27, 2024</li>
+	<li style="font:400 10pt arial, sans-serif">USB 2.0 Double Isochrnous IN ECN dated April 8, 2025</li>
+</ol>
+</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+
+  </div>
+
+          </aside>
+              
+    </div>
+  </div>
+  
+      <footer class="footer" role="contentinfo">
+      
+  
+
+
+  <div class="region region-footer container"
+    >
+    <nav role="navigation" aria-labelledby="block-usb-website-theme-footer-menu" id="block-usb-website-theme-footer">
+            
+  <h2 class="visually-hidden" id="block-usb-website-theme-footer-menu">Footer menu</h2>
+  
+
+        
+
+              <ul class="menu footer-menu" id="footer-menu">
+                            <li>
+        <a href="/about">
+          About USB-IF
+        </a>
+                                  <ul>
+                            <li>
+        <a href="/members" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/157">Members</a>
+                  </li>
+                        <li>
+        <span title="" id="" name="" rel="" class="footer-header-link" style="" target="" accesskey="">Awards</span>
+                  </li>
+                        <li>
+        <a href="/usb-if-honor-roll-awards" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/2307">Honor Roll Award</a>
+                  </li>
+        </ul>
+  
+            </li>
+                        <li>
+        <a href="/compliance">
+          Compliance
+        </a>
+                                  <ul>
+                            <li>
+        <a href="https://www.usb.org/usb4compliance" title="" id="" name="" rel="" style="" target="" accesskey="">USB4®</a>
+                  </li>
+                        <li>
+        <a href="/usb-32" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/589">USB 3.2</a>
+                  </li>
+                        <li>
+        <a href="/usb2" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/594">USB 2.0</a>
+                  </li>
+                        <li>
+        <a href="/usbc" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/595">USB Type-C® / USB PD</a>
+                  </li>
+                        <li>
+        <a href="/cable_connector" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/596">Cables and Connectors</a>
+                  </li>
+                        <li>
+        <a href="https://www.usb.org/compliancetools" title="" id="" name="" rel="" style="" target="" accesskey="">Compliance Tools</a>
+                  </li>
+                        <li>
+        <a href="/labs" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/582">Test Labs</a>
+                  </li>
+                        <li>
+        <a href="/estore" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/1812">USB-IF eStore</a>
+                  </li>
+                        <li>
+        <a href="/request_XID" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/583">Request an XID</a>
+                  </li>
+                        <li>
+        <a href="/euconformity" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/2311">EU Conformity (IEC 62680)</a>
+                  </li>
+        </ul>
+  
+            </li>
+                        <li>
+        <a href="/developers">
+          Developers
+        </a>
+                                  <ul>
+                            <li>
+        <a href="https://www.usb.org/usb4" title="" id="" name="" rel="" style="" target="" accesskey="">USB4®</a>
+                  </li>
+                        <li>
+        <a href="/logo_license" title="" id="" name="" rel="" style="" target="" accesskey="">USB-IF Logo License</a>
+                  </li>
+                        <li>
+        <a href="/getting-vendor-id" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/1809">Vendor ID Request</a>
+                  </li>
+                        <li>
+        <a href="/usb-type-ctm-cable-and-connector-specification" title="" id="" name="" rel="" style="" target="" accesskey="">USB Type-C®</a>
+                  </li>
+                        <li>
+        <a href="/usb-charger-pd" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/261">USB Charger (USB PD)</a>
+                  </li>
+                        <li>
+        <a href="https://www.usb.org/usb-32-0" title="" id="" name="" rel="" style="" target="" accesskey="">USB 3.2</a>
+                  </li>
+                        <li>
+        <a href="https://www.usb.org/authentication" title="" id="" name="" rel="" style="" target="" accesskey="">Authentication</a>
+                  </li>
+        </ul>
+  
+            </li>
+                        <li>
+        <a href="http://google.com">
+          Press
+        </a>
+                                  <ul>
+                            <li>
+        <a href="/pressroom/usb-press-releases" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="pressroom/usb-press-releases">USB-IF Press Releases</a>
+                  </li>
+                        <li>
+        <a href="/pressroom/member-press-releases" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="pressroom/member-press-releases">Member Press Releases</a>
+                  </li>
+        </ul>
+  
+            </li>
+                        <li>
+        <a href="/search">
+          USB-IF Resources
+        </a>
+                                  <ul>
+                            <li>
+        <a href="/documents" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="documents">Document Library</a>
+                  </li>
+                        <li>
+        <a href="/products" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/258">Certified Product List</a>
+                  </li>
+                        <li>
+        <a href="/eu-conformity-list-iec-62680" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/2310">EU Conformity List       (IEC 62680)</a>
+                  </li>
+                        <li class="footer-header-link">
+        <span title="" id="" name="" rel="" style="" target="" accesskey="">Education</span>
+                  </li>
+                        <li>
+        <a href="https://certifiedusb.com/" title="" id="" name="" rel="" style="" target="" accesskey="">Consumers</a>
+                  </li>
+                        <li>
+        <a href="https://www.enablingusb.org/" title="" id="" name="" rel="" style="" target="" accesskey="">Retailers</a>
+                  </li>
+        </ul>
+  
+            </li>
+                        <li>
+        <a href="/contact">
+          Contact
+        </a>
+                                  <ul>
+                            <li>
+        <a href="https://groups.usb.org" title="" id="" name="" rel="" style="" target="" accesskey="">Members Login</a>
+                  </li>
+        </ul>
+  
+            </li>
+        </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+      <section class="footer-bar-wrapper">
+        
+  
+
+
+  <div class="region region-footer-bar container"
+    >
+    <section id="block-footercopyrightbarcontent" class="block block-block-content block-block-content1aed1700-9ca3-4534-b04e-0125459b9ea5 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>Site sponsored by USB Implementers Forum, Inc., creators of USB technology.</p>
+
+<p>USB4®, USB Type-C® and USB-C® are registered trademarks of USB Implementers Forum. USB 2.0 Type-C® is a trademark of USB Implementers Forum.</p></div>
+      
+  </section>
+
+<nav role="navigation" aria-labelledby="block-copyrightbarmenu-menu" id="block-copyrightbarmenu">
+            
+  <h2 class="visually-hidden" id="block-copyrightbarmenu-menu">Copyright Bar Menu</h2>
+  
+
+        
+
+              <ul class="menu copyright-bar-menu" id="copyright-bar-menu">
+                            <li>
+        <a href="/about/privacy-statement" title="" id="" name="" rel="" style="" target="" accesskey="" data-drupal-link-system-path="node/222">Privacy Statement</a>
+                  </li>
+                        <li>
+        <a href="https://www.vtmgroup.com/">VTM Group</a>
+                  </li>
+        </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+      </section>
+    </footer>
+  
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/1852","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"google_analytics":{"trackOutbound":true,"trackMailto":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true,"trackDomainMode":1},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"ajaxTrustedUrl":{"form_action_p_pvdeGsVG5zNF_XLGPTvYSKCf43t8qZYSwcfZl2uzM":true},"user":{"uid":0,"permissionsHash":"7d46b39b87e15f6e93051f2742006c45c6e0bb5d0689b02cb7e4ac3736c696d2"}}</script>
+<script src="/core/assets/vendor/jquery/jquery.min.js?v=3.5.1"></script>
+<script src="/core/assets/vendor/underscore/underscore-min.js?v=1.9.1"></script>
+<script src="/core/misc/drupalSettingsLoader.js?v=8.9.13"></script>
+<script src="/core/misc/drupal.js?v=8.9.13"></script>
+<script src="/core/misc/drupal.init.js?v=8.9.13"></script>
+<script src="/modules/google_analytics/js/google_analytics.js?v=8.9.13"></script>
+<script src="/themes/usb_parent_theme/node_modules/select2/dist/js/select2.min.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/assets/js/scripts.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/affix.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/alert.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/button.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/carousel.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/collapse.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/dropdown.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/modal.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/tooltip.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/popover.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/scrollspy.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/tab.js?tiy0t6"></script>
+<script src="/themes/usb_parent_theme/bootstrap/assets/javascripts/bootstrap/transition.js?tiy0t6"></script>
+<script src="/themes/contrib/bootstrap/js/drupal.bootstrap.js?tiy0t6"></script>
+<script src="/themes/contrib/bootstrap/js/attributes.js?tiy0t6"></script>
+<script src="/themes/contrib/bootstrap/js/theme.js?tiy0t6"></script>
+<script src="/themes/usb_website_theme/dist/bundle.js?tiy0t6"></script>
+<script src="/modules/custom/omnia_file_agreement_popup/js/script.js?v=0.8"></script>
+<script src="/themes/contrib/bootstrap/js/popover.js?tiy0t6"></script>
+<script src="/themes/contrib/bootstrap/js/tooltip.js?tiy0t6"></script>
+
+  </body>
+</html>

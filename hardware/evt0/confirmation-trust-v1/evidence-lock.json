@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "profile": "confirmation-trust-evidence-lock-v1",
+  "retrievedAt": "2026-08-03T11:51:50Z",
+  "sources": [
+    {
+      "sourceId": "rfc7517",
+      "url": "https://www.rfc-editor.org/rfc/rfc7517.txt",
+      "bytes": 93906,
+      "sha256": "681c19b92a85068716b7e89c5815aa821bd3f11c755ff1c641b40ae9851bb33c",
+      "supports": "Trusted key-set selection and key identifier rotation semantics; kid remains an identifier rather than a trust source."
+    },
+    {
+      "sourceId": "rfc7519",
+      "url": "https://www.rfc-editor.org/rfc/rfc7519.txt",
+      "bytes": 63039,
+      "sha256": "fecd930e9ccf2276b95c0017c6c4ff5d09352e4bc3c7629946447894e0f97248",
+      "supports": "Audience, expiration, issued-at and unique identifier semantics used to constrain proof acceptance and replay."
+    },
+    {
+      "sourceId": "rfc7638",
+      "url": "https://www.rfc-editor.org/rfc/rfc7638.txt",
+      "bytes": 27593,
+      "sha256": "98b29ab9652070e6a5fec748d43e221bbedc66b6b22e05903fb5366c04ef3110",
+      "supports": "Deterministic SHA-256 JWK thumbprints used as stable Ed25519 key identifiers."
+    },
+    {
+      "sourceId": "rfc8032",
+      "url": "https://www.rfc-editor.org/rfc/rfc8032.txt",
+      "bytes": 103210,
+      "sha256": "ed63657ff389301282b169b0abde9b5dd2c7e4d524fdfa5da6ff3094fc93c4c3",
+      "supports": "Ed25519 algorithm definition, security properties and independent test vectors."
+    },
+    {
+      "sourceId": "rfc8037",
+      "url": "https://www.rfc-editor.org/rfc/rfc8037.txt",
+      "bytes": 24333,
+      "sha256": "f14347f9d8eead78ef6e7a1ea3d795d35d664033095a76a80fcd567904aaedaa",
+      "supports": "OKP and Ed25519 public JWK member definitions used by the pinned verifier keyring."
+    },
+    {
+      "sourceId": "rfc8410",
+      "url": "https://www.rfc-editor.org/rfc/rfc8410.txt",
+      "bytes": 34896,
+      "sha256": "90a0ff0b3dd661d3e26e1873f40f2ca8b41709a7bbd755a1ed3599c4746313d2",
+      "supports": "Ed25519 SubjectPublicKeyInfo and PKCS#8 key representation."
+    },
+    {
+      "sourceId": "rfc8725",
+      "url": "https://www.rfc-editor.org/rfc/rfc8725.txt",
+      "bytes": 30793,
+      "sha256": "737b7013a2495dcfd5481cf4c57c87e2455d537c4cec1140c9096a71fcef0812",
+      "supports": "Exact algorithm verification, explicit typing and mutually exclusive validation profiles."
+    },
+    {
+      "sourceId": "rfc8785",
+      "url": "https://www.rfc-editor.org/rfc/rfc8785.txt",
+      "bytes": 41879,
+      "sha256": "63d52294eb0e3f0014174288186d388b4ddbf2c67d1ce8af1d9726eb0c3ab240",
+      "supports": "JCS deterministic JSON representation for repeatable hashing and signing."
+    },
+    {
+      "sourceId": "rfc9278",
+      "url": "https://www.rfc-editor.org/rfc/rfc9278.txt",
+      "bytes": 9608,
+      "sha256": "c84d83e485a078599b4a022602ce336910b6d7c166fb9072a72ad8d923414816",
+      "supports": "Standard JWK thumbprint URI representation used by the proof kid field."
+    },
+    {
+      "sourceId": "rfc9449",
+      "url": "https://www.rfc-editor.org/rfc/rfc9449.txt",
+      "bytes": 92478,
+      "sha256": "3842c58e1f6043389416023b9bb8d765048266024982fbbd90640e05943f4e13",
+      "supports": "Server-issued nonce, unique identifier and replay-window guidance; the provider uses a 128-bit single-use challenge."
+    },
+    {
+      "sourceId": "node-v24.18.1-crypto",
+      "url": "https://nodejs.org/docs/v24.18.1/api/crypto.html",
+      "bytes": 622841,
+      "sha256": "6b9b1ddb1bba7ca54e56e7e03e830329f32eb27771f847e932b9b8cc1f2b790a",
+      "supports": "Installed Node line supports Ed25519 KeyObject import plus sign(null, data) and verify(null, data)."
+    }
+  ]
+}

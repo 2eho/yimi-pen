@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "fixtureOnly",
+    "confirmationId",
+    "previewId",
+    "sourceSha256",
+    "decision",
+    "scope",
+    "guardianRole",
+    "policyVersion",
+    "confirmedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "profile": {
+      "const": "family-alpha-confirmation-v1"
+    },
+    "fixtureOnly": {
+      "type": "boolean"
+    },
+    "confirmationId": {
+      "type": "string",
+      "pattern": "^CONF-[A-Z0-9][A-Z0-9-]{2,63}$"
+    },
+    "previewId": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "decision": {
+      "const": "confirmed"
+    },
+    "scope": {
+      "const": "all-bindings"
+    },
+    "guardianRole": {
+      "enum": [
+        "parent",
+        "guardian"
+      ]
+    },
+    "policyVersion": {
+      "const": "family-alpha-v1"
+    },
+    "confirmedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

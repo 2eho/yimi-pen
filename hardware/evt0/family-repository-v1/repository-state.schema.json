@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/family-repository-state-v1.json",
+  "title": "Yimi FamilyRepository state v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "repositoryId",
+    "familyLibraryId",
+    "outboxEpoch",
+    "stateIntegritySha256",
+    "stateGeneration",
+    "headRevisionId",
+    "headRevisionNumber",
+    "nextOutboxSequence",
+    "revisions",
+    "outbox",
+    "operations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "family-repository-state-v1" },
+    "repositoryId": { "$ref": "#/$defs/repositoryId" },
+    "familyLibraryId": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/familyLibraryId" }
+      ]
+    },
+    "outboxEpoch": { "$ref": "#/$defs/outboxEpoch" },
+    "stateIntegritySha256": { "$ref": "#/$defs/sha256" },
+    "stateGeneration": { "$ref": "#/$defs/u64" },
+    "headRevisionId": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/sha256Id" }
+      ]
+    },
+    "headRevisionNumber": { "$ref": "#/$defs/u64" },
+    "nextOutboxSequence": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,19}$"
+    },
+    "revisions": {
+      "type": "array",
+      "items": { "$ref": "https://yimi.local/schemas/family-revision-v1.json" }
+    },
+    "outbox": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/outboxEvent" }
+    },
+    "operations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/operationRecord" }
+    }
+  },
+  "$defs": {
+    "u64": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,19})$"
+    },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "sha256Id": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "repositoryId": {
+      "type": "string",
+      "pattern": "^FAMILY-REPO-[A-Z0-9][A-Z0-9._-]{2,127}$"
+    },
+    "familyLibraryId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,95}$"
+    },
+    "outboxEpoch": {
+      "type": "string",
+      "pattern": "^epoch:sha256:[a-f0-9]{64}$"
+    },
+    "operationId": {
+      "type": "string",
+      "pattern": "^OP-[A-Z0-9][A-Z0-9._-]{2,127}$"
+    },
+    "outboxEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "epoch",
+        "eventId",
+        "kind",
+        "operationId",
+        "at",
+        "previousHeadRevisionId",
+        "headRevisionId",
+        "backupId",
+        "backupSourceStateSha256",
+        "corruptFileSha256"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$"
+        },
+        "epoch": { "$ref": "#/$defs/outboxEpoch" },
+        "eventId": {
+          "type": "string",
+          "pattern": "^event:sha256:[a-f0-9]{64}$"
+        },
+        "kind": {
+          "enum": ["REVISION_COMMITTED", "RESTORE_COMPLETED", "RECOVERY_COMPLETED"]
+        },
+        "operationId": { "$ref": "#/$defs/operationId" },
+        "at": { "type": "string", "format": "date-time" },
+        "previousHeadRevisionId": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/sha256Id" }
+          ]
+        },
+        "headRevisionId": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/sha256Id" }
+          ]
+        },
+        "backupId": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^backup:sha256:[a-f0-9]{64}$" }
+          ]
+        },
+        "backupSourceStateSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/sha256" }
+          ]
+        },
+        "corruptFileSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/sha256" }
+          ]
+        }
+      }
+    },
+    "operationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operationId",
+        "kind",
+        "fingerprint",
+        "outcomeHeadRevisionId",
+        "outcomeEventEpoch",
+        "outcomeEventSequence"
+      ],
+      "properties": {
+        "operationId": { "$ref": "#/$defs/operationId" },
+        "kind": { "enum": ["COMMIT", "RESTORE", "RECOVER"] },
+        "fingerprint": { "$ref": "#/$defs/sha256" },
+        "outcomeHeadRevisionId": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/sha256Id" }
+          ]
+        },
+        "outcomeEventEpoch": { "$ref": "#/$defs/outboxEpoch" },
+        "outcomeEventSequence": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$"
+        }
+      }
+    }
+  }
+}

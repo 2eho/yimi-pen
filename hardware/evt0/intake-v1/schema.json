@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/evt0-intake-v1.json",
+  "title": "Yimi EVT-0 Evidence Intake v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "intakeKind",
+    "intakeId",
+    "recordedAt",
+    "identity",
+    "observations",
+    "tests",
+    "disposition",
+    "blockers",
+    "requirements"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "intakeKind": { "enum": ["benchmark-product", "board-oid-kit"] },
+    "intakeId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+    "recordedAt": { "type": ["string", "null"], "format": "date-time" },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["purchasePlanItemId", "candidateId", "sampleCountExpected", "samples"],
+      "properties": {
+        "purchasePlanItemId": { "type": "string", "minLength": 1 },
+        "candidateId": { "type": "string", "minLength": 1 },
+        "sampleCountExpected": { "type": "integer", "minimum": 1 },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sampleId", "serialNumber", "lot", "boardIdentityTuple", "artifacts", "artifactRefs"],
+            "properties": {
+              "sampleId": { "type": "string", "minLength": 1 },
+              "serialNumber": { "type": ["string", "null"] },
+              "lot": { "type": ["string", "null"] },
+              "boardIdentityTuple": {
+                "oneOf": [
+                  { "type": "null" },
+                  { "$ref": "#/$defs/boardIdentityTuple" }
+                ]
+              },
+              "artifacts": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/sampleArtifact" }
+              },
+              "artifactRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+            }
+          }
+        }
+      }
+    },
+    "observations": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/evidenceField" }
+    },
+    "tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/testResult" }
+    },
+    "disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason"],
+      "properties": {
+        "status": { "enum": ["PENDING", "ACCEPTED_BOARD_TARGET", "REJECTED", "REFERENCE_ONLY"] },
+        "reason": { "type": ["string", "null"] }
+      }
+    },
+    "blockers": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "requirements": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "boardIdentityTuple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["BOARD_MPN", "PCB_REV", "HEAD_MPN", "HEAD_REV", "FW_VERSION"],
+      "properties": {
+        "BOARD_MPN": { "type": ["string", "null"] },
+        "PCB_REV": { "type": ["string", "null"] },
+        "HEAD_MPN": { "type": ["string", "null"] },
+        "HEAD_REV": { "type": ["string", "null"] },
+        "FW_VERSION": { "type": ["string", "null"] }
+      }
+    },
+    "sampleArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "bytes", "sha256", "mediaType"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+        "path": { "type": "string", "minLength": 1 },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "mediaType": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidenceField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "value", "unit", "evidenceRefs", "artifactRefs", "notes"],
+      "properties": {
+        "state": { "enum": ["PENDING", "VENDOR_DOCUMENT", "OBSERVED", "MEASURED"] },
+        "value": {},
+        "unit": { "type": ["string", "null"] },
+        "evidenceRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "artifactRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "testResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "method", "acceptance", "result", "instrument", "artifactRefs"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+        "status": { "enum": ["PENDING", "PASS", "FAIL", "NOT_APPLICABLE"] },
+        "method": { "type": "string", "minLength": 1 },
+        "acceptance": { "type": "string", "minLength": 1 },
+        "result": {},
+        "instrument": { "type": ["string", "null"] },
+        "artifactRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}

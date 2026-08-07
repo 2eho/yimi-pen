@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "profileId": "HW-EDA-SHARED-HTTP-POC-V1",
+  "purpose": "Prove one loopback easyeda-mcp-pro HTTP process can own two isolated MCP sessions and survive a controlled stop/restart cycle without changing the live JLCEDA route.",
+  "runtime": {
+    "nodeVersion": "v24.18.1",
+    "nodeRelativeToCodexHome": "tools/node-v24.18.1-win-x64/node.exe",
+    "nodeBytes": 92540232,
+    "nodeSha256": "ac51903c4c111815d52280b1fdcc8da067cbb37e2fe1a765097b85c3292c8582",
+    "packageName": "easyeda-mcp-pro",
+    "packageVersion": "0.35.4",
+    "toolRootRelativeToCodexHome": "tools/easyeda-mcp-pro",
+    "packageRelativeToCodexHome": "tools/easyeda-mcp-pro/node_modules/easyeda-mcp-pro",
+    "toolPackageLock": {
+      "path": "package-lock.json",
+      "bytes": 49507,
+      "sha256": "6f3fd34aa68c624a5adc213798d3b7b7a71d219788ffad95b4f8b5786ed7e41e"
+    },
+    "packageTree": {
+      "algorithm": "sha256(sorted UTF-8 lines: <posix-relative>\\0<bytes>\\0<file-sha256>\\n)",
+      "fileCount": 606,
+      "totalBytes": 3815595,
+      "sha256": "16533fbc5a9dc6699a5ffd73d9c71d95da102864f7366cd4e38a5e3ded125d4e"
+    },
+    "evidenceFiles": [
+      {
+        "path": "package.json",
+        "bytes": 6934,
+        "sha256": "b9fe8e79c45a82cd2a5637a37c2ed21c44cf49b42b422529b87fd61d6859123d"
+      },
+      {
+        "path": "README.md",
+        "bytes": 43680,
+        "sha256": "c522260620d5d919e7530f9ead6182d481f5551a6f3de49db2eead96c2ada992"
+      },
+      {
+        "path": "dist/index.js",
+        "bytes": 3068,
+        "sha256": "4fca20b24212b1c025f5262e514c113ab3bfec12338349a46f69c02606122fcc"
+      },
+      {
+        "path": "dist/server/factory.js",
+        "bytes": 6277,
+        "sha256": "ebfc16d0f263082dff3e03a2b129ea34464aa7b62ef3fb5085a4a2853508923e"
+      },
+      {
+        "path": "dist/server/transports/http.js",
+        "bytes": 21781,
+        "sha256": "9f678f33019737a09bbe801ff2aff184ae7ca69841e684a7215f088ab1e41711"
+      },
+      {
+        "path": "dist/bridge/manager.js",
+        "bytes": 30929,
+        "sha256": "4ec4b18dbbc3903442fb9b691275ce8f5e864f2929f5ee313053e42a8298f88d"
+      }
+    ]
+  },
+  "isolatedTopology": {
+    "transport": "http",
+    "httpHost": "127.0.0.1",
+    "httpPort": 49643,
+    "mcpPath": "/mcp",
+    "bridgeHost": "127.0.0.1",
+    "bridgePort": 49642,
+    "bridgePortScan": "49642",
+    "expectedBridgeConnected": false,
+    "toolProfile": "core",
+    "toolScopes": [
+      "diagnostics:read",
+      "schematic:read",
+      "bom:read",
+      "checks:read",
+      "pcb:read"
+    ],
+    "orderingEnabled": false,
+    "rawExecEnabled": false,
+    "externalSourcingEnabled": false
+  },
+  "isolatedRuntimeStorage": {
+    "root": "build/jlceda-shared-http-poc-runtime",
+    "separateDirectoryPerRunAndCycle": true,
+    "sharesStateWithLiveStdioProcesses": false,
+    "childEnvironmentPolicy": "OS_ALLOWLIST_PLUS_EXPLICIT_POC",
+    "retention": "PRESERVE_BUILD_EVIDENCE_MANUAL_CLEANUP"
+  },
+  "futureLiveCandidate": {
+    "status": "PENDING_CONTROLLED_MAINTENANCE_WINDOW",
+    "mcpUrl": "http://127.0.0.1:49630/mcp",
+    "httpPort": 49630,
+    "bridgePort": 49620,
+    "applyToGlobalConfig": false
+  },
+  "protectedState": [
+    {
+      "id": "CODEX_GLOBAL_CONFIG",
+      "pathKind": "CODEX_HOME",
+      "path": "config.toml"
+    },
+    {
+      "id": "HARDWARE_TARGET_BINDING",
+      "pathKind": "REPOSITORY",
+      "path": "hardware/evt0/hardware-system-v1/target-binding.json"
+    },
+    {
+      "id": "HARDWARE_TOPOLOGY",
+      "pathKind": "REPOSITORY",
+      "path": "hardware/evt0/hardware-system-v1/topology.json"
+    },
+    {
+      "id": "BOM_REV_A_PENDING",
+      "pathKind": "REPOSITORY",
+      "path": "hardware/evt0/bom-revisions/BOM-REV-A.pending.json"
+    },
+    {
+      "id": "PURCHASE_PLAN",
+      "pathKind": "REPOSITORY",
+      "path": "hardware/evt0/purchase-plan.csv"
+    }
+  ],
+  "effects": {
+    "targetBindingEffect": "NONE",
+    "adapterEffect": "NONE",
+    "bomRevisionEffect": "NONE",
+    "releaseGateEffect": "NONE",
+    "purchaseAuthorizationEffect": "NONE",
+    "globalCodexConfigEffect": "NONE_NOT_APPLIED",
+    "liveEdaBridgeEffect": "NONE_ISOLATED_PORTS"
+  },
+  "requiredCheckIds": [
+    "PROFILE_IDENTITY",
+    "PINNED_RUNTIME",
+    "PINNED_PACKAGE_EVIDENCE",
+    "PROTECTED_STATE_CAPTURED",
+    "ISOLATED_PORTS_FREE",
+    "CYCLE1_HEALTH",
+    "CYCLE1_READINESS",
+    "CYCLE1_SINGLE_PROCESS_TWO_LISTENERS",
+    "CYCLE1_LOOPBACK_ONLY",
+    "CYCLE1_TWO_DISTINCT_SESSIONS",
+    "CYCLE1_TOOL_SURFACES_MATCH",
+    "CYCLE1_FEATURES_DISABLED",
+    "CYCLE1_WRITE_SCOPE_DENIED",
+    "CYCLE1_RUNTIME_STORAGE_ISOLATED",
+    "CYCLE1_PARALLEL_STATUS",
+    "CYCLE1_BRIDGE_ISOLATED",
+    "CYCLE1_SESSION_A_CLOSED",
+    "CYCLE1_SESSION_B_SURVIVES",
+    "CYCLE1_STOP_RELEASES_PORTS",
+    "CYCLE2_HEALTH",
+    "CYCLE2_SINGLE_PROCESS_TWO_LISTENERS",
+    "CYCLE2_RUNTIME_STORAGE_ISOLATED",
+    "CYCLE2_OLD_SESSION_REJECTED",
+    "CYCLE2_NEW_SESSION_ALLOCATED",
+    "CYCLE2_BRIDGE_ISOLATED",
+    "CYCLE2_STOP_RELEASES_PORTS",
+    "LIVE_49620_LISTENER_UNCHANGED",
+    "LIVE_49620_ENDPOINTS_UNCHANGED",
+    "PROTECTED_STATE_UNCHANGED",
+    "GLOBAL_CONFIG_REMAINS_STDIO",
+    "MIGRATION_CANDIDATE_NOT_APPLIED"
+  ]
+}

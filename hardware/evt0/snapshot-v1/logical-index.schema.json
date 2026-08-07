@@ -1,0 +1,102 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "physicalMapStatus",
+    "entries"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "physicalMapStatus": {
+      "enum": [
+        "unassigned",
+        "assigned"
+      ]
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "physicalCode",
+          "logicalOid",
+          "actionId"
+        ],
+        "properties": {
+          "physicalCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "pattern": "^(?:0|[1-9][0-9]{0,19})$"
+              }
+            ]
+          },
+          "logicalOid": {
+            "type": "string",
+            "pattern": "^[A-Z0-9][A-Z0-9._-]{2,63}$"
+          },
+          "actionId": {
+            "type": "string",
+            "pattern": "^action-[a-z0-9][a-z0-9._-]{2,63}$"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "physicalMapStatus": {
+            "const": "assigned"
+          }
+        },
+        "required": [
+          "physicalMapStatus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "physicalCode": {
+                  "type": "string",
+                  "pattern": "^(?:0|[1-9][0-9]{0,19})$"
+                }
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "physicalCode": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/snapshot-logical-index-v1.json",
+  "title": "Yimi Snapshot v1 logical OID index"
+}

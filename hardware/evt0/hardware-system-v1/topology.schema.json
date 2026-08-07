@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/hardware-system-topology-v1.json",
+  "title": "Yimi Hardware System Topology v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "topologyId",
+    "intent",
+    "requirements",
+    "blocks",
+    "interfaces"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "hardware-system-topology-v1" },
+    "topologyId": {
+      "type": "string",
+      "pattern": "^hwt:sha256:[0-9a-f]{64}$"
+    },
+    "intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/requirementId" }
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/block" }
+    },
+    "interfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/interface" }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*$"
+    },
+    "requirementId": {
+      "type": "string",
+      "pattern": "^(?:RQ-SP|PS)-[0-9]{3}$"
+    },
+    "port": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["portId", "direction", "semantic"],
+      "properties": {
+        "portId": { "$ref": "#/$defs/identifier" },
+        "direction": {
+          "enum": ["PRODUCES", "CONSUMES", "BIDIRECTIONAL", "PASSIVE"]
+        },
+        "semantic": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockId", "role", "responsibility", "ports"],
+      "properties": {
+        "blockId": { "$ref": "#/$defs/identifier" },
+        "role": {
+          "enum": [
+            "OID_MEDIA",
+            "OID_HEAD",
+            "TARGET_ADAPTER",
+            "CONTENT_STORAGE",
+            "AUDIO_OUTPUT",
+            "USB_DEVICE_PORT",
+            "BATTERY_PACK",
+            "POWER_SYSTEM",
+            "USER_IO",
+            "DIAGNOSTICS",
+            "OPTIONAL_WIRELESS",
+            "ENCLOSURE"
+          ]
+        },
+        "responsibility": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ports": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/port" }
+        }
+      }
+    },
+    "endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockId", "portId"],
+      "properties": {
+        "blockId": { "$ref": "#/$defs/identifier" },
+        "portId": { "$ref": "#/$defs/identifier" }
+      }
+    },
+    "interface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interfaceId",
+        "kind",
+        "from",
+        "to",
+        "semantic",
+        "requirements"
+      ],
+      "properties": {
+        "interfaceId": { "$ref": "#/$defs/identifier" },
+        "kind": {
+          "enum": [
+            "OPTICAL",
+            "EVENT",
+            "STORAGE",
+            "AUDIO_SIGNAL",
+            "DATA_TRANSPORT",
+            "POWER",
+            "CONTROL",
+            "STATUS",
+            "DIAGNOSTIC",
+            "WIRELESS",
+            "MECHANICAL",
+            "ACOUSTIC"
+          ]
+        },
+        "from": { "$ref": "#/$defs/endpoint" },
+        "to": { "$ref": "#/$defs/endpoint" },
+        "semantic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirements": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/requirementId" }
+        }
+      }
+    }
+  }
+}

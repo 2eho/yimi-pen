@@ -1,0 +1,367 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/hardware-system-target-binding-v1.json",
+  "title": "Yimi Hardware System Target Binding v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "topologyRef",
+    "targetIdentity",
+    "interfaceBindings",
+    "eda"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "hardware-system-target-binding-v1" },
+    "topologyRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/hardware-system-v1/topology.json"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "targetIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "intakeSelector", "observationRefs", "testRefs", "releaseGateRefs"],
+      "properties": {
+        "state": { "enum": ["UNRESOLVED", "FROZEN"] },
+        "intakeSelector": { "$ref": "#/$defs/intakeSelector" },
+        "observationRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "testRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "releaseGateRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/releaseGateId" }
+        }
+      }
+    },
+    "interfaceBindings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/interfaceBinding" }
+    },
+    "eda": { "$ref": "#/$defs/edaState" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "targetIdentity": {
+            "type": "object",
+            "properties": { "state": { "const": "UNRESOLVED" } },
+            "required": ["state"]
+          }
+        },
+        "required": ["targetIdentity"]
+      },
+      "then": {
+        "properties": {
+          "interfaceBindings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "enum": [
+                    "REQUIREMENT_FROZEN",
+                    "TARGET_EVIDENCE_PENDING",
+                    "NOT_APPLICABLE"
+                  ]
+                },
+                "edaReadiness": {
+                  "enum": [
+                    "SYSTEM_SKELETON_READY",
+                    "BLOCKED_TARGET_EVIDENCE",
+                    "NOT_APPLICABLE"
+                  ]
+                }
+              }
+            }
+          },
+          "eda": {
+            "type": "object",
+            "properties": {
+              "readiness": { "const": "SYSTEM_SKELETON_ONLY" },
+              "chipLevelReady": { "const": false }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "eda": {
+            "type": "object",
+            "properties": { "readiness": { "const": "CHIP_LEVEL_READY" } },
+            "required": ["readiness"]
+          }
+        },
+        "required": ["eda"]
+      },
+      "then": {
+        "properties": {
+          "targetIdentity": {
+            "type": "object",
+            "properties": { "state": { "const": "FROZEN" } }
+          },
+          "interfaceBindings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "state": { "enum": ["TARGET_FROZEN", "NOT_APPLICABLE"] },
+                "edaReadiness": { "enum": ["CHIP_LEVEL_READY", "NOT_APPLICABLE"] }
+              }
+            }
+          },
+          "eda": {
+            "type": "object",
+            "properties": {
+              "systemSkeletonReady": { "const": true },
+              "chipLevelReady": { "const": true },
+              "blockedWork": { "type": "array", "maxItems": 0 }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "eda": {
+            "type": "object",
+            "properties": { "readiness": { "const": "SYSTEM_SKELETON_ONLY" } },
+            "required": ["readiness"]
+          }
+        },
+        "required": ["eda"]
+      },
+      "then": {
+        "properties": {
+          "eda": {
+            "type": "object",
+            "properties": { "chipLevelReady": { "const": false } }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*$"
+    },
+    "releaseGateId": {
+      "type": "string",
+      "pattern": "^RG-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "intakeSelector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "templatePath",
+        "recordsDirectory",
+        "intakeKind",
+        "purchasePlanItemId",
+        "candidateId",
+        "requiredDisposition",
+        "minimumMatchingSamples"
+      ],
+      "properties": {
+        "templatePath": {
+          "const": "hardware/evt0/intake-v1/board-oid-kit.template.json"
+        },
+        "recordsDirectory": {
+          "const": "hardware/evt0/intake-v1/records"
+        },
+        "intakeKind": { "const": "board-oid-kit" },
+        "purchasePlanItemId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requiredDisposition": { "const": "ACCEPTED_BOARD_TARGET" },
+        "minimumMatchingSamples": {
+          "type": "integer",
+          "minimum": 2
+        }
+      }
+    },
+    "interfaceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interfaceId",
+        "state",
+        "observationRefs",
+        "testRefs",
+        "releaseGateRefs",
+        "edaReadiness",
+        "blocker"
+      ],
+      "properties": {
+        "interfaceId": { "$ref": "#/$defs/identifier" },
+        "state": {
+          "enum": [
+            "REQUIREMENT_FROZEN",
+            "TARGET_EVIDENCE_PENDING",
+            "TARGET_FROZEN",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "observationRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "testRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "releaseGateRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/releaseGateId" }
+        },
+        "edaReadiness": {
+          "enum": [
+            "SYSTEM_SKELETON_READY",
+            "BLOCKED_TARGET_EVIDENCE",
+            "CHIP_LEVEL_READY",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "blocker": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "state": { "const": "TARGET_EVIDENCE_PENDING" }
+            },
+            "required": ["state"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "blocker": { "type": "string", "minLength": 1 },
+              "edaReadiness": { "const": "BLOCKED_TARGET_EVIDENCE" }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "state": { "const": "TARGET_FROZEN" }
+            },
+            "required": ["state"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "blocker": { "type": "null" },
+              "edaReadiness": { "const": "CHIP_LEVEL_READY" }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "state": { "const": "NOT_APPLICABLE" }
+            },
+            "required": ["state"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "blocker": { "type": "null" },
+              "edaReadiness": { "const": "NOT_APPLICABLE" }
+            }
+          }
+        }
+      ]
+    },
+    "edaState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "readiness",
+        "systemSkeletonReady",
+        "chipLevelReady",
+        "permittedWork",
+        "blockedWork",
+        "entryGateRefs"
+      ],
+      "properties": {
+        "readiness": {
+          "enum": ["SYSTEM_SKELETON_ONLY", "CHIP_LEVEL_READY"]
+        },
+        "systemSkeletonReady": { "type": "boolean" },
+        "chipLevelReady": { "type": "boolean" },
+        "permittedWork": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["HIERARCHY", "BLOCK_DIAGRAM", "INTERFACE_LABELS"]
+          }
+        },
+        "blockedWork": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "SYMBOL_SELECTION",
+              "PIN_MAPPING",
+              "PHYSICAL_NET_NAMING",
+              "POWER_RAIL_VALUES",
+              "CONNECTOR_SELECTION",
+              "PCB_LAYOUT"
+            ]
+          }
+        },
+        "entryGateRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/releaseGateId" }
+        }
+      }
+    }
+  }
+}

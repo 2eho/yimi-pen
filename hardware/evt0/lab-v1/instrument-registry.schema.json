@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/evt0-lab-instrument-registry-v1.json",
+  "title": "Yimi Pen EVT-0 Lab Instrument Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "registryId",
+    "status",
+    "recordedAt",
+    "operator",
+    "discoveryReportRef",
+    "instruments",
+    "qualificationEffect",
+    "blockers"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "recordKind": { "const": "evt0-lab-instrument-registry" },
+    "registryId": { "type": "string", "pattern": "^EVT0-LAB-REGISTRY-[A-Z0-9-]+$" },
+    "status": { "enum": ["TEMPLATE", "PENDING", "QUALIFIED"] },
+    "recordedAt": {
+      "anyOf": [
+        { "type": "string", "format": "date-time" },
+        { "type": "null" }
+      ]
+    },
+    "operator": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "discoveryReportRef": {
+      "anyOf": [
+        { "type": "string", "pattern": "^build/hardware-lab-discovery\\.json$" },
+        { "type": "null" }
+      ]
+    },
+    "instruments": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": { "$ref": "#/$defs/instrument" }
+    },
+    "qualificationEffect": { "const": "NONE_UNTIL_ALL_REQUIRED_QUALIFIED" },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "nullableString": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "bytes", "sha256", "mediaType"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]+$" },
+        "path": { "type": "string", "pattern": "^build/hardware-lab/instruments/[^/]+/raw/[^/]+$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "mediaType": { "type": "string", "minLength": 1 }
+      }
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "status", "performedAt", "validUntil", "procedure", "artifactRefs", "referenceArtifactRefs"],
+      "properties": {
+        "kind": { "enum": ["PENDING", "CALIBRATION_CERTIFICATE", "TRACEABLE_SELF_CHECK"] },
+        "status": { "enum": ["PENDING", "PASS", "FAIL", "EXPIRED"] },
+        "performedAt": {
+          "anyOf": [
+            { "type": "string", "format": "date-time" },
+            { "type": "null" }
+          ]
+        },
+        "validUntil": {
+          "anyOf": [
+            { "type": "string", "format": "date-time" },
+            { "type": "null" }
+          ]
+        },
+        "procedure": { "$ref": "#/$defs/nullableString" },
+        "artifactRefs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "referenceArtifactRefs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assetId",
+        "assetKind",
+        "manufacturer",
+        "model",
+        "serial",
+        "serialSource",
+        "firmwareVersion",
+        "identityArtifactRefs",
+        "calibration",
+        "artifacts",
+        "disposition",
+        "blockers"
+      ],
+      "properties": {
+        "assetId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9-]+$" },
+        "assetKind": {
+          "enum": [
+            "BENCH_SUPPLY",
+            "MULTIMETER",
+            "CALIPER",
+            "SCALE",
+            "MACRO_CAMERA",
+            "USB_C_POWER_METER",
+            "SOUND_LEVEL_METER"
+          ]
+        },
+        "manufacturer": { "$ref": "#/$defs/nullableString" },
+        "model": { "$ref": "#/$defs/nullableString" },
+        "serial": { "$ref": "#/$defs/nullableString" },
+        "serialSource": {
+          "enum": ["MANUFACTURER_SERIAL", "LOCAL_ASSET_TAG", null]
+        },
+        "firmwareVersion": { "$ref": "#/$defs/nullableString" },
+        "identityArtifactRefs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "calibration": { "$ref": "#/$defs/calibration" },
+        "artifacts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/artifact" }
+        },
+        "disposition": { "enum": ["PENDING", "QUALIFIED", "REJECTED"] },
+        "blockers": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "instrument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "purchasePlanItemId", "role", "assets", "disposition", "blockers"],
+      "properties": {
+        "id": { "enum": ["PSU-01", "DMM-01", "MECH-01", "MACRO-01", "USBPWR-01", "SPL-01"] },
+        "purchasePlanItemId": { "enum": ["LAB1", "LAB2", "LAB3", "LAB4", "LAB5", "LAB6"] },
+        "role": { "type": "string", "minLength": 1 },
+        "assets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/asset" }
+        },
+        "disposition": { "enum": ["PENDING", "QUALIFIED", "REJECTED"] },
+        "blockers": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

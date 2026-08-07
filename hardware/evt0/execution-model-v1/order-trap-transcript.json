@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "profile": "snapshot-execution-transcript-v1",
+  "sourceProfile": "slot-order-trap",
+  "fixtureOnly": true,
+  "physicalEvidence": false,
+  "hostSurrogateFormula": "9000000000000000 + logical OID numeric suffix; NOT AN OID CODE",
+  "physicalMap": [
+    {
+      "logicalOid": "YIMI-ORDER-003",
+      "physicalCode": "9000000000000003"
+    },
+    {
+      "logicalOid": "YIMI-ORDER-010",
+      "physicalCode": "9000000000000010"
+    },
+    {
+      "logicalOid": "YIMI-ORDER-021",
+      "physicalCode": "9000000000000021"
+    }
+  ],
+  "taps": [
+    {
+      "id": "TAP-ORDER-01",
+      "status": "valid",
+      "physicalCode": "9000000000000003",
+      "eventAtUs": "100",
+      "randomIndex": 1,
+      "expected": {
+        "decision": "play",
+        "actionKey": "action-zeta",
+        "actionSlot": 0,
+        "playPolicy": "random_one",
+        "clipKeys": [
+          "clip-zeta-b"
+        ]
+      }
+    },
+    {
+      "id": "TAP-ORDER-02",
+      "status": "valid",
+      "physicalCode": "9000000000000003",
+      "eventAtUs": "150",
+      "randomIndex": null,
+      "expected": {
+        "decision": "suppress-cooldown",
+        "actionKey": "action-zeta",
+        "actionSlot": 0,
+        "playPolicy": "random_one",
+        "clipKeys": []
+      }
+    },
+    {
+      "id": "TAP-ORDER-03",
+      "status": "valid",
+      "physicalCode": "9000000000000010",
+      "eventAtUs": "200",
+      "randomIndex": null,
+      "expected": {
+        "decision": "play",
+        "actionKey": "action-alpha",
+        "actionSlot": 1,
+        "playPolicy": "replace",
+        "clipKeys": [
+          "clip-alpha-a"
+        ]
+      }
+    },
+    {
+      "id": "TAP-ORDER-04",
+      "status": "valid",
+      "physicalCode": "9000000000000021",
+      "eventAtUs": "300",
+      "randomIndex": null,
+      "expected": {
+        "decision": "play",
+        "actionKey": "action-mike",
+        "actionSlot": 2,
+        "playPolicy": "queue",
+        "clipKeys": [
+          "clip-mike-b",
+          "clip-mike-a"
+        ]
+      }
+    },
+    {
+      "id": "TAP-ORDER-05",
+      "status": "low-quality",
+      "physicalCode": "9000000000000003",
+      "eventAtUs": "400",
+      "randomIndex": null,
+      "expected": {
+        "decision": "ignore-invalid",
+        "actionKey": null,
+        "actionSlot": null,
+        "playPolicy": null,
+        "clipKeys": []
+      }
+    }
+  ]
+}

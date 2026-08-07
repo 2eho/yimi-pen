@@ -1,0 +1,791 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/hardware-method-gap-evidence-v1.json",
+  "title": "Hardware fixture method-gap evidence audit v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "packageId",
+    "revision",
+    "status",
+    "boardTargetState",
+    "sourcePolicy",
+    "dependencyPolicy",
+    "protectedFiles",
+    "officialSources",
+    "unavailableOfficialSources",
+    "gaps",
+    "decisions",
+    "softwareReadOnly",
+    "effects",
+    "implementation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "hardware-method-gap-evidence-audit-v1"
+    },
+    "packageId": {
+      "const": "HW-FIXTURE-METHOD-GAP-EVIDENCE-AUDIT-V1"
+    },
+    "revision": {
+      "const": "1.1.0"
+    },
+    "status": {
+      "enum": [
+        "AUDIT_COMPLETE",
+        "PRIMARY_EVIDENCE_PENDING"
+      ]
+    },
+    "boardTargetState": {
+      "const": "UNRESOLVED"
+    },
+    "sourcePolicy": {
+      "$ref": "#/$defs/sourcePolicy"
+    },
+    "dependencyPolicy": {
+      "$ref": "#/$defs/dependencyPolicy"
+    },
+    "protectedFiles": {
+      "type": "array",
+      "minItems": 13,
+      "items": {
+        "$ref": "#/$defs/protectedFile"
+      }
+    },
+    "officialSources": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "$ref": "#/$defs/sourceRecord"
+      }
+    },
+    "unavailableOfficialSources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unavailableSource"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/gap"
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/decision"
+      }
+    },
+    "softwareReadOnly": {
+      "$ref": "#/$defs/softwareReadOnly"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    },
+    "implementation": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "$ref": "#/$defs/implementationIdentity"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sourcePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowedPublishers",
+        "allowedHosts",
+        "unofficialSources",
+        "claimRule",
+        "licenseRule"
+      ],
+      "properties": {
+        "allowedPublishers": {
+          "type": "array",
+          "minItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "USB-IF",
+              "Micron Technology",
+              "KIOXIA",
+              "NVM Express",
+              "NI",
+              "OpenHTF project",
+              "SD Association"
+            ]
+          }
+        },
+        "allowedHosts": {
+          "type": "array",
+          "minItems": 7,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9.-]+$"
+          }
+        },
+        "unofficialSources": {
+          "const": "REJECTED"
+        },
+        "claimRule": {
+          "const": "SOURCE_BOUNDARY_ONLY_NO_TARGET_INFERENCE"
+        },
+        "licenseRule": {
+          "const": "INTERNAL_SNAPSHOT_ONLY_WHEN_PUBLIC_AND_SIZE_PERMITS"
+        }
+      }
+    },
+    "protectedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "owner",
+        "bytes",
+        "sha256",
+        "state"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(hardware|docs|build)/[^\\\\]+(?:/[^\\\\]+)*$"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "state": {
+          "enum": [
+            "UNCHANGED_EXPECTED",
+            "AUDIT_SNAPSHOT_AT_CAPTURE"
+          ]
+        }
+      }
+    },
+    "dependencyPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "auditSnapshotState",
+        "liveFixtureRule",
+        "liveSoftwareRule",
+        "canonicalArtifactRule"
+      ],
+      "properties": {
+        "auditSnapshotState": {
+          "const": "AUDIT_SNAPSHOT_AT_CAPTURE"
+        },
+        "liveFixtureRule": {
+          "const": "CURRENT_SEMANTIC_VALIDATION_ONLY"
+        },
+        "liveSoftwareRule": {
+          "const": "LIVE_BOUNDARY_SEMANTICS_ONLY_NO_HASH_OR_TASK_NAME"
+        },
+        "canonicalArtifactRule": {
+          "const": "NO_CHURN_FOR_HARDWARE_IMPACT_NONE"
+        }
+      }
+    },
+    "sourceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "gapRefs",
+        "publisher",
+        "title",
+        "url",
+        "retrievedAt",
+        "timezone",
+        "sourceVersionOrDate",
+        "httpStatus",
+        "contentType",
+        "bytes",
+        "sha256",
+        "localRawPath",
+        "claimBoundary",
+        "licenseBoundary"
+      ],
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "pattern": "^SRC-METHOD-GAP-[A-Z0-9-]+$"
+        },
+        "gapRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "GAP-IF-USB-DATA-METHOD",
+              "GAP-IF-STORAGE-POWER-LOSS-METHOD",
+              "GAP-CONTROL-STATUS-METHOD"
+            ]
+          }
+        },
+        "publisher": {
+          "enum": [
+            "USB-IF",
+            "Micron Technology",
+            "KIOXIA",
+            "NVM Express",
+            "NI",
+            "OpenHTF project",
+            "SD Association"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://[^\\s]+$"
+        },
+        "retrievedAt": {
+          "type": "string",
+          "pattern": "^2026-08-04T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}\\+08:00$"
+        },
+        "timezone": {
+          "const": "Asia/Shanghai"
+        },
+        "sourceVersionOrDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "httpStatus": {
+          "const": 200
+        },
+        "contentType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "localRawPath": {
+          "type": "string",
+          "pattern": "^hardware/evt0/method-gap-evidence-v1/raw/[A-Za-z0-9._-]+$"
+        },
+        "claimBoundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "licenseBoundary": {
+          "enum": [
+            "PUBLIC_INTERNAL_SNAPSHOT",
+            "OFFICIAL_PAGE_ONLY",
+            "PUBLIC_PROJECT_SOURCE"
+          ]
+        }
+      }
+    },
+    "unavailableSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "gapRefs",
+        "publisher",
+        "title",
+        "url",
+        "retrievedAt",
+        "timezone",
+        "httpStatus",
+        "contentType",
+        "localRawPath",
+        "accessState",
+        "claimBoundary"
+      ],
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "pattern": "^SRC-METHOD-GAP-UNAVAILABLE-[A-Z0-9-]+$"
+        },
+        "gapRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "GAP-IF-USB-DATA-METHOD",
+              "GAP-IF-STORAGE-POWER-LOSS-METHOD",
+              "GAP-CONTROL-STATUS-METHOD"
+            ]
+          }
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://[^\\s]+$"
+        },
+        "retrievedAt": {
+          "type": "string",
+          "pattern": "^2026-08-04T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}\\+08:00$"
+        },
+        "timezone": {
+          "const": "Asia/Shanghai"
+        },
+        "httpStatus": {
+          "type": "integer",
+          "minimum": 400
+        },
+        "contentType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "localRawPath": {
+          "const": null
+        },
+        "accessState": {
+          "enum": [
+            "INACCESSIBLE",
+            "LICENSE_OR_LOGIN_GATED",
+            "NOT_PUBLICLY_CAPTURED"
+          ]
+        },
+        "claimBoundary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gapId",
+        "interfaceRefs",
+        "supportingInterfaceRefs",
+        "existingMethodRefs",
+        "existingInstrumentSlotRefs",
+        "proposedMethodId",
+        "methodStatus",
+        "acceptedInMethodCatalog",
+        "instrumentCoverage",
+        "targetNeutralSkeleton",
+        "targetSpecificParameters",
+        "physicalAcceptanceThresholdState",
+        "evidenceRefs",
+        "decision",
+        "confidence"
+      ],
+      "properties": {
+        "gapId": {
+          "enum": [
+            "GAP-IF-USB-DATA-METHOD",
+            "GAP-IF-STORAGE-POWER-LOSS-METHOD",
+            "GAP-CONTROL-STATUS-METHOD"
+          ]
+        },
+        "interfaceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^IF-[A-Z0-9-]+$"
+          }
+        },
+        "supportingInterfaceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^IF-[A-Z0-9-]+$"
+          }
+        },
+        "existingMethodRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9-]+$"
+          }
+        },
+        "existingInstrumentSlotRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9-]+$"
+          }
+        },
+        "proposedMethodId": {
+          "type": "string",
+          "pattern": "^PROPOSED-[A-Z0-9-]+$"
+        },
+        "methodStatus": {
+          "const": "PROPOSED_ONLY"
+        },
+        "acceptedInMethodCatalog": {
+          "const": false
+        },
+        "instrumentCoverage": {
+          "$ref": "#/$defs/instrumentCoverage"
+        },
+        "targetNeutralSkeleton": {
+          "$ref": "#/$defs/targetNeutralSkeleton"
+        },
+        "targetSpecificParameters": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "physicalAcceptanceThresholdState": {
+          "const": "PENDING"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-METHOD-GAP-[A-Z0-9-]+$"
+          }
+        },
+        "decision": {
+          "enum": [
+            "FREEZE_TARGET_NEUTRAL_SKELETON",
+            "KEEP_PENDING_MORE_PRIMARY_EVIDENCE"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW"
+          ]
+        }
+      }
+    },
+    "instrumentCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "existingSlotRefs",
+        "dedicatedSlotState",
+        "proposedInstrumentRole",
+        "registryEffect"
+      ],
+      "properties": {
+        "existingSlotRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9-]+$"
+          }
+        },
+        "dedicatedSlotState": {
+          "enum": [
+            "MISSING",
+            "PENDING_OWNER_DECISION",
+            "PARTIAL_REUSE_ONLY"
+          ]
+        },
+        "proposedInstrumentRole": {
+          "type": "string",
+          "minLength": 1
+        },
+        "registryEffect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "targetNeutralSkeleton": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "steps",
+        "rawOutputs",
+        "targetDependentFields",
+        "physicalThresholds"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "JUSTIFIED_DRAFT",
+            "PENDING_DRAFT_NOT_FREEZABLE"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "$ref": "#/$defs/skeletonStep"
+          }
+        },
+        "rawOutputs": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "targetDependentFields": {
+          "const": "PENDING"
+        },
+        "physicalThresholds": {
+          "const": "PENDING"
+        }
+      }
+    },
+    "skeletonStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "action",
+        "targetDependentFields",
+        "physicalThresholdState"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^STEP-[0-9]{2}$"
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetDependentFields": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "physicalThresholdState": {
+          "const": "PENDING"
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gapId",
+        "classification",
+        "rationale",
+        "nextOwner",
+        "scoreForLaterMethodPackage"
+      ],
+      "properties": {
+        "gapId": {
+          "enum": [
+            "GAP-IF-USB-DATA-METHOD",
+            "GAP-IF-STORAGE-POWER-LOSS-METHOD",
+            "GAP-CONTROL-STATUS-METHOD"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "FREEZE_TARGET_NEUTRAL_SKELETON",
+            "KEEP_PENDING_MORE_PRIMARY_EVIDENCE"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextOwner": {
+          "const": "hardware/evt0/lab-v1/method-catalog.json"
+        },
+        "scoreForLaterMethodPackage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "softwareReadOnly": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "anchorPath",
+        "anchorSha256",
+        "anchorStateAtCapture",
+        "acceptedFormalReportPath",
+        "acceptedFormalReportSha256",
+        "acceptedFormalReportChecks",
+        "acceptedFormalReportRole",
+        "explicitHardwareImpactReportPath",
+        "explicitHardwareImpactReportSha256",
+        "provenanceState",
+        "liveSemanticRule",
+        "hardwareImpact",
+        "boardTarget",
+        "sessionCoreModified",
+        "familyWorkspaceModified",
+        "productionProviderQualified",
+        "offlineReady"
+      ],
+      "properties": {
+        "anchorPath": {
+          "const": "docs/codex/tasks/system-product-rd/active-task.md"
+        },
+        "anchorSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "anchorStateAtCapture": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acceptedFormalReportPath": {
+          "const": "build/companion-authoring-task-recovery-validation/report.json"
+        },
+        "acceptedFormalReportSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "acceptedFormalReportChecks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "acceptedFormalReportRole": {
+          "const": "AUDIT_TIME_ACCEPTED_REPORT_NOT_NEWEST_REQUIRED"
+        },
+        "explicitHardwareImpactReportPath": {
+          "const": "build/companion-tts-source-adapter-validation/report.json"
+        },
+        "explicitHardwareImpactReportSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "provenanceState": {
+          "const": "AUDIT_SNAPSHOT_AT_CAPTURE"
+        },
+        "liveSemanticRule": {
+          "const": "LIVE_BOUNDARY_SEMANTICS_ONLY_NO_HASH_OR_TASK_NAME"
+        },
+        "hardwareImpact": {
+          "const": "NONE"
+        },
+        "boardTarget": {
+          "const": "UNRESOLVED"
+        },
+        "sessionCoreModified": {
+          "const": false
+        },
+        "familyWorkspaceModified": {
+          "const": false
+        },
+        "productionProviderQualified": {
+          "const": false
+        },
+        "offlineReady": {
+          "const": false
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodCatalog",
+        "instrumentRegistry",
+        "targetBinding",
+        "physicalEvidence",
+        "releaseGate",
+        "promotion",
+        "software"
+      ],
+      "properties": {
+        "methodCatalog": {
+          "const": "NONE"
+        },
+        "instrumentRegistry": {
+          "const": "NONE"
+        },
+        "targetBinding": {
+          "const": "NONE"
+        },
+        "physicalEvidence": {
+          "const": "NONE"
+        },
+        "releaseGate": {
+          "const": "NONE"
+        },
+        "promotion": {
+          "const": "NONE"
+        },
+        "software": {
+          "const": "NONE"
+        }
+      }
+    },
+    "implementationIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "revision",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": "1.1.0"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

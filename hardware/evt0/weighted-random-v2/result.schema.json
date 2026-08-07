@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/weighted-random-result-v2.json",
+  "title": "Yimi weighted random result v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "algorithmId",
+    "transcriptSha256",
+    "results",
+    "allPassed"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "profile": { "const": "weighted-random-result-v2" },
+    "algorithmId": { "const": "yimi-weighted-random-v2" },
+    "transcriptSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "selectedIndex",
+          "selectedClipSlot",
+          "totalWeight",
+          "rejectionThreshold",
+          "acceptedRawWord",
+          "ticket",
+          "consumedWords",
+          "acceptedWordCount",
+          "bucketPreimageCount",
+          "expectedMatched"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^WR2-[A-Z0-9-]{2,31}$" },
+          "selectedIndex": { "type": "integer", "minimum": 0, "maximum": 31 },
+          "selectedClipSlot": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+          "totalWeight": { "$ref": "#/$defs/integerString" },
+          "rejectionThreshold": { "$ref": "#/$defs/integerString" },
+          "acceptedRawWord": { "$ref": "#/$defs/integerString" },
+          "ticket": { "$ref": "#/$defs/integerString" },
+          "consumedWords": { "type": "integer", "minimum": 1, "maximum": 4294967295 },
+          "acceptedWordCount": { "$ref": "#/$defs/integerString" },
+          "bucketPreimageCount": { "$ref": "#/$defs/integerString" },
+          "expectedMatched": { "type": "boolean" }
+        }
+      }
+    },
+    "allPassed": { "type": "boolean" }
+  },
+  "$defs": {
+    "integerString": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,38})$"
+    }
+  }
+}

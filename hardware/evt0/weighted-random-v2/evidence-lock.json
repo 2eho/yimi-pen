@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 2,
+  "profile": "weighted-random-evidence-lock-v2",
+  "reviewedAt": "2026-08-03",
+  "localTruth": [
+    {
+      "path": "packages/core/src/types.ts",
+      "sha256": "0707972b8dcac61e26d9df0a518a1cc60b48cac53310b1e5395dfcde351f9ebd",
+      "claim": "Clip.weight is optional and random_one is defined as weighted clip selection."
+    },
+    {
+      "path": "packages/core/src/engine.ts",
+      "sha256": "3d8858f9615bbe0d72267465ed444bde62ee1f55c265a3fc7312064a3ef3e1d5",
+      "claim": "Legacy product behavior maps a missing clip weight to 1 and selects in clip array order."
+    },
+    {
+      "path": "content/books/jojo-bedtime-01/book.json",
+      "sha256": "3158bc6eff63f43919d0ba7b8060b79fc60f6d5d0c9e7af142ff7944798b7525",
+      "claim": "Repository product content contains a random_one action with integer weights 2 and 1."
+    },
+    {
+      "path": "content/diy/bindings.json",
+      "sha256": "e80f09fe0a0993f5a2fbd58722b13b01ae9b309e6d3c184bf23a094f5a8e2a46",
+      "claim": "Repository family/DIY content contains a random_one binding with integer weights 2 and 1."
+    }
+  ],
+  "primarySources": [
+    {
+      "sourceId": "rust-random-rand-uniform-int",
+      "url": "https://github.com/rust-random/rand/blob/bb1262f703ca04e4ce56be78e1dc4e204cd6a998/src/distr/uniform_int.rs",
+      "lockedRevision": "bb1262f703ca04e4ce56be78e1dc4e204cd6a998",
+      "contentSha256": "75af3ac5a15d0a3cbd15a73ed045bbd2ff2508478d2ce0006ea73ca73ff1b1fa",
+      "claim": "The upstream integer sampler documents that the accepted sample-space size must be a multiple of the requested range and rejects the remainder.",
+      "useBoundary": "Evidence for the unbiased bounded-integer invariant; Yimi v2 freezes a simpler auditable low-prefix modulo rejection mapping rather than copying upstream code."
+    },
+    {
+      "sourceId": "lemire-fast-random-integer-v4",
+      "url": "https://arxiv.org/abs/1805.10941v4",
+      "lockedRevision": "arXiv:1805.10941v4",
+      "claim": "Primary paper on fast unbiased random integer generation in an interval.",
+      "useBoundary": "Corroborating algorithm research only; the Yimi v2 contract is fully specified by its own exact integer formulas and golden vectors."
+    }
+  ],
+  "decisions": {
+    "weightDefault": 1,
+    "weightRange": "1..4294967295 per clip; 2..32 clips",
+    "sampleSpace": "uniform raw u64 words; low-prefix rejection",
+    "mapping": "array-order half-open cumulative integer ranges",
+    "productionBoundary": "host contract evidence does not close RG-SNAPSHOT-WEIGHTED-RANDOM-VERIFIED"
+  }
+}

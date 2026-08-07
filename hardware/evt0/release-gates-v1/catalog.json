@@ -1,0 +1,898 @@
+{
+  "schemaVersion": 1,
+  "profile": "release-gate-catalog-v1",
+  "catalogId": "rgc:sha256:0fcab5f025687078ebe3f834721164602c6c756d37ef02f5b3943ddd782e5d7b",
+  "catalogVersion": "1.2.0",
+  "releaseProfile": "yimi-gen1-evt0-release",
+  "hostAdapterRegistrySha256": "a4facb4bfab0253656a9778f3109e5cae91d12eb6fbb600984deb3d7abbbb3ba",
+  "legacyInventorySha256": "1fbd95a8dfa5258d2349bb38c77ad0b4bafcf79d28ec6034cb363da83e70071c",
+  "gates": [
+    {
+      "gateId": "RG-BOARD-SUPPLY-VERIFIED",
+      "title": "Exact board/head revision supply is verified",
+      "domain": "hardware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "evt0-intake-validator"
+      ],
+      "requiredArtifactRoles": [
+        "supply-evidence"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Written supply evidence names the exact board, PCB, head and firmware revision used by EVT-0.",
+      "legacyAliases": [
+        "SUPPLY_UNPROVEN"
+      ],
+      "reportScopes": [
+        "product-baseline"
+      ]
+    },
+    {
+      "gateId": "RG-BOARD-TARGET-FROZEN",
+      "title": "Two matching target kits and identities are frozen",
+      "domain": "hardware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "evt0-intake-validator"
+      ],
+      "requiredArtifactRoles": [
+        "board-intake"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Accepted intake records two same-revision kits with complete board/head/firmware identity.",
+      "legacyAliases": [
+        "BOARD_TARGET_UNFROZEN",
+        "TWO_MATCHING_KITS_NOT_RECEIVED",
+        "IDENTITY_UNPROVEN"
+      ],
+      "reportScopes": [
+        "product-baseline",
+        "family-alpha",
+        "firmware-contracts",
+        "rust-firmware"
+      ]
+    },
+    {
+      "gateId": "RG-C-RUST-DIFFERENTIAL-PASSED",
+      "title": "Two-board C and Rust differential passed",
+      "domain": "firmware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "firmware-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "differential-trace"
+      ],
+      "minReceipts": 2,
+      "minDistinctEvidenceSubjects": 2,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Supplier C and Rust product paths produce matching normalized results on two same-revision boards.",
+      "legacyAliases": [
+        "PHYSICAL_C_RUST_DIFFERENTIAL_PENDING",
+        "BOARD_C_REFERENCE_RUST_DIFFERENTIAL_PENDING",
+        "C_RUST_DIFFERENTIAL_PENDING"
+      ],
+      "reportScopes": [
+        "product-baseline",
+        "firmware-contracts",
+        "rust-firmware"
+      ]
+    },
+    {
+      "gateId": "RG-DEVICELINK-PHYSICAL-TRANSPORT-PASSED",
+      "title": "Physical DeviceLink transport and reconnect passed",
+      "domain": "firmware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "firmware-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "transport-trace"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Target framing, streaming, reconnect, replay and transaction behavior pass on the selected transport.",
+      "legacyAliases": [
+        "PHYSICAL_DEVICELINK_RECONNECT_PENDING",
+        "DEVICELINK_PHYSICAL_TRANSPORT_PENDING",
+        "BOARD_DEVICELINK_PHYSICAL_PROFILE_PENDING"
+      ],
+      "reportScopes": [
+        "product-baseline",
+        "family-alpha",
+        "firmware-contracts",
+        "rust-firmware"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-ARCHITECTURE-CONFORMANCE-PASSED",
+      "title": "Architecture policy and dependency conformance passed",
+      "domain": "architecture",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "architecture-validator"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Machine architecture policy, dependency graph and contract ownership checks all pass.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-CONFIRMATION-TRUST-CONTRACT-PASSED",
+      "title": "Confirmation trust contract and replay conformance passed",
+      "domain": "family",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "confirmation-trust-validator"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "BuildPlan separation, Ed25519 proof verification, presentation binding, authority windows, idempotency, atomic replay consumption and zero-side-effect negatives pass with fixture-only keys.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-DEVICELINK-TRANSACTION-PASSED",
+      "title": "DeviceLink Node/Rust transaction conformance passed",
+      "domain": "firmware",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "device-link-sim"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Shared DeviceLink golden and negative transactions pass in independent Node and Rust implementations.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-EVT0-INTAKE-CONTRACT-PASSED",
+      "title": "EVT-0 intake templates and evidence rules passed",
+      "domain": "hardware",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "evt0-intake-validator"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Intake schemas, pending-state honesty, requirement references and physical-evidence derivation checks pass.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-EXECUTION-MODEL-PASSED",
+      "title": "Snapshot ExecutionModel Node/Rust conformance passed",
+      "domain": "firmware",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "execution-model-crosscheck"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Family, Golden-24 and order-trap models/traces match with symmetric negative coverage.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-FAMILY-ALPHA-COMPILER-PASSED",
+      "title": "Family Alpha compiler conformance passed",
+      "domain": "family",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "family-alpha-compiler"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Preview, confirmation, deterministic Snapshot compilation, privacy and negative boundaries pass.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-FAMILY-BUILD-PASSED",
+      "title": "FamilyRevision to BuildRequest projection passed",
+      "domain": "family",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "family-build-adapter"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Target-neutral revision projection, asset identity, confirmation identity and negative boundaries pass.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-FAMILY-REPOSITORY-PASSED",
+      "title": "FamilyRepository conformance passed",
+      "domain": "family",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "family-repository"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Memory and Atomic JSON adapters match the shared revision, CAS, backup, restore and recovery contract.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-FIRMWARE-CONTRACTS-PASSED",
+      "title": "Firmware host contracts passed",
+      "domain": "firmware",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "firmware-contract-validator"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Schema, C ABI, Rust enum and host contract checks pass.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-GOLDEN24-PROJECTION-PASSED",
+      "title": "Golden-24 single-source projections passed",
+      "domain": "content",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "golden-24-projection-validator"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Canonical Golden-24 source exactly regenerates Snapshot and Family projections.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-PRODUCT-BASELINE-PASSED",
+      "title": "Product design baseline passed",
+      "domain": "product",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "product-baseline-validator"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Product requirements, Snapshot schemas, hashes, documents and host fixtures pass without physical claims.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-RELEASE-GATE-CONFORMANCE-PASSED",
+      "title": "Release gate catalog, receipt and decision conformance passed",
+      "domain": "product",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "release-gate-conformance"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Catalog identity, receipt semantics, deterministic decisions, legacy mapping and negative boundaries pass.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-RUST-FIRMWARE-PASSED",
+      "title": "Rust host and portability validation passed",
+      "domain": "firmware",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "rust-firmware-validator"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Pinned Rust build, tests, ABI checks and target-neutral portability sentinels pass.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-SNAPSHOT-TRANSACTION-PASSED",
+      "title": "Snapshot Node/Rust lifecycle conformance passed",
+      "domain": "firmware",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "snapshot-sim"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Shared Snapshot stage, verify, activate, rollback and failure transcript passes.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-WEIGHTED-RANDOM-CONTRACT-PASSED",
+      "title": "Weighted random v2 host contract passed",
+      "domain": "content",
+      "evidenceClass": "host",
+      "evidenceSubjectTypes": [
+        "HOST_REPORT"
+      ],
+      "acceptedProducerIds": [
+        "weighted-random-validator"
+      ],
+      "requiredArtifactRoles": [
+        "host-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": true,
+      "evidenceRule": "Reviewed integer-weight vectors, exact rejection arithmetic, legacy mapping and independent Node/Rust implementations pass with zero-side-effect negatives.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "release-decision"
+      ]
+    },
+    {
+      "gateId": "RG-MANIFEST-PARSER-HIL-PASSED",
+      "title": "Target Snapshot manifest parser HIL passed",
+      "domain": "firmware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "FIRMWARE_BUILD"
+      ],
+      "acceptedProducerIds": [
+        "firmware-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "parser-trace",
+        "memory-budget"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Target parser validates manifest/components within measured RAM and Flash budgets and rejects corrupt inputs.",
+      "legacyAliases": [
+        "BOARD_MANIFEST_PARSER_HIL_PENDING"
+      ],
+      "reportScopes": [
+        "firmware-contracts",
+        "rust-firmware"
+      ]
+    },
+    {
+      "gateId": "RG-OFFLINE-POINT-READ-PASSED",
+      "title": "Offline point-read behavior passed",
+      "domain": "product",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "evt0-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "offline-trace"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "With network and host links removed, installed content resolves and plays locally for the frozen acceptance run.",
+      "legacyAliases": [
+        "OFFLINE_UNPROVEN"
+      ],
+      "reportScopes": [
+        "product-baseline"
+      ]
+    },
+    {
+      "gateId": "RG-OID-CODE-TOOL-FROZEN",
+      "title": "OID code and print toolchain is sealed",
+      "domain": "hardware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "OID_TOOLCHAIN"
+      ],
+      "acceptedProducerIds": [
+        "oid-toolchain-validator"
+      ],
+      "requiredArtifactRoles": [
+        "tool-lock"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "The exact code generator, version, print profile, commands and artifact hashes reproduce offline.",
+      "legacyAliases": [
+        "OID_CODE_TOOL_UNFROZEN"
+      ],
+      "reportScopes": [
+        "product-baseline"
+      ]
+    },
+    {
+      "gateId": "RG-OID-PHYSICAL-MAP-ASSIGNED",
+      "title": "Release Snapshot physical OID map is assigned",
+      "domain": "content",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "PHYSICAL_MAP"
+      ],
+      "acceptedProducerIds": [
+        "oid-toolchain-validator"
+      ],
+      "requiredArtifactRoles": [
+        "physical-map"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "The sealed tool exports a unique, complete physical map bound to Snapshot component hashes.",
+      "legacyAliases": [
+        "PHYSICAL_CODES_UNASSIGNED",
+        "OID_PHYSICAL_MAP_PENDING"
+      ],
+      "reportScopes": [
+        "product-baseline",
+        "family-alpha"
+      ]
+    },
+    {
+      "gateId": "RG-OID-TWO-HEAD-TWO-PRINT-MATRIX-PASSED",
+      "title": "Two-head by two-print OID matrix passed",
+      "domain": "manufacturing",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "PRODUCT_RELEASE"
+      ],
+      "acceptedProducerIds": [
+        "manufacturing-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "oid-matrix"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Two heads across two independently printed batches pass positive, blank and adjacent-region raw matrices.",
+      "legacyAliases": [
+        "TWO_HEAD_TWO_PRINT_MATRIX_PENDING"
+      ],
+      "reportScopes": [
+        "product-baseline"
+      ]
+    },
+    {
+      "gateId": "RG-PLATFORM-ABI-HIL-PASSED",
+      "title": "Board platform ABI and provider ownership HIL passed",
+      "domain": "firmware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "firmware-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "abi-trace"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "ABI layout, link, provider ownership, queue overflow and ISR/task boundaries pass on target.",
+      "legacyAliases": [
+        "BOARD_PLATFORM_ABI_PROVIDER_PENDING",
+        "PLATFORM_ABI_HIL_PENDING",
+        "C_ABI_CONTRACT_UNPROVEN"
+      ],
+      "reportScopes": [
+        "firmware-contracts"
+      ]
+    },
+    {
+      "gateId": "RG-POINT-READ-LATENCY-PASSED",
+      "title": "Physical point-read latency target passed",
+      "domain": "product",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "PRODUCT_RELEASE"
+      ],
+      "acceptedProducerIds": [
+        "evt0-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "latency-result"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Measured TestResult v1 uses an accepted output timestamp class and satisfies the frozen P95 target.",
+      "legacyAliases": [
+        "PHYSICAL_LATENCY_RUN_PENDING"
+      ],
+      "reportScopes": [
+        "product-baseline",
+        "firmware-contracts"
+      ]
+    },
+    {
+      "gateId": "RG-PRODUCTION-CONFIRMATION-TRUST-VERIFIED",
+      "title": "Production confirmation provider qualification is verified",
+      "domain": "family",
+      "evidenceClass": "production",
+      "evidenceSubjectTypes": [
+        "CONFIRMATION_TRUST_PROVIDER_RELEASE"
+      ],
+      "acceptedProducerIds": [
+        "confirmation-trust-provider"
+      ],
+      "requiredArtifactRoles": [
+        "provider-qualification"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "A gate-specific verifier proves the deployed provider profile, production keyring, authority resolver and atomic replay store are qualified for this exact product release; per-build guardian authorization remains a separate BuildAuthorization.",
+      "legacyAliases": [
+        "PRODUCTION_CONFIRMATION_TRUST_PENDING"
+      ],
+      "reportScopes": [
+        "product-baseline",
+        "family-alpha"
+      ]
+    },
+    {
+      "gateId": "RG-SNAPSHOT-WEIGHTED-RANDOM-VERIFIED",
+      "title": "Weighted random Snapshot semantics are verified",
+      "domain": "content",
+      "evidenceClass": "production",
+      "evidenceSubjectTypes": [
+        "SNAPSHOT"
+      ],
+      "acceptedProducerIds": [
+        "weighted-random-validator"
+      ],
+      "requiredArtifactRoles": [
+        "random-vector",
+        "distribution-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Versioned integer weights, raw random-word mapping and distribution acceptance vectors preserve the product oracle.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "product-baseline"
+      ]
+    },
+    {
+      "gateId": "RG-TARGET-AUDIO-PROFILE-VERIFIED",
+      "title": "Target audio profile and output path are verified",
+      "domain": "hardware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "evt0-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "audio-trace"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Target codec parameters, decode/output path and accepted first-output timestamp class pass measured playback.",
+      "legacyAliases": [
+        "TARGET_AUDIO_CAPABILITIES_UNVERIFIED",
+        "TARGET_AUDIO_PROFILE_PENDING"
+      ],
+      "reportScopes": [
+        "product-baseline",
+        "family-alpha"
+      ]
+    },
+    {
+      "gateId": "RG-TARGET-EXECUTION-MODEL-HIL-PASSED",
+      "title": "Target ExecutionModel parser and runtime HIL passed",
+      "domain": "firmware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "FIRMWARE_BUILD"
+      ],
+      "acceptedProducerIds": [
+        "firmware-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "execution-trace",
+        "memory-budget"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Verified Snapshot bytes compile to target tables and reproduce host action/clip/cooldown traces within budget.",
+      "legacyAliases": [
+        "SNAPSHOT_RUST_EXECUTION_MODEL_PENDING",
+        "RUST_EXECUTION_ROUTE_UNPROVEN"
+      ],
+      "reportScopes": [
+        "product-baseline"
+      ]
+    },
+    {
+      "gateId": "RG-TARGET-FORM-RELIABILITY-PASSED",
+      "title": "Target-form reliability acceptance passed",
+      "domain": "product",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "PRODUCT_RELEASE"
+      ],
+      "acceptedProducerIds": [
+        "evt0-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "reliability-report"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Target battery, charging, controls, enclosure, acoustics and endurance meet the frozen EVT-0 acceptance plan.",
+      "legacyAliases": [],
+      "reportScopes": [
+        "product-baseline"
+      ]
+    },
+    {
+      "gateId": "RG-TARGET-STORAGE-DURABILITY-PASSED",
+      "title": "Target storage durability and power-loss behavior passed",
+      "domain": "firmware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "firmware-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "storage-trace"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Measured sync, interrupted write, activation and last-good recovery pass on the exact storage stack.",
+      "legacyAliases": [
+        "BOARD_STORAGE_DURABILITY_PENDING",
+        "TARGET_STORAGE_DURABILITY_PENDING"
+      ],
+      "reportScopes": [
+        "product-baseline",
+        "family-alpha"
+      ]
+    },
+    {
+      "gateId": "RG-TARGET-TOOLCHAIN-SEALED",
+      "title": "Target C/Rust build and flash toolchain is sealed",
+      "domain": "firmware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "FIRMWARE_BUILD"
+      ],
+      "acceptedProducerIds": [
+        "firmware-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "toolchain-lock",
+        "firmware-binary"
+      ],
+      "minReceipts": 1,
+      "minDistinctEvidenceSubjects": 1,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Pinned build, flash and log commands reproduce the same firmware binary and retain tool hashes.",
+      "legacyAliases": [
+        "TOOLS_UNSEALED"
+      ],
+      "reportScopes": [
+        "product-baseline"
+      ]
+    },
+    {
+      "gateId": "RG-TWO-BOARD-PORT-HIL-PASSED",
+      "title": "Rust board port HIL passed on two boards",
+      "domain": "firmware",
+      "evidenceClass": "physical",
+      "evidenceSubjectTypes": [
+        "BOARD_TARGET"
+      ],
+      "acceptedProducerIds": [
+        "firmware-hil-runner"
+      ],
+      "requiredArtifactRoles": [
+        "hil-trace"
+      ],
+      "minReceipts": 2,
+      "minDistinctEvidenceSubjects": 2,
+      "allowSyntheticEvidence": false,
+      "evidenceRule": "Rust boot, OID, audio, storage, transport and reproducibility pass on two same-revision boards.",
+      "legacyAliases": [
+        "BOARD_PORT_NOT_IMPLEMENTED",
+        "TWO_BOARD_HIL_PENDING",
+        "PHYSICAL_HIL_PENDING"
+      ],
+      "reportScopes": [
+        "family-alpha",
+        "rust-firmware"
+      ]
+    }
+  ],
+  "semanticFiles": {
+    "contracts/confirmation-trust-v1.mjs": "432c65fc74cbda8e02276ace8cd27e8e19be17a5da63a057926bfa384e4260bb",
+    "contracts/family-build-plan-v1.mjs": "b7b38692b6dbde8b3fe192ca0c7ae733d49279d0412c5415ce9e6753f3e95e70",
+    "contracts/release-gates-v1.mjs": "388b1784c71869e136a56a517983e27c0ce3e3d33eeea3c5aa682d92aff26ba7",
+    "contracts/rfc3339.mjs": "fb9b0115956ec529f73f3472f98189b1f1ebc72ae1ff0f88dc8b01a46cc4fe78",
+    "contracts/strict-json-v1.mjs": "123a13312ba04327d7cd7088c3f99980d5cc5a1e43bbfcad95f5d5d69bf5751e",
+    "hardware/evt0/confirmation-trust-v1/challenge.schema.json": "52d1b28970b06cedbde370db6a4f899bb1ab5f8966df9cbc8725b55af8997698",
+    "hardware/evt0/confirmation-trust-v1/common.schema.json": "5daad15d5303b4f5914de3722394d6f8fcd231ee1f039e4d0c041eb1a759e733",
+    "hardware/evt0/confirmation-trust-v1/evidence-lock.json": "65425a6a5064334263e733080b5a5bc3a86db8c5ae28846b7be1e87372279d14",
+    "hardware/evt0/confirmation-trust-v1/evidence-lock.schema.json": "327be384699c52cfc09c85c082f0795e012d65f954e06a7ab5b86629a2e9290b",
+    "hardware/evt0/confirmation-trust-v1/presentation-transcript.schema.json": "7b68581de2402ccea740ebcba3fa8a7ac1be5421095051717466e362054aa6af",
+    "hardware/evt0/confirmation-trust-v1/proof.schema.json": "35a957e2ea5971d208c91c09a812016b2177583b4735132511978dd29333692a",
+    "hardware/evt0/confirmation-trust-v1/replay-ledger.schema.json": "b9b3ba639abf4ca3a958e6d52ebc9f9bfb89a44c4613fc2db790c82b94ee5f56",
+    "hardware/evt0/confirmation-trust-v1/trust-policy.schema.json": "17f13b0ae427b50b2caf5708f764e519632a26238322475afef5d75d6843f78c",
+    "hardware/evt0/confirmation-trust-v1/verification-result.schema.json": "8d85d2ae7daa8292f1ad5e013804de0cde7102e598a4266944180bca3aeec10e",
+    "hardware/evt0/family-repository-v1/build-authorization.schema.json": "138fd81b62fd0ec6261a18f94a978ebd6da2e110090cad30d8dd2824ba41cd83",
+    "hardware/evt0/family-repository-v1/build-plan.schema.json": "7874a2270ad9055c3a71b42e61848f2f5279d4943065571ee5cba9728a047f45",
+    "hardware/evt0/family-repository-v1/golden/build-plan.json": "cd45e2082adac16491675706678da6c55e4220b6bd33df1ff7b67d4c2176e944",
+    "hardware/evt0/release-gates-v1/catalog.schema.json": "3bc081ad4331a9c7adddb79bd3a3b84199875dedbecd980d7c447b52fcc0cbcb",
+    "hardware/evt0/release-gates-v1/evidence-receipt.schema.json": "b20889560e375c2bd37848543535ce730eb902175545f497f1e62ba77165a458",
+    "hardware/evt0/release-gates-v1/host-report-adapters.schema.json": "cc850f07667e562689f38f7a3d969529590316bea9b7c4c6f4e2d046f0a497f0",
+    "hardware/evt0/release-gates-v1/host-validation-run.schema.json": "11815ef8f316433d7c8bef406627f85f318cac735bbe646bd9e30f59aa09b47f",
+    "hardware/evt0/release-gates-v1/release-decision.schema.json": "2ef970aa8165a06d72a263eb54f558064cf74c26d625b3cf6c21ce2ca08cdfce",
+    "scripts/snapshot-jcs.mjs": "45bda55ecc8aa7e26a98cb79a9edc789c20bfbc3c5ee55a7c28f1edfd4dfcf59",
+    "tools/confirmation-trust/ed25519-verifier.mjs": "274caff26b795f683c7b24df6adfac62cd21da8ff181a7eac8ae54e986f0f332",
+    "tools/confirmation-trust/provider.mjs": "f57ae7f9e67b6933ff4dad9af833a749f8285c29a74bcdb3ffa045e9fc91de80",
+    "tools/confirmation-trust/replay-store.mjs": "6a51649acb65d4e23984d77fc4e71a9080cbb9af909651f4efddbc30619f6ece",
+    "tools/confirmation-trust/run-validation.mjs": "cf5d5e6c76e4b7f70149f03d5d9dadd02ad4cd32ab7fa0549b5728d422ab4b01",
+    "tools/confirmation-trust/schema-validator.mjs": "c2d07263c0b15d6609b4a536c5949593a33c0d25f332af7c90bca5e5df490320",
+    "tools/release-gates/catalog-semantics.mjs": "888d5b9441485d1b1c76eb3de5fb5436d5b024c8e0dbc6c9c1401fbfa99f10e6",
+    "tools/release-gates/evaluate-current.mjs": "cb12f58cfe428c7a12b54e149f8e5924205505fce2752bc04837b20654e6831d",
+    "tools/release-gates/gate-specific-verifiers.mjs": "eb1cb5fa2d4d0f737ca8ef5f910d9337701ff3128d72c6a986097cf986a9921c",
+    "tools/release-gates/host-run-provenance.mjs": "7e3270237f7da81fef91f97eb9148997c1b000877916746b82e4aad7978196a9",
+    "tools/release-gates/refresh-catalog.mjs": "b20374ca51edd3f73e90d7235c086cc35f4fcd8ab893eefddfae830f66fde3b0",
+    "tools/release-gates/report-adapter.mjs": "559045eee971d8441a02d4c617f0b986aebdbd2c9173501d90c005d22c7bf088",
+    "tools/release-gates/run-product-rd.mjs": "544adcbfa19cc2c4a11e8cddce15efa484722ef17494c1b0661e44fd48b807e6",
+    "tools/release-gates/source-set.mjs": "8385f86c7539e8b73df3c6e01ba26966fc5af8926ebe6ded4f8c7110a4a7ae5b"
+  }
+}

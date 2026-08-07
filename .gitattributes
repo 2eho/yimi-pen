@@ -1,0 +1,33 @@
+# Family Alpha identity-bearing text is normalized across Windows/macOS/Linux.
+hardware/evt0/family-alpha-v1/*.json text eol=lf
+hardware/evt0/family-alpha-v1/golden/*.json text eol=lf
+tools/family-alpha-compiler/*.mjs text eol=lf
+tools/family-alpha-compiler/*.md text eol=lf
+hardware/evt0/family-alpha-v1/golden/assets/*.wav binary
+hardware/evt0/golden-24/*.json text eol=lf
+hardware/evt0/snapshot-v1/design/*.json text eol=lf
+architecture/*.json text eol=lf
+scripts/generate-golden-24-projection.mjs text eol=lf
+hardware/evt0/family-repository-v1/*.json text eol=lf
+hardware/evt0/family-repository-v1/*.md text eol=lf
+hardware/evt0/family-repository-v1/golden/*.json text eol=lf
+tools/family-build-adapter/*.mjs text eol=lf
+tools/family-build-adapter/*.md text eol=lf
+contracts/*.mjs text eol=lf
+contracts/*.md text eol=lf
+tools/family-repository/*.mjs text eol=lf
+tools/family-repository/*.md text eol=lf
+hardware/evt0/execution-model-v1/*.json text eol=lf
+hardware/evt0/execution-model-v1/**/*.json text eol=lf
+hardware/evt0/execution-model-v1/*.md text eol=lf
+tools/execution-model/*.mjs text eol=lf
+tools/execution-model/*.md text eol=lf
+firmware/crates/yimi-fw-contract/src/*.rs text eol=lf
+firmware/crates/yimi-runtime-core/src/*.rs text eol=lf
+firmware/crates/yimi-fw-host/src/*.rs text eol=lf
+hardware/evt0/release-gates-v1/*.json text eol=lf
+hardware/evt0/release-gates-v1/*.md text eol=lf
+hardware/evt0/release-evidence/*.json text eol=lf
+hardware/evt0/release-evidence/*.md text eol=lf
+tools/release-gates/*.mjs text eol=lf
+tools/release-gates/*.md text eol=lf

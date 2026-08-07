@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "profiles": [
+    {
+      "profileId": "CONTRACT-LATENCY-FIXTURE",
+      "fixtureOnly": true,
+      "startStage": "event",
+      "endStage": "audioStart",
+      "minSamples": 5,
+      "minSuccessRate": 1,
+      "maxWrongCodes": 0,
+      "maxNoReads": 0,
+      "maxP95Us": 200000
+    },
+    {
+      "profileId": "EVT0-FW-LATENCY",
+      "fixtureOnly": false,
+      "startStage": "event",
+      "endStage": "audioStart",
+      "minSamples": 1000,
+      "minSuccessRate": 1,
+      "maxWrongCodes": 0,
+      "maxNoReads": 0,
+      "maxP95Us": 200000
+    },
+    {
+      "profileId": "EVT0-SYSTEM-LATENCY",
+      "fixtureOnly": false,
+      "startStage": "sensor",
+      "endStage": "acousticStart",
+      "minSamples": 1000,
+      "minSuccessRate": 1,
+      "maxWrongCodes": 0,
+      "maxNoReads": 0,
+      "maxP95Us": 200000
+    }
+  ]
+}
+

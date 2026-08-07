@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "mb1-prepay-response",
+  "responseId": "MB1-RESPONSE-TEMPLATE",
+  "candidateId": "MB1-CANDIDATE-TEMPLATE",
+  "vendorName": null,
+  "receivedAt": null,
+  "channel": null,
+  "sourceRefs": [],
+  "rawArtifacts": [],
+  "identityTuple": {
+    "BOARD_MPN": { "state": "PENDING", "value": null, "artifactRefs": [], "notes": null },
+    "PCB_REV": { "state": "PENDING", "value": null, "artifactRefs": [], "notes": null },
+    "HEAD_MPN": { "state": "PENDING", "value": null, "artifactRefs": [], "notes": null },
+    "HEAD_REV": { "state": "PENDING", "value": null, "artifactRefs": [], "notes": null },
+    "FW_VERSION": { "state": "PENDING", "value": null, "artifactRefs": [], "notes": null }
+  },
+  "answers": [
+    { "id": "M01", "state": "PENDING", "answer": null, "artifactRefs": [] },
+    { "id": "M02", "state": "PENDING", "answer": null, "artifactRefs": [] },
+    { "id": "M03", "state": "PENDING", "answer": null, "artifactRefs": [] },
+    { "id": "M04", "state": "PENDING", "answer": null, "artifactRefs": [] },
+    { "id": "M05", "state": "PENDING", "answer": null, "artifactRefs": [] },
+    { "id": "M06", "state": "PENDING", "answer": null, "artifactRefs": [] },
+    { "id": "M07", "state": "PENDING", "answer": null, "artifactRefs": [] },
+    { "id": "M08", "state": "PENDING", "answer": null, "artifactRefs": [] }
+  ],
+  "attachments": [
+    { "id": "A01", "description": "完整身份五元组", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A02", "description": "两套待发样品正反面、标签和serial原图", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A03", "description": "板与光头2D图、连接器和工作距", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A04", "description": "MCU、BSP、RTOS、SDK、C compiler/linker版本", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A05", "description": "build、flash、log命令、软件包版本和SHA-256", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A06", "description": "OID事件API或帧协议、错误码、sequence、drop和时间戳定义", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A07", "description": "离线码工具、24码、空白区、码段和授权", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A08", "description": "印刷profile与两个独立打样批次安排", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A09", "description": "音频、存储、USB、供电和离线能力表", "state": "PENDING", "artifactRefs": [] },
+    { "id": "A10", "description": "当前同revision数量、同版承诺、PCN/EOL与替代规则", "state": "PENDING", "artifactRefs": [] }
+  ],
+  "sampleOffers": [
+    {
+      "sampleId": "SAMPLE-A",
+      "BOARD_MPN": null,
+      "PCB_REV": null,
+      "HEAD_MPN": null,
+      "HEAD_REV": null,
+      "FW_VERSION": null,
+      "artifactRefs": []
+    },
+    {
+      "sampleId": "SAMPLE-B",
+      "BOARD_MPN": null,
+      "PCB_REV": null,
+      "HEAD_MPN": null,
+      "HEAD_REV": null,
+      "FW_VERSION": null,
+      "artifactRefs": []
+    }
+  ],
+  "targetBindingEffect": "NONE_VENDOR_CLAIM_ONLY",
+  "decision": {
+    "status": "EVIDENCE_REQUIRED",
+    "reason": "Template only; no supplier response has been received.",
+    "blockers": [
+      "RESPONSE_NOT_RECEIVED",
+      "IDENTITY_TUPLE_INCOMPLETE",
+      "M01_M08_INCOMPLETE",
+      "ATTACHMENTS_INCOMPLETE",
+      "TWO_MATCHING_SAMPLES_UNPROVEN"
+    ]
+  },
+  "requirements": ["RQ-HW-001", "RQ-HW-002", "RQ-HW-003"]
+}

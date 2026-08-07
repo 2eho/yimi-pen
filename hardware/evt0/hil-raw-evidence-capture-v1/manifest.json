@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "hardware-hil-raw-evidence-capture-lane-v1",
+  "packageId": "HW-HIL-RAW-EVIDENCE-CAPTURE-LANE-V1",
+  "revision": "1.0.0",
+  "status": "PROPOSED_PENDING_OWNER_EXTENSION",
+  "boardTargetState": "UNRESOLVED",
+  "lane": {
+    "laneId": "HIL_RAW_TEST",
+    "status": "PROPOSED_ONLY",
+    "acceptedInEvidenceCaptureProfile": false,
+    "captureRouteState": "PENDING_OWNER_EXTENSION",
+    "adoptionId": null,
+    "existingProfilePath": "hardware/evt0/evidence-capture-v1/profile.json",
+    "ownerExtensionKind": "NEW_HARDWARE_OWNED_CONTRACT_PENDING_PROFILE_ADOPTION"
+  },
+  "methodRefs": [
+    {
+      "methodId": "PROPOSED-USB-DATA-OBSERVATION-001",
+      "gapId": "GAP-IF-USB-DATA-METHOD",
+      "status": "PROPOSED_ONLY",
+      "acceptedInMethodCatalog": false,
+      "contractPath": "hardware/evt0/fixture-method-contract-v1/manifest.json",
+      "contractRevision": "1.0.0",
+      "sourceIds": [
+        "SRC-METHOD-GAP-USB-COMPLIANCE-PAGE",
+        "SRC-METHOD-GAP-USB-COMPLIANCE-PDF",
+        "SRC-METHOD-GAP-USB-BASE-PAGE"
+      ],
+      "rawArtifactKinds": [
+        "enumeration_trace",
+        "transfer_trace",
+        "disconnect_reconnect_trace",
+        "raw_capture_manifest",
+        "session_binding_ref"
+      ]
+    },
+    {
+      "methodId": "PROPOSED-CONTROL-STATUS-HIL-001",
+      "gapId": "GAP-CONTROL-STATUS-METHOD",
+      "status": "PROPOSED_ONLY",
+      "acceptedInMethodCatalog": false,
+      "contractPath": "hardware/evt0/fixture-method-contract-v1/manifest.json",
+      "contractRevision": "1.0.0",
+      "sourceIds": [
+        "SRC-METHOD-GAP-HIL-NI-VERISTAND",
+        "SRC-METHOD-GAP-HIL-OPENHTF"
+      ],
+      "rawArtifactKinds": [
+        "stimulus_trace",
+        "observation_trace",
+        "diagnostic_log",
+        "measurement_manifest",
+        "attachment_manifest"
+      ]
+    }
+  ],
+  "ownerRefs": {
+    "methodContractManifestPath": "hardware/evt0/fixture-method-contract-v1/manifest.json",
+    "methodContractRunTemplatePath": "hardware/evt0/fixture-method-contract-v1/run.template.json",
+    "methodGapManifestPath": "hardware/evt0/method-gap-evidence-v1/manifest.json",
+    "evidenceCaptureProfilePath": "hardware/evt0/evidence-capture-v1/profile.json",
+    "testResultSchemaPath": "hardware/evt0/test-result-v1/schema.json",
+    "fixtureAdapterTemplatePath": "hardware/evt0/test-fixture-v1/adapter.template.json",
+    "targetBindingPath": "hardware/evt0/hardware-system-v1/target-binding.json",
+    "releaseGateCatalogPath": "hardware/evt0/release-gates-v1/catalog.json",
+    "testResultRawArtifactsField": "rawArtifacts"
+  },
+  "provenancePolicy": {
+    "artifactMetadataFields": [
+      "artifactId",
+      "role",
+      "relativePath",
+      "byteLength",
+      "sha256",
+      "mediaType",
+      "format",
+      "capturedAt",
+      "source",
+      "captureTool",
+      "references",
+      "clockMetadata",
+      "custody",
+      "originalDerived",
+      "operatorId",
+      "readbackState",
+      "sourceUrl"
+    ],
+    "pathPolicy": "REPOSITORY_RELATIVE_NO_ABSOLUTE_NO_DOT_SEGMENTS",
+    "digestPolicy": "SHA256_AND_BYTE_LENGTH_REQUIRED_WITH_READBACK",
+    "originalDerivedPolicy": "ORIGINAL_OR_DERIVED_RELATION_EXPLICIT_NO_IMPLICIT_PROMOTION",
+    "chainOfCustodyPolicy": "OPERATOR_CUSTODY_READBACK_STATE_EXPLICIT",
+    "rawSourceAuthority": "METHOD_GAP_MANIFEST_OFFICIAL_SNAPSHOTS_ONLY_NO_DUPLICATION",
+    "syntheticEvidencePolicy": "SYNTHETIC_OR_TEMPLATE_NEVER_PHYSICAL"
+  },
+  "softwareBoundary": {
+    "hardwareImpact": "NONE",
+    "boardTarget": "UNRESOLVED",
+    "sessionCoreModified": false,
+    "familyWorkspaceModified": false,
+    "productionProviderQualified": false,
+    "offlineReady": false,
+    "sourceMode": "READ_ONLY_SEMANTIC_BOUNDARY_NO_TASK_NAME_OR_HASH_GATE"
+  },
+  "effects": {
+    "targetBinding": "NONE",
+    "methodCatalog": "NONE",
+    "physicalEvidence": "NONE",
+    "testResult": "NONE_REFERENCE_OWNER_UNCHANGED",
+    "evidenceCaptureProfile": "NONE_PROFILE_UNCHANGED",
+    "releaseGate": "NONE",
+    "software": "NONE",
+    "qualification": "NONE",
+    "promotion": "NONE"
+  },
+  "implementation": [
+    {
+      "path": "hardware/evt0/hil-raw-evidence-capture-v1/schema.json",
+      "revision": "1.0.0",
+      "bytes": 9163,
+      "sha256": "5adf5074b02e4af8b02e06d59e2091d1b9ebe811dec0ac0debb7ba2abbcacd65"
+    },
+    {
+      "path": "hardware/evt0/hil-raw-evidence-capture-v1/capture-index.schema.json",
+      "revision": "1.0.0",
+      "bytes": 17352,
+      "sha256": "2809b875e32114bc423e27117a0fc77adef421db381e9216950af7432be00d77"
+    },
+    {
+      "path": "hardware/evt0/hil-raw-evidence-capture-v1/capture-index.template.json",
+      "revision": "1.0.0",
+      "bytes": 3065,
+      "sha256": "e2cb21207c11435b6d45f87c31b20c165c6c06fbaa63e184557f270b89109f91"
+    },
+    {
+      "path": "hardware/evt0/hil-raw-evidence-capture-v1/README.md",
+      "revision": "1.0.0",
+      "bytes": 4054,
+      "sha256": "b29b5b5f2dd62500cf4e0c7cd99a3de19c5870632171b75821f3440da2b4f882"
+    },
+    {
+      "path": "scripts/validate-hardware-hil-raw-evidence-capture.mjs",
+      "revision": "1.0.0",
+      "bytes": 28683,
+      "sha256": "a149ec2425fba12652d487d9b9c555289195f2a4d064db96eae69fde9b499201"
+    },
+    {
+      "path": "scripts/test-hardware-hil-raw-evidence-capture.mjs",
+      "revision": "1.0.0",
+      "bytes": 10579,
+      "sha256": "f9d81e1ac91f6ceb2eccf65e064ca4d5d4a4b38362abf48dfba2a6300d155e45"
+    }
+  ]
+}

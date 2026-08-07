@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/vendor-outbound-v1.json",
+  "title": "Yimi MB1 Vendor Outbound v1",
+  "oneOf": [
+    { "$ref": "#/$defs/outboundManifest" },
+    { "$ref": "#/$defs/messageTemplate" }
+  ],
+  "$defs": {
+    "outboundManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "documentKind",
+        "bundleId",
+        "bundleStatus",
+        "deliveryMode",
+        "sourceDocuments",
+        "messageTemplatePaths"
+      ],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "documentKind": { "const": "mb1-outbound-manifest" },
+        "bundleId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+        "bundleStatus": { "const": "PREPARED_NOT_SENT" },
+        "deliveryMode": { "const": "MANUAL_OFFICIAL_ENTRY_ONLY" },
+        "sourceDocuments": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceDocument" }
+        },
+        "messageTemplatePaths": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Za-z0-9._/-]+$" }
+        }
+      }
+    },
+    "messageTemplate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "documentKind",
+        "messageId",
+        "candidateId",
+        "candidateRole",
+        "messageStatus",
+        "recipientEntry",
+        "sourceRefs",
+        "subject",
+        "body",
+        "requiredAnswers",
+        "attachmentRequests",
+        "replyIntake"
+      ],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "documentKind": { "const": "mb1-outbound-message" },
+        "messageId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+        "candidateId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+        "candidateRole": { "enum": ["PCBA_CANDIDATE", "OID_MANUFACTURER_CROSSCHECK"] },
+        "messageStatus": { "const": "PREPARED_NOT_SENT" },
+        "recipientEntry": { "$ref": "#/$defs/recipientEntry" },
+        "sourceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" }
+        },
+        "subject": { "type": "string", "minLength": 1 },
+        "body": { "type": "string", "minLength": 1 },
+        "requiredAnswers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/requestItem" }
+        },
+        "attachmentRequests": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/requestItem" }
+        },
+        "replyIntake": { "$ref": "#/$defs/replyIntake" }
+      }
+    },
+    "sourceDocument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "purpose", "distribution"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+        "path": { "type": "string", "pattern": "^[A-Za-z0-9._/-]+$" },
+        "purpose": { "type": "string", "minLength": 1 },
+        "distribution": { "enum": ["INCLUDE_IN_BUNDLE", "MANIFEST_ONLY"] }
+      }
+    },
+    "recipientEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entryType", "officialEntryUrl", "listedAddresses", "manualSelectionRequired", "note"],
+      "properties": {
+        "entryType": { "const": "OFFICIAL_ENTRY_MANUAL_SELECTION" },
+        "officialEntryUrl": { "type": "string", "pattern": "^https://" },
+        "listedAddresses": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "manualSelectionRequired": { "const": true },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    },
+    "requestItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "request"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][0-9]{2}$" },
+        "request": { "type": "string", "minLength": 1 }
+      }
+    },
+    "replyIntake": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rawArchiveRoot",
+        "responseRecordTemplate",
+        "responseRecordDestination",
+        "targetBindingEffect",
+        "paymentGate",
+        "note"
+      ],
+      "properties": {
+        "rawArchiveRoot": { "type": "string", "pattern": "^build/vendor-evidence/" },
+        "responseRecordTemplate": { "const": "hardware/evt0/vendor-evidence-v1/candidate.template.json" },
+        "responseRecordDestination": { "type": "string", "pattern": "^hardware/evt0/vendor-evidence-v1/records/" },
+        "targetBindingEffect": { "const": "NONE_VENDOR_CLAIM_ONLY" },
+        "paymentGate": { "enum": ["REPLY_EVIDENCE_REQUIRED_BEFORE_PAYMENT", "CROSSCHECK_ONLY_NOT_A_PCBA_PAYMENT_GATE"] },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,1553 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/device-link-v1.json",
+  "title": "Yimi DeviceLink v1 loopback envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "kind",
+    "requestId",
+    "op"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "profile": {
+      "const": "loopback-json-v1"
+    },
+    "kind": {
+      "enum": [
+        "request",
+        "response"
+      ]
+    },
+    "requestId": {
+      "type": "string",
+      "pattern": "^REQ-[A-Z0-9][A-Z0-9-]{0,47}$"
+    },
+    "op": {
+      "$ref": "#/$defs/operation"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "error": {
+      "$ref": "#/$defs/error"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "payload"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "ok"
+              ]
+            },
+            {
+              "required": [
+                "error"
+              ]
+            }
+          ]
+        }
+      },
+      "else": {
+        "required": [
+          "ok"
+        ],
+        "if": {
+          "properties": {
+            "ok": {
+              "const": true
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "payload"
+          ],
+          "not": {
+            "required": [
+              "error"
+            ]
+          }
+        },
+        "else": {
+          "required": [
+            "error"
+          ],
+          "not": {
+            "required": [
+              "payload"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          },
+          "op": {
+            "const": "hello"
+          }
+        },
+        "required": [
+          "kind",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/helloRequest"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          },
+          "op": {
+            "enum": [
+              "capabilities.get",
+              "status.get"
+            ]
+          }
+        },
+        "required": [
+          "kind",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/emptyPayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          },
+          "op": {
+            "const": "snapshot.stage.begin"
+          }
+        },
+        "required": [
+          "kind",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/stageBeginRequest"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          },
+          "op": {
+            "const": "snapshot.stage.write"
+          }
+        },
+        "required": [
+          "kind",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/stageWriteRequest"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          },
+          "op": {
+            "enum": [
+              "snapshot.verify",
+              "snapshot.abort"
+            ]
+          }
+        },
+        "required": [
+          "kind",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/transactionRequest"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          },
+          "op": {
+            "const": "snapshot.activate"
+          }
+        },
+        "required": [
+          "kind",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/activateRequest"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          },
+          "op": {
+            "const": "snapshot.rollback"
+          }
+        },
+        "required": [
+          "kind",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/rollbackRequest"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "request"
+          },
+          "op": {
+            "const": "diagnostics.read"
+          }
+        },
+        "required": [
+          "kind",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/diagnosticsRequest"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "hello"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/helloResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "capabilities.get"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/capabilitiesResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "status.get"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/statusResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "snapshot.stage.begin"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/stageBeginResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "snapshot.stage.write"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/stageWriteResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "snapshot.verify"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/verifyResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "snapshot.activate"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/activateResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "snapshot.abort"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/abortResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "snapshot.rollback"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/rollbackResponse"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "response"
+          },
+          "ok": {
+            "const": true
+          },
+          "op": {
+            "const": "diagnostics.read"
+          }
+        },
+        "required": [
+          "kind",
+          "ok",
+          "op"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/diagnosticsResponse"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "operation": {
+      "enum": [
+        "hello",
+        "capabilities.get",
+        "status.get",
+        "snapshot.stage.begin",
+        "snapshot.stage.write",
+        "snapshot.verify",
+        "snapshot.activate",
+        "snapshot.abort",
+        "snapshot.rollback",
+        "diagnostics.read"
+      ]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "snapshotId": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "transactionId": {
+      "type": "string",
+      "pattern": "^TX-[A-Z0-9][A-Z0-9-]{0,47}$"
+    },
+    "safePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\\/$)[A-Za-z0-9._/-]+$"
+    },
+    "errorCode": {
+      "enum": [
+        "MALFORMED_MESSAGE",
+        "PROTOCOL_VERSION_UNSUPPORTED",
+        "REQUEST_ID_CONFLICT",
+        "TRANSACTION_ID_CONFLICT",
+        "OPERATION_UNSUPPORTED",
+        "INVALID_STATE",
+        "BUSY",
+        "TRANSACTION_NOT_FOUND",
+        "OFFSET_MISMATCH",
+        "CHUNK_OUT_OF_RANGE",
+        "CHUNK_HASH_MISMATCH",
+        "CHUNK_CONFLICT",
+        "STAGING_INCOMPLETE",
+        "IO_ERROR",
+        "SNAPSHOT_SCHEMA_UNSUPPORTED",
+        "TARGET_MISMATCH",
+        "CAPABILITY_MISMATCH",
+        "INSUFFICIENT_SPACE",
+        "FILE_HASH_MISMATCH",
+        "MANIFEST_HASH_MISMATCH",
+        "ACTIVATION_INTERRUPTED",
+        "ROLLBACK_ACTIVE",
+        "DESIGN_FIXTURE_NOT_RELEASE",
+        "RECOVERY_REQUIRED",
+        "EXPECTED_ACTIVE_MISMATCH"
+      ]
+    },
+    "installPhase": {
+      "enum": [
+        "Idle",
+        "Staging",
+        "Verifying",
+        "ReadyToActivate",
+        "Activating"
+      ]
+    },
+    "bootSelection": {
+      "enum": [
+        "Empty",
+        "Active",
+        "LastGood"
+      ]
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "retryable",
+        "installPhase",
+        "bootSelection",
+        "detail"
+      ],
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/errorCode"
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "installPhase": {
+          "$ref": "#/$defs/installPhase"
+        },
+        "bootSelection": {
+          "$ref": "#/$defs/bootSelection"
+        },
+        "detail": {
+          "$ref": "#/$defs/errorDetail"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "enum": [
+                  "BUSY",
+                  "IO_ERROR"
+                ]
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "retryable": {
+                "const": true
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "retryable": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "OFFSET_MISMATCH"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "detail": {
+                "required": [
+                  "expectedOffset",
+                  "receivedOffset"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "REQUEST_ID_CONFLICT"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "detail": {
+                "required": [
+                  "requestId"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "enum": [
+                  "TRANSACTION_ID_CONFLICT",
+                  "TRANSACTION_NOT_FOUND"
+                ]
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "detail": {
+                "required": [
+                  "transactionId"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "CHUNK_CONFLICT"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "detail": {
+                "required": [
+                  "transactionId",
+                  "path",
+                  "receivedOffset"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "EXPECTED_ACTIVE_MISMATCH"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "detail": {
+                "required": [
+                  "expectedActiveSnapshotId",
+                  "actualActiveSnapshotId"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "emptyPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "maxProperties": 0
+    },
+    "helloRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "hostName"
+      ],
+      "properties": {
+        "protocolVersion": {
+          "const": 1
+        },
+        "hostName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        }
+      }
+    },
+    "stageBeginRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "snapshotId",
+        "manifestByteLength",
+        "totalBytes",
+        "fileCount",
+        "expectedActiveSnapshotId"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "snapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "manifestByteLength": {
+          "$ref": "#/$defs/positiveU64Decimal"
+        },
+        "totalBytes": {
+          "$ref": "#/$defs/positiveU64Decimal"
+        },
+        "fileCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "expectedActiveSnapshotId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshotId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "stageWriteRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "path",
+        "offset",
+        "byteLength",
+        "dataBase64",
+        "chunkSha256"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "offset": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "dataBase64": {
+          "type": "string",
+          "minLength": 4,
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+        },
+        "chunkSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "transactionRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        }
+      }
+    },
+    "activateRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "expectedActiveSnapshotId"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "expectedActiveSnapshotId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshotId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "rollbackRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedActiveSnapshotId"
+      ],
+      "properties": {
+        "expectedActiveSnapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        }
+      }
+    },
+    "diagnosticsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "afterSequence",
+        "maxEvents"
+      ],
+      "properties": {
+        "afterSequence": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "maxEvents": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        }
+      }
+    },
+    "u64Decimal": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,19})$"
+    },
+    "positiveU64Decimal": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,19}$"
+    },
+    "bootSessionId": {
+      "type": "string",
+      "pattern": "^BOOT-[A-Z0-9][A-Z0-9-]{0,47}$"
+    },
+    "deviceState": {
+      "enum": [
+        "Booting",
+        "Ready",
+        "RecoveryRequired"
+      ]
+    },
+    "lastInstallOutcome": {
+      "enum": [
+        "None",
+        "Activated",
+        "Rejected",
+        "Aborted",
+        "Interrupted",
+        "RolledBack"
+      ]
+    },
+    "errorDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "pattern": "^REQ-[A-Z0-9][A-Z0-9-]{0,47}$"
+        },
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "expectedOffset": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "receivedOffset": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "expectedActiveSnapshotId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshotId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actualActiveSnapshotId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshotId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "requiredBytes": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "availableBytes": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "expectedSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "observedSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "recoveryAction": {
+          "enum": [
+            "retry-same-request",
+            "status-then-resume",
+            "begin-new-transaction",
+            "repair-device"
+          ]
+        }
+      }
+    },
+    "helloResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "bootSessionId"
+      ],
+      "properties": {
+        "protocolVersion": {
+          "const": 1
+        },
+        "bootSessionId": {
+          "$ref": "#/$defs/bootSessionId"
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxPathBytes",
+        "maxChunkBytes",
+        "replayJournalEntries",
+        "maxFilesPerSnapshot",
+        "inactiveStorageBytes"
+      ],
+      "properties": {
+        "maxPathBytes": {
+          "const": 240
+        },
+        "maxChunkBytes": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "replayJournalEntries": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maxFilesPerSnapshot": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inactiveStorageBytes": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/u64Decimal"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "capabilitiesResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "bootSessionId",
+        "boardTarget",
+        "firmwareVersion",
+        "transportProfile",
+        "snapshotSchemaVersions",
+        "stagingResumeAcrossTransportReconnect",
+        "stagingResumeAcrossPowerLoss",
+        "limits"
+      ],
+      "properties": {
+        "protocolVersion": {
+          "const": 1
+        },
+        "bootSessionId": {
+          "$ref": "#/$defs/bootSessionId"
+        },
+        "boardTarget": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96
+        },
+        "transportProfile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96
+        },
+        "snapshotSchemaVersions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4294967295
+          }
+        },
+        "stagingResumeAcrossTransportReconnect": {
+          "const": true
+        },
+        "stagingResumeAcrossPowerLoss": {
+          "const": false
+        },
+        "limits": {
+          "$ref": "#/$defs/limits"
+        }
+      }
+    },
+    "stagingStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "snapshotId",
+        "receivedBytes",
+        "currentPath",
+        "nextDurableOffset"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "snapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "receivedBytes": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "currentPath": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/safePath"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nextDurableOffset": {
+          "$ref": "#/$defs/u64Decimal"
+        }
+      }
+    },
+    "statusResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bootSessionId",
+        "deviceState",
+        "installPhase",
+        "bootSelection",
+        "activeSnapshotId",
+        "lastGoodSnapshotId",
+        "generation",
+        "lastInstallOutcome",
+        "staging"
+      ],
+      "properties": {
+        "bootSessionId": {
+          "$ref": "#/$defs/bootSessionId"
+        },
+        "deviceState": {
+          "$ref": "#/$defs/deviceState"
+        },
+        "installPhase": {
+          "$ref": "#/$defs/installPhase"
+        },
+        "bootSelection": {
+          "$ref": "#/$defs/bootSelection"
+        },
+        "activeSnapshotId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshotId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lastGoodSnapshotId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshotId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generation": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "lastInstallOutcome": {
+          "$ref": "#/$defs/lastInstallOutcome"
+        },
+        "staging": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/stagingStatus"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "stageBeginResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "snapshotId",
+        "resumed",
+        "receivedBytes",
+        "installPhase"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "snapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "resumed": {
+          "type": "boolean"
+        },
+        "receivedBytes": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "installPhase": {
+          "const": "Staging"
+        }
+      }
+    },
+    "stageWriteResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "path",
+        "nextDurableOffset",
+        "receivedBytes",
+        "replayed"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "nextDurableOffset": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "receivedBytes": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "replayed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "verifyResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "snapshotId",
+        "installPhase"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "snapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "installPhase": {
+          "const": "ReadyToActivate"
+        }
+      }
+    },
+    "activateResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "activeSnapshotId",
+        "lastGoodSnapshotId",
+        "generation",
+        "installPhase",
+        "bootSelection"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "activeSnapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "lastGoodSnapshotId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshotId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generation": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "installPhase": {
+          "const": "Idle"
+        },
+        "bootSelection": {
+          "const": "Active"
+        }
+      }
+    },
+    "abortResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transactionId",
+        "aborted",
+        "activeSnapshotId",
+        "installPhase"
+      ],
+      "properties": {
+        "transactionId": {
+          "$ref": "#/$defs/transactionId"
+        },
+        "aborted": {
+          "const": true
+        },
+        "activeSnapshotId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snapshotId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "installPhase": {
+          "const": "Idle"
+        }
+      }
+    },
+    "rollbackResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activeSnapshotId",
+        "lastGoodSnapshotId",
+        "generation",
+        "installPhase",
+        "bootSelection"
+      ],
+      "properties": {
+        "activeSnapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "lastGoodSnapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "generation": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "installPhase": {
+          "const": "Idle"
+        },
+        "bootSelection": {
+          "const": "LastGood"
+        }
+      }
+    },
+    "diagnosticContext": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      },
+      "maxProperties": 16
+    },
+    "diagnosticEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "code",
+        "severity",
+        "context"
+      ],
+      "properties": {
+        "sequence": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,63}$"
+        },
+        "severity": {
+          "enum": [
+            "debug",
+            "info",
+            "warning",
+            "error"
+          ]
+        },
+        "context": {
+          "$ref": "#/$defs/diagnosticContext"
+        }
+      }
+    },
+    "diagnosticsResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "events",
+        "nextAfterSequence",
+        "hasMore"
+      ],
+      "properties": {
+        "events": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/diagnosticEvent"
+          }
+        },
+        "nextAfterSequence": {
+          "$ref": "#/$defs/u64Decimal"
+        },
+        "hasMore": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

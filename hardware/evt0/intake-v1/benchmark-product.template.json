@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "intakeKind": "benchmark-product",
+  "intakeId": "REF1-PENDING-EXACT-SKU",
+  "recordedAt": null,
+  "identity": {
+    "purchasePlanItemId": "REF1",
+    "candidateId": "PIYO-PW20-PENDING-EXACT-SKU",
+    "sampleCountExpected": 1,
+    "samples": []
+  },
+  "observations": {
+    "brand": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": ["SRC-PIYO-001"], "artifactRefs": [], "notes": "Confirm from package and nameplate" },
+    "productModel": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": ["SRC-PIYO-001"], "artifactRefs": [], "notes": "Exact model only" },
+    "sku": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": "No random-version listing" },
+    "packageBarcode": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": null },
+    "productionBatch": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": null },
+    "firmwareVersion": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": null },
+    "appVersion": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": null },
+    "includedCodeMedia": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": "Record exact included book/card revision" },
+    "storageCapacity": { "state": "PENDING", "value": null, "unit": "GB", "evidenceRefs": ["SRC-PIYO-001"], "artifactRefs": [], "notes": "Verify on exact SKU" },
+    "length": { "state": "PENDING", "value": null, "unit": "mm", "evidenceRefs": [], "artifactRefs": [], "notes": null },
+    "mainDiameter": { "state": "PENDING", "value": null, "unit": "mm", "evidenceRefs": [], "artifactRefs": [], "notes": null },
+    "weight": { "state": "PENDING", "value": null, "unit": "g", "evidenceRefs": [], "artifactRefs": [], "notes": null },
+    "buttonLayout": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": null },
+    "statusFeedback": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": "Boot success unbound low-battery update and failure" },
+    "chargingPort": { "state": "PENDING", "value": null, "unit": null, "evidenceRefs": [], "artifactRefs": [], "notes": null }
+  },
+  "tests": [
+    { "id": "BENCH-IDENTITY", "status": "PENDING", "method": "Photograph package barcode nameplate and version screens before use", "acceptance": "All evidence belongs to one exact SKU and revision", "result": null, "instrument": "Camera", "artifactRefs": [] },
+    { "id": "BENCH-OFFLINE", "status": "PENDING", "method": "Disable wireless disconnect computer and point included media 100 times", "acceptance": "100/100 correct local playback", "result": null, "instrument": "Video plus event sheet", "artifactRefs": [] },
+    { "id": "BENCH-LATENCY", "status": "PENDING", "method": "Capture visible point event and first acoustic output", "acceptance": "Record raw P50 P95 P99 without converting to Yimi claims", "result": null, "instrument": "High-speed video or synchronized logic/audio capture", "artifactRefs": [] },
+    { "id": "BENCH-FEEDBACK", "status": "PENDING", "method": "Exercise boot valid point unbound low battery storage/update failure where available", "acceptance": "Record distinct light/audio/state behavior", "result": null, "instrument": "Video", "artifactRefs": [] },
+    { "id": "BENCH-CONTROLS", "status": "PENDING", "method": "Map every button short/long press and rapid retap behavior", "acceptance": "Complete observable control-state table", "result": null, "instrument": "Video plus worksheet", "artifactRefs": [] },
+    { "id": "BENCH-ACOUSTIC", "status": "PENDING", "method": "Measure representative content and maximum setting at fixed geometry", "acceptance": "Record calibrated values and method uncertainty", "result": null, "instrument": "Calibrated SPL meter", "artifactRefs": [] },
+    { "id": "BENCH-ENDURANCE", "status": "PENDING", "method": "Run defined mixed point-read workload from full charge", "acceptance": "Record runtime workload and shutdown behavior", "result": null, "instrument": "Timer and power log", "artifactRefs": [] }
+  ],
+  "disposition": { "status": "PENDING", "reason": null },
+  "blockers": ["EXACT_SKU_NOT_ACQUIRED", "IDENTITY_NOT_RECORDED", "MEASUREMENTS_PENDING"],
+  "requirements": ["RQ-SP-003", "RQ-SP-004", "PS-001", "PS-004", "PS-005", "PS-007"]
+}
+

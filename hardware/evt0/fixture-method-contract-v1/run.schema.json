@@ -1,0 +1,463 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/fixture-method-contract-run-v1.json",
+  "title": "USB and control/status HIL fixture run binding template v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "runTemplateId",
+    "status",
+    "contractPackageId",
+    "contractRevision",
+    "methodId",
+    "targetState",
+    "targetAdapter",
+    "fixtureAdapter",
+    "fixtureProfile",
+    "fixtureInstance",
+    "methodInputs",
+    "labSession",
+    "testResult",
+    "rawArtifactOwner",
+    "evidenceCapture",
+    "releaseGate",
+    "software",
+    "firmware",
+    "rawArtifacts",
+    "verdict",
+    "physicalReadiness",
+    "effects"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "hardware-fixture-method-contract-run-v1"
+    },
+    "runTemplateId": {
+      "const": "RUN-TEMPLATE-USB-CONTROL-HIL-V1"
+    },
+    "status": {
+      "const": "TEMPLATE_ONLY"
+    },
+    "contractPackageId": {
+      "const": "HW-FIXTURE-METHOD-CONTRACT-USB-CONTROL-HIL-V1"
+    },
+    "contractRevision": {
+      "const": "1.0.0"
+    },
+    "methodId": {
+      "type": "null"
+    },
+    "targetState": {
+      "const": "UNRESOLVED"
+    },
+    "targetAdapter": {
+      "$ref": "#/$defs/methodAdapterRef"
+    },
+    "fixtureAdapter": {
+      "$ref": "#/$defs/fixtureAdapterRef"
+    },
+    "fixtureProfile": {
+      "$ref": "#/$defs/fixtureProfileRef"
+    },
+    "fixtureInstance": {
+      "$ref": "#/$defs/fixtureInstanceRef"
+    },
+    "labSession": {
+      "$ref": "#/$defs/labSessionRef"
+    },
+    "testResult": {
+      "$ref": "#/$defs/testResultRef"
+    },
+    "rawArtifactOwner": {
+      "$ref": "#/$defs/rawArtifactOwnerRef"
+    },
+    "evidenceCapture": {
+      "$ref": "#/$defs/evidenceCaptureRef"
+    },
+    "releaseGate": {
+      "$ref": "#/$defs/releaseGateRef"
+    },
+    "software": {
+      "$ref": "#/$defs/softwareRef"
+    },
+    "firmware": {
+      "$ref": "#/$defs/firmwareRef"
+    },
+    "rawArtifacts": {
+      "type": "array",
+      "maxItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
+    "verdict": {
+      "type": "null"
+    },
+    "physicalReadiness": {
+      "type": "null"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    },
+    "methodInputs": {
+      "$ref": "#/$defs/methodInputs"
+    }
+  },
+  "$defs": {
+    "methodAdapterRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "templateId",
+        "sha256",
+        "id"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/fixture-method-contract-v1/adapter.template.json"
+        },
+        "templateId": {
+          "const": "METHOD-ADAPTER-TEMPLATE-USB-CONTROL-HIL-V1"
+        },
+        "sha256": {
+          "type": "null"
+        },
+        "id": {
+          "type": "null"
+        }
+      }
+    },
+    "fixtureAdapterRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "id",
+        "revision",
+        "bindingId"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/adapter.template.json"
+        },
+        "id": {
+          "const": "EVT0-TARGET-ADAPTER-TEMPLATE"
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "bindingId": {
+          "type": "null"
+        }
+      }
+    },
+    "fixtureProfileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "profileId",
+        "revision",
+        "sha256",
+        "id"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/profile.json"
+        },
+        "profileId": {
+          "const": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1"
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "sha256": {
+          "type": "null"
+        },
+        "id": {
+          "type": "null"
+        }
+      }
+    },
+    "fixtureInstanceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "templateId",
+        "status",
+        "sha256",
+        "id"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/instance.template.json"
+        },
+        "templateId": {
+          "const": "HW-REUSABLE-TEST-FIXTURE-INSTANCE-TEMPLATE-V1"
+        },
+        "status": {
+          "const": "TEMPLATE_ONLY"
+        },
+        "sha256": {
+          "type": "null"
+        },
+        "id": {
+          "type": "null"
+        }
+      }
+    },
+    "labSessionRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "sessionId",
+        "sha256"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/lab-v1"
+        },
+        "sessionId": {
+          "type": "null"
+        },
+        "sha256": {
+          "type": "null"
+        }
+      }
+    },
+    "testResultRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "resultId",
+        "sha256"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/test-result-v1/schema.json"
+        },
+        "resultId": {
+          "type": "null"
+        },
+        "sha256": {
+          "type": "null"
+        }
+      }
+    },
+    "rawArtifactOwnerRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "field",
+        "effect"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/test-result-v1/schema.json"
+        },
+        "field": {
+          "const": "rawArtifacts"
+        },
+        "effect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "evidenceCaptureRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "captureRouteState",
+        "laneId",
+        "captureIndexId",
+        "sha256"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/evidence-capture-v1/profile.json"
+        },
+        "captureRouteState": {
+          "const": "PENDING_OWNER_EXTENSION"
+        },
+        "laneId": {
+          "type": "null"
+        },
+        "captureIndexId": {
+          "type": "null"
+        },
+        "sha256": {
+          "type": "null"
+        }
+      }
+    },
+    "releaseGateRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "receiptId",
+        "effect"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/release-gates-v1/catalog.json"
+        },
+        "receiptId": {
+          "type": "null"
+        },
+        "effect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "softwareRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractId",
+        "transactionScenarioId",
+        "hardwareImpact"
+      ],
+      "properties": {
+        "contractId": {
+          "type": "null"
+        },
+        "transactionScenarioId": {
+          "type": "null"
+        },
+        "hardwareImpact": {
+          "const": "NONE"
+        }
+      }
+    },
+    "firmwareRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactRole",
+        "implementationLane",
+        "version",
+        "evidenceRef"
+      ],
+      "properties": {
+        "artifactRole": {
+          "type": "null"
+        },
+        "implementationLane": {
+          "type": "null"
+        },
+        "version": {
+          "type": "null"
+        },
+        "evidenceRef": {
+          "type": "null"
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetBinding",
+        "physicalEvidence",
+        "qualification",
+        "releaseGate",
+        "promotion",
+        "software"
+      ],
+      "properties": {
+        "targetBinding": {
+          "const": "NONE"
+        },
+        "physicalEvidence": {
+          "const": "NONE"
+        },
+        "qualification": {
+          "const": "NONE"
+        },
+        "releaseGate": {
+          "const": "NONE"
+        },
+        "promotion": {
+          "const": "NONE"
+        },
+        "software": {
+          "const": "NONE"
+        }
+      }
+    },
+    "methodInputs": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/methodInput"
+      }
+    },
+    "methodInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodId",
+        "fields"
+      ],
+      "properties": {
+        "methodId": {
+          "enum": [
+            "PROPOSED-USB-DATA-OBSERVATION-001",
+            "PROPOSED-CONTROL-STATUS-HIL-001"
+          ]
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/methodInputField"
+          }
+        }
+      }
+    },
+    "methodInputField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "state",
+        "value",
+        "evidenceRefs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "state": {
+          "const": "PENDING_EVIDENCE"
+        },
+        "value": {
+          "type": "null"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "maxItems": 0,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

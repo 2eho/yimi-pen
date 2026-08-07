@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/content-snapshot-v1.json",
+  "title": "Yimi Content Snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "releaseState",
+    "snapshotId",
+    "contentRevision",
+    "createdAt",
+    "producer",
+    "target",
+    "oidIndex",
+    "actions",
+    "files",
+    "install",
+    "evidenceRefs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "releaseState": {
+      "enum": [
+        "design-fixture",
+        "release-candidate"
+      ]
+    },
+    "snapshotId": {
+      "oneOf": [
+        {
+          "pattern": "^design:[a-z0-9][a-z0-9._-]{2,95}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        }
+      ]
+    },
+    "contentRevision": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boardTarget",
+        "firmwareMin",
+        "physicalMapStatus",
+        "capabilities"
+      ],
+      "properties": {
+        "boardTarget": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "firmwareMin": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "physicalMapStatus": {
+          "enum": [
+            "unassigned",
+            "assigned"
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 96
+          }
+        }
+      }
+    },
+    "oidIndex": {
+      "$ref": "#/$defs/indexRef"
+    },
+    "actions": {
+      "$ref": "#/$defs/actionRef"
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/fileRef"
+      }
+    },
+    "install": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activationMode",
+        "requiredBytes",
+        "lastGoodRequired"
+      ],
+      "properties": {
+        "activationMode": {
+          "const": "staged-atomic"
+        },
+        "requiredBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Exact manifest.json bytes plus every payload file byte; target filesystem and A/B reserve are additional.",
+          "maximum": 9007199254740991
+        },
+        "lastGoodRequired": {
+          "const": true
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "releaseState": {
+            "const": "release-candidate"
+          }
+        },
+        "required": [
+          "releaseState"
+        ]
+      },
+      "then": {
+        "properties": {
+          "snapshotId": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "target": {
+            "type": "object",
+            "properties": {
+              "physicalMapStatus": {
+                "const": "assigned"
+              }
+            }
+          },
+          "files": {
+            "type": "array",
+            "contains": {
+              "type": "object",
+              "required": [
+                "role"
+              ],
+              "properties": {
+                "role": {
+                  "const": "audio"
+                }
+              }
+            },
+            "minContains": 1
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "snapshotId": {
+            "type": "string",
+            "pattern": "^design:[a-z0-9][a-z0-9._-]{2,95}$"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "safePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\\/$)[A-Za-z0-9._/-]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "fileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "size",
+        "sha256",
+        "role"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "role": {
+          "enum": [
+            "oid-index",
+            "actions",
+            "audio",
+            "system-audio",
+            "metadata"
+          ]
+        },
+        "codec": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "indexRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "size",
+        "sha256",
+        "entryCount"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "entryCount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "actionRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "size",
+        "sha256",
+        "actionCount"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "actionCount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

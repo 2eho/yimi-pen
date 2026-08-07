@@ -1,0 +1,323 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/device-link-v1-transaction-transcript.json",
+  "title": "Yimi DeviceLink v1 host transaction transcript",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "class",
+    "hostSimulation",
+    "fixture",
+    "scenarios"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "profile": {
+      "const": "device-link-v1-host-transaction-transcript"
+    },
+    "class": {
+      "enum": [
+        "golden",
+        "negative"
+      ]
+    },
+    "hostSimulation": {
+      "const": true
+    },
+    "fixture": {
+      "$ref": "#/$defs/fixture"
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/scenario"
+      }
+    }
+  },
+  "$defs": {
+    "snapshotId": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "transactionId": {
+      "type": "string",
+      "pattern": "^TX-[A-Z0-9][A-Z0-9-]{0,47}$"
+    },
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activeSnapshotId",
+        "lastGoodSnapshotId",
+        "generation"
+      ],
+      "properties": {
+        "activeSnapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "lastGoodSnapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "generation": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      }
+    },
+    "operation": {
+      "enum": [
+        "snapshot.stage.begin",
+        "snapshot.stage.write",
+        "snapshot.verify",
+        "snapshot.activate",
+        "snapshot.abort",
+        "snapshot.rollback"
+      ]
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "profile",
+        "kind",
+        "requestId",
+        "op",
+        "payload"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "profile": {
+          "const": "loopback-json-v1"
+        },
+        "kind": {
+          "const": "request"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^REQ-[A-Z0-9][A-Z0-9-]{0,47}$"
+        },
+        "op": {
+          "$ref": "#/$defs/operation"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "expectedStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "semanticMutation"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        },
+        "errorCode": {
+          "enum": [
+            "MALFORMED_MESSAGE",
+            "REQUEST_ID_CONFLICT",
+            "TRANSACTION_ID_CONFLICT",
+            "INVALID_STATE",
+            "TRANSACTION_NOT_FOUND",
+            "OFFSET_MISMATCH",
+            "CHUNK_OUT_OF_RANGE",
+            "CHUNK_CONFLICT",
+            "CHUNK_HASH_MISMATCH",
+            "STAGING_INCOMPLETE",
+            "EXPECTED_ACTIVE_MISMATCH"
+          ]
+        },
+        "semanticMutation": {
+          "enum": [
+            "changed",
+            "unchanged"
+          ]
+        },
+        "replayed": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "ok": {
+                "const": false
+              }
+            },
+            "required": [
+              "ok"
+            ]
+          },
+          "then": {
+            "required": [
+              "errorCode"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "errorCode"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "request",
+        "expected"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^STEP-[A-Z0-9][A-Z0-9-]{0,47}$"
+        },
+        "delivery": {
+          "enum": [
+            "normal",
+            "disconnect-before-dispatch",
+            "disconnect-after-durable-before-response"
+          ]
+        },
+        "request": {
+          "$ref": "#/$defs/request"
+        },
+        "expected": {
+          "$ref": "#/$defs/expectedStep"
+        }
+      }
+    },
+    "transactionSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "committedBytes",
+        "committedFiles"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "Staging",
+            "ReadyToActivate",
+            "Activated",
+            "Aborted"
+          ]
+        },
+        "committedBytes": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "committedFiles": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "finalState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activeSnapshotId",
+        "lastGoodSnapshotId",
+        "generation",
+        "transactions"
+      ],
+      "properties": {
+        "activeSnapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "lastGoodSnapshotId": {
+          "$ref": "#/$defs/snapshotId"
+        },
+        "generation": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "transactions": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/transactionId"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/transactionSummary"
+          }
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "covers",
+        "steps",
+        "expectedFinal"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^DLTX-[A-Z0-9][A-Z0-9-]{0,47}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "covers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "two-file-multi-chunk",
+              "manifest-first",
+              "request-id-replay",
+              "request-id-conflict",
+              "chunk-idempotent-new-request",
+              "chunk-conflict",
+              "offset-gap",
+              "offset-overlap",
+              "out-of-range",
+              "disconnect-before-dispatch",
+              "disconnect-after-durable-before-response",
+              "transaction-resume",
+              "transaction-metadata-conflict",
+              "verify-incomplete",
+              "begin-cas",
+              "activate-cas",
+              "abort-replay",
+              "rollback-replay"
+            ]
+          }
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        },
+        "expectedFinal": {
+          "$ref": "#/$defs/finalState"
+        }
+      }
+    }
+  }
+}

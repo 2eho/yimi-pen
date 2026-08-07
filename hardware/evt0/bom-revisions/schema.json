@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/bom-revision-v1.json",
+  "title": "Yimi BOM Revision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "bomRevisionId",
+    "state",
+    "createdAt",
+    "activeBranch",
+    "sourceCsv",
+    "targetBinding",
+    "targetIdentity",
+    "vendorEvidence",
+    "physicalIntake",
+    "releaseReceiptRefs",
+    "change",
+    "approval",
+    "requirements"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "bom-revision-v1" },
+    "bomRevisionId": { "type": "string", "pattern": "^BOM-REV-[A-Z0-9]+$" },
+    "state": { "enum": ["PENDING", "RELEASED"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "activeBranch": { "enum": ["UNRESOLVED", "INTEGRATED_MAINBOARD", "CUSTOM_BOARD"] },
+    "sourceCsv": { "$ref": "#/$defs/fileRef" },
+    "targetBinding": { "$ref": "#/$defs/fileRef" },
+    "targetIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["BOARD_MPN", "PCB_REV", "HEAD_MPN", "HEAD_REV", "FW_VERSION"],
+      "properties": {
+        "BOARD_MPN": { "type": ["string", "null"] },
+        "PCB_REV": { "type": ["string", "null"] },
+        "HEAD_MPN": { "type": ["string", "null"] },
+        "HEAD_REV": { "type": ["string", "null"] },
+        "FW_VERSION": { "type": ["string", "null"] }
+      }
+    },
+    "vendorEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recordsDirectory", "candidateId", "requiredDecision"],
+      "properties": {
+        "recordsDirectory": { "const": "hardware/evt0/vendor-evidence-v1/records" },
+        "candidateId": { "type": "string", "minLength": 1 },
+        "requiredDecision": { "const": "READY_TO_BUY" }
+      }
+    },
+    "physicalIntake": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recordsDirectory", "candidateId", "requiredDisposition", "minimumMatchingSamples"],
+      "properties": {
+        "recordsDirectory": { "const": "hardware/evt0/intake-v1/records" },
+        "candidateId": { "type": "string", "minLength": 1 },
+        "requiredDisposition": { "const": "ACCEPTED_BOARD_TARGET" },
+        "minimumMatchingSamples": { "type": "integer", "minimum": 2 }
+      }
+    },
+    "releaseReceiptRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["previousRevisionId", "reason", "affectedInterfaces"],
+      "properties": {
+        "previousRevisionId": { "type": ["string", "null"], "pattern": "^BOM-REV-[A-Z0-9]+$" },
+        "reason": { "type": "string", "minLength": 1 },
+        "affectedInterfaces": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "approvedBy", "approvedAt"],
+      "properties": {
+        "status": { "enum": ["PENDING", "APPROVED"] },
+        "approvedBy": { "type": ["string", "null"] },
+        "approvedAt": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "fileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "rowCount": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

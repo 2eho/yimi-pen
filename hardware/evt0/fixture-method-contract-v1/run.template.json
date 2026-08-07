@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "hardware-fixture-method-contract-run-v1",
+  "runTemplateId": "RUN-TEMPLATE-USB-CONTROL-HIL-V1",
+  "status": "TEMPLATE_ONLY",
+  "contractPackageId": "HW-FIXTURE-METHOD-CONTRACT-USB-CONTROL-HIL-V1",
+  "contractRevision": "1.0.0",
+  "methodId": null,
+  "targetState": "UNRESOLVED",
+  "targetAdapter": {
+    "path": "hardware/evt0/fixture-method-contract-v1/adapter.template.json",
+    "templateId": "METHOD-ADAPTER-TEMPLATE-USB-CONTROL-HIL-V1",
+    "sha256": null,
+    "id": null
+  },
+  "fixtureAdapter": {
+    "path": "hardware/evt0/test-fixture-v1/adapter.template.json",
+    "id": "EVT0-TARGET-ADAPTER-TEMPLATE",
+    "revision": "1.0.0",
+    "bindingId": null
+  },
+  "fixtureProfile": {
+    "path": "hardware/evt0/test-fixture-v1/profile.json",
+    "profileId": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1",
+    "revision": "1.0.0",
+    "sha256": null,
+    "id": null
+  },
+  "fixtureInstance": {
+    "path": "hardware/evt0/test-fixture-v1/instance.template.json",
+    "templateId": "HW-REUSABLE-TEST-FIXTURE-INSTANCE-TEMPLATE-V1",
+    "status": "TEMPLATE_ONLY",
+    "sha256": null,
+    "id": null
+  },
+  "labSession": {
+    "ownerPath": "hardware/evt0/lab-v1",
+    "sessionId": null,
+    "sha256": null
+  },
+  "testResult": {
+    "ownerPath": "hardware/evt0/test-result-v1/schema.json",
+    "resultId": null,
+    "sha256": null
+  },
+  "rawArtifactOwner": {
+    "ownerPath": "hardware/evt0/test-result-v1/schema.json",
+    "field": "rawArtifacts",
+    "effect": "NONE"
+  },
+  "evidenceCapture": {
+    "ownerPath": "hardware/evt0/evidence-capture-v1/profile.json",
+    "captureRouteState": "PENDING_OWNER_EXTENSION",
+    "laneId": null,
+    "captureIndexId": null,
+    "sha256": null
+  },
+  "releaseGate": {
+    "ownerPath": "hardware/evt0/release-gates-v1/catalog.json",
+    "receiptId": null,
+    "effect": "NONE"
+  },
+  "software": {
+    "contractId": null,
+    "transactionScenarioId": null,
+    "hardwareImpact": "NONE"
+  },
+  "firmware": {
+    "artifactRole": null,
+    "implementationLane": null,
+    "version": null,
+    "evidenceRef": null
+  },
+  "rawArtifacts": [],
+  "verdict": null,
+  "physicalReadiness": null,
+  "effects": {
+    "targetBinding": "NONE",
+    "physicalEvidence": "NONE",
+    "qualification": "NONE",
+    "releaseGate": "NONE",
+    "promotion": "NONE",
+    "software": "NONE"
+  },
+  "methodInputs": [
+    {
+      "methodId": "PROPOSED-USB-DATA-OBSERVATION-001",
+      "fields": [
+        {
+          "id": "CABLE_OR_FIXTURE_ID",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "PAYLOAD_SET",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        }
+      ]
+    },
+    {
+      "methodId": "PROPOSED-CONTROL-STATUS-HIL-001",
+      "fields": [
+        {
+          "id": "FAULT_MODEL",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "EXPECTED_SEQUENCE",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "MEASUREMENT_SET",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "ACCEPTANCE_PREDICATES",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        }
+      ]
+    }
+  ]
+}

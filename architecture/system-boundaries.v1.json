@@ -1,0 +1,587 @@
+{
+  "schemaVersion": 1,
+  "profile": "yimi-system-boundaries-v1",
+  "objective": {
+    "reuseStrategy": "stable-kernel-ports-adapters",
+    "maintenanceStrategy": "single-owner-contracts-and-conformance",
+    "abstractionGate": "extract-after-second-real-consumer"
+  },
+  "nodeWorkspaces": [
+    {
+      "name": "@yimi-pen/core",
+      "root": "packages/core",
+      "role": "stable-core",
+      "allowedInternalDependencies": [],
+      "allowNodeBuiltins": false
+    },
+    {
+      "name": "@yimi-pen/audio",
+      "root": "packages/audio",
+      "role": "stable-capability",
+      "allowedInternalDependencies": [
+        "@yimi-pen/core"
+      ],
+      "allowNodeBuiltins": true
+    },
+    {
+      "name": "@yimi-pen/content",
+      "root": "packages/content",
+      "role": "stable-capability",
+      "allowedInternalDependencies": [
+        "@yimi-pen/core"
+      ],
+      "allowNodeBuiltins": true
+    },
+    {
+      "name": "@yimi-pen/protocol",
+      "root": "packages/protocol",
+      "role": "stable-capability",
+      "allowedInternalDependencies": [],
+      "allowNodeBuiltins": false
+    },
+    {
+      "name": "@yimi-pen/admin-web",
+      "root": "apps/admin-web",
+      "role": "composition-root",
+      "allowedInternalDependencies": [
+        "@yimi-pen/content",
+        "@yimi-pen/core"
+      ],
+      "allowNodeBuiltins": true
+    },
+    {
+      "name": "@yimi-pen/companion-app",
+      "root": "apps/companion-app",
+      "role": "composition-root",
+      "allowedInternalDependencies": [
+        "@yimi-pen/audio"
+      ],
+      "allowedCompositionImports": [
+        "contracts",
+        "scripts/snapshot-jcs.mjs",
+        "tools/confirmation-trust",
+        "tools/family-alpha-compiler",
+        "tools/family-build-adapter",
+        "tools/family-repository"
+      ],
+      "allowNodeBuiltins": true
+    },
+    {
+      "name": "@yimi-pen/device-sim",
+      "root": "apps/device-sim",
+      "role": "composition-root",
+      "allowedInternalDependencies": [
+        "@yimi-pen/audio",
+        "@yimi-pen/content",
+        "@yimi-pen/core",
+        "@yimi-pen/protocol"
+      ],
+      "allowNodeBuiltins": true
+    }
+  ],
+  "rustWorkspace": {
+    "manifest": "firmware/Cargo.toml",
+    "crates": [
+      {
+        "name": "yimi-fw-contract",
+        "root": "firmware/crates/yimi-fw-contract",
+        "allowedProductionPathDependencies": [],
+        "allowExternalProductionDependencies": false
+      },
+      {
+        "name": "yimi-snapshot-core",
+        "root": "firmware/crates/yimi-snapshot-core",
+        "allowedProductionPathDependencies": [
+          "yimi-fw-contract"
+        ],
+        "allowExternalProductionDependencies": false
+      },
+      {
+        "name": "yimi-runtime-core",
+        "root": "firmware/crates/yimi-runtime-core",
+        "allowedProductionPathDependencies": [
+          "yimi-fw-contract"
+        ],
+        "allowExternalProductionDependencies": false
+      },
+      {
+        "name": "yimi-device-link-core",
+        "root": "firmware/crates/yimi-device-link-core",
+        "allowedProductionPathDependencies": [
+          "yimi-fw-contract",
+          "yimi-snapshot-core"
+        ],
+        "allowExternalProductionDependencies": false
+      },
+      {
+        "name": "yimi-platform-ffi",
+        "root": "firmware/crates/yimi-platform-ffi",
+        "allowedProductionPathDependencies": [
+          "yimi-fw-contract"
+        ],
+        "allowExternalProductionDependencies": false
+      },
+      {
+        "name": "yimi-fw-host",
+        "root": "firmware/crates/yimi-fw-host",
+        "allowedProductionPathDependencies": [
+          "yimi-device-link-core",
+          "yimi-fw-contract",
+          "yimi-runtime-core",
+          "yimi-snapshot-core"
+        ],
+        "allowExternalProductionDependencies": true
+      }
+    ],
+    "pureCoreCrates": [
+      "yimi-fw-contract",
+      "yimi-snapshot-core",
+      "yimi-runtime-core",
+      "yimi-device-link-core"
+    ],
+    "hostOnlyCrates": [
+      "yimi-fw-host"
+    ],
+    "ffiBoundaryCrates": [
+      "yimi-platform-ffi"
+    ],
+    "allowedUnsafeRustFiles": [
+      "firmware/crates/yimi-platform-ffi/src/raw.rs"
+    ],
+    "forbiddenVendorTokensInPureCore": [
+      "esp_idf",
+      "freertos",
+      "nuttx",
+      "openvela",
+      "embassy_executor",
+      "stm32_hal"
+    ]
+  },
+  "contractOwners": [
+    {
+      "id": "golden-24-v1",
+      "canonicalPaths": [
+        "hardware/evt0/golden-24/codes.json"
+      ],
+      "consumers": [
+        "scripts/generate-golden-24-projection.mjs",
+        "hardware/evt0/snapshot-v1/design",
+        "hardware/evt0/family-alpha-v1/golden"
+      ],
+      "conformanceGate": "npm run validate:golden-24-projection"
+    },
+    {
+      "id": "snapshot-v1",
+      "canonicalPaths": [
+        "hardware/evt0/snapshot-v1/schema.json",
+        "hardware/evt0/snapshot-v1/logical-index.schema.json",
+        "hardware/evt0/snapshot-v1/actions.schema.json",
+        "hardware/evt0/snapshot-v1/operation-transcript.schema.json",
+        "hardware/evt0/snapshot-v1/operation-transcript.json"
+      ],
+      "consumers": [
+        "scripts/snapshot-projection-validator.mjs",
+        "tools/snapshot-sim",
+        "firmware/crates/yimi-snapshot-core"
+      ],
+      "conformanceGate": "npm run test:snapshot-sim"
+    },
+    {
+      "id": "execution-model-v1",
+      "canonicalPaths": [
+        "hardware/evt0/execution-model-v1/execution-model.schema.json",
+        "hardware/evt0/execution-model-v1/execution-result.schema.json",
+        "hardware/evt0/execution-model-v1/execution-transcript.schema.json",
+        "hardware/evt0/execution-model-v1/family-alpha-transcript.json",
+        "hardware/evt0/execution-model-v1/golden-24-transcript.json",
+        "hardware/evt0/execution-model-v1/order-trap/logical-index.json",
+        "hardware/evt0/execution-model-v1/order-trap/actions.json",
+        "hardware/evt0/execution-model-v1/order-trap-transcript.json"
+      ],
+      "consumers": [
+        "tools/execution-model",
+        "firmware/crates/yimi-runtime-core",
+        "firmware/crates/yimi-fw-host"
+      ],
+      "conformanceGate": "npm run test:execution-model"
+    },
+    {
+      "id": "weighted-random-v2",
+      "canonicalPaths": [
+        "hardware/evt0/weighted-random-v2/transcript.schema.json",
+        "hardware/evt0/weighted-random-v2/result.schema.json",
+        "hardware/evt0/weighted-random-v2/golden-transcript.json",
+        "hardware/evt0/weighted-random-v2/evidence-lock.schema.json",
+        "hardware/evt0/weighted-random-v2/evidence-lock.json"
+      ],
+      "consumers": [
+        "tools/weighted-random",
+        "firmware/crates/yimi-runtime-core",
+        "firmware/crates/yimi-fw-host"
+      ],
+      "conformanceGate": "npm run test:weighted-random-v2"
+    },
+    {
+      "id": "device-link-v1",
+      "canonicalPaths": [
+        "hardware/evt0/device-link-v1/schema.json",
+        "hardware/evt0/device-link-v1/transaction-transcript.schema.json",
+        "hardware/evt0/device-link-v1/transaction-golden.json",
+        "hardware/evt0/device-link-v1/transaction-negative.json"
+      ],
+      "consumers": [
+        "tools/device-link-sim",
+        "firmware/crates/yimi-device-link-core"
+      ],
+      "conformanceGate": "npm run test:device-link-sim"
+    },
+    {
+      "id": "family-repository-v1",
+      "canonicalPaths": [
+        "contracts/family-revision-v1.mjs",
+        "contracts/rfc3339.mjs",
+        "hardware/evt0/family-repository-v1/family-revision.schema.json",
+        "hardware/evt0/family-repository-v1/build-request.schema.json",
+        "hardware/evt0/family-repository-v1/repository-format.schema.json",
+        "hardware/evt0/family-repository-v1/repository-state.schema.json",
+        "hardware/evt0/family-repository-v1/repository-backup.schema.json",
+        "hardware/evt0/family-repository-v1/repository-conformance.schema.json",
+        "hardware/evt0/family-repository-v1/repository-conformance.json",
+        "hardware/evt0/family-repository-v1/golden/family-revision.json",
+        "hardware/evt0/family-repository-v1/golden/family-revision-2.json",
+        "hardware/evt0/family-repository-v1/golden/family-revision-3.json",
+        "hardware/evt0/family-repository-v1/golden/family-revision-3-alt.json",
+        "hardware/evt0/family-repository-v1/golden/build-request.json",
+        "contracts/family-build-plan-v1.mjs",
+        "hardware/evt0/family-repository-v1/build-plan.schema.json",
+        "hardware/evt0/family-repository-v1/build-authorization.schema.json",
+        "hardware/evt0/family-repository-v1/golden/build-plan.json"
+      ],
+      "consumers": [
+        "apps/companion-app",
+        "tools/family-build-adapter",
+        "tools/family-repository",
+        "hardware/evt0/family-alpha-v1/golden/draft.json",
+        "tools/confirmation-trust"
+      ],
+      "conformanceGate": "npm run validate:family-repository-contracts"
+    },
+    {
+      "id": "authoring-product-session-v1",
+      "canonicalPaths": [
+        "apps/companion-app/src/authoring/authoring-contract.mjs",
+        "apps/companion-app/src/authoring/authoring-product-session-core.mjs",
+        "docs/authoring-product-shell-v1.md"
+      ],
+      "consumers": [
+        "apps/companion-app/src/authoring/authoring-product-session.mjs",
+        "apps/companion-app/src/authoring/family-workspace-authoring-adapter.mjs",
+        "apps/companion-app/src/authoring/run-authoring-product-shell-acceptance.mjs"
+      ],
+      "conformanceGate": "npm run test:companion-authoring-product-shell"
+    },
+    {
+      "id": "family-export-v1",
+      "canonicalPaths": [
+        "contracts/family-export-v1.mjs",
+        "hardware/evt0/family-export-v1/family-export-manifest.schema.json"
+      ],
+      "consumers": [
+        "apps/companion-app/src/local-family-export.mjs",
+        "apps/companion-app/src/run-acceptance.mjs"
+      ],
+      "conformanceGate": "npm run test:companion-host"
+    },
+    {
+      "id": "family-alpha-v1",
+      "canonicalPaths": [
+        "hardware/evt0/family-alpha-v1/draft.schema.json",
+        "hardware/evt0/family-alpha-v1/preview.schema.json",
+        "hardware/evt0/family-alpha-v1/confirmation.schema.json"
+      ],
+      "consumers": [
+        "apps/companion-app",
+        "tools/family-alpha-compiler"
+      ],
+      "conformanceGate": "npm run test:family-alpha-compiler"
+    },
+    {
+      "id": "confirmation-trust-v1",
+      "canonicalPaths": [
+        "contracts/confirmation-trust-v1.mjs",
+        "contracts/strict-json-v1.mjs",
+        "hardware/evt0/confirmation-trust-v1/common.schema.json",
+        "hardware/evt0/confirmation-trust-v1/challenge.schema.json",
+        "hardware/evt0/confirmation-trust-v1/presentation-transcript.schema.json",
+        "hardware/evt0/confirmation-trust-v1/proof.schema.json",
+        "hardware/evt0/confirmation-trust-v1/trust-policy.schema.json",
+        "hardware/evt0/confirmation-trust-v1/verification-result.schema.json",
+        "hardware/evt0/confirmation-trust-v1/replay-ledger.schema.json",
+        "hardware/evt0/confirmation-trust-v1/evidence-lock.schema.json",
+        "hardware/evt0/confirmation-trust-v1/evidence-lock.json",
+        "hardware/evt0/confirmation-trust-v1/golden/trust-policy.json",
+        "hardware/evt0/confirmation-trust-v1/golden/challenge.json",
+        "hardware/evt0/confirmation-trust-v1/golden/presentation-transcript.json",
+        "hardware/evt0/confirmation-trust-v1/golden/proof.json",
+        "hardware/evt0/confirmation-trust-v1/golden/verification-result.json",
+        "hardware/evt0/confirmation-trust-v1/golden/build-authorization.json"
+      ],
+      "consumers": [
+        "apps/companion-app",
+        "tools/confirmation-trust",
+        "tools/family-alpha-compiler",
+        "tools/family-build-adapter"
+      ],
+      "conformanceGate": "npm run test:confirmation-trust"
+    },
+    {
+      "id": "platform-ffi-v1",
+      "canonicalPaths": [
+        "firmware/abi/yimi_platform_v1.h",
+        "hardware/evt0/platform-ffi-v1/schema.json",
+        "hardware/evt0/platform-ffi-v1/golden-vectors.json"
+      ],
+      "consumers": [
+        "firmware/crates/yimi-platform-ffi"
+      ],
+      "conformanceGate": "npm run validate:rust-firmware"
+    },
+    {
+      "id": "test-result-v1",
+      "canonicalPaths": [
+        "hardware/evt0/test-result-v1/schema.json"
+      ],
+      "consumers": [
+        "scripts/validate-firmware-contracts.mjs",
+        "hardware/evt0/intake-v1"
+      ],
+      "conformanceGate": "npm run validate:firmware-contracts"
+    },
+    {
+      "id": "hardware-system-v1",
+      "canonicalPaths": [
+        "hardware/evt0/hardware-system-v1/topology.schema.json",
+        "hardware/evt0/hardware-system-v1/topology.json",
+        "hardware/evt0/hardware-system-v1/target-binding.schema.json",
+        "hardware/evt0/hardware-system-v1/target-binding.json"
+      ],
+      "consumers": [
+        "scripts/validate-hardware-system.mjs",
+        "docs/hardware-system-architecture.md",
+        "hardware/evt0/intake-v1"
+      ],
+      "conformanceGate": "npm run validate:hardware-system"
+    },
+    {
+      "id": "release-gates-v1",
+      "canonicalPaths": [
+        "contracts/release-gates-v1.mjs",
+        "hardware/evt0/release-gates-v1/catalog.schema.json",
+        "hardware/evt0/release-gates-v1/catalog.json",
+        "hardware/evt0/release-gates-v1/evidence-receipt.schema.json",
+        "hardware/evt0/release-gates-v1/release-decision.schema.json",
+        "hardware/evt0/release-gates-v1/host-report-adapters.schema.json",
+        "hardware/evt0/release-gates-v1/host-report-adapters.json",
+        "hardware/evt0/release-gates-v1/host-validation-run.schema.json",
+        "hardware/evt0/release-gates-v1/legacy-blocker-inventory.json"
+      ],
+      "consumers": [
+        "tools/release-gates",
+        "scripts/validate-product-baseline.mjs",
+        "scripts/validate-firmware-contracts.mjs",
+        "scripts/validate-rust-firmware.ps1",
+        "tools/family-alpha-compiler"
+      ],
+      "conformanceGate": "npm run validate:release-gates"
+    }
+  ],
+  "evolutionRules": [
+    {
+      "change": "new-random-provider",
+      "reuse": "WeightedRandom v2 raw-u64 contract and no_std selector",
+      "acceptance": "add one board RNG adapter and raw-word evidence; integer mapping and product weights stay unchanged"
+    },
+    {
+      "change": "new-board-target",
+      "reuse": "yimi no_std cores plus yimi-platform-ffi-v1",
+      "acceptance": "add one board adapter and evidence pack; pure cores stay unchanged"
+    },
+    {
+      "change": "new-device-transport",
+      "reuse": "DeviceLink v1 transaction core and transcript",
+      "acceptance": "add framing adapter; transaction semantics and error codes stay unchanged"
+    },
+    {
+      "change": "new-family-storage",
+      "reuse": "FamilyRepository v1 port and repository conformance suite",
+      "acceptance": "replace the adapter only; revision, CAS and recovery use cases stay unchanged"
+    },
+    {
+      "change": "new-content-source",
+      "reuse": "AuthoringProductSession v1 source port, FamilyWorkspace authoring capability, and existing review/compiler pipeline",
+      "acceptance": "add one source adapter plus product-shell fixtures; session core, FamilyRevision, device projection, and installer stay unchanged"
+    },
+    {
+      "change": "new-release-evidence-producer",
+      "reuse": "ReleaseGateCatalog v1, EvidenceReceipt v1 and deterministic ReleaseDecision evaluator",
+      "acceptance": "add one producer/adapter and artifact-role conformance; validators do not add private blocker arrays"
+    },
+    {
+      "change": "contract-revision",
+      "reuse": "one canonical schema owner plus language-independent vectors",
+      "acceptance": "add compatibility decision, migration and cross-consumer conformance before adoption"
+    }
+  ],
+  "integrationGates": [
+    {
+      "id": "AUTHORING_PRODUCT_SESSION_V1",
+      "status": "CLOSED",
+      "blocks": "shipping a family authoring UI that bypasses capability, immutable revision, or verified-review ordering",
+      "ownerDocs": [
+        "docs/authoring-product-shell-v1.md",
+        "docs/family-authoring-v1.md",
+        "docs/family-workspace-v1.md"
+      ],
+      "closureEvidence": [
+        "framework-neutral state transition core with monotonic revision and exact duplicate handling",
+        "FILE and CAPTURE converge through one sanitized source receipt and FamilyWorkspace public capabilities; permission identity is locally content-addressed",
+        "exact frozen commit replay, stale-head conflict, cancellation barrier, and late callback isolation",
+        "review receipt binds session, revision, binding, clip, and asset while direct confirmation stays absent",
+        "adapter permission IDs and producer fields stay private; the controller emits fixed non-sensitive durable identities",
+        "fixture-only review receipt never elevates buildAuthorized; production authority remains under PRODUCTION_CONFIRMATION_TRUST",
+        "device delivery and offline-ready remain separate target evidence gates"
+      ]
+    },
+    {
+      "id": "FAMILY_REVISION_BUILD_REQUEST_SPLIT",
+      "status": "CLOSED",
+      "blocks": "FamilyRepository v1 promotion and production compilation",
+      "ownerDocs": [
+        "docs/reuse-maintainability.md",
+        "docs/family-alpha-v1.md"
+      ],
+      "closureEvidence": [
+        "target-neutral FamilyRevision v1 machine schema",
+        "confirmation-free BuildPlan and per-build BuildAuthorization machine schemas",
+        "FamilyRevision plus BuildPlan to CompileDraftProjection byte-exact adapter with legacy BuildRequest compatibility",
+        "repository, build adapter, confirmation trust and compiler conformance in the aggregate gate"
+      ]
+    },
+    {
+      "id": "TARGET_SNAPSHOT_EXECUTION_MODEL_EVIDENCE",
+      "status": "EVIDENCE_PENDING",
+      "blocks": "claiming Family Snapshot tap-to-clip execution on target firmware",
+      "ownerDocs": [
+        "docs/reuse-maintainability.md",
+        "docs/snapshot-v1.md"
+      ],
+      "closureEvidence": [
+        "ActionKey to zero-based ActionSlot parser contract",
+        "per-action cooldown and play-policy planner with injected random source",
+        "Family Snapshot to Rust parser/runtime/playback golden vector",
+        "two-board same-revision C and Rust differential result"
+      ]
+    },
+    {
+      "id": "WEIGHTED_RANDOM_V2_CONTRACT",
+      "status": "CLOSED",
+      "blocks": "sharing one unbiased integer-weight mapping across Family compiler, host tools and Rust firmware",
+      "ownerDocs": [
+        "docs/reuse-maintainability.md",
+        "docs/snapshot-v1.md"
+      ],
+      "closureEvidence": [
+        "versioned positive-u32 weight and raw-u64 transcript contract",
+        "low-prefix rejection mapping with exact per-ticket preimage proof",
+        "independent Node and no_std Rust results are byte exact",
+        "legacy Pack weight default is isolated in one adapter and existing 2:1 product content is evidence-locked",
+        "production Snapshot and target RNG evidence remain in RG-SNAPSHOT-WEIGHTED-RANDOM-VERIFIED"
+      ]
+    },
+    {
+      "id": "RELEASE_GATE_CATALOG",
+      "status": "CLOSED",
+      "blocks": "deriving one product release decision from host, firmware and physical evidence",
+      "ownerDocs": [
+        "docs/reuse-maintainability.md",
+        "docs/product-slice-evt0.md"
+      ],
+      "closureEvidence": [
+        "versioned ReleaseGateCatalog with affirmative stable RG IDs and legacy aliases",
+        "EvidenceReceipt schema binds release/evidence subjects, producer, catalog and artifact hashes",
+        "ReleaseDecision is deterministic over one catalog and receipt set",
+        "host report adapters emit fifteen receipts and current decision retains nineteen physical/production gates",
+        "catalog conformance covers identity, order independence, stale subjects, conflicts, synthetic physical rejection and production confirmation self-report rejection"
+      ]
+    },
+    {
+      "id": "PRODUCTION_CONFIRMATION_TRUST",
+      "status": "EVIDENCE_PENDING",
+      "blocks": "claiming production guardian trust or compiling a release-candidate Family Snapshot",
+      "ownerDocs": [
+        "docs/confirmation-trust-v1.md",
+        "docs/family-alpha-v1.md"
+      ],
+      "closureEvidence": [
+        "production authority resolver bound to immutable guardian authority revisions",
+        "production signing-key storage, rotation, retirement, revocation and audit evidence",
+        "atomic product database replay adapter with multiprocess and crash recovery evidence",
+        "provider qualification receipt for the current product release",
+        "real BuildAuthorization, ReleaseDecision and release-candidate compilation transcript"
+      ]
+    }
+  ],
+  "qualityGates": {
+    "requiredDocs": [
+      "docs/system-concept.md",
+      "docs/reuse-maintainability.md",
+      "docs/architecture-options.md",
+      "docs/family-coordination-consumer-audit.md",
+      "docs/family-workspace-v1.md",
+      "docs/authoring-product-shell-v1.md",
+      "docs/asset-vault-recovery-v1.md",
+      "docs/hardware-system-architecture.md",
+      "docs/research/github-actions-quality-gate-2026-08-03.md",
+      "docs/confirmation-trust-v1.md"
+    ],
+    "requiredAutomation": [
+      ".github/workflows/quality-gates.yml"
+    ],
+    "requiredRootScripts": [
+      "validate:architecture",
+      "validate:hardware-system",
+      "validate:golden-24-projection",
+      "validate:fast",
+      "validate:contracts",
+      "validate:full",
+      "validate:product-rd",
+      "test:family-build-adapter",
+      "test:companion-host",
+      "test:companion-capture-authoring",
+      "test:companion-authoring-product-shell",
+      "test:companion-asset-vault-maintenance",
+      "test:companion-asset-vault-recovery",
+      "test:companion-family-workspace",
+      "verify:companion-real-prelisten",
+      "test:family-repository",
+      "validate:family-repository-contracts",
+      "test:execution-model",
+      "test:execution-model-core",
+      "test:weighted-random-v2",
+      "generate:release-gate-catalog",
+      "validate:release-gate-catalog",
+      "test:release-gate-conformance",
+      "evaluate:release-gates",
+      "validate:release-gates",
+      "test:confirmation-trust"
+    ],
+    "aggregateScript": "validate:product-rd",
+    "protectedStableRoots": [
+      "packages/core",
+      "packages/audio",
+      "packages/content",
+      "packages/protocol"
+    ]
+  }
+}
+

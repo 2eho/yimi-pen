@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "hardware-fixture-method-contract-method-adapter-v1",
+  "adapterTemplateId": "METHOD-ADAPTER-TEMPLATE-USB-CONTROL-HIL-V1",
+  "contractPackageId": "HW-FIXTURE-METHOD-CONTRACT-USB-CONTROL-HIL-V1",
+  "contractRevision": "1.0.0",
+  "status": "TEMPLATE_ONLY",
+  "boardTargetState": "UNRESOLVED",
+  "contractMethodIds": [
+    "PROPOSED-USB-DATA-OBSERVATION-001",
+    "PROPOSED-CONTROL-STATUS-HIL-001"
+  ],
+  "methods": [
+    {
+      "methodId": "PROPOSED-USB-DATA-OBSERVATION-001",
+      "fields": [
+        {
+          "id": "USB_ROLE",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "USB_REVISION",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "USB_MODE",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "DEVICE_IDENTITY",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "CLASS",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "VID_PID",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "ENDPOINTS",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "TRANSFER_TYPES",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "FRAMING",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "RECOVERY_POLICY",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "TIMING_THRESHOLDS",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        }
+      ]
+    },
+    {
+      "methodId": "PROPOSED-CONTROL-STATUS-HIL-001",
+      "fields": [
+        {
+          "id": "CONTROL_CHANNELS",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "STATUS_CHANNELS",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "DEBUG_TRANSPORT",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "TIMING",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "DEBOUNCE",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "STATE_CODES",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "STIMULUS_LEVELS",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "TRACE_CLOCK",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "FLASH_ROUTE",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        },
+        {
+          "id": "LOG_ROUTE",
+          "state": "PENDING_EVIDENCE",
+          "value": null,
+          "evidenceRefs": []
+        }
+      ]
+    }
+  ],
+  "effects": {
+    "targetBinding": "NONE",
+    "physicalEvidence": "NONE",
+    "qualification": "NONE",
+    "releaseGate": "NONE",
+    "promotion": "NONE",
+    "software": "NONE"
+  }
+}

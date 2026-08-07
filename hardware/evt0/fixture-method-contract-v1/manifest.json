@@ -1,0 +1,449 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "hardware-fixture-method-contract-v1",
+  "packageId": "HW-FIXTURE-METHOD-CONTRACT-USB-CONTROL-HIL-V1",
+  "revision": "1.0.0",
+  "status": "PROPOSED_CONTRACT_COMPLETE",
+  "boardTargetState": "UNRESOLVED",
+  "effects": {
+    "methodCatalog": "NONE",
+    "instrumentRegistry": "NONE",
+    "targetBinding": "NONE",
+    "physicalEvidence": "NONE",
+    "releaseGate": "NONE",
+    "promotion": "NONE",
+    "software": "NONE"
+  },
+  "dependencyPolicy": {
+    "methodGapRule": "AUDIT_PROVENANCE_PLUS_LIVE_SEMANTIC_VALIDATION",
+    "fixtureRule": "CURRENT_SEMANTIC_VALIDATION_ONLY",
+    "softwareRule": "LIVE_BOUNDARY_SEMANTICS_ONLY_NO_HASH_OR_TASK_NAME",
+    "canonicalArtifactRule": "NO_CHURN_FOR_HARDWARE_IMPACT_NONE"
+  },
+  "sourceRefs": {
+    "methodGapManifestPath": "hardware/evt0/method-gap-evidence-v1/manifest.json",
+    "methodGapPackageId": "HW-FIXTURE-METHOD-GAP-EVIDENCE-AUDIT-V1",
+    "methodGapRevision": "1.1.0",
+    "sourceIds": [
+      "SRC-METHOD-GAP-USB-COMPLIANCE-PAGE",
+      "SRC-METHOD-GAP-USB-COMPLIANCE-PDF",
+      "SRC-METHOD-GAP-USB-BASE-PAGE",
+      "SRC-METHOD-GAP-HIL-NI-VERISTAND",
+      "SRC-METHOD-GAP-HIL-OPENHTF"
+    ]
+  },
+  "ownerRefs": {
+    "methodCatalogPath": "hardware/evt0/lab-v1/method-catalog.json",
+    "registrationPlanPath": "hardware/evt0/lab-v1/registration-capture-plan.json",
+    "topologyPath": "hardware/evt0/hardware-system-v1/topology.json",
+    "targetBindingPath": "hardware/evt0/hardware-system-v1/target-binding.json",
+    "testResultSchemaPath": "hardware/evt0/test-result-v1/schema.json",
+    "releaseGateCatalogPath": "hardware/evt0/release-gates-v1/catalog.json",
+    "evidenceCaptureProfilePath": "hardware/evt0/evidence-capture-v1/profile.json",
+    "fixtureProfilePath": "hardware/evt0/test-fixture-v1/profile.json",
+    "fixtureInstanceTemplatePath": "hardware/evt0/test-fixture-v1/instance.template.json"
+  },
+  "contracts": [
+    {
+      "methodId": "PROPOSED-USB-DATA-OBSERVATION-001",
+      "gapId": "GAP-IF-USB-DATA-METHOD",
+      "status": "PROPOSED_ONLY",
+      "acceptedInMethodCatalog": false,
+      "interfaceRefs": [
+        "IF-USB-DATA",
+        "IF-USB-MECHANICAL"
+      ],
+      "supportingInterfaceRefs": [],
+      "sourceIds": [
+        "SRC-METHOD-GAP-USB-COMPLIANCE-PAGE",
+        "SRC-METHOD-GAP-USB-COMPLIANCE-PDF",
+        "SRC-METHOD-GAP-USB-BASE-PAGE"
+      ],
+      "purpose": "Observe target-neutral USB enumeration, transactions, interruption and recovery while preserving ordered raw traces and existing owner references.",
+      "roles": {
+        "inputRoles": [
+          "fixture_profile",
+          "target_adapter",
+          "run_binding",
+          "software_transaction_scenario",
+          "host_transport_observation"
+        ],
+        "outputRoles": [
+          "ordered_transport_trace",
+          "recovery_observation",
+          "owner_binding_refs"
+        ]
+      },
+      "phases": [
+        {
+          "id": "PHASE-01",
+          "skeletonStepId": "STEP-01",
+          "action": "Bind the run to the exact profile, adapter, instance, host/device role, and official USB revision only after target evidence exists.",
+          "targetDependentFields": [
+            "USB_ROLE",
+            "USB_REVISION",
+            "USB_MODE",
+            "DEVICE_IDENTITY",
+            "CABLE_OR_FIXTURE_ID"
+          ],
+          "physicalThresholdState": "PENDING"
+        },
+        {
+          "id": "PHASE-02",
+          "skeletonStepId": "STEP-02",
+          "action": "Run enumeration and representative read/write transaction scenarios selected by the accepted target software contract; preserve event order and timestamps.",
+          "targetDependentFields": [
+            "CLASS",
+            "VID_PID",
+            "ENDPOINTS",
+            "TRANSFER_TYPES",
+            "PAYLOAD_SET"
+          ],
+          "physicalThresholdState": "PENDING"
+        },
+        {
+          "id": "PHASE-03",
+          "skeletonStepId": "STEP-03",
+          "action": "Repeat disconnect, reconnect, and interrupted-transfer observations; preserve raw traces and recovery outcomes without assigning a target pass threshold.",
+          "targetDependentFields": [
+            "CONNECTOR",
+            "PIN_MAPPING",
+            "FRAMING",
+            "RECOVERY_POLICY",
+            "TIMING_THRESHOLDS"
+          ],
+          "physicalThresholdState": "PENDING"
+        },
+        {
+          "id": "PHASE-04",
+          "skeletonStepId": "STEP-04",
+          "action": "Hash the raw capture, bind it to the existing session/TestResult/evidence owners, and leave ReleaseGate disposition to those owners.",
+          "targetDependentFields": [
+            "SESSION_ID",
+            "TEST_RESULT_ID",
+            "RAW_EVIDENCE_INDEX",
+            "RELEASE_GATE_RECEIPT"
+          ],
+          "physicalThresholdState": "PENDING"
+        }
+      ],
+      "rawArtifactKinds": [
+        "enumeration_trace",
+        "transfer_trace",
+        "disconnect_reconnect_trace",
+        "raw_capture_manifest",
+        "session_binding_ref"
+      ],
+      "ownerProjection": {
+        "methodCatalog": {
+          "path": "hardware/evt0/lab-v1/method-catalog.json",
+          "methodId": "PROPOSED-USB-DATA-OBSERVATION-001",
+          "acceptedInMethodCatalog": false,
+          "effect": "NONE"
+        },
+        "labSession": {
+          "path": "hardware/evt0/lab-v1",
+          "refFields": [
+            "sessionId"
+          ],
+          "effect": "NONE"
+        },
+        "testResult": {
+          "path": "hardware/evt0/test-result-v1/schema.json",
+          "refFields": [
+            "resultId",
+            "rawArtifacts"
+          ],
+          "effect": "NONE"
+        },
+        "evidenceCapture": {
+          "path": "hardware/evt0/evidence-capture-v1/profile.json",
+          "captureRouteState": "PENDING_OWNER_EXTENSION",
+          "laneId": null,
+          "captureIndexId": null,
+          "effect": "NONE"
+        },
+        "releaseGate": {
+          "path": "hardware/evt0/release-gates-v1/catalog.json",
+          "disposition": "NONE",
+          "effect": "NONE"
+        }
+      },
+      "failureSemantics": {
+        "onMissingTargetEvidence": "PENDING_EVIDENCE",
+        "verdictState": "NOT_SET",
+        "physicalEvidenceEffect": "NONE",
+        "releaseGateEffect": "NONE",
+        "targetPromotionEffect": "NONE",
+        "qualificationEffect": "NONE"
+      },
+      "fieldOwnership": {
+        "METHOD_ADAPTER": [
+          "USB_ROLE",
+          "USB_REVISION",
+          "USB_MODE",
+          "DEVICE_IDENTITY",
+          "CLASS",
+          "VID_PID",
+          "ENDPOINTS",
+          "TRANSFER_TYPES",
+          "FRAMING",
+          "RECOVERY_POLICY",
+          "TIMING_THRESHOLDS"
+        ],
+        "RUN_BINDING": [
+          "CABLE_OR_FIXTURE_ID",
+          "PAYLOAD_SET"
+        ],
+        "EXISTING_FIXTURE_ADAPTER": [
+          "CONNECTOR",
+          "PIN_MAPPING"
+        ],
+        "OWNER_REFERENCE": [
+          "SESSION_ID",
+          "TEST_RESULT_ID",
+          "RAW_EVIDENCE_INDEX",
+          "RELEASE_GATE_RECEIPT"
+        ]
+      },
+      "runBindingPaths": {},
+      "ownerReferencePaths": {
+        "SESSION_ID": "labSession.sessionId",
+        "TEST_RESULT_ID": "testResult.resultId",
+        "RAW_EVIDENCE_INDEX": "evidenceCapture.captureIndexId",
+        "RELEASE_GATE_RECEIPT": "releaseGate.receiptId"
+      },
+      "existingFixturePaths": {
+        "CONNECTOR": "targetDependent.connectorMappings",
+        "PIN_MAPPING": "targetDependent.pinMappings"
+      }
+    },
+    {
+      "methodId": "PROPOSED-CONTROL-STATUS-HIL-001",
+      "gapId": "GAP-CONTROL-STATUS-METHOD",
+      "status": "PROPOSED_ONLY",
+      "acceptedInMethodCatalog": false,
+      "interfaceRefs": [
+        "IF-CONTROL",
+        "IF-STATUS"
+      ],
+      "supportingInterfaceRefs": [
+        "IF-DIAGNOSTIC"
+      ],
+      "sourceIds": [
+        "SRC-METHOD-GAP-HIL-NI-VERISTAND",
+        "SRC-METHOD-GAP-HIL-OPENHTF"
+      ],
+      "purpose": "Observe target-neutral control/status stimulus and diagnostic response ordering through a reusable HIL trace contract without defining target I/O or firmware thresholds.",
+      "roles": {
+        "inputRoles": [
+          "fixture_profile",
+          "target_adapter",
+          "run_binding",
+          "firmware_artifact_role",
+          "logical_stimulus_sequence"
+        ],
+        "outputRoles": [
+          "ordered_hil_trace",
+          "diagnostic_observation",
+          "owner_binding_refs"
+        ]
+      },
+      "phases": [
+        {
+          "id": "PHASE-01",
+          "skeletonStepId": "STEP-01",
+          "action": "Bind the run to a firmware build identity, logical control/status channel names, diagnostic route, fixture instance, and existing lab session owner.",
+          "targetDependentFields": [
+            "FIRMWARE_VERSION",
+            "CONTROL_CHANNELS",
+            "STATUS_CHANNELS",
+            "DEBUG_TRANSPORT",
+            "FIXTURE_INSTANCE"
+          ],
+          "physicalThresholdState": "PENDING"
+        },
+        {
+          "id": "PHASE-02",
+          "skeletonStepId": "STEP-02",
+          "action": "Declare a stimulus sequence and observation predicates in logical terms; keep physical levels, debounce, timing, and state-code mapping unresolved.",
+          "targetDependentFields": [
+            "STIMULUS_LEVELS",
+            "TIMING",
+            "DEBOUNCE",
+            "STATE_CODES",
+            "PIN_MAPPING"
+          ],
+          "physicalThresholdState": "PENDING"
+        },
+        {
+          "id": "PHASE-03",
+          "skeletonStepId": "STEP-03",
+          "action": "Execute the HIL sequence, capture stimulus/observation ordering, diagnostic logs, build/flash witness, and fault-injection outcome as raw artifacts.",
+          "targetDependentFields": [
+            "TRACE_CLOCK",
+            "FAULT_MODEL",
+            "FLASH_ROUTE",
+            "LOG_ROUTE",
+            "EXPECTED_SEQUENCE"
+          ],
+          "physicalThresholdState": "PENDING"
+        },
+        {
+          "id": "PHASE-04",
+          "skeletonStepId": "STEP-04",
+          "action": "Attach measurements and raw traces to the existing TestResult/evidence owners; leave qualification and ReleaseGate decisions outside the proposed method.",
+          "targetDependentFields": [
+            "MEASUREMENT_SET",
+            "ACCEPTANCE_PREDICATES",
+            "RAW_EVIDENCE_INDEX",
+            "RELEASE_GATE_RECEIPT"
+          ],
+          "physicalThresholdState": "PENDING"
+        }
+      ],
+      "rawArtifactKinds": [
+        "stimulus_trace",
+        "observation_trace",
+        "diagnostic_log",
+        "measurement_manifest",
+        "attachment_manifest"
+      ],
+      "ownerProjection": {
+        "methodCatalog": {
+          "path": "hardware/evt0/lab-v1/method-catalog.json",
+          "methodId": "PROPOSED-CONTROL-STATUS-HIL-001",
+          "acceptedInMethodCatalog": false,
+          "effect": "NONE"
+        },
+        "labSession": {
+          "path": "hardware/evt0/lab-v1",
+          "refFields": [
+            "sessionId"
+          ],
+          "effect": "NONE"
+        },
+        "testResult": {
+          "path": "hardware/evt0/test-result-v1/schema.json",
+          "refFields": [
+            "resultId",
+            "rawArtifacts"
+          ],
+          "effect": "NONE"
+        },
+        "evidenceCapture": {
+          "path": "hardware/evt0/evidence-capture-v1/profile.json",
+          "captureRouteState": "PENDING_OWNER_EXTENSION",
+          "laneId": null,
+          "captureIndexId": null,
+          "effect": "NONE"
+        },
+        "releaseGate": {
+          "path": "hardware/evt0/release-gates-v1/catalog.json",
+          "disposition": "NONE",
+          "effect": "NONE"
+        }
+      },
+      "failureSemantics": {
+        "onMissingTargetEvidence": "PENDING_EVIDENCE",
+        "verdictState": "NOT_SET",
+        "physicalEvidenceEffect": "NONE",
+        "releaseGateEffect": "NONE",
+        "targetPromotionEffect": "NONE",
+        "qualificationEffect": "NONE"
+      },
+      "fieldOwnership": {
+        "METHOD_ADAPTER": [
+          "CONTROL_CHANNELS",
+          "STATUS_CHANNELS",
+          "DEBUG_TRANSPORT",
+          "TIMING",
+          "DEBOUNCE",
+          "STATE_CODES",
+          "STIMULUS_LEVELS",
+          "TRACE_CLOCK",
+          "FLASH_ROUTE",
+          "LOG_ROUTE"
+        ],
+        "RUN_BINDING": [
+          "FIXTURE_INSTANCE",
+          "FAULT_MODEL",
+          "EXPECTED_SEQUENCE",
+          "MEASUREMENT_SET",
+          "ACCEPTANCE_PREDICATES"
+        ],
+        "EXISTING_FIXTURE_ADAPTER": [
+          "FIRMWARE_VERSION",
+          "PIN_MAPPING"
+        ],
+        "OWNER_REFERENCE": [
+          "RAW_EVIDENCE_INDEX",
+          "RELEASE_GATE_RECEIPT"
+        ]
+      },
+      "runBindingPaths": {
+        "FIXTURE_INSTANCE": "fixtureInstance.id"
+      },
+      "ownerReferencePaths": {
+        "SESSION_ID": "labSession.sessionId",
+        "TEST_RESULT_ID": "testResult.resultId",
+        "RAW_EVIDENCE_INDEX": "evidenceCapture.captureIndexId",
+        "RELEASE_GATE_RECEIPT": "releaseGate.receiptId"
+      },
+      "existingFixturePaths": {
+        "FIRMWARE_VERSION": "targetIdentity.fullFiveTuple.FW_VERSION",
+        "PIN_MAPPING": "targetDependent.pinMappings"
+      }
+    }
+  ],
+  "implementation": [
+    {
+      "path": "hardware/evt0/fixture-method-contract-v1/contract.schema.json",
+      "revision": "1.0.0",
+      "bytes": 17290,
+      "sha256": "d4ac364bb0df72203f16360cdf6c8c7844853dd5ac59f808e14d1bc3dd2ad7ec"
+    },
+    {
+      "path": "hardware/evt0/fixture-method-contract-v1/adapter.schema.json",
+      "revision": "1.0.0",
+      "bytes": 3278,
+      "sha256": "56c3dcb1e66b4d249520b7c62081f42925ea230e209450026716d373c7233c04"
+    },
+    {
+      "path": "hardware/evt0/fixture-method-contract-v1/adapter.template.json",
+      "revision": "1.0.0",
+      "bytes": 3877,
+      "sha256": "8a36477246cb2158c9700ab98b24d39468e48b7dac6e0644643c32d4dd56fbd3"
+    },
+    {
+      "path": "hardware/evt0/fixture-method-contract-v1/run.schema.json",
+      "revision": "1.0.0",
+      "bytes": 9901,
+      "sha256": "4294dba8f261222a1e4be63b20b02bf312d58a2c0b4f0aa6ecca302dbe7be59e"
+    },
+    {
+      "path": "hardware/evt0/fixture-method-contract-v1/run.template.json",
+      "revision": "1.0.0",
+      "bytes": 3453,
+      "sha256": "6f9e158f3c38829076b0239a2073dd2f3b0e4fb6f315ef307d75687814351315"
+    },
+    {
+      "path": "hardware/evt0/fixture-method-contract-v1/README.md",
+      "revision": "1.0.0",
+      "bytes": 5633,
+      "sha256": "2f387268ba98747d03427e30e1fadfc6ef149265f65ce91c0ff1ddf09e71dfda"
+    },
+    {
+      "path": "scripts/validate-hardware-fixture-method-contract.mjs",
+      "revision": "1.0.0",
+      "bytes": 35398,
+      "sha256": "4364828c258df9e4e1f39408944220018ea86cade3f1f3bfc72c474bb4ea315e"
+    },
+    {
+      "path": "scripts/test-hardware-fixture-method-contract.mjs",
+      "revision": "1.0.0",
+      "bytes": 11023,
+      "sha256": "0f056db5e41c306d94827f446f2cb7753348d901670959e895e9154418a8e797"
+    }
+  ]
+}

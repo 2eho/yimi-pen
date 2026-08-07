@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "actions": [
+    {
+      "actionId": "action-001",
+      "playPolicy": "random_one",
+      "clipIds": [
+        "clip-001-1",
+        "clip-001-2",
+        "clip-001-3"
+      ],
+      "cooldownMs": 0,
+      "designSource": "SYSTEM_TTS",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-002",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-002-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_VOICE",
+      "codecPlan": "MP3"
+    },
+    {
+      "actionId": "action-003",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-003-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_SFX",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-004",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-004-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_SFX",
+      "codecPlan": "MP3"
+    },
+    {
+      "actionId": "action-005",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-005-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_VOICE",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-006",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-006-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_VOICE",
+      "codecPlan": "MP3"
+    },
+    {
+      "actionId": "action-007",
+      "playPolicy": "random_one",
+      "clipIds": [
+        "clip-007-1",
+        "clip-007-2",
+        "clip-007-3"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_VOICE",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-008",
+      "playPolicy": "random_one",
+      "clipIds": [
+        "clip-008-1",
+        "clip-008-2",
+        "clip-008-3"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_VOICE",
+      "codecPlan": "MP3"
+    },
+    {
+      "actionId": "action-009",
+      "playPolicy": "queue",
+      "clipIds": [
+        "clip-009-1",
+        "clip-009-2"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_VOICE",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-010",
+      "playPolicy": "queue",
+      "clipIds": [
+        "clip-010-1",
+        "clip-010-2"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_VOICE",
+      "codecPlan": "MP3"
+    },
+    {
+      "actionId": "action-011",
+      "playPolicy": "queue",
+      "clipIds": [
+        "clip-011-1",
+        "clip-011-2"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_MUSIC",
+      "codecPlan": "MP3"
+    },
+    {
+      "actionId": "action-012",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-012-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "GOLDEN_VOICE",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-013",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-013-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "FAMILY_RECORDING",
+      "codecPlan": "BOARD_NEGOTIATED"
+    },
+    {
+      "actionId": "action-014",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-014-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "SYSTEM_TTS",
+      "codecPlan": "BOARD_NEGOTIATED"
+    },
+    {
+      "actionId": "action-015",
+      "playPolicy": "random_one",
+      "clipIds": [
+        "clip-015-1",
+        "clip-015-2"
+      ],
+      "cooldownMs": 0,
+      "designSource": "FAMILY_RECORDING",
+      "codecPlan": "BOARD_NEGOTIATED"
+    },
+    {
+      "actionId": "action-016",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-016-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "SYSTEM_TTS",
+      "codecPlan": "BOARD_NEGOTIATED"
+    },
+    {
+      "actionId": "action-017",
+      "playPolicy": "queue",
+      "clipIds": [
+        "clip-017-1",
+        "clip-017-2"
+      ],
+      "cooldownMs": 0,
+      "designSource": "FAMILY_RECORDING",
+      "codecPlan": "BOARD_NEGOTIATED"
+    },
+    {
+      "actionId": "action-018",
+      "playPolicy": "random_one",
+      "clipIds": [
+        "clip-018-1",
+        "clip-018-2",
+        "clip-018-3"
+      ],
+      "cooldownMs": 0,
+      "designSource": "SYSTEM_TTS",
+      "codecPlan": "BOARD_NEGOTIATED"
+    },
+    {
+      "actionId": "action-019",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-019-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "HOST_FIXTURE_TONE",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-020",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-020-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "HOST_FIXTURE_TONE",
+      "codecPlan": "MP3"
+    },
+    {
+      "actionId": "action-021",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-021-1"
+      ],
+      "cooldownMs": 500,
+      "designSource": "HOST_FIXTURE_TONE",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-022",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-022-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "HOST_FIXTURE_TONE",
+      "codecPlan": "WAV_PCM16"
+    },
+    {
+      "actionId": "action-023",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-023-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "HOST_FIXTURE_TONE",
+      "codecPlan": "MP3"
+    },
+    {
+      "actionId": "action-024",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-024-1"
+      ],
+      "cooldownMs": 0,
+      "designSource": "HOST_FIXTURE_TONE",
+      "codecPlan": "WAV_PCM16"
+    }
+  ]
+}

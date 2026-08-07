@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "yimi-evt0-golden-24",
+  "version": "0.1.0",
+  "status": "DESIGN_READY_HARDWARE_BLOCKED",
+  "purpose": "One shared logical fixture for product UX, board/OID screening, firmware runtime, snapshot compilation and acceptance tests.",
+  "evidenceModel": "O/M/R/S/V/E/I as defined in docs/research/product-system-evidence-2026.md",
+  "evidenceGaps": [
+    "BOARD_TARGET is UNFROZEN",
+    "OID code generator and print profile are UNFROZEN",
+    "All physicalCode values are intentionally unassigned",
+    "Target audio codec parameters require board capability evidence"
+  ],
+  "entries": [
+    {
+      "slot": 1,
+      "logicalOid": "YIMI-EVT0-001",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "开箱问候",
+      "kind": "character",
+      "playPolicy": "random_one",
+      "clipCount": 3,
+      "sourcePlan": "SYSTEM_TTS",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "首次有效反馈与加权随机",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 2,
+      "logicalOid": "YIMI-EVT0-002",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "苹果认知",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "GOLDEN_VOICE",
+      "codecPlan": "MP3",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "唯一映射与短句起播",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 3,
+      "logicalOid": "YIMI-EVT0-003",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "小猫叫声",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "GOLDEN_SFX",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "音效路径与即时打断",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 4,
+      "logicalOid": "YIMI-EVT0-004",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "公交车声音",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "GOLDEN_SFX",
+      "codecPlan": "MP3",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "第二种音效与编码覆盖",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 5,
+      "logicalOid": "YIMI-EVT0-005",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "喝水提醒",
+      "kind": "word",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "GOLDEN_VOICE",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "生活习惯短句",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 6,
+      "logicalOid": "YIMI-EVT0-006",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "收玩具提醒",
+      "kind": "word",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "GOLDEN_VOICE",
+      "codecPlan": "MP3",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "生活习惯短句",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 7,
+      "logicalOid": "YIMI-EVT0-007",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "角色彩蛋A",
+      "kind": "character",
+      "playPolicy": "random_one",
+      "clipCount": 3,
+      "sourcePlan": "GOLDEN_VOICE",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "同码重复与随机句",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 8,
+      "logicalOid": "YIMI-EVT0-008",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "角色彩蛋B",
+      "kind": "character",
+      "playPolicy": "random_one",
+      "clipCount": 3,
+      "sourcePlan": "GOLDEN_VOICE",
+      "codecPlan": "MP3",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "权重与重复可玩",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 9,
+      "logicalOid": "YIMI-EVT0-009",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "两句小故事A",
+      "kind": "story",
+      "playPolicy": "queue",
+      "clipCount": 2,
+      "sourcePlan": "GOLDEN_VOICE",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "顺序队列",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 10,
+      "logicalOid": "YIMI-EVT0-010",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "两句小故事B",
+      "kind": "story",
+      "playPolicy": "queue",
+      "clipCount": 2,
+      "sourcePlan": "GOLDEN_VOICE",
+      "codecPlan": "MP3",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "队列与编码覆盖",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 11,
+      "logicalOid": "YIMI-EVT0-011",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "短儿歌A",
+      "kind": "song",
+      "playPolicy": "queue",
+      "clipCount": 2,
+      "sourcePlan": "GOLDEN_MUSIC",
+      "codecPlan": "MP3",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "连续音频与停止",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 12,
+      "logicalOid": "YIMI-EVT0-012",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "自由点读打断",
+      "kind": "character",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "GOLDEN_VOICE",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "新点打断旧播",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 13,
+      "logicalOid": "YIMI-EVT0-013",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "水杯家庭贴",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "FAMILY_RECORDING",
+      "codecPlan": "BOARD_NEGOTIATED",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "真人录音DIY闭环",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 14,
+      "logicalOid": "YIMI-EVT0-014",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "玩具汽车家庭贴",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "SYSTEM_TTS",
+      "codecPlan": "BOARD_NEGOTIATED",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "基础TTS DIY闭环",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 15,
+      "logicalOid": "YIMI-EVT0-015",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "家庭照片贴",
+      "kind": "character",
+      "playPolicy": "random_one",
+      "clipCount": 2,
+      "sourcePlan": "FAMILY_RECORDING",
+      "codecPlan": "BOARD_NEGOTIATED",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "多条家庭录音",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 16,
+      "logicalOid": "YIMI-EVT0-016",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "房门提示贴",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "SYSTEM_TTS",
+      "codecPlan": "BOARD_NEGOTIATED",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "物品命名与提示",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 17,
+      "logicalOid": "YIMI-EVT0-017",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "睡前提示贴",
+      "kind": "story",
+      "playPolicy": "queue",
+      "clipCount": 2,
+      "sourcePlan": "FAMILY_RECORDING",
+      "codecPlan": "BOARD_NEGOTIATED",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "家庭录音队列",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 18,
+      "logicalOid": "YIMI-EVT0-018",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "香蕉示例贴",
+      "kind": "object",
+      "playPolicy": "random_one",
+      "clipCount": 3,
+      "sourcePlan": "SYSTEM_TTS",
+      "codecPlan": "BOARD_NEGOTIATED",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "万物可点样例",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 19,
+      "logicalOid": "YIMI-EVT0-019",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "快速切换A",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "HOST_FIXTURE_TONE",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "与20交替点读竞态",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 20,
+      "logicalOid": "YIMI-EVT0-020",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "快速切换B",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "HOST_FIXTURE_TONE",
+      "codecPlan": "MP3",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "与19交替点读竞态",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 21,
+      "logicalOid": "YIMI-EVT0-021",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "同码冷却",
+      "kind": "ui",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "HOST_FIXTURE_TONE",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "500ms冷却与重复过滤",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 500
+    },
+    {
+      "slot": 22,
+      "logicalOid": "YIMI-EVT0-022",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "相邻区域A",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "HOST_FIXTURE_TONE",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "与23相邻边界错码检查",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 23,
+      "logicalOid": "YIMI-EVT0-023",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "相邻区域B",
+      "kind": "object",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "HOST_FIXTURE_TONE",
+      "codecPlan": "MP3",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "与22相邻边界错码检查",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "slot": 24,
+      "logicalOid": "YIMI-EVT0-024",
+      "physicalCode": null,
+      "physicalCodeStatus": "UNASSIGNED_PENDING_CODE_TOOL",
+      "productScene": "升级后持久化",
+      "kind": "ui",
+      "playPolicy": "replace",
+      "clipCount": 1,
+      "sourcePlan": "HOST_FIXTURE_TONE",
+      "codecPlan": "WAV_PCM16",
+      "codecStatus": "PENDING_BOARD_CAPABILITY",
+      "primaryOracle": "重启与快照切换后映射保持",
+      "evidenceRefs": [
+        "docs/system-concept.md",
+        "docs/hardware-gen1-p0.md",
+        "SRC-OID-001"
+      ],
+      "cooldownMs": 0
+    }
+  ],
+  "negativeCases": [
+    {
+      "id": "NEG-01",
+      "case": "VALID_UNBOUND_CODE",
+      "oracle": "Distinct unbound feedback and no unrelated audio",
+      "status": "PENDING_EXTRA_CODE_ASSIGNMENT"
+    },
+    {
+      "id": "NEG-02",
+      "case": "BLANK_PAPER",
+      "oracle": "No trigger in 100 attempts per sample",
+      "status": "PENDING_PRINT_FIXTURE"
+    },
+    {
+      "id": "NEG-03",
+      "case": "ORDINARY_CMYK_WITHOUT_OID",
+      "oracle": "No trigger in 100 attempts per sample",
+      "status": "PENDING_PRINT_FIXTURE"
+    },
+    {
+      "id": "NEG-04",
+      "case": "MISSING_AUDIO_FILE",
+      "oracle": "Local storage error feedback and no network playback",
+      "status": "DESIGN_DEFINED"
+    },
+    {
+      "id": "NEG-05",
+      "case": "CHECKSUM_MISMATCH",
+      "oracle": "Snapshot activation rejected and last-good snapshot retained",
+      "status": "DESIGN_DEFINED"
+    },
+    {
+      "id": "NEG-06",
+      "case": "INSTALL_POWER_LOSS",
+      "oracle": "Boot selects last-good snapshot",
+      "status": "DESIGN_DEFINED"
+    }
+  ]
+}

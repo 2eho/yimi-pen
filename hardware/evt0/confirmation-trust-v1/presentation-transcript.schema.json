@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/family-confirmation-presentation-v1.json",
+  "title": "Yimi guardian preview presentation transcript v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "profile", "transcriptSha256", "buildPlanId",
+    "buildSubjectSha256", "previewId", "sourceSha256", "presentationPolicyVersion",
+    "challengeId", "openedAt", "completedAt", "events"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "family-confirmation-presentation-v1" },
+    "transcriptSha256": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" },
+    "buildPlanId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/buildPlanId" },
+    "buildSubjectSha256": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" },
+    "previewId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256Id" },
+    "sourceSha256": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" },
+    "presentationPolicyVersion": { "const": "family-alpha-v1" },
+    "challengeId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/challengeId" },
+    "openedAt": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/rfc3339" },
+    "completedAt": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/rfc3339" },
+    "events": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sequence", "kind", "clipId", "clipSha256", "confirmationId", "occurredAt"],
+        "properties": {
+          "sequence": { "type": "integer", "minimum": 0, "maximum": 9999 },
+          "kind": { "enum": ["PREVIEW_OPENED", "CLIP_PLAYBACK_COMPLETED", "CONFIRM_ACTION"] },
+          "clipId": { "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 128 }] },
+          "clipSha256": { "oneOf": [{ "type": "null" }, { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" }] },
+          "confirmationId": { "oneOf": [{ "type": "null" }, { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/confirmationId" }] },
+          "occurredAt": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/rfc3339" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "kind": { "const": "CLIP_PLAYBACK_COMPLETED" } }, "required": ["kind"] },
+            "then": { "properties": { "clipId": { "type": "string" }, "clipSha256": { "type": "string" }, "confirmationId": { "type": "null" } } }
+          },
+          {
+            "if": { "properties": { "kind": { "const": "CONFIRM_ACTION" } }, "required": ["kind"] },
+            "then": { "properties": { "clipId": { "type": "null" }, "clipSha256": { "type": "null" }, "confirmationId": { "type": "string" } } }
+          },
+          {
+            "if": { "properties": { "kind": { "const": "PREVIEW_OPENED" } }, "required": ["kind"] },
+            "then": { "properties": { "clipId": { "type": "null" }, "clipSha256": { "type": "null" }, "confirmationId": { "type": "null" } } }
+          }
+        ]
+      }
+    }
+  }
+}

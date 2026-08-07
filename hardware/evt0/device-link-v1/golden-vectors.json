@@ -1,0 +1,481 @@
+{
+  "schemaVersion": 1,
+  "profile": "loopback-json-v1",
+  "vectors": [
+    {
+      "id": "DL-001",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-HELLO-001",
+        "op": "hello",
+        "payload": {
+          "protocolVersion": 1,
+          "hostName": "yimi-fw-host"
+        }
+      }
+    },
+    {
+      "id": "DL-002",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-STAGE-001",
+        "op": "snapshot.stage.begin",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "totalBytes": "3",
+          "fileCount": 1,
+          "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "manifestByteLength": "512"
+        }
+      }
+    },
+    {
+      "id": "DL-003",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-WRITE-001",
+        "op": "snapshot.stage.write",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "path": "audio/clip-001.mp3",
+          "offset": "0",
+          "byteLength": 3,
+          "dataBase64": "YWJj",
+          "chunkSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+        }
+      }
+    },
+    {
+      "id": "DL-004",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "requestId": "REQ-ACTIVATE-001",
+        "op": "snapshot.activate",
+        "ok": false,
+        "error": {
+          "code": "INVALID_STATE",
+          "retryable": false,
+          "installPhase": "Staging",
+          "bootSelection": "Active",
+          "detail": {}
+        }
+      }
+    },
+    {
+      "id": "DL-005",
+      "expectedSchemaValid": false,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-WRITE-TRAVERSAL",
+        "op": "snapshot.stage.write",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "path": "../outside.bin",
+          "offset": "0",
+          "byteLength": 3,
+          "dataBase64": "YWJj",
+          "chunkSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+        }
+      }
+    },
+    {
+      "id": "DL-006",
+      "expectedSchemaValid": false,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-VERIFY-MISSING-TX",
+        "op": "snapshot.verify",
+        "payload": {}
+      }
+    },
+    {
+      "id": "DL-007",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-WRITE-BAD-HASH",
+        "op": "snapshot.stage.write",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "path": "audio/clip-001.mp3",
+          "offset": "0",
+          "byteLength": 3,
+          "dataBase64": "YWJj",
+          "chunkSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    },
+    {
+      "id": "DL-008",
+      "expectedSchemaValid": false,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "requestId": "REQ-STATUS-BOTH",
+        "op": "status.get",
+        "ok": true,
+        "payload": {},
+        "error": {
+          "code": "INVALID_STATE",
+          "retryable": false,
+          "installPhase": "Idle",
+          "bootSelection": "Active",
+          "detail": {}
+        }
+      }
+    },
+    {
+      "id": "DL-009",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "requestId": "REQ-WRITE-001",
+        "op": "snapshot.stage.write",
+        "ok": true,
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "path": "audio/clip-001.mp3",
+          "nextDurableOffset": "3",
+          "receivedBytes": "3",
+          "replayed": false
+        }
+      }
+    },
+    {
+      "id": "DL-010",
+      "expectedSchemaValid": false,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "requestId": "REQ-WRITE-GARBAGE",
+        "op": "snapshot.stage.write",
+        "ok": true,
+        "payload": {
+          "garbage": true
+        }
+      }
+    },
+    {
+      "id": "DL-011",
+      "expectedSchemaValid": false,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-STAGE-UNSAFE-NUMBER",
+        "op": "snapshot.stage.begin",
+        "payload": {
+          "transactionId": "TX-EVT0-UNSAFE",
+          "snapshotId": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+          "manifestByteLength": "512",
+          "totalBytes": 9007199254740993,
+          "fileCount": 1,
+          "expectedActiveSnapshotId": null
+        }
+      }
+    },
+    {
+      "id": "DL-012",
+      "expectedSchemaValid": false,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-WRITE-PATH-ALIAS",
+        "op": "snapshot.stage.write",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "path": "audio//clip.mp3",
+          "offset": "0",
+          "byteLength": 1,
+          "dataBase64": "YQ==",
+          "chunkSha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"
+        }
+      }
+    },
+    {
+      "id": "DL-013",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-WRITE-NONCANONICAL",
+        "op": "snapshot.stage.write",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "path": "audio/clip.mp3",
+          "offset": "0",
+          "byteLength": 1,
+          "dataBase64": "YR==",
+          "chunkSha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"
+        }
+      }
+    },
+    {
+      "id": "DL-014",
+      "expectedSchemaValid": false,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "requestId": "REQ-BUSY-BAD-RETRY",
+        "op": "snapshot.stage.begin",
+        "ok": false,
+        "error": {
+          "code": "BUSY",
+          "retryable": false,
+          "installPhase": "Idle",
+          "bootSelection": "Active",
+          "detail": {}
+        }
+      }
+    },
+    {
+      "id": "DL-015",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": false,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "request",
+        "requestId": "REQ-STAGE-U64-OVERFLOW",
+        "op": "snapshot.stage.begin",
+        "payload": {
+          "transactionId": "TX-EVT0-U64",
+          "snapshotId": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+          "manifestByteLength": "512",
+          "totalBytes": "18446744073709551616",
+          "fileCount": 1,
+          "expectedActiveSnapshotId": null
+        }
+      }
+    },
+    {
+      "id": "DL-016",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-HELLO-RESP",
+        "op": "hello",
+        "payload": {
+          "protocolVersion": 1,
+          "bootSessionId": "BOOT-FIXTURE-001"
+        }
+      }
+    },
+    {
+      "id": "DL-017",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-CAPS-RESP",
+        "op": "capabilities.get",
+        "payload": {
+          "protocolVersion": 1,
+          "bootSessionId": "BOOT-FIXTURE-001",
+          "boardTarget": "UNFROZEN",
+          "firmwareVersion": "HOST-FIXTURE",
+          "transportProfile": "loopback-json-v1",
+          "snapshotSchemaVersions": [
+            1
+          ],
+          "stagingResumeAcrossTransportReconnect": true,
+          "stagingResumeAcrossPowerLoss": false,
+          "limits": {
+            "maxPathBytes": 240,
+            "maxChunkBytes": null,
+            "replayJournalEntries": null,
+            "maxFilesPerSnapshot": null,
+            "inactiveStorageBytes": null
+          }
+        }
+      }
+    },
+    {
+      "id": "DL-018",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-STATUS-RESP",
+        "op": "status.get",
+        "payload": {
+          "bootSessionId": "BOOT-FIXTURE-001",
+          "deviceState": "Ready",
+          "installPhase": "Idle",
+          "bootSelection": "Active",
+          "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "generation": "7",
+          "lastInstallOutcome": "None",
+          "staging": null
+        }
+      }
+    },
+    {
+      "id": "DL-019",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-BEGIN-RESP",
+        "op": "snapshot.stage.begin",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "resumed": false,
+          "receivedBytes": "0",
+          "installPhase": "Staging"
+        }
+      }
+    },
+    {
+      "id": "DL-020",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-VERIFY-RESP",
+        "op": "snapshot.verify",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "installPhase": "ReadyToActivate"
+        }
+      }
+    },
+    {
+      "id": "DL-021",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-ACTIVATE-RESP",
+        "op": "snapshot.activate",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "activeSnapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "generation": "8",
+          "installPhase": "Idle",
+          "bootSelection": "Active"
+        }
+      }
+    },
+    {
+      "id": "DL-022",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-ABORT-RESP",
+        "op": "snapshot.abort",
+        "payload": {
+          "transactionId": "TX-EVT0-001",
+          "aborted": true,
+          "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "installPhase": "Idle"
+        }
+      }
+    },
+    {
+      "id": "DL-023",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-ROLLBACK-RESP",
+        "op": "snapshot.rollback",
+        "payload": {
+          "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "generation": "9",
+          "installPhase": "Idle",
+          "bootSelection": "LastGood"
+        }
+      }
+    },
+    {
+      "id": "DL-024",
+      "expectedSchemaValid": true,
+      "expectedSemanticValid": true,
+      "message": {
+        "schemaVersion": 1,
+        "profile": "loopback-json-v1",
+        "kind": "response",
+        "ok": true,
+        "requestId": "REQ-DIAG-RESP",
+        "op": "diagnostics.read",
+        "payload": {
+          "events": [],
+          "nextAfterSequence": "0",
+          "hasMore": false
+        }
+      }
+    }
+  ]
+}

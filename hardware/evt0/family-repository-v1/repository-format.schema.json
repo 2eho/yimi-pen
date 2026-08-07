@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/family-repository-format-v1.json",
+  "title": "Yimi Atomic JSON FamilyRepository identity marker v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profile", "repositoryId"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "family-repository-format-v1" },
+    "repositoryId": {
+      "type": "string",
+      "pattern": "^FAMILY-REPO-[A-Z0-9][A-Z0-9._-]{2,127}$"
+    }
+  }
+}

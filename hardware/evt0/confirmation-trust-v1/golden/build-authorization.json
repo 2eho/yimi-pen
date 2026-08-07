@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "profile": "family-build-authorization-v1",
+  "fixtureOnly": true,
+  "authorizationId": "authorization:sha256:28123dd1d171b1d8165de8115255c080f6a2aa6da981f7aef3b849a4115083ce",
+  "buildPlanId": "PLAN-FAMILY-ALPHA-GOLDEN-001",
+  "buildSubjectSha256": "cdb45e96a1350404483a6172cb1dacde62602f240120ca006eb5c2a0f5b1070f",
+  "familyRevisionId": "sha256:39c95b3b12cbe4abc84ac86b77f3aaeaea2f915b8c0bd105ea2ea3b1b25e263c",
+  "confirmationId": "CONF-FAMILY-ALPHA-GOLDEN-001",
+  "confirmationSemanticSha256": "0b66146967e64118906bb8739bf6725ea7445336126733cde99b5fb9defca87c",
+  "confirmationProofId": "proof:sha256:6930cc98cec12c19c1a0dd079294d3bee0b524b38c4c24a228495a5db47b3b09",
+  "presentationTranscriptSha256": "252ac5aa4048c2b7e884a5272252e7dee0a9393460ccf7858db1535052dc127c",
+  "providerVerificationId": "verification:sha256:9e5864f1ee3d6e333500565b2b24bf6c3948452c033996246add23bef0745142",
+  "trustPolicyId": "policy:sha256:4ff61fe05afc95b297c9e9f5cc668c28afdb67ef06e34b05267c937738089134",
+  "productReleaseDecisionId": null,
+  "productReleaseSubjectRevisionSha256": null,
+  "authorizedAt": "2026-08-03T00:05:02Z",
+  "authorizationExpiresAt": "2026-08-03T00:10:01Z"
+}

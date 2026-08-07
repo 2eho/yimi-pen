@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "profile": "release-host-report-adapters-v1",
+  "adapters": [
+    {
+      "gateId": "RG-HOST-ARCHITECTURE-CONFORMANCE-PASSED",
+      "producerId": "architecture-validator",
+      "producerVersion": "1",
+      "reportPath": "build/architecture-validation.json",
+      "expectedProfile": "yimi-architecture-validation-v1",
+      "syntheticEvidence": false,
+      "passConditions": [
+        {
+          "pointer": "/valid",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "claimRefs": [
+        "architecture/system-boundaries.v1.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-CONFIRMATION-TRUST-CONTRACT-PASSED",
+      "producerId": "confirmation-trust-validator",
+      "producerVersion": "1",
+      "reportPath": "build/confirmation-trust-validation/report.json",
+      "expectedProfile": "confirmation-trust-validation-v1",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/gates",
+          "operator": "allTrue",
+          "expected": null
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/confirmation-trust-v1/evidence-lock.json",
+        "hardware/evt0/confirmation-trust-v1/proof.schema.json",
+        "hardware/evt0/family-repository-v1/build-plan.schema.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-DEVICELINK-TRANSACTION-PASSED",
+      "producerId": "device-link-sim",
+      "producerVersion": "1",
+      "reportPath": "build/device-link-sim/report.json",
+      "expectedProfile": "device-link-v1-host-transaction-transcript",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/passed",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/device-link-v1/transaction-golden.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-EVT0-INTAKE-CONTRACT-PASSED",
+      "producerId": "evt0-intake-validator",
+      "producerVersion": "1",
+      "reportPath": "build/evt0-intake-validation.json",
+      "expectedProfile": null,
+      "syntheticEvidence": false,
+      "passConditions": [
+        {
+          "pointer": "/templatesValid",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/intake-v1/schema.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-EXECUTION-MODEL-PASSED",
+      "producerId": "execution-model-crosscheck",
+      "producerVersion": "1",
+      "reportPath": "build/execution-model-validation/report.json",
+      "expectedProfile": "execution-model-validation-v1",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/gates",
+          "operator": "allTrue",
+          "expected": null
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/execution-model-v1/execution-model.schema.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-FAMILY-ALPHA-COMPILER-PASSED",
+      "producerId": "family-alpha-compiler",
+      "producerVersion": "0.1.0",
+      "reportPath": "build/family-alpha-validation/report.json",
+      "expectedProfile": "family-alpha-compiler-validation-v1",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/golden/deterministic",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "pointer": "/negativeSummary/passed",
+          "operator": "equalsPointer",
+          "expected": "/negativeSummary/total"
+        },
+        {
+          "pointer": "/negativeSummary/zeroSideEffect",
+          "operator": "equalsPointer",
+          "expected": "/negativeSummary/total"
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/family-alpha-v1/draft.schema.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-FAMILY-BUILD-PASSED",
+      "producerId": "family-build-adapter",
+      "producerVersion": "1",
+      "reportPath": "build/family-build-adapter-validation/report.json",
+      "expectedProfile": "family-build-adapter-validation-v1",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/gates",
+          "operator": "allTrue",
+          "expected": null
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/family-repository-v1/build-request.schema.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-FAMILY-REPOSITORY-PASSED",
+      "producerId": "family-repository",
+      "producerVersion": "1",
+      "reportPath": "build/family-repository-validation/report.json",
+      "expectedProfile": "family-repository-validation-v1",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/gates",
+          "operator": "allTrue",
+          "expected": null
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/family-repository-v1/repository-conformance.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-FIRMWARE-CONTRACTS-PASSED",
+      "producerId": "firmware-contract-validator",
+      "producerVersion": "1",
+      "reportPath": "build/firmware-contract-validation.json",
+      "expectedProfile": "firmware-contract-host-validation",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/failed",
+          "operator": "equals",
+          "expected": 0
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/platform-ffi-v1/schema.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-GOLDEN24-PROJECTION-PASSED",
+      "producerId": "golden-24-projection-validator",
+      "producerVersion": "1",
+      "reportPath": "build/golden-24-projection-validation.json",
+      "expectedProfile": "golden-24-projection-validation-v1",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/valid",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/golden-24/codes.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-PRODUCT-BASELINE-PASSED",
+      "producerId": "product-baseline-validator",
+      "producerVersion": "1",
+      "reportPath": "build/product-baseline-validation.json",
+      "expectedProfile": null,
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/designBaselineValid",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "claimRefs": [
+        "docs/product-slice-evt0.md"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-RELEASE-GATE-CONFORMANCE-PASSED",
+      "producerId": "release-gate-conformance",
+      "producerVersion": "1",
+      "reportPath": "build/release-gate-conformance/report.json",
+      "expectedProfile": "release-gate-conformance-v1",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/gates",
+          "operator": "allTrue",
+          "expected": null
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/release-gates-v1/catalog.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-RUST-FIRMWARE-PASSED",
+      "producerId": "rust-firmware-validator",
+      "producerVersion": "1",
+      "reportPath": "build/rust-firmware-validation.json",
+      "expectedProfile": "rust-firmware-host-validation",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/failed",
+          "operator": "equals",
+          "expected": 0
+        }
+      ],
+      "claimRefs": [
+        "firmware/Cargo.lock"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-SNAPSHOT-TRANSACTION-PASSED",
+      "producerId": "snapshot-sim",
+      "producerVersion": "1",
+      "reportPath": "build/snapshot-sim/report.json",
+      "expectedProfile": "snapshot-node-rust-differential",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/passed",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/snapshot-v1/operation-transcript.json"
+      ]
+    },
+    {
+      "gateId": "RG-HOST-WEIGHTED-RANDOM-CONTRACT-PASSED",
+      "producerId": "weighted-random-validator",
+      "producerVersion": "2",
+      "reportPath": "build/weighted-random-validation/report.json",
+      "expectedProfile": "weighted-random-v2-host-validation",
+      "syntheticEvidence": true,
+      "passConditions": [
+        {
+          "pointer": "/gates",
+          "operator": "allTrue",
+          "expected": null
+        }
+      ],
+      "claimRefs": [
+        "hardware/evt0/weighted-random-v2/golden-transcript.json",
+        "hardware/evt0/weighted-random-v2/evidence-lock.json"
+      ]
+    }
+  ]
+}

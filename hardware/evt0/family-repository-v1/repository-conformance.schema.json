@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/family-repository-conformance-v1.json",
+  "title": "Yimi FamilyRepository conformance transcript v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profile", "revisions", "steps"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "family-repository-conformance-v1" },
+    "revisions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._/-]+$"
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "op", "args", "expected"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^FR-[0-9]{2}$" },
+          "op": {
+            "enum": ["open", "commit", "backup", "restore", "load-revision", "read-outbox", "reopen"]
+          },
+          "args": { "type": "object" },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "status": { "type": "string", "minLength": 1 },
+              "error": { "type": "string", "minLength": 1 },
+              "headRevision": {
+                "oneOf": [
+                  { "type": "string", "minLength": 1 },
+                  { "type": "null" }
+                ]
+              },
+              "found": { "type": "boolean" },
+              "outboxCount": { "type": "integer", "minimum": 0 },
+              "operationOutcomeHeadRevision": {
+                "oneOf": [
+                  { "type": "string", "minLength": 1 },
+                  { "type": "null" }
+                ]
+              },
+              "superseded": { "type": "boolean" },
+              "zeroSideEffect": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

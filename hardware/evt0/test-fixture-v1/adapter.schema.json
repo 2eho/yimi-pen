@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/evt0-test-fixture-adapter-v1.json",
+  "title": "Yimi Pen EVT-0 target adapter v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "adapterId",
+    "revision",
+    "status",
+    "profileRef",
+    "topologyRef",
+    "targetBindingRef",
+    "targetIdentity",
+    "capabilityRefs",
+    "targetDependent",
+    "claims",
+    "effects",
+    "blockers"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "evt0-test-fixture-target-adapter"
+    },
+    "adapterId": {
+      "type": "string",
+      "pattern": "^EVT0-TARGET-ADAPTER-[A-Z0-9-]+$"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "enum": [
+        "PENDING_TARGET_EVIDENCE",
+        "CANDIDATE",
+        "BOUND"
+      ]
+    },
+    "profileRef": {
+      "$ref": "#/$defs/profileRef"
+    },
+    "topologyRef": {
+      "$ref": "#/$defs/topologyRef"
+    },
+    "targetBindingRef": {
+      "$ref": "#/$defs/ownerRef"
+    },
+    "targetIdentity": {
+      "$ref": "#/$defs/targetIdentity"
+    },
+    "capabilityRefs": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "CAP-FIXTURE-EVIDENCE-ANCHOR",
+          "CAP-OPTICAL-PRESENTATION-DATUM",
+          "CAP-OID-EVENT-TIMING-OBSERVATION",
+          "CAP-POWER-SAFE-INJECTION",
+          "CAP-CONTENT-STORAGE-OFFLINE",
+          "CAP-USB-DATA-TRANSPORT",
+          "CAP-AUDIO-ACOUSTIC-OBSERVATION",
+          "CAP-CONTROL-STATUS-DIAGNOSTIC-HIL"
+        ]
+      }
+    },
+    "targetDependent": {
+      "$ref": "#/$defs/targetDependent"
+    },
+    "claims": {
+      "$ref": "#/$defs/claims"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    },
+    "blockers": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+    },
+    "ownerRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "identity"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "profileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "profileId",
+        "revision"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/profile.json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "profileId": {
+          "const": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1"
+        },
+        "revision": {
+          "const": "1.0.0"
+        }
+      }
+    },
+    "topologyRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "topologyId"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/hardware-system-v1/topology.json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "topologyId": {
+          "type": "string",
+          "pattern": "^hwt:sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "nullableIdentity": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "targetIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "evidenceState",
+        "fullFiveTuple",
+        "evidenceRefs"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "UNRESOLVED",
+            "CANDIDATE",
+            "BOUND"
+          ]
+        },
+        "evidenceState": {
+          "enum": [
+            "TARGET_EVIDENCE_PENDING",
+            "TARGET_EVIDENCE_PARTIAL",
+            "TARGET_EVIDENCE_ACCEPTED"
+          ]
+        },
+        "fullFiveTuple": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "BOARD_MPN",
+            "PCB_REV",
+            "HEAD_MPN",
+            "HEAD_REV",
+            "FW_VERSION"
+          ],
+          "properties": {
+            "BOARD_MPN": {
+              "$ref": "#/$defs/nullableIdentity"
+            },
+            "PCB_REV": {
+              "$ref": "#/$defs/nullableIdentity"
+            },
+            "HEAD_MPN": {
+              "$ref": "#/$defs/nullableIdentity"
+            },
+            "HEAD_REV": {
+              "$ref": "#/$defs/nullableIdentity"
+            },
+            "FW_VERSION": {
+              "$ref": "#/$defs/nullableIdentity"
+            }
+          }
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ownerRef"
+          }
+        }
+      }
+    },
+    "nullableNumber": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "targetDependent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "voltageV",
+        "currentA",
+        "pinMappings",
+        "connectorMappings",
+        "pogoMappings",
+        "mechanical"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "PENDING",
+            "PARTIAL",
+            "READY"
+          ]
+        },
+        "voltageV": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "currentA": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "pinMappings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "connectorMappings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "pogoMappings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "mechanical": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "workingDistanceMm",
+            "angleDeg",
+            "mountingDatums"
+          ],
+          "properties": {
+            "lengthMm": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "widthMm": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "heightMm": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "workingDistanceMm": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "angleDeg": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "mountingDatums": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "physicalAdapter",
+        "qualified",
+        "readyForPhysicalUse",
+        "releaseGateClosed",
+        "boardStatePromoted"
+      ],
+      "properties": {
+        "physicalAdapter": {
+          "type": "boolean"
+        },
+        "qualified": {
+          "type": "boolean"
+        },
+        "readyForPhysicalUse": {
+          "type": "boolean"
+        },
+        "releaseGateClosed": {
+          "type": "boolean"
+        },
+        "boardStatePromoted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetBinding",
+        "physicalEvidence",
+        "releaseGate",
+        "promotion"
+      ],
+      "properties": {
+        "targetBinding": {
+          "const": "NONE"
+        },
+        "physicalEvidence": {
+          "const": "NONE"
+        },
+        "releaseGate": {
+          "const": "NONE"
+        },
+        "promotion": {
+          "const": "NONE"
+        }
+      }
+    }
+  }
+}

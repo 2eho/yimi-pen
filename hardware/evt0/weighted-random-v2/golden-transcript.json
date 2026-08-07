@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "profile": "weighted-random-transcript-v2",
+  "algorithmId": "yimi-weighted-random-v2",
+  "hostFixture": true,
+  "physicalEvidence": false,
+  "productionEvidence": false,
+  "algorithm": {
+    "randomWordBits": 64,
+    "weightType": "positive-u32",
+    "minClips": 2,
+    "maxClips": 32,
+    "rejectionRule": "reject rawWord < (2^64 mod totalWeight)",
+    "ticketRule": "acceptedRawWord mod totalWeight",
+    "selectionRule": "first half-open cumulative interval in clip array order"
+  },
+  "scenarios": [
+    {
+      "id": "WR2-REJECTION-2-1",
+      "covers": ["rejection-prefix", "array-order", "two-to-one"],
+      "clips": [
+        { "clipSlot": 7, "weight": 2 },
+        { "clipSlot": 3, "weight": 1 }
+      ],
+      "rawWords": ["0", "1"],
+      "expected": {
+        "selectedIndex": 0,
+        "selectedClipSlot": 7,
+        "totalWeight": "3",
+        "rejectionThreshold": "1",
+        "acceptedRawWord": "1",
+        "ticket": "1",
+        "consumedWords": 2,
+        "acceptedWordCount": "18446744073709551615",
+        "bucketPreimageCount": "6148914691236517205"
+      }
+    },
+    {
+      "id": "WR2-HALF-OPEN-BOUNDARY",
+      "covers": ["half-open-boundary", "non-sorted-slots"],
+      "clips": [
+        { "clipSlot": 7, "weight": 2 },
+        { "clipSlot": 3, "weight": 1 }
+      ],
+      "rawWords": ["2"],
+      "expected": {
+        "selectedIndex": 1,
+        "selectedClipSlot": 3,
+        "totalWeight": "3",
+        "rejectionThreshold": "1",
+        "acceptedRawWord": "2",
+        "ticket": "2",
+        "consumedWords": 1,
+        "acceptedWordCount": "18446744073709551615",
+        "bucketPreimageCount": "6148914691236517205"
+      }
+    },
+    {
+      "id": "WR2-EQUAL-POWER-OF-TWO",
+      "covers": ["equal-weights", "power-of-two", "u64-maximum"],
+      "clips": [
+        { "clipSlot": 9, "weight": 1 },
+        { "clipSlot": 4, "weight": 1 },
+        { "clipSlot": 8, "weight": 1 },
+        { "clipSlot": 1, "weight": 1 }
+      ],
+      "rawWords": ["18446744073709551615"],
+      "expected": {
+        "selectedIndex": 3,
+        "selectedClipSlot": 1,
+        "totalWeight": "4",
+        "rejectionThreshold": "0",
+        "acceptedRawWord": "18446744073709551615",
+        "ticket": "3",
+        "consumedWords": 1,
+        "acceptedWordCount": "18446744073709551616",
+        "bucketPreimageCount": "4611686018427387904"
+      }
+    },
+    {
+      "id": "WR2-U32-MAX-BOUNDARY",
+      "covers": ["u32-weight-maximum", "cumulative-boundary"],
+      "clips": [
+        { "clipSlot": 5, "weight": 4294967295 },
+        { "clipSlot": 6, "weight": 1 }
+      ],
+      "rawWords": ["4294967295"],
+      "expected": {
+        "selectedIndex": 1,
+        "selectedClipSlot": 6,
+        "totalWeight": "4294967296",
+        "rejectionThreshold": "0",
+        "acceptedRawWord": "4294967295",
+        "ticket": "4294967295",
+        "consumedWords": 1,
+        "acceptedWordCount": "18446744073709551616",
+        "bucketPreimageCount": "4294967296"
+      }
+    },
+    {
+      "id": "WR2-MULTI-REJECTION",
+      "covers": ["multiple-rejections", "three-weight-ranges"],
+      "clips": [
+        { "clipSlot": 30, "weight": 1 },
+        { "clipSlot": 10, "weight": 2 },
+        { "clipSlot": 20, "weight": 3 }
+      ],
+      "rawWords": ["0", "1", "2", "3", "4"],
+      "expected": {
+        "selectedIndex": 2,
+        "selectedClipSlot": 20,
+        "totalWeight": "6",
+        "rejectionThreshold": "4",
+        "acceptedRawWord": "4",
+        "ticket": "4",
+        "consumedWords": 5,
+        "acceptedWordCount": "18446744073709551612",
+        "bucketPreimageCount": "3074457345618258602"
+      }
+    },
+    {
+      "id": "WR2-U64-HIGH-EDGE",
+      "covers": ["accepted-high-edge", "non-power-of-two"],
+      "clips": [
+        { "clipSlot": 42, "weight": 1 },
+        { "clipSlot": 2, "weight": 1 },
+        { "clipSlot": 99, "weight": 1 }
+      ],
+      "rawWords": ["18446744073709551615"],
+      "expected": {
+        "selectedIndex": 0,
+        "selectedClipSlot": 42,
+        "totalWeight": "3",
+        "rejectionThreshold": "1",
+        "acceptedRawWord": "18446744073709551615",
+        "ticket": "0",
+        "consumedWords": 1,
+        "acceptedWordCount": "18446744073709551615",
+        "bucketPreimageCount": "6148914691236517205"
+      }
+    }
+  ]
+}

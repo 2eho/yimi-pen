@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/benchmark-seller-evidence-v1.json",
+  "title": "Benchmark seller evidence record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "recordId",
+    "profileId",
+    "purchasePlanItemId",
+    "candidateId",
+    "preparedAt",
+    "sourceRefs",
+    "requestedIdentity",
+    "observedIdentity",
+    "requestTemplate",
+    "request",
+    "response",
+    "rawArtifacts",
+    "requirementResults",
+    "review",
+    "decision",
+    "targetBindingEffect",
+    "adapterEffect",
+    "releaseGateEffect",
+    "purchaseAuthorizationEffect",
+    "purchasePlanEffect",
+    "intakeEffect",
+    "requirements"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "recordKind": { "const": "benchmark-seller-evidence" },
+    "recordId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9-]{2,95}$" },
+    "profileId": { "$ref": "#/$defs/nullableString" },
+    "purchasePlanItemId": {
+      "anyOf": [
+        { "type": "string", "pattern": "^REF[0-9]+$" },
+        { "type": "null" }
+      ]
+    },
+    "candidateId": { "$ref": "#/$defs/nullableString" },
+    "preparedAt": { "$ref": "#/$defs/nullableDateTime" },
+    "sourceRefs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "requestedIdentity": { "$ref": "#/$defs/requestedIdentity" },
+    "observedIdentity": { "$ref": "#/$defs/observedIdentity" },
+    "requestTemplate": { "$ref": "#/$defs/requestTemplate" },
+    "request": { "$ref": "#/$defs/request" },
+    "response": { "$ref": "#/$defs/response" },
+    "rawArtifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "requirementResults": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/requirementResult" }
+    },
+    "review": { "$ref": "#/$defs/review" },
+    "decision": { "$ref": "#/$defs/decision" },
+    "targetBindingEffect": { "const": "NONE_BENCHMARK_ONLY" },
+    "adapterEffect": { "const": "NONE" },
+    "releaseGateEffect": { "const": "NONE" },
+    "purchaseAuthorizationEffect": { "const": "NONE_HUMAN_DECISION_REQUIRED" },
+    "purchasePlanEffect": { "const": "NONE_RECORD_ONLY" },
+    "intakeEffect": { "const": "NONE_UNTIL_RECEIVED_UNIT" },
+    "requirements": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true,
+      "minItems": 1
+    }
+  },
+  "$defs": {
+    "nullableString": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "nullableDateTime": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "stringArray": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "requestedIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["productGeneration", "sourceOrderSku", "bundleCapacityLabel"],
+      "properties": {
+        "productGeneration": { "$ref": "#/$defs/nullableString" },
+        "sourceOrderSku": { "$ref": "#/$defs/nullableString" },
+        "bundleCapacityLabel": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "observedIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "listingUrl",
+        "sellerOrderSku",
+        "skuRelation",
+        "sellerName",
+        "fulfilmentParty",
+        "stockStatement",
+        "productGeneration",
+        "packageBarcode",
+        "productionLotOrDate",
+        "deviceModel",
+        "serialPrefix",
+        "serialSuffix",
+        "bootVersionDisplay",
+        "bundleCapacityLabel",
+        "includedReadableMedia"
+      ],
+      "properties": {
+        "listingUrl": { "$ref": "#/$defs/nullableString" },
+        "sellerOrderSku": { "$ref": "#/$defs/nullableString" },
+        "skuRelation": { "$ref": "#/$defs/nullableString" },
+        "sellerName": { "$ref": "#/$defs/nullableString" },
+        "fulfilmentParty": { "$ref": "#/$defs/nullableString" },
+        "stockStatement": { "$ref": "#/$defs/nullableString" },
+        "productGeneration": { "$ref": "#/$defs/nullableString" },
+        "packageBarcode": { "$ref": "#/$defs/nullableString" },
+        "productionLotOrDate": { "$ref": "#/$defs/nullableString" },
+        "deviceModel": { "$ref": "#/$defs/nullableString" },
+        "serialPrefix": { "$ref": "#/$defs/nullableString" },
+        "serialSuffix": { "$ref": "#/$defs/nullableString" },
+        "bootVersionDisplay": { "$ref": "#/$defs/nullableString" },
+        "bundleCapacityLabel": { "$ref": "#/$defs/nullableString" },
+        "includedReadableMedia": { "$ref": "#/$defs/stringArray" }
+      }
+    },
+    "requestTemplate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {
+          "anyOf": [
+            { "type": "string", "pattern": "^build/benchmark-seller-evidence/[^/]+/SELLER-REQUEST\\.txt$" },
+            { "type": "null" }
+          ]
+        },
+        "bytes": {
+          "anyOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "null" }
+          ]
+        },
+        "sha256": {
+          "anyOf": [
+            { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "sentAt", "channel", "sellerEndpoint", "transportReference", "artifactRefs"],
+      "properties": {
+        "state": { "enum": ["PREPARED_NOT_SENT", "SENT"] },
+        "sentAt": { "$ref": "#/$defs/nullableDateTime" },
+        "channel": {
+          "enum": ["MARKETPLACE_CHAT", "EMAIL", "WEB_FORM", "OTHER_DOCUMENTED_CHANNEL", null]
+        },
+        "sellerEndpoint": { "$ref": "#/$defs/nullableString" },
+        "transportReference": { "$ref": "#/$defs/nullableString" },
+        "artifactRefs": { "$ref": "#/$defs/stringArray" }
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "receivedAt", "senderIdentity", "artifactRefs"],
+      "properties": {
+        "state": { "enum": ["PENDING", "RECEIVED"] },
+        "receivedAt": { "$ref": "#/$defs/nullableDateTime" },
+        "senderIdentity": { "$ref": "#/$defs/nullableString" },
+        "artifactRefs": { "$ref": "#/$defs/stringArray" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "provenance", "path", "bytes", "sha256", "mediaType", "capturedAt", "sourceUrl"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]+$" },
+        "kind": {
+          "enum": [
+            "ORDER_PAGE_CAPTURE",
+            "REQUEST_EXPORT",
+            "SELLER_CHAT_EXPORT",
+            "PACKAGE_PHOTO",
+            "PEN_LABEL_PHOTO",
+            "BOOT_VERSION_PHOTO",
+            "BUNDLE_PHOTO",
+            "SELLER_ORIGINAL_VIDEO",
+            "SELLER_CONFIRMATION_EXPORT",
+            "OTHER_SUPPORTING"
+          ]
+        },
+        "provenance": { "enum": ["SELLER_ORIGINAL", "PLATFORM_EXPORT", "OPERATOR_CAPTURE"] },
+        "path": { "type": "string", "pattern": "^build/benchmark-seller-evidence/[^/]+/raw/[^/]+$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "mediaType": { "type": "string", "minLength": 1 },
+        "capturedAt": { "type": "string", "minLength": 1 },
+        "sourceUrl": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "requirementResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "observedValue", "artifactRefs", "notes"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9_]+$" },
+        "status": { "enum": ["PENDING", "PASS", "FAIL"] },
+        "observedValue": { "$ref": "#/$defs/nullableString" },
+        "artifactRefs": { "$ref": "#/$defs/stringArray" },
+        "notes": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewedAt", "reviewer", "notes"],
+      "properties": {
+        "reviewedAt": { "$ref": "#/$defs/nullableDateTime" },
+        "reviewer": { "$ref": "#/$defs/nullableString" },
+        "notes": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason", "blockers"],
+      "properties": {
+        "status": { "enum": ["EVIDENCE_REQUIRED", "EVIDENCE_COMPLETE_FOR_HUMAN_REVIEW", "REJECTED"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "blockers": { "$ref": "#/$defs/stringArray" }
+      }
+    }
+  }
+}

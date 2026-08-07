@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "actions": [
+    {
+      "actionId": "action-zeta",
+      "playPolicy": "random_one",
+      "clipIds": [
+        "clip-zeta-a",
+        "clip-zeta-b"
+      ],
+      "cooldownMs": 500
+    },
+    {
+      "actionId": "action-alpha",
+      "playPolicy": "replace",
+      "clipIds": [
+        "clip-alpha-a"
+      ],
+      "cooldownMs": 0
+    },
+    {
+      "actionId": "action-mike",
+      "playPolicy": "queue",
+      "clipIds": [
+        "clip-mike-b",
+        "clip-mike-a"
+      ],
+      "cooldownMs": 0
+    }
+  ],
+  "clips": [
+    {
+      "clipId": "clip-zeta-b",
+      "path": "audio/clip-zeta-b.wav",
+      "size": 1,
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "codec": "ORDER_TRAP_FIXTURE",
+      "mediaType": "voice"
+    },
+    {
+      "clipId": "clip-alpha-a",
+      "path": "audio/clip-alpha-a.wav",
+      "size": 1,
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "codec": "ORDER_TRAP_FIXTURE",
+      "mediaType": "voice"
+    },
+    {
+      "clipId": "clip-zeta-a",
+      "path": "audio/clip-zeta-a.wav",
+      "size": 1,
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "codec": "ORDER_TRAP_FIXTURE",
+      "mediaType": "voice"
+    },
+    {
+      "clipId": "clip-mike-a",
+      "path": "audio/clip-mike-a.wav",
+      "size": 1,
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "codec": "ORDER_TRAP_FIXTURE",
+      "mediaType": "narration"
+    },
+    {
+      "clipId": "clip-mike-b",
+      "path": "audio/clip-mike-b.wav",
+      "size": 1,
+      "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "codec": "ORDER_TRAP_FIXTURE",
+      "mediaType": "narration"
+    }
+  ]
+}

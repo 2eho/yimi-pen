@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "base": "golden-result.json",
+  "vectors": [
+    {
+      "id": "TR-NEG-001",
+      "description": "Declared percentile differs from raw samples",
+      "set": {
+        "path": "summary.p95Us",
+        "value": 170000
+      }
+    },
+    {
+      "id": "TR-NEG-002",
+      "description": "Latency endpoints use unsynchronized clocks",
+      "set": {
+        "path": "samples.1.stages.audioStart.clockId",
+        "value": "external-001"
+      }
+    },
+    {
+      "id": "TR-NEG-003",
+      "description": "Raw artifact hash differs from file bytes",
+      "set": {
+        "path": "rawArtifacts.0.sha256",
+        "value": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "id": "TR-NEG-004",
+      "description": "Outcome summary differs from samples",
+      "set": {
+        "path": "summary.wrong",
+        "value": 1
+      }
+    },
+    {
+      "id": "TR-NEG-005",
+      "description": "Acceptance values drift from the catalog",
+      "set": {
+        "path": "acceptance.maxP95Us",
+        "value": 180000
+      }
+    },
+    {
+      "id": "TR-NEG-006",
+      "description": "Request acceptance is presented as audio output timing",
+      "set": {
+        "path": "method.audioStartTimeClass",
+        "value": "request-accepted"
+      }
+    },
+    {
+      "id": "TR-NEG-007",
+      "description": "OID provider queue loss is hidden from the verdict",
+      "set": {
+        "path": "queueEvidence.oid.droppedEvents",
+        "value": 1
+      }
+    }
+  ]
+}

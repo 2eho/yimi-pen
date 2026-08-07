@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/snapshot-execution-transcript-v1.json",
+  "title": "Yimi Snapshot execution transcript v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "sourceProfile",
+    "fixtureOnly",
+    "physicalEvidence",
+    "hostSurrogateFormula",
+    "physicalMap",
+    "taps"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "profile": {
+      "const": "snapshot-execution-transcript-v1"
+    },
+    "sourceProfile": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "fixtureOnly": {
+      "const": true
+    },
+    "physicalEvidence": {
+      "const": false
+    },
+    "hostSurrogateFormula": {
+      "const": "9000000000000000 + logical OID numeric suffix; NOT AN OID CODE"
+    },
+    "physicalMap": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "logicalOid",
+          "physicalCode"
+        ],
+        "properties": {
+          "logicalOid": {
+            "$ref": "#/$defs/logicalOid"
+          },
+          "physicalCode": {
+            "$ref": "#/$defs/u64"
+          }
+        }
+      }
+    },
+    "taps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "status",
+          "physicalCode",
+          "eventAtUs",
+          "randomIndex",
+          "expected"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^TAP-[A-Z0-9-]{2,31}$"
+          },
+          "status": {
+            "enum": [
+              "valid",
+              "low-quality",
+              "no-code",
+              "sensor-fault"
+            ]
+          },
+          "physicalCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/$defs/u64"
+              }
+            ]
+          },
+          "eventAtUs": {
+            "$ref": "#/$defs/u64"
+          },
+          "randomIndex": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/$defs/slot"
+              }
+            ]
+          },
+          "expected": {
+            "$ref": "#/$defs/expected"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "valid"
+                }
+              },
+              "required": [
+                "status"
+              ]
+            },
+            "then": {
+              "properties": {
+                "physicalCode": {
+                  "$ref": "#/$defs/u64"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "enum": [
+                    "no-code",
+                    "sensor-fault"
+                  ]
+                }
+              },
+              "required": [
+                "status"
+              ]
+            },
+            "then": {
+              "properties": {
+                "physicalCode": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "u64": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,19})$"
+    },
+    "slot": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "logicalOid": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]{2,63}$"
+    },
+    "actionKey": {
+      "type": "string",
+      "pattern": "^action-[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "clipKey": {
+      "type": "string",
+      "pattern": "^clip-[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "playPolicy": {
+      "enum": [
+        "replace",
+        "queue",
+        "random_one"
+      ]
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "actionKey",
+        "actionSlot",
+        "playPolicy",
+        "clipKeys"
+      ],
+      "properties": {
+        "decision": {
+          "enum": [
+            "ignore-invalid",
+            "suppress-cooldown",
+            "unbound",
+            "play"
+          ]
+        },
+        "actionKey": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/actionKey"
+            }
+          ]
+        },
+        "actionSlot": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/slot"
+            }
+          ]
+        },
+        "playPolicy": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/playPolicy"
+            }
+          ]
+        },
+        "clipKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/clipKey"
+          }
+        }
+      }
+    }
+  }
+}

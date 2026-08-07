@@ -1,0 +1,12 @@
+[package]
+name = "yimi-fw-contract"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Target-neutral no_std contracts for Yimi Pen firmware"
+
+[lints]
+workspace = true
+

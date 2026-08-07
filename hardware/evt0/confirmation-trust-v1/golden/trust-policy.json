@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "profile": "confirmation-trust-policy-v1",
+  "policyId": "policy:sha256:4ff61fe05afc95b297c9e9f5cc668c28afdb67ef06e34b05267c937738089134",
+  "fixtureOnly": true,
+  "providerId": "confirmation-trust-provider",
+  "signatureProfile": "Ed25519+JCS-prefix-v1",
+  "algorithm": "Ed25519",
+  "purpose": "snapshot-build",
+  "audience": "yimi-family-alpha-compiler",
+  "maxChallengeLifetimeSeconds": 900,
+  "maxProofLifetimeSeconds": 300,
+  "clockSkewSeconds": 30,
+  "keyring": [
+    {
+      "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k",
+      "algorithm": "Ed25519",
+      "publicJwk": {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "x": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+      },
+      "state": "active",
+      "notBefore": "2026-01-01T00:00:00Z",
+      "signUntil": "2027-01-01T00:00:00Z",
+      "verifyUntil": "2028-01-01T00:00:00Z"
+    }
+  ],
+  "authorities": [
+    {
+      "authorityRevisionId": "authority-revision:sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "guardianSubjectRef": "guardian:sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "familyLibraryId": "family-alpha-golden",
+      "role": "parent",
+      "state": "active",
+      "validFrom": "2026-01-01T00:00:00Z",
+      "authorizeUntil": "2027-01-01T00:00:00Z",
+      "verifyUntil": "2028-01-01T00:00:00Z"
+    }
+  ]
+}

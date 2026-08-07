@@ -1,0 +1,23 @@
+# Capsule: family-repository-v1
+
+- Date: 2026-08-03
+- Project: yimi-pen
+- Memory ID: family-repository-v1
+- Memory class: durable-fact
+- Scope: target-neutral FamilyRevision、FamilyRepository 与构建计划边界
+- Aliases/keywords: FamilyRevision, FamilyRepository, BuildPlan, BuildRequest, BuildAuthorization, EventCursor, append-only restore, revision CAS
+- Wake-up route: `index.md` -> `family-repository-v1`
+- Version: v1
+- Phase/mode: scoped-build
+- Module: `contracts/family-revision-v1.mjs`、`contracts/family-build-plan-v1.mjs`、`hardware/evt0/family-repository-v1/`、`tools/family-repository/`、`tools/family-build-adapter/`
+- Question: 如何让家庭长期事实不受板卡、codec、路径、确认方式和存储实现变化影响。
+- Baseline: FamilyRevision 只保存家庭内容语义；confirmation-free BuildPlan 保存单次 target/profile/map/asset 投影；BuildAuthorization 只授权一个 BuildSubject。旧 BuildRequest v1 保留 fixture 字节兼容，不再承载新的 release 语义。
+- Repository semantics: append-only revision graph、active-head CAS、repository/family scope、逐 binding revision、epoch EventCursor、operation replay、backup/restore/recovery；正常 restore 只移动 head，不删除较新 revision；portable restore 只接收全新空库并为新 replica 旋转 epoch。
+- Adapter boundary: Memory 与 Atomic JSON 跑同一 16 步 transcript；后续 SQLite/产品数据库只实现 port，不复制领域用例。FamilyRevision + BuildPlan 到既有 Alpha draft 逐字节一致。
+- Evidence: repository Memory/Atomic transcript 各16/16，Atomic边界13/13，核心边界14/14；portable restore证明源/恢复 `(epoch, sequence)` 不冲突且响应丢失可重放。build adapter 23/23负向与零副作用，报告 SHA-256 `5edf4e3c45c0c276fd9b5a4a09c1f9f3e236ef92aef0bf0ecdb5b62ab6715aa9`；repository报告 SHA-256 `96433369a8bad64742c53699a259313e3fc738a2609315a3f9828312443b019f`。
+- Rejected hypotheses: 把 CompileDraftProjection 当长期数据库；把 target/physical code/codec/path/confirmation 回写 FamilyRevision；为每种存储复制用例；恢复时删除 revision；继续向 BuildRequest v1 单 receipt 字段增加生产语义。
+- Stable behavior: 旧 Alpha draft 投影字节与仓库 transcript 保持；换存储只换 adapter，换板卡只生成新 BuildPlan，不改 FamilyRevision 模型。
+- Regression guards: revision/build identity漂移、confirmation回填BuildPlan、伪造legacy receipt、scope/CAS/epoch冲突、portable restore 非空目标和失败写入均保持零副作用。
+- Judgment: 家庭事实与构建计划 host 合同已关闭；产品数据库崩溃/多进程证据和生产确认信任由独立门持有。
+- Next step: 产品数据库出现第二个真实消费者时实现同一 Repository/Replay port；当前本地候选是 companion 真实录音/播放 callback，不先建立 SQLite。
+- Links: `../../../hardware/evt0/family-repository-v1/README.md`、`../../family-alpha-v1.md`、`../../confirmation-trust-v1.md`

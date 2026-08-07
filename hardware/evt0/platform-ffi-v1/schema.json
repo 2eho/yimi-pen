@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/platform-ffi-v1-golden-vectors.schema.json",
+  "title": "Yimi platform FFI v1 golden vectors",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contract",
+    "fixtureOnly",
+    "expectedInfo",
+    "oidVectors",
+    "audioVectors",
+    "storageVectors",
+    "transportVectors"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contract": { "const": "yimi-platform-ffi-v1" },
+    "fixtureOnly": { "const": true },
+    "expectedInfo": { "$ref": "#/$defs/platformInfo" },
+    "oidVectors": {
+      "type": "array",
+      "minItems": 6,
+      "items": { "$ref": "#/$defs/oidVector" }
+    },
+    "audioVectors": {
+      "type": "array",
+      "minItems": 8,
+      "items": { "$ref": "#/$defs/audioVector" }
+    },
+    "storageVectors": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "$ref": "#/$defs/storageVector" }
+    },
+    "transportVectors": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/transportVector" }
+    }
+  },
+  "$defs": {
+    "u64": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "nullableU64": {
+      "oneOf": [
+        { "$ref": "#/$defs/u64" },
+        { "type": "null" }
+      ]
+    },
+    "nullableQuality": {
+      "oneOf": [
+        { "type": "integer", "minimum": 0, "maximum": 65535 },
+        { "type": "null" }
+      ]
+    },
+    "hexBytes": { "type": "string", "pattern": "^(?:[0-9a-f]{2})*$" },
+    "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9-]{2,63}$" },
+    "platformInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "abiVersion",
+        "infoSize",
+        "oidEventSize",
+        "audioEventSize",
+        "capabilityBits",
+        "maxPathBytes",
+        "transportMtu",
+        "audioStartTimeClass",
+        "oidQueueStatsSize",
+        "storageWriteAlignment",
+        "storageMaxTransfer",
+        "storageAtomicWriteBytes",
+        "audioQueueStatsSize"
+      ],
+      "properties": {
+        "abiVersion": { "const": 1 },
+        "infoSize": { "const": 56 },
+        "oidEventSize": { "const": 48 },
+        "audioEventSize": { "const": 32 },
+        "capabilityBits": { "const": "31" },
+        "maxPathBytes": { "const": 240 },
+        "transportMtu": { "const": 1024 },
+        "audioStartTimeClass": { "const": 0 },
+        "oidQueueStatsSize": { "const": 16 },
+        "storageWriteAlignment": { "const": 1 },
+        "storageMaxTransfer": { "const": 4096 },
+        "storageAtomicWriteBytes": { "const": 1 },
+        "audioQueueStatsSize": { "const": 16 }
+      }
+    },
+    "rawOid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "physicalCode",
+        "eventAtUs",
+        "sensorAtUs",
+        "readyAtUs",
+        "sequence",
+        "droppedEvents",
+        "quality",
+        "status",
+        "flags",
+        "reserved0"
+      ],
+      "properties": {
+        "physicalCode": { "$ref": "#/$defs/u64" },
+        "eventAtUs": { "$ref": "#/$defs/u64" },
+        "sensorAtUs": { "$ref": "#/$defs/u64" },
+        "readyAtUs": { "$ref": "#/$defs/u64" },
+        "sequence": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "droppedEvents": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "quality": { "type": "integer", "minimum": 0, "maximum": 65535 },
+        "status": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "flags": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "reserved0": { "type": "integer", "minimum": 0, "maximum": 4294967295 }
+      }
+    },
+    "normalizedOid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "physicalCode",
+        "eventAtUs",
+        "sensorAtUs",
+        "readyAtUs",
+        "quality",
+        "status",
+        "sequence",
+        "droppedEvents"
+      ],
+      "properties": {
+        "physicalCode": { "$ref": "#/$defs/nullableU64" },
+        "eventAtUs": { "$ref": "#/$defs/u64" },
+        "sensorAtUs": { "$ref": "#/$defs/nullableU64" },
+        "readyAtUs": { "$ref": "#/$defs/nullableU64" },
+        "quality": { "$ref": "#/$defs/nullableQuality" },
+        "status": { "enum": ["valid", "low-quality", "no-code", "sensor-fault"] },
+        "sequence": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "droppedEvents": { "type": "integer", "minimum": 0, "maximum": 4294967295 }
+      }
+    },
+    "oidVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "raw", "expected", "expectedError"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "raw": { "$ref": "#/$defs/rawOid" },
+        "expected": {
+          "oneOf": [
+            { "$ref": "#/$defs/normalizedOid" },
+            { "type": "null" }
+          ]
+        },
+        "expectedError": {
+          "oneOf": [
+            { "const": "provider-violation" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "expected": { "$ref": "#/$defs/normalizedOid" },
+            "expectedError": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "expected": { "type": "null" },
+            "expectedError": { "const": "provider-violation" }
+          }
+        }
+      ]
+    },
+    "audioVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "requestId", "expectedStatus"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "path": { "type": "string", "minLength": 1, "maxLength": 260 },
+        "requestId": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "expectedStatus": { "enum": ["ok", "invalid-argument"] }
+      }
+    },
+    "storageVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "offset", "hex", "expectedStatus"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "offset": { "$ref": "#/$defs/u64" },
+        "hex": { "$ref": "#/$defs/hexBytes" },
+        "expectedStatus": { "enum": ["ok", "invalid-argument"] }
+      }
+    },
+    "transportVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "direction", "hex"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "direction": { "enum": ["host-to-device", "device-to-host"] },
+        "hex": { "$ref": "#/$defs/hexBytes" }
+      }
+    }
+  }
+}

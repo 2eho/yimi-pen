@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "profile": "family-repository-conformance-v1",
+  "revisions": {
+    "r1": "golden/family-revision.json",
+    "r2": "golden/family-revision-2.json",
+    "r3": "golden/family-revision-3.json"
+  },
+  "steps": [
+    {
+      "id": "FR-01",
+      "op": "open",
+      "args": {},
+      "expected": { "status": "empty", "headRevision": null }
+    },
+    {
+      "id": "FR-02",
+      "op": "commit",
+      "args": {
+        "operationId": "OP-COMMIT-R1",
+        "revision": "r1",
+        "expectedHeadRevision": null,
+        "at": "2026-08-03T00:06:00Z"
+      },
+      "expected": { "status": "committed", "headRevision": "r1" }
+    },
+    {
+      "id": "FR-03",
+      "op": "load-revision",
+      "args": { "revision": "r1" },
+      "expected": { "found": true, "headRevision": "r1" }
+    },
+    {
+      "id": "FR-04",
+      "op": "commit",
+      "args": {
+        "operationId": "OP-STALE-R2",
+        "revision": "r2",
+        "expectedHeadRevision": null,
+        "at": "2026-08-03T00:11:00Z"
+      },
+      "expected": { "error": "STALE_HEAD", "headRevision": "r1", "zeroSideEffect": true }
+    },
+    {
+      "id": "FR-05",
+      "op": "commit",
+      "args": {
+        "operationId": "OP-COMMIT-R2",
+        "revision": "r2",
+        "expectedHeadRevision": "r1",
+        "at": "2026-08-03T00:11:00Z"
+      },
+      "expected": { "status": "committed", "headRevision": "r2" }
+    },
+    {
+      "id": "FR-06",
+      "op": "commit",
+      "args": {
+        "operationId": "OP-COMMIT-R2",
+        "revision": "r2",
+        "expectedHeadRevision": "r1",
+        "at": "2026-08-03T00:11:00Z"
+      },
+      "expected": { "status": "replayed", "headRevision": "r2", "zeroSideEffect": true }
+    },
+    {
+      "id": "FR-07",
+      "op": "commit",
+      "args": {
+        "operationId": "OP-COMMIT-R2",
+        "revision": "r3",
+        "expectedHeadRevision": "r2",
+        "at": "2026-08-03T00:21:00Z"
+      },
+      "expected": { "error": "OPERATION_CONFLICT", "headRevision": "r2", "zeroSideEffect": true }
+    },
+    {
+      "id": "FR-08",
+      "op": "backup",
+      "args": { "backup": "b1", "createdAt": "2026-08-03T00:15:00Z" },
+      "expected": { "status": "backed-up", "headRevision": "r2", "zeroSideEffect": true }
+    },
+    {
+      "id": "FR-09",
+      "op": "commit",
+      "args": {
+        "operationId": "OP-COMMIT-R3",
+        "revision": "r3",
+        "expectedHeadRevision": "r2",
+        "at": "2026-08-03T00:21:00Z"
+      },
+      "expected": { "status": "committed", "headRevision": "r3" }
+    },
+    {
+      "id": "FR-10",
+      "op": "restore",
+      "args": {
+        "operationId": "OP-RESTORE-B1",
+        "backup": "b1",
+        "expectedHeadRevision": "r3",
+        "at": "2026-08-03T00:30:00Z"
+      },
+      "expected": { "status": "restored", "headRevision": "r2" }
+    },
+    {
+      "id": "FR-11",
+      "op": "restore",
+      "args": {
+        "operationId": "OP-RESTORE-B1",
+        "backup": "b1",
+        "expectedHeadRevision": "r3",
+        "at": "2026-08-03T00:30:00Z"
+      },
+      "expected": { "status": "replayed", "headRevision": "r2", "zeroSideEffect": true }
+    },
+    {
+      "id": "FR-12",
+      "op": "restore",
+      "args": {
+        "operationId": "OP-STALE-RESTORE",
+        "backup": "b1",
+        "expectedHeadRevision": "r3",
+        "at": "2026-08-03T00:31:00Z"
+      },
+      "expected": { "error": "STALE_HEAD", "headRevision": "r2", "zeroSideEffect": true }
+    },
+    {
+      "id": "FR-13",
+      "op": "load-revision",
+      "args": { "revision": "r3" },
+      "expected": { "found": true, "headRevision": "r2" }
+    },
+    {
+      "id": "FR-14",
+      "op": "read-outbox",
+      "args": {},
+      "expected": { "outboxCount": 4, "headRevision": "r2", "zeroSideEffect": true }
+    },
+    {
+      "id": "FR-15",
+      "op": "reopen",
+      "args": {},
+      "expected": { "status": "ready", "headRevision": "r2", "zeroSideEffect": true }
+    },
+    {
+      "id": "FR-16",
+      "op": "commit",
+      "args": {
+        "operationId": "OP-COMMIT-R3",
+        "revision": "r3",
+        "expectedHeadRevision": "r2",
+        "at": "2026-08-03T00:21:00Z"
+      },
+      "expected": {
+        "status": "replayed",
+        "headRevision": "r2",
+        "operationOutcomeHeadRevision": "r3",
+        "superseded": true,
+        "zeroSideEffect": true
+      }
+    }
+  ]
+}

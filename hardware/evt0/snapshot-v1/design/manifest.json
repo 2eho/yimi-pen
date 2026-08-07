@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "releaseState": "design-fixture",
+  "snapshotId": "design:yimi-evt0-golden-24-v0.1.0",
+  "contentRevision": "yimi-evt0-golden-24@0.1.0",
+  "createdAt": "2026-08-03T03:25:15+08:00",
+  "producer": {
+    "name": "yimi-product-baseline",
+    "version": "0.1.0"
+  },
+  "target": {
+    "boardTarget": "UNFROZEN",
+    "firmwareMin": "UNFROZEN",
+    "physicalMapStatus": "unassigned",
+    "capabilities": [
+      "oid-map:logical-only",
+      "snapshot:staged-atomic",
+      "audio:board-negotiated"
+    ]
+  },
+  "oidIndex": {
+    "path": "logical-index.json",
+    "size": 2697,
+    "sha256": "2de9d4a452806a7a0cbde165b6947e21c93bae95e2b6edf3da18d05b6442ff6a",
+    "entryCount": 24
+  },
+  "actions": {
+    "path": "actions.json",
+    "size": 5571,
+    "sha256": "b6452f9a8e4ef05375a319c3ac14a9999e4aa849a246d78907e731ce9303e1b4",
+    "actionCount": 24
+  },
+  "files": [
+    {
+      "path": "logical-index.json",
+      "size": 2697,
+      "sha256": "2de9d4a452806a7a0cbde165b6947e21c93bae95e2b6edf3da18d05b6442ff6a",
+      "role": "oid-index"
+    },
+    {
+      "path": "actions.json",
+      "size": 5571,
+      "sha256": "b6452f9a8e4ef05375a319c3ac14a9999e4aa849a246d78907e731ce9303e1b4",
+      "role": "actions"
+    }
+  ],
+  "install": {
+    "activationMode": "staged-atomic",
+    "requiredBytes": 9767,
+    "lastGoodRequired": true
+  },
+  "evidenceRefs": [
+    "docs/system-concept.md",
+    "docs/product-slice-evt0.md",
+    "docs/research/product-system-evidence-2026.md"
+  ]
+}

@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "evt0-test-fixture-profile",
+  "profileId": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1",
+  "revision": "1.0.0",
+  "status": "RECOMMENDED",
+  "boardTargetState": "UNRESOLVED",
+  "topologyRef": {
+    "path": "hardware/evt0/hardware-system-v1/topology.json",
+    "sha256": "98a87a1de9ee8dfa52ec68ebd00afbbf23fa3c18e0c2a75e34ba09da4a9c4e5f",
+    "topologyId": "hwt:sha256:98a87a1de9ee8dfa52ec68ebd00afbbf23fa3c18e0c2a75e34ba09da4a9c4e5f"
+  },
+  "targetBindingRef": {
+    "path": "hardware/evt0/hardware-system-v1/target-binding.json",
+    "sha256": "ccb6efefadc6b438646c69160bc882229465b3639c130aa044a08330de35e202",
+    "identity": "hardware-system-target-binding-v1"
+  },
+  "ownerRefs": {
+    "methodCatalog": {
+      "path": "hardware/evt0/lab-v1/method-catalog.json",
+      "sha256": "dbd51a9ff845070b6432015f6a68d6577121871c938afb0705290c21a9343aba",
+      "identity": "EVT0-LAB-METHODS-V1"
+    },
+    "registrationPlan": {
+      "path": "hardware/evt0/lab-v1/registration-capture-plan.json",
+      "sha256": "6358840bf2bfb8280e6a7df593b9c2c83617c6e9593ce659cff3211f7bbb05de",
+      "identity": "EVT0-LAB-REGISTRATION-CAPTURE-V1"
+    },
+    "instrumentRegistrySchema": {
+      "path": "hardware/evt0/lab-v1/instrument-registry.schema.json",
+      "sha256": "64286d233372c8609bb38c18aaec4c314fa74ffdeafafdd475895bd00c83eb51",
+      "identity": "https://yimi.local/schemas/evt0-lab-instrument-registry-v1.json"
+    },
+    "labSessionTemplate": {
+      "path": "hardware/evt0/lab-v1/session.template.json",
+      "sha256": "e98f1e545a1192f0ea84cb05e72fa35d6ca50d8441bd06ac0166b4c4660b10f5",
+      "identity": "EVT0-LAB-SESSION-TEMPLATE-V1"
+    },
+    "testResultSchema": {
+      "path": "hardware/evt0/test-result-v1/schema.json",
+      "sha256": "1b05c0d36be60133976785ae97b2666307852c9bc7129f1e66b49a77b793d6c4",
+      "identity": "https://yimi.local/schemas/test-result-v1.json"
+    },
+    "evidenceCaptureProfile": {
+      "path": "hardware/evt0/evidence-capture-v1/profile.json",
+      "sha256": "b3fc802d6b94e830f7db6b1776120fb76bce5dcfc511b37acfc757c37d66a0f1",
+      "identity": "HW-EVIDENCE-CAPTURE-ADAPTER-V1"
+    },
+    "releaseGateCatalog": {
+      "path": "hardware/evt0/release-gates-v1/catalog.json",
+      "sha256": "a57777a0e9cb6487de00c91c8c45317eeb700ebcc279b84fcce9d9b9e5d31561",
+      "identity": "rgc:sha256:0fcab5f025687078ebe3f834721164602c6c756d37ef02f5b3943ddd782e5d7b"
+    }
+  },
+  "capabilities": [
+    {
+      "id": "CAP-FIXTURE-EVIDENCE-ANCHOR",
+      "role": "CROSS_CUTTING",
+      "status": "RECOMMENDED",
+      "description": "Stable profile, instance, method, instrument, selftest, session and raw-evidence identity envelope without owning target facts.",
+      "interfaceRefs": [
+        "IF-DIAGNOSTIC"
+      ],
+      "methodRefs": [
+        "LAB-SETUP-001"
+      ],
+      "instrumentSlotRefs": [
+        "PSU-01",
+        "DMM-01",
+        "MECH-01",
+        "MACRO-01",
+        "USBPWR-01",
+        "SPL-01"
+      ],
+      "assetKindRefs": [
+        "BENCH_SUPPLY",
+        "MULTIMETER",
+        "CALIPER",
+        "SCALE",
+        "MACRO_CAMERA",
+        "USB_C_POWER_METER",
+        "SOUND_LEVEL_METER"
+      ],
+      "releaseGateRefs": [
+        "RG-HOST-EVT0-INTAKE-CONTRACT-PASSED"
+      ],
+      "coverage": {
+        "interfaceRole": "CROSS_CUTTING",
+        "methodState": "READY_NOW",
+        "instrumentState": "COVERED",
+        "notes": [
+          "Cross-cutting evidence identity only; it is excluded from the seven-family interface partition.",
+          "Selftest and capture effects are non-promoting."
+        ]
+      }
+    },
+    {
+      "id": "CAP-OPTICAL-PRESENTATION-DATUM",
+      "role": "OPERATIONAL",
+      "status": "RECOMMENDED",
+      "description": "Repeatable printed-code presentation, head datum and optical observation seam; target working values remain unresolved.",
+      "interfaceRefs": [
+        "IF-OID-OPTICAL",
+        "IF-HEAD-MECHANICAL"
+      ],
+      "methodRefs": [
+        "MECH-INTAKE-001",
+        "OID-OPTICS-INTAKE-001"
+      ],
+      "instrumentSlotRefs": [
+        "MECH-01",
+        "MACRO-01"
+      ],
+      "assetKindRefs": [
+        "CALIPER",
+        "SCALE",
+        "MACRO_CAMERA"
+      ],
+      "releaseGateRefs": [
+        "RG-OID-CODE-TOOL-FROZEN",
+        "RG-OID-PHYSICAL-MAP-ASSIGNED",
+        "RG-OID-TWO-HEAD-TWO-PRINT-MATRIX-PASSED",
+        "RG-BOARD-TARGET-FROZEN",
+        "RG-TARGET-FORM-RELIABILITY-PASSED"
+      ],
+      "coverage": {
+        "interfaceRole": "OPERATIONAL",
+        "methodState": "READY_NOW",
+        "instrumentState": "COVERED",
+        "notes": [
+          "Observations use existing intake methods; no fixture geometry or target optical values are invented."
+        ]
+      }
+    },
+    {
+      "id": "CAP-OID-EVENT-TIMING-OBSERVATION",
+      "role": "OPERATIONAL",
+      "status": "RECOMMENDED",
+      "description": "OID startup, event reception, sequence, drop count, clock synchronization and raw trace observation seam.",
+      "interfaceRefs": [
+        "IF-OID-EVENT"
+      ],
+      "methodRefs": [
+        "PWR-BOARD-BOOT-001",
+        "OID-FUNCTION-001"
+      ],
+      "instrumentSlotRefs": [
+        "PSU-01",
+        "DMM-01",
+        "USBPWR-01",
+        "MACRO-01"
+      ],
+      "assetKindRefs": [
+        "BENCH_SUPPLY",
+        "MULTIMETER",
+        "MACRO_CAMERA",
+        "USB_C_POWER_METER"
+      ],
+      "releaseGateRefs": [
+        "RG-BOARD-TARGET-FROZEN",
+        "RG-OID-TWO-HEAD-TWO-PRINT-MATRIX-PASSED",
+        "RG-POINT-READ-LATENCY-PASSED"
+      ],
+      "coverage": {
+        "interfaceRole": "OPERATIONAL",
+        "methodState": "READY_NOW",
+        "instrumentState": "COVERED",
+        "notes": [
+          "Exact event transport and electrical values remain target evidence, not profile facts."
+        ]
+      }
+    },
+    {
+      "id": "CAP-POWER-SAFE-INJECTION",
+      "role": "OPERATIONAL",
+      "status": "RECOMMENDED",
+      "description": "Abstract controlled supply, current limiting, charge/battery observation and raw time-series seam.",
+      "interfaceRefs": [
+        "IF-USB-POWER",
+        "IF-BATTERY-POWER",
+        "IF-BOARD-POWER",
+        "IF-AUDIO-POWER"
+      ],
+      "methodRefs": [
+        "USB-POWER-INTAKE-001",
+        "PWR-BOARD-BOOT-001",
+        "TARGET-BATTERY-001"
+      ],
+      "instrumentSlotRefs": [
+        "PSU-01",
+        "DMM-01",
+        "USBPWR-01"
+      ],
+      "assetKindRefs": [
+        "BENCH_SUPPLY",
+        "MULTIMETER",
+        "USB_C_POWER_METER"
+      ],
+      "releaseGateRefs": [
+        "RG-BOARD-SUPPLY-VERIFIED",
+        "RG-TARGET-STORAGE-DURABILITY-PASSED",
+        "RG-TARGET-AUDIO-PROFILE-VERIFIED",
+        "RG-TARGET-FORM-RELIABILITY-PASSED"
+      ],
+      "coverage": {
+        "interfaceRole": "OPERATIONAL",
+        "methodState": "READY_NOW",
+        "instrumentState": "COVERED",
+        "notes": [
+          "The existing methods provide controlled observation inputs; they do not authorize pre-target rail values."
+        ]
+      }
+    },
+    {
+      "id": "CAP-CONTENT-STORAGE-OFFLINE",
+      "role": "OPERATIONAL",
+      "status": "PARTIAL_COVERAGE",
+      "description": "Offline content state, storage references and power-loss/recovery raw-evidence attachment seam.",
+      "interfaceRefs": [
+        "IF-STORAGE",
+        "IF-WIRELESS"
+      ],
+      "methodRefs": [
+        "OID-FUNCTION-001"
+      ],
+      "instrumentSlotRefs": [
+        "DMM-01",
+        "MACRO-01"
+      ],
+      "assetKindRefs": [
+        "MULTIMETER",
+        "MACRO_CAMERA"
+      ],
+      "releaseGateRefs": [
+        "RG-TARGET-STORAGE-DURABILITY-PASSED",
+        "RG-OFFLINE-POINT-READ-PASSED"
+      ],
+      "coverage": {
+        "interfaceRole": "OPERATIONAL",
+        "methodState": "PARTIAL_COVERAGE",
+        "instrumentState": "COVERED",
+        "notes": [
+          "Offline functional evidence is available through OID-FUNCTION-001.",
+          "Storage power-loss durability has no dedicated existing lab method and remains an explicit gap."
+        ]
+      }
+    },
+    {
+      "id": "CAP-USB-DATA-TRANSPORT",
+      "role": "OPERATIONAL",
+      "status": "PENDING_METHOD_COVERAGE",
+      "description": "Target-neutral host data boundary, transaction/stream trace and transport evidence attachment seam.",
+      "interfaceRefs": [
+        "IF-USB-DATA",
+        "IF-USB-MECHANICAL"
+      ],
+      "methodRefs": [],
+      "instrumentSlotRefs": [],
+      "assetKindRefs": [],
+      "releaseGateRefs": [
+        "RG-DEVICELINK-PHYSICAL-TRANSPORT-PASSED",
+        "RG-BOARD-TARGET-FROZEN",
+        "RG-TARGET-FORM-RELIABILITY-PASSED"
+      ],
+      "coverage": {
+        "interfaceRole": "OPERATIONAL",
+        "methodState": "PENDING_METHOD_COVERAGE",
+        "instrumentState": "NONE_EXISTING_SLOT",
+        "notes": [
+          "IF-USB-DATA has no dedicated existing lab method or instrument slot; the gap is not masked by a synthetic method.",
+          "Data mode, framing, pins, connector and pogo placement remain pending target evidence."
+        ]
+      }
+    },
+    {
+      "id": "CAP-AUDIO-ACOUSTIC-OBSERVATION",
+      "role": "OPERATIONAL",
+      "status": "RECOMMENDED",
+      "description": "Audio request, observable output start, acoustic measurement and raw evidence attachment seam.",
+      "interfaceRefs": [
+        "IF-AUDIO-SIGNAL",
+        "IF-AUDIO-ACOUSTIC"
+      ],
+      "methodRefs": [
+        "AUD-REFERENCE-001",
+        "TARGET-ACOUSTIC-001"
+      ],
+      "instrumentSlotRefs": [
+        "SPL-01",
+        "USBPWR-01"
+      ],
+      "assetKindRefs": [
+        "SOUND_LEVEL_METER",
+        "USB_C_POWER_METER"
+      ],
+      "releaseGateRefs": [
+        "RG-POINT-READ-LATENCY-PASSED",
+        "RG-TARGET-AUDIO-PROFILE-VERIFIED",
+        "RG-TARGET-FORM-RELIABILITY-PASSED"
+      ],
+      "coverage": {
+        "interfaceRole": "OPERATIONAL",
+        "methodState": "READY_NOW",
+        "instrumentState": "COVERED",
+        "notes": [
+          "Competitor reference and target acoustic methods remain separate owners and separate evidence states."
+        ]
+      }
+    },
+    {
+      "id": "CAP-CONTROL-STATUS-DIAGNOSTIC-HIL",
+      "role": "OPERATIONAL",
+      "status": "PARTIAL_COVERAGE",
+      "description": "Control/status events, diagnostic build/flash/log and HIL attachment seam without owning firmware or pin definitions.",
+      "interfaceRefs": [
+        "IF-CONTROL",
+        "IF-STATUS",
+        "IF-DIAGNOSTIC",
+        "IF-BOARD-MECHANICAL",
+        "IF-USER-IO-MECHANICAL"
+      ],
+      "methodRefs": [
+        "LAB-SETUP-001",
+        "PWR-BOARD-BOOT-001",
+        "OID-FUNCTION-001"
+      ],
+      "instrumentSlotRefs": [
+        "PSU-01",
+        "DMM-01",
+        "MACRO-01",
+        "USBPWR-01"
+      ],
+      "assetKindRefs": [
+        "BENCH_SUPPLY",
+        "MULTIMETER",
+        "MACRO_CAMERA",
+        "USB_C_POWER_METER"
+      ],
+      "releaseGateRefs": [
+        "RG-C-RUST-DIFFERENTIAL-PASSED",
+        "RG-PLATFORM-ABI-HIL-PASSED",
+        "RG-TARGET-TOOLCHAIN-SEALED",
+        "RG-TWO-BOARD-PORT-HIL-PASSED",
+        "RG-TARGET-FORM-RELIABILITY-PASSED"
+      ],
+      "coverage": {
+        "interfaceRole": "OPERATIONAL",
+        "methodState": "PARTIAL_COVERAGE",
+        "instrumentState": "COVERED",
+        "notes": [
+          "Existing methods cover setup, boot and basic functional evidence only.",
+          "Control/status has no dedicated existing method; diagnostic and mechanical claims remain target-dependent."
+        ]
+      }
+    }
+  ],
+  "coverageGaps": [
+    {
+      "id": "GAP-IF-USB-DATA-METHOD",
+      "interfaceRefs": [
+        "IF-USB-DATA"
+      ],
+      "state": "PENDING_METHOD_COVERAGE",
+      "methodRefs": [],
+      "instrumentSlotRefs": [],
+      "reason": "IF-USB-DATA has no dedicated method or lab instrument slot in the existing owner catalog.",
+      "nextOwner": "hardware/evt0/lab-v1/method-catalog.json"
+    },
+    {
+      "id": "GAP-IF-STORAGE-POWER-LOSS-METHOD",
+      "interfaceRefs": [
+        "IF-STORAGE"
+      ],
+      "state": "PARTIAL_COVERAGE",
+      "methodRefs": [
+        "OID-FUNCTION-001"
+      ],
+      "instrumentSlotRefs": [
+        "DMM-01",
+        "MACRO-01"
+      ],
+      "reason": "Offline functional observation exists, but storage power-loss durability has no dedicated existing method.",
+      "nextOwner": "hardware/evt0/lab-v1/method-catalog.json"
+    },
+    {
+      "id": "GAP-IF-CONTROL-STATUS-METHOD",
+      "interfaceRefs": [
+        "IF-CONTROL",
+        "IF-STATUS"
+      ],
+      "state": "PARTIAL_COVERAGE",
+      "methodRefs": [
+        "LAB-SETUP-001",
+        "PWR-BOARD-BOOT-001",
+        "OID-FUNCTION-001"
+      ],
+      "instrumentSlotRefs": [
+        "PSU-01",
+        "DMM-01",
+        "MACRO-01",
+        "USBPWR-01"
+      ],
+      "reason": "Setup, boot and basic function are available, but control/status has no dedicated existing method.",
+      "nextOwner": "hardware/evt0/lab-v1/method-catalog.json"
+    }
+  ],
+  "policies": {
+    "effects": {
+      "targetBinding": "NONE",
+      "adapter": "NONE",
+      "physicalFixture": "NONE",
+      "releaseGate": "NONE",
+      "promotion": "NONE"
+    },
+    "syntheticEvidence": "NEVER_REPRESENTED_AS_PHYSICAL",
+    "targetDependentFields": "PENDING_OR_NULL_ONLY_BEFORE_TARGET_LOCK",
+    "ownership": "REFER_EXISTING_OWNERS_DO_NOT_DUPLICATE_FIELDS"
+  },
+  "implementation": [
+    {
+      "path": "hardware/evt0/test-fixture-v1/profile.schema.json",
+      "revision": "1.0.0",
+      "bytes": 9810,
+      "sha256": "876f00b7285e4be087df59e0cfee073fe50c82844f328f3acba4a3644a021b69"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/adapter.schema.json",
+      "revision": "1.0.0",
+      "bytes": 8802,
+      "sha256": "743d96e8698eb4070ca0ec85784c613f10097e8f76ad02a0435c35e4771e6375"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/instance.schema.json",
+      "revision": "1.0.0",
+      "bytes": 7212,
+      "sha256": "8320e4f94450119241e6824936451f6730d40f54c007ed63b8d3a881e3114b46"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/selftest.schema.json",
+      "revision": "1.0.0",
+      "bytes": 7560,
+      "sha256": "9087c67a4dcc8db30360a59be7cca99e03e39b7ca73bd4d20256ca27fad0e1f1"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/README.md",
+      "revision": "1.0.0",
+      "bytes": 5159,
+      "sha256": "377bc7bcf63747d215a4eb4d7e87403a34f5c9258634e0b0b675c5b00eae596d"
+    },
+    {
+      "path": "scripts/validate-hardware-test-fixture.mjs",
+      "revision": "1.0.0",
+      "bytes": 41389,
+      "sha256": "743455cf54bfc07ab54f1d3909f5ecbd9a9e96c27cd39d23033459bb0409b529"
+    },
+    {
+      "path": "scripts/test-hardware-test-fixture.mjs",
+      "revision": "1.0.0",
+      "bytes": 6788,
+      "sha256": "ffba522bd7b4ef5317d5193bf77df5e6ff37b0b9a6ee160601d9c27beea40ec4"
+    }
+  ]
+}

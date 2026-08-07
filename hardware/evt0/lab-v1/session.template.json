@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "sessionId": "EVT0-LAB-SESSION-YYYYMMDD-001",
+  "status": "TEMPLATE",
+  "recordedAt": null,
+  "operator": null,
+  "candidateId": null,
+  "boardIdentity": {
+    "BOARD_MPN": null,
+    "PCB_REV": null,
+    "HEAD_MPN": null,
+    "HEAD_REV": null,
+    "FW_VERSION": null
+  },
+  "environment": {
+    "location": null,
+    "temperatureC": null,
+    "humidityPercent": null,
+    "noiseFloorDba": null,
+    "powerState": null,
+    "wirelessState": null,
+    "hostConnection": null
+  },
+  "instrumentIds": [],
+  "methodResults": [],
+  "rawArtifactRoot": "build/hardware-lab/EVT0-LAB-SESSION-YYYYMMDD-001/raw",
+  "artifacts": [],
+  "blockers": ["TEMPLATE_ONLY"],
+  "disposition": "PENDING"
+}

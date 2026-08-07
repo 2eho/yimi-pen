@@ -1,0 +1,431 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/test-result-v1.json",
+  "title": "Yimi TestResult v1 point-read latency record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "resultId",
+    "fixtureOnly",
+    "evidenceState",
+    "recordedAt",
+    "verdict",
+    "testDefinition",
+    "specimen",
+    "method",
+    "rawArtifacts",
+    "samples",
+    "queueEvidence",
+    "summary",
+    "acceptance"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "recordType": { "const": "point-read-latency-v1" },
+    "resultId": {
+      "type": "string",
+      "pattern": "^RESULT-[A-Z0-9][A-Z0-9-]{0,63}$"
+    },
+    "fixtureOnly": { "type": "boolean" },
+    "evidenceState": { "enum": ["PENDING", "SYNTHETIC", "MEASURED"] },
+    "recordedAt": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+        },
+        { "type": "null" }
+      ]
+    },
+    "verdict": { "enum": ["BLOCKED", "PASS", "FAIL"] },
+    "testDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["testId", "catalogVersion"],
+      "properties": {
+        "testId": { "type": "string", "pattern": "^[A-Z0-9-]{3,64}$" },
+        "catalogVersion": { "const": 1 }
+      }
+    },
+    "specimen": { "$ref": "#/$defs/specimen" },
+    "method": { "$ref": "#/$defs/method" },
+    "rawArtifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "samples": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sample" }
+    },
+    "queueEvidence": { "$ref": "#/$defs/queueEvidence" },
+    "summary": { "$ref": "#/$defs/summary" },
+    "acceptance": { "$ref": "#/$defs/acceptance" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "evidenceState": { "const": "PENDING" } } },
+      "then": {
+        "properties": {
+          "recordedAt": { "type": "null" },
+          "verdict": { "const": "BLOCKED" },
+          "samples": { "type": "array", "maxItems": 0 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "evidenceState": { "const": "SYNTHETIC" } } },
+      "then": {
+        "properties": {
+          "fixtureOnly": { "const": true },
+          "recordedAt": { "type": "string" },
+          "verdict": { "enum": ["PASS", "FAIL"] },
+          "samples": { "type": "array", "minItems": 1 },
+          "rawArtifacts": { "type": "array", "minItems": 1 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "evidenceState": { "const": "MEASURED" } } },
+      "then": {
+        "properties": {
+          "fixtureOnly": { "const": false },
+          "recordedAt": { "type": "string" },
+          "verdict": { "enum": ["PASS", "FAIL"] },
+          "samples": { "type": "array", "minItems": 1 },
+          "rawArtifacts": { "type": "array", "minItems": 1 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nullableIdentity": {
+      "oneOf": [
+        { "type": "string", "minLength": 1, "maxLength": 160 },
+        { "type": "null" }
+      ]
+    },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "specimen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateId",
+        "boardMpn",
+        "pcbRevision",
+        "boardSerial",
+        "headMpn",
+        "headRevision",
+        "headSerial",
+        "firmware",
+        "snapshotId",
+        "oidTool",
+        "oidToolVersion",
+        "printProfile",
+        "printBatch"
+      ],
+      "properties": {
+        "candidateId": { "$ref": "#/$defs/nullableIdentity" },
+        "boardMpn": { "$ref": "#/$defs/nullableIdentity" },
+        "pcbRevision": { "$ref": "#/$defs/nullableIdentity" },
+        "boardSerial": { "$ref": "#/$defs/nullableIdentity" },
+        "headMpn": { "$ref": "#/$defs/nullableIdentity" },
+        "headRevision": { "$ref": "#/$defs/nullableIdentity" },
+        "headSerial": { "$ref": "#/$defs/nullableIdentity" },
+        "firmware": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "version",
+            "gitCommit",
+            "binarySha256",
+            "rustcVersion",
+            "targetTriple",
+            "cargoLockSha256",
+            "features"
+          ],
+          "properties": {
+            "version": { "$ref": "#/$defs/nullableIdentity" },
+            "gitCommit": {
+              "oneOf": [
+                { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+                { "type": "null" }
+              ]
+            },
+            "binarySha256": {
+              "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+            },
+            "rustcVersion": { "$ref": "#/$defs/nullableIdentity" },
+            "targetTriple": { "$ref": "#/$defs/nullableIdentity" },
+            "cargoLockSha256": {
+              "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+            },
+            "features": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "uniqueItems": true
+            }
+          }
+        },
+        "snapshotId": {
+          "oneOf": [
+            { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+            { "type": "null" }
+          ]
+        },
+        "oidTool": { "$ref": "#/$defs/nullableIdentity" },
+        "oidToolVersion": { "$ref": "#/$defs/nullableIdentity" },
+        "printProfile": { "$ref": "#/$defs/nullableIdentity" },
+        "printBatch": { "$ref": "#/$defs/nullableIdentity" }
+      }
+    },
+    "clockDomain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clockId", "kind", "tickHz", "wrapBits"],
+      "properties": {
+        "clockId": { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,80}$" },
+        "kind": { "enum": ["device-monotonic", "external-instrument"] },
+        "tickHz": { "type": "integer", "minimum": 1 },
+        "wrapBits": { "type": "integer", "minimum": 16, "maximum": 64 }
+      }
+    },
+    "synchronization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fromClockId", "toClockId", "method", "offsetUs", "uncertaintyUs"],
+      "properties": {
+        "fromClockId": { "type": "string" },
+        "toClockId": { "type": "string" },
+        "method": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "offsetUs": { "type": "integer" },
+        "uncertaintyUs": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "instrument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "maker", "model", "serial", "calibrationRef"],
+      "properties": {
+        "role": { "type": "string", "minLength": 1 },
+        "maker": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "serial": { "type": "string", "minLength": 1 },
+        "calibrationRef": { "type": "string", "minLength": 1 }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["procedureId", "audioStartTimeClass", "clockDomains", "synchronization", "instruments", "environment"],
+      "properties": {
+        "procedureId": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "audioStartTimeClass": {
+          "enum": [
+            "request-accepted",
+            "decoder-first-pcm",
+            "dma-first-buffer",
+            "electrical-output",
+            "unavailable"
+          ]
+        },
+        "clockDomains": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/clockDomain" },
+          "minItems": 1
+        },
+        "synchronization": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/synchronization" }
+        },
+        "instruments": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instrument" }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["temperatureC", "relativeHumidityPct", "notes"],
+          "properties": {
+            "temperatureC": { "type": ["number", "null"] },
+            "relativeHumidityPct": {
+              "oneOf": [
+                { "type": "number", "minimum": 0, "maximum": 100 },
+                { "type": "null" }
+              ]
+            },
+            "notes": { "type": "string", "maxLength": 1000 }
+          }
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path", "size", "sha256"],
+      "properties": {
+        "role": { "enum": ["raw-samples", "logic-trace", "audio-capture", "firmware", "other"] },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240,
+          "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[A-Za-z0-9._/-]+$"
+        },
+        "size": { "type": "integer", "minimum": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "stagePoint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["clockId", "tUs"],
+          "properties": {
+            "clockId": { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,80}$" },
+            "tUs": { "type": "string", "pattern": "^(?:0|[1-9][0-9]*)$" }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "runId",
+        "ordinal",
+        "expectedPhysicalCode",
+        "observedPhysicalCode",
+        "outcome",
+        "oidSequence",
+        "oidDroppedEvents",
+        "audioSequence",
+        "audioDroppedEvents",
+        "stages"
+      ],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "runId": { "type": "string", "pattern": "^RUN-[A-Z0-9][A-Z0-9-]{0,63}$" },
+        "ordinal": { "type": "integer", "minimum": 1 },
+        "expectedPhysicalCode": { "type": "string", "pattern": "^(?:0|[1-9][0-9]*)$" },
+        "observedPhysicalCode": {
+          "oneOf": [
+            { "type": "string", "pattern": "^(?:0|[1-9][0-9]*)$" },
+            { "type": "null" }
+          ]
+        },
+        "outcome": { "enum": ["correct", "wrong", "no-read", "timeout", "read-error"] },
+        "oidSequence": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+            { "type": "null" }
+          ]
+        },
+        "oidDroppedEvents": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "audioSequence": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+            { "type": "null" }
+          ]
+        },
+        "audioDroppedEvents": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "stages": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sensor", "event", "resolved", "pcmQueued", "audioStart", "acousticStart"],
+          "properties": {
+            "sensor": { "$ref": "#/$defs/stagePoint" },
+            "event": { "$ref": "#/$defs/stagePoint" },
+            "resolved": { "$ref": "#/$defs/stagePoint" },
+            "pcmQueued": { "$ref": "#/$defs/stagePoint" },
+            "audioStart": { "$ref": "#/$defs/stagePoint" },
+            "acousticStart": { "$ref": "#/$defs/stagePoint" }
+          }
+        }
+      }
+    },
+    "nullableMetric": {
+      "oneOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }]
+    },
+    "queueStats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nextSequence", "droppedEvents", "queuedEvents"],
+      "properties": {
+        "nextSequence": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "droppedEvents": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "queuedEvents": { "type": "integer", "minimum": 0, "maximum": 4294967295 }
+      }
+    },
+    "queueEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["oid", "audio"],
+      "properties": {
+        "oid": { "$ref": "#/$defs/queueStats" },
+        "audio": { "$ref": "#/$defs/queueStats" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total",
+        "correct",
+        "wrong",
+        "noRead",
+        "timeout",
+        "readError",
+        "oidQueueDrops",
+        "audioQueueDrops",
+        "eligibleLatencySamples",
+        "p50Us",
+        "p95Us",
+        "p99Us",
+        "maxUs"
+      ],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "correct": { "type": "integer", "minimum": 0 },
+        "wrong": { "type": "integer", "minimum": 0 },
+        "noRead": { "type": "integer", "minimum": 0 },
+        "timeout": { "type": "integer", "minimum": 0 },
+        "readError": { "type": "integer", "minimum": 0 },
+        "oidQueueDrops": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "audioQueueDrops": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "eligibleLatencySamples": { "type": "integer", "minimum": 0 },
+        "p50Us": { "$ref": "#/$defs/nullableMetric" },
+        "p95Us": { "$ref": "#/$defs/nullableMetric" },
+        "p99Us": { "$ref": "#/$defs/nullableMetric" },
+        "maxUs": { "$ref": "#/$defs/nullableMetric" }
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profileId",
+        "startStage",
+        "endStage",
+        "minSamples",
+        "minSuccessRate",
+        "maxWrongCodes",
+        "maxNoReads",
+        "maxP95Us"
+      ],
+      "properties": {
+        "profileId": { "type": "string", "pattern": "^[A-Z0-9-]{3,64}$" },
+        "startStage": { "enum": ["sensor", "event", "resolved", "pcmQueued", "audioStart"] },
+        "endStage": { "enum": ["resolved", "pcmQueued", "audioStart", "acousticStart"] },
+        "minSamples": { "type": "integer", "minimum": 1 },
+        "minSuccessRate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "maxWrongCodes": { "type": "integer", "minimum": 0 },
+        "maxNoReads": { "type": "integer", "minimum": 0 },
+        "maxP95Us": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

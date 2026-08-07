@@ -1,0 +1,27 @@
+# Capsule: execution-model-v1
+
+- Date: 2026-08-03
+- Project: yimi-pen
+- Memory ID: execution-model-v1
+- Memory class: durable-fact
+- Scope: Snapshot v1 到目标无关 Rust 点读执行内核
+- Aliases/keywords: ExecutionModel, ActionSlot, ClipSlot, cooldown, replace, queue, random_one, RandomIndexSource, order-trap
+- Wake-up route: `index.md` -> `execution-model-v1`
+- Version: v1
+- Phase/mode: scoped-build
+- Module: `hardware/evt0/execution-model-v1/`、`firmware/crates/yimi-runtime-core/`、`firmware/crates/yimi-fw-host/`、`tools/execution-model/`
+- Question: 如何让不同主板复用相同点读语义，同时把目标编码、随机质量和实物HIL留在证据门后。
+- Baseline: OID有序索引、ActionSlot/ClipSlot稠密表、三种play policy、逐action accepted-play cooldown、调用方状态和注入随机源构成v1稳定核心；Rust core为`no_std`、无分配、借用数据。
+- Evidence: `build/execution-model-validation/report.json`；3/3黄金场景，Node/Rust完整model+trace逐字节一致，23/23负向与零副作用；当前密封run报告SHA-256 `607d59d307748dbd3a758ef3d0ed038bad882fe3fd5ed104606b2d7bfcc38205`。
+- Rejected hypotheses: assigned码表等同物理证明；注入最终index等同随机均匀性/熵/加权算法证明；host parser等同目标板parser/HIL。
+- Stable behavior: slot顺序由数组位置决定而非ID词法序；cooldown抑制不消费随机源；`physicalEvidence`在v1恒为false；JSON字节数字段上限为`9007199254740991`。
+- 稳定模块保护判断: 新语义位于独立合同/host adapter/no_std core，`packages/*/src`与`apps/*`保持。
+- Memory hygiene: 用户的Rust与高复用要求由任务RQ持有；本capsule只持有已验证v1语义和证据边界。
+- Run audit: green；本工作包工件和报告齐全，整机任务仍active。
+- Artifact discipline: component hash只锚定实际index/actions字节；完整Snapshot/manifest身份由ReleaseGate receipt绑定。
+- Encoding check: 纳入全源严格UTF-8/JSON/Markdown审计。
+- Regression guards: 保留Family Alpha、Golden24、非词法order-trap，以及“random_one被cooldown抑制时随机源零消费”向量。
+- Judgment: ExecutionModel host合同已关闭；WeightedRandom v2 host合同也已独立关闭，但`RG-TARGET-EXECUTION-MODEL-HIL-PASSED`与`RG-SNAPSHOT-WEIGHTED-RANDOM-VERIFIED`继续缺目标/量产实证。
+- Open questions: 目标板parser编码与RAM/Flash预算、真实OID映射、目标RNG provider与原始词流、两板C/Rust差分。
+- Next step: 取得冻结主板后跑目标parser/HIL，并用同版板的raw-word/选择trace形成加权随机生产证据。
+- Links: `../../../hardware/evt0/execution-model-v1/README.md`、`../../snapshot-v1.md`

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "vendor-outbound-send-receipt",
+  "receiptId": "CONTACT-RECEIPT-TEMPLATE",
+  "messageId": "MB1-OUTBOUND-MESSAGE-TEMPLATE",
+  "candidateId": "MB1-CANDIDATE-TEMPLATE",
+  "sourceRefs": [],
+  "outboundBundle": {
+    "bundleId": null,
+    "reproducibleId": null,
+    "manifestPath": null,
+    "manifestBytes": null,
+    "manifestSha256": null,
+    "messageArtifactPath": null,
+    "messageArtifactBytes": null,
+    "messageArtifactSha256": null,
+    "recipientArtifactPath": null,
+    "recipientArtifactBytes": null,
+    "recipientArtifactSha256": null
+  },
+  "contactEndpoint": {
+    "officialEntryUrl": null,
+    "verifiedAt": null,
+    "recipientKind": null,
+    "recipientValue": null,
+    "verificationArtifactRefs": []
+  },
+  "submission": {
+    "state": "PENDING",
+    "sentAt": null,
+    "channel": null,
+    "transportReference": null,
+    "submissionArtifactRefs": []
+  },
+  "rawArtifacts": [],
+  "targetBindingEffect": "NONE_CONTACT_ONLY",
+  "paymentEffect": "NONE_AWAIT_VENDOR_RESPONSE",
+  "decision": {
+    "status": "PENDING_SEND",
+    "reason": "Template only; no outbound submission evidence exists.",
+    "blockers": [
+      "OFFICIAL_ENDPOINT_NOT_VERIFIED",
+      "OUTBOUND_NOT_SUBMITTED",
+      "SUBMISSION_EVIDENCE_MISSING",
+      "SUPPLIER_RESPONSE_PENDING"
+    ]
+  },
+  "requirements": ["RQ-HW-001", "RQ-HW-002", "RQ-HW-003"]
+}

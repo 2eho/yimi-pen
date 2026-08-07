@@ -1,0 +1,434 @@
+{
+  "schemaVersion": 1,
+  "profile": "hardware-system-topology-v1",
+  "topologyId": "hwt:sha256:98a87a1de9ee8dfa52ec68ebd00afbbf23fa3c18e0c2a75e34ba09da4a9c4e5f",
+  "intent": "Stable logical product blocks and interfaces; component identity, pin mapping, and board-specific implementation belong only to the target binding and accepted intake evidence.",
+  "requirements": [
+    "RQ-SP-002",
+    "RQ-SP-003",
+    "RQ-SP-004",
+    "RQ-SP-005",
+    "RQ-SP-007",
+    "PS-001",
+    "PS-003",
+    "PS-004",
+    "PS-005",
+    "PS-006",
+    "PS-007",
+    "PS-009",
+    "PS-010",
+    "PS-012"
+  ],
+  "blocks": [
+    {
+      "blockId": "OID-MEDIA",
+      "role": "OID_MEDIA",
+      "responsibility": "Carry the physical code pattern associated with one product action.",
+      "ports": [
+        {
+          "portId": "OPTICAL-OUT",
+          "direction": "PRODUCES",
+          "semantic": "Printed OID optical field"
+        }
+      ]
+    },
+    {
+      "blockId": "OID-HEAD",
+      "role": "OID_HEAD",
+      "responsibility": "Sense the printed field and emit one decoded OID event without owning product behavior.",
+      "ports": [
+        {
+          "portId": "OPTICAL-IN",
+          "direction": "CONSUMES",
+          "semantic": "Printed OID optical field"
+        },
+        {
+          "portId": "OID-EVENT-OUT",
+          "direction": "PRODUCES",
+          "semantic": "Decoded OID event"
+        },
+        {
+          "portId": "MECHANICAL",
+          "direction": "PASSIVE",
+          "semantic": "Head envelope, work distance, and mounting datum"
+        }
+      ]
+    },
+    {
+      "blockId": "TARGET-BOARD-ADAPTER",
+      "role": "TARGET_ADAPTER",
+      "responsibility": "Confine target-specific execution, peripheral access, and diagnostics behind stable product ports.",
+      "ports": [
+        {
+          "portId": "OID-EVENT-IN",
+          "direction": "CONSUMES",
+          "semantic": "Decoded OID event"
+        },
+        {
+          "portId": "STORAGE-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "Content and durable snapshot storage operations"
+        },
+        {
+          "portId": "AUDIO-OUT",
+          "direction": "PRODUCES",
+          "semantic": "Selected local audio stream or target audio command"
+        },
+        {
+          "portId": "DEVICE-LINK-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "DeviceLink byte transport"
+        },
+        {
+          "portId": "POWER-IN",
+          "direction": "CONSUMES",
+          "semantic": "Managed board supply"
+        },
+        {
+          "portId": "CONTROL-IN",
+          "direction": "CONSUMES",
+          "semantic": "Debounced user control event"
+        },
+        {
+          "portId": "STATUS-OUT",
+          "direction": "PRODUCES",
+          "semantic": "User-visible status command"
+        },
+        {
+          "portId": "DIAGNOSTIC-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "Identity, trace, flash, and test access"
+        },
+        {
+          "portId": "WIRELESS-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "Optional non-hot-path connectivity"
+        },
+        {
+          "portId": "MECHANICAL",
+          "direction": "PASSIVE",
+          "semantic": "Board envelope and mounting datum"
+        }
+      ]
+    },
+    {
+      "blockId": "CONTENT-STORAGE",
+      "role": "CONTENT_STORAGE",
+      "responsibility": "Persist content and active or last-good snapshots across power loss.",
+      "ports": [
+        {
+          "portId": "STORAGE-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "Content and durable snapshot storage operations"
+        }
+      ]
+    },
+    {
+      "blockId": "AUDIO-OUTPUT",
+      "role": "AUDIO_OUTPUT",
+      "responsibility": "Convert selected local audio into bounded acoustic output with observable start timing.",
+      "ports": [
+        {
+          "portId": "AUDIO-IN",
+          "direction": "CONSUMES",
+          "semantic": "Selected local audio stream or target audio command"
+        },
+        {
+          "portId": "POWER-IN",
+          "direction": "CONSUMES",
+          "semantic": "Managed audio supply"
+        },
+        {
+          "portId": "ACOUSTIC-OUT",
+          "direction": "PRODUCES",
+          "semantic": "Acoustic energy delivered into the target sound path"
+        }
+      ]
+    },
+    {
+      "blockId": "USB-DEVICE-PORT",
+      "role": "USB_DEVICE_PORT",
+      "responsibility": "Provide the product external wired data and charging boundary.",
+      "ports": [
+        {
+          "portId": "DATA-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "DeviceLink byte transport"
+        },
+        {
+          "portId": "VBUS-OUT",
+          "direction": "PRODUCES",
+          "semantic": "External USB input power"
+        },
+        {
+          "portId": "MECHANICAL",
+          "direction": "PASSIVE",
+          "semantic": "External connector opening and retention datum"
+        }
+      ]
+    },
+    {
+      "blockId": "BATTERY-PACK",
+      "role": "BATTERY_PACK",
+      "responsibility": "Store product energy behind a protected and observable pack boundary.",
+      "ports": [
+        {
+          "portId": "ENERGY-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "Protected battery energy and sensing boundary"
+        }
+      ]
+    },
+    {
+      "blockId": "POWER-SYSTEM",
+      "role": "POWER_SYSTEM",
+      "responsibility": "Manage charging, battery protection boundary, and downstream supplies.",
+      "ports": [
+        {
+          "portId": "USB-POWER-IN",
+          "direction": "CONSUMES",
+          "semantic": "External USB input power"
+        },
+        {
+          "portId": "BATTERY-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "Protected battery energy and sensing boundary"
+        },
+        {
+          "portId": "BOARD-POWER-OUT",
+          "direction": "PRODUCES",
+          "semantic": "Managed board supply"
+        },
+        {
+          "portId": "AUDIO-POWER-OUT",
+          "direction": "PRODUCES",
+          "semantic": "Managed audio supply"
+        }
+      ]
+    },
+    {
+      "blockId": "USER-IO",
+      "role": "USER_IO",
+      "responsibility": "Expose minimal physical controls and distinct user-visible feedback.",
+      "ports": [
+        {
+          "portId": "CONTROL-OUT",
+          "direction": "PRODUCES",
+          "semantic": "Debounced user control event"
+        },
+        {
+          "portId": "STATUS-IN",
+          "direction": "CONSUMES",
+          "semantic": "User-visible status command"
+        },
+        {
+          "portId": "MECHANICAL",
+          "direction": "PASSIVE",
+          "semantic": "Control and indicator external datum"
+        }
+      ]
+    },
+    {
+      "blockId": "DIAGNOSTICS",
+      "role": "DIAGNOSTICS",
+      "responsibility": "Capture identity, timing, fault, build, flash, and manufacturing evidence.",
+      "ports": [
+        {
+          "portId": "DIAGNOSTIC-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "Identity, trace, flash, and test access"
+        }
+      ]
+    },
+    {
+      "blockId": "OPTIONAL-WIRELESS",
+      "role": "OPTIONAL_WIRELESS",
+      "responsibility": "Provide optional coordination connectivity while staying outside the offline point-read hot path.",
+      "ports": [
+        {
+          "portId": "DATA-IO",
+          "direction": "BIDIRECTIONAL",
+          "semantic": "Optional non-hot-path connectivity"
+        }
+      ]
+    },
+    {
+      "blockId": "ENCLOSURE",
+      "role": "ENCLOSURE",
+      "responsibility": "Own target-form mechanical, acoustic, access, and child-use boundaries.",
+      "ports": [
+        {
+          "portId": "HEAD-MOUNT",
+          "direction": "PASSIVE",
+          "semantic": "Head envelope, work distance, and mounting datum"
+        },
+        {
+          "portId": "BOARD-MOUNT",
+          "direction": "PASSIVE",
+          "semantic": "Board envelope and mounting datum"
+        },
+        {
+          "portId": "ACOUSTIC-IN",
+          "direction": "CONSUMES",
+          "semantic": "Acoustic energy delivered into the target sound path"
+        },
+        {
+          "portId": "USB-MOUNT",
+          "direction": "PASSIVE",
+          "semantic": "External connector opening and retention datum"
+        },
+        {
+          "portId": "USER-IO-MOUNT",
+          "direction": "PASSIVE",
+          "semantic": "Control and indicator external datum"
+        }
+      ]
+    }
+  ],
+  "interfaces": [
+    {
+      "interfaceId": "IF-OID-OPTICAL",
+      "kind": "OPTICAL",
+      "from": { "blockId": "OID-MEDIA", "portId": "OPTICAL-OUT" },
+      "to": { "blockId": "OID-HEAD", "portId": "OPTICAL-IN" },
+      "semantic": "Physical print-to-head recognition boundary.",
+      "requirements": ["RQ-SP-002", "RQ-SP-003", "RQ-SP-004", "PS-003", "PS-006"]
+    },
+    {
+      "interfaceId": "IF-OID-EVENT",
+      "kind": "EVENT",
+      "from": { "blockId": "OID-HEAD", "portId": "OID-EVENT-OUT" },
+      "to": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "OID-EVENT-IN" },
+      "semantic": "Decoded OID event enters the reusable product runtime.",
+      "requirements": ["RQ-SP-002", "RQ-SP-005", "RQ-SP-007", "PS-004", "PS-005", "PS-006", "PS-009"]
+    },
+    {
+      "interfaceId": "IF-STORAGE",
+      "kind": "STORAGE",
+      "from": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "STORAGE-IO" },
+      "to": { "blockId": "CONTENT-STORAGE", "portId": "STORAGE-IO" },
+      "semantic": "Target storage adapter implements content reads and durable snapshot commits.",
+      "requirements": ["RQ-SP-002", "RQ-SP-005", "RQ-SP-007", "PS-005", "PS-010"]
+    },
+    {
+      "interfaceId": "IF-AUDIO-SIGNAL",
+      "kind": "AUDIO_SIGNAL",
+      "from": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "AUDIO-OUT" },
+      "to": { "blockId": "AUDIO-OUTPUT", "portId": "AUDIO-IN" },
+      "semantic": "Local selection crosses into the target audio path with observable start timing.",
+      "requirements": ["RQ-SP-002", "RQ-SP-005", "RQ-SP-007", "PS-004", "PS-007", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-USB-DATA",
+      "kind": "DATA_TRANSPORT",
+      "from": { "blockId": "USB-DEVICE-PORT", "portId": "DATA-IO" },
+      "to": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "DEVICE-LINK-IO" },
+      "semantic": "Physical transport carries DeviceLink bytes without changing transaction semantics.",
+      "requirements": ["RQ-SP-002", "RQ-SP-005", "RQ-SP-007", "PS-001", "PS-010"]
+    },
+    {
+      "interfaceId": "IF-USB-POWER",
+      "kind": "POWER",
+      "from": { "blockId": "USB-DEVICE-PORT", "portId": "VBUS-OUT" },
+      "to": { "blockId": "POWER-SYSTEM", "portId": "USB-POWER-IN" },
+      "semantic": "External wired power enters the managed charging path.",
+      "requirements": ["RQ-SP-002", "RQ-SP-004", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-BATTERY-POWER",
+      "kind": "POWER",
+      "from": { "blockId": "BATTERY-PACK", "portId": "ENERGY-IO" },
+      "to": { "blockId": "POWER-SYSTEM", "portId": "BATTERY-IO" },
+      "semantic": "Protected battery energy, charge, and sensing cross one pack boundary.",
+      "requirements": ["RQ-SP-002", "RQ-SP-004", "PS-010", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-BOARD-POWER",
+      "kind": "POWER",
+      "from": { "blockId": "POWER-SYSTEM", "portId": "BOARD-POWER-OUT" },
+      "to": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "POWER-IN" },
+      "semantic": "Managed supply powers the selected board route.",
+      "requirements": ["RQ-SP-002", "RQ-SP-004", "PS-005", "PS-010", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-AUDIO-POWER",
+      "kind": "POWER",
+      "from": { "blockId": "POWER-SYSTEM", "portId": "AUDIO-POWER-OUT" },
+      "to": { "blockId": "AUDIO-OUTPUT", "portId": "POWER-IN" },
+      "semantic": "Managed supply supports bounded and stable audio output.",
+      "requirements": ["RQ-SP-002", "RQ-SP-004", "PS-004", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-CONTROL",
+      "kind": "CONTROL",
+      "from": { "blockId": "USER-IO", "portId": "CONTROL-OUT" },
+      "to": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "CONTROL-IN" },
+      "semantic": "Physical controls become stable debounced product events.",
+      "requirements": ["RQ-SP-002", "RQ-SP-007", "PS-001", "PS-009", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-STATUS",
+      "kind": "STATUS",
+      "from": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "STATUS-OUT" },
+      "to": { "blockId": "USER-IO", "portId": "STATUS-IN" },
+      "semantic": "Stable product states drive target-specific light or sound feedback.",
+      "requirements": ["RQ-SP-002", "RQ-SP-007", "PS-007", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-DIAGNOSTIC",
+      "kind": "DIAGNOSTIC",
+      "from": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "DIAGNOSTIC-IO" },
+      "to": { "blockId": "DIAGNOSTICS", "portId": "DIAGNOSTIC-IO" },
+      "semantic": "Target evidence is observable without leaking vendor details into product cores.",
+      "requirements": ["RQ-SP-002", "RQ-SP-004", "RQ-SP-005", "RQ-SP-007", "PS-004", "PS-006"]
+    },
+    {
+      "interfaceId": "IF-WIRELESS",
+      "kind": "WIRELESS",
+      "from": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "WIRELESS-IO" },
+      "to": { "blockId": "OPTIONAL-WIRELESS", "portId": "DATA-IO" },
+      "semantic": "Optional coordination connectivity remains outside the offline point-read hot path.",
+      "requirements": ["RQ-SP-002", "RQ-SP-007", "PS-005"]
+    },
+    {
+      "interfaceId": "IF-HEAD-MECHANICAL",
+      "kind": "MECHANICAL",
+      "from": { "blockId": "OID-HEAD", "portId": "MECHANICAL" },
+      "to": { "blockId": "ENCLOSURE", "portId": "HEAD-MOUNT" },
+      "semantic": "Target form preserves head alignment and operating distance.",
+      "requirements": ["RQ-SP-002", "RQ-SP-003", "RQ-SP-004", "PS-006", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-BOARD-MECHANICAL",
+      "kind": "MECHANICAL",
+      "from": { "blockId": "TARGET-BOARD-ADAPTER", "portId": "MECHANICAL" },
+      "to": { "blockId": "ENCLOSURE", "portId": "BOARD-MOUNT" },
+      "semantic": "Target board envelope and mounting are proven in the production-equivalent enclosure.",
+      "requirements": ["RQ-SP-002", "RQ-SP-004", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-AUDIO-ACOUSTIC",
+      "kind": "ACOUSTIC",
+      "from": { "blockId": "AUDIO-OUTPUT", "portId": "ACOUSTIC-OUT" },
+      "to": { "blockId": "ENCLOSURE", "portId": "ACOUSTIC-IN" },
+      "semantic": "Speaker and enclosure form the measurable target acoustic profile.",
+      "requirements": ["RQ-SP-002", "RQ-SP-003", "RQ-SP-004", "PS-004", "PS-007", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-USB-MECHANICAL",
+      "kind": "MECHANICAL",
+      "from": { "blockId": "USB-DEVICE-PORT", "portId": "MECHANICAL" },
+      "to": { "blockId": "ENCLOSURE", "portId": "USB-MOUNT" },
+      "semantic": "The wired connector is accessible and retained in target form.",
+      "requirements": ["RQ-SP-002", "RQ-SP-004", "PS-012"]
+    },
+    {
+      "interfaceId": "IF-USER-IO-MECHANICAL",
+      "kind": "MECHANICAL",
+      "from": { "blockId": "USER-IO", "portId": "MECHANICAL" },
+      "to": { "blockId": "ENCLOSURE", "portId": "USER-IO-MOUNT" },
+      "semantic": "Controls and indicators remain usable in target form.",
+      "requirements": ["RQ-SP-002", "RQ-SP-003", "RQ-SP-004", "PS-001", "PS-007", "PS-012"]
+    }
+  ]
+}

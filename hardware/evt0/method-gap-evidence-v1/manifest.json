@@ -1,0 +1,753 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "hardware-method-gap-evidence-audit-v1",
+  "packageId": "HW-FIXTURE-METHOD-GAP-EVIDENCE-AUDIT-V1",
+  "revision": "1.1.0",
+  "status": "AUDIT_COMPLETE",
+  "boardTargetState": "UNRESOLVED",
+  "sourcePolicy": {
+    "allowedPublishers": [
+      "USB-IF",
+      "Micron Technology",
+      "KIOXIA",
+      "NVM Express",
+      "NI",
+      "OpenHTF project",
+      "SD Association"
+    ],
+    "allowedHosts": [
+      "usb.org",
+      "micron.com",
+      "kioxia.com",
+      "nvmexpress.org",
+      "ni.com",
+      "raw.githubusercontent.com",
+      "sdcard.org"
+    ],
+    "unofficialSources": "REJECTED",
+    "claimRule": "SOURCE_BOUNDARY_ONLY_NO_TARGET_INFERENCE",
+    "licenseRule": "INTERNAL_SNAPSHOT_ONLY_WHEN_PUBLIC_AND_SIZE_PERMITS"
+  },
+  "dependencyPolicy": {
+    "auditSnapshotState": "AUDIT_SNAPSHOT_AT_CAPTURE",
+    "liveFixtureRule": "CURRENT_SEMANTIC_VALIDATION_ONLY",
+    "liveSoftwareRule": "LIVE_BOUNDARY_SEMANTICS_ONLY_NO_HASH_OR_TASK_NAME",
+    "canonicalArtifactRule": "NO_CHURN_FOR_HARDWARE_IMPACT_NONE"
+  },
+  "protectedFiles": [
+    {
+      "path": "hardware/evt0/test-fixture-v1/profile.schema.json",
+      "owner": "accepted-fixture-v1",
+      "bytes": 9810,
+      "sha256": "876f00b7285e4be087df59e0cfee073fe50c82844f328f3acba4a3644a021b69",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/profile.json",
+      "owner": "accepted-fixture-v1",
+      "bytes": 14807,
+      "sha256": "8760bf98a5dedc2ad0d295b5ebfe1ae2d815db8cf5d88172bc120fda58f886bb",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/adapter.schema.json",
+      "owner": "accepted-fixture-v1",
+      "bytes": 8802,
+      "sha256": "743d96e8698eb4070ca0ec85784c613f10097e8f76ad02a0435c35e4771e6375",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/adapter.template.json",
+      "owner": "accepted-fixture-v1",
+      "bytes": 2359,
+      "sha256": "e657b60d5373f14262ed506d7bca02d3f6f32eddf3fe3d2d22aba72dfb553e52",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/instance.schema.json",
+      "owner": "accepted-fixture-v1",
+      "bytes": 7212,
+      "sha256": "8320e4f94450119241e6824936451f6730d40f54c007ed63b8d3a881e3114b46",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/instance.template.json",
+      "owner": "accepted-fixture-v1",
+      "bytes": 1892,
+      "sha256": "0f37398f78e6f524ffb80785a6748aacb30e862310df48d33e06f672d5d62f3c",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/selftest.schema.json",
+      "owner": "accepted-fixture-v1",
+      "bytes": 7560,
+      "sha256": "9087c67a4dcc8db30360a59be7cca99e03e39b7ca73bd4d20256ca27fad0e1f1",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/selftest.template.json",
+      "owner": "accepted-fixture-v1",
+      "bytes": 4219,
+      "sha256": "853174fbc97301361fa40b5a8b2f57378832f860d2ce24bf1d7ed9e2fe720aea",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-fixture-v1/README.md",
+      "owner": "accepted-fixture-v1",
+      "bytes": 4789,
+      "sha256": "ed131559769deffa3aa1c89825791d3196c1037dd631d3045c0aa2b8805cdefc",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/lab-v1/method-catalog.json",
+      "owner": "stable-lab-method-owner",
+      "bytes": 8717,
+      "sha256": "dbd51a9ff845070b6432015f6a68d6577121871c938afb0705290c21a9343aba",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/lab-v1/registration-capture-plan.json",
+      "owner": "stable-lab-registration-owner",
+      "bytes": 3645,
+      "sha256": "6358840bf2bfb8280e6a7df593b9c2c83617c6e9593ce659cff3211f7bbb05de",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/hardware-system-v1/topology.json",
+      "owner": "stable-topology-owner",
+      "bytes": 15420,
+      "sha256": "96431fecb220882b16745082d803e9349675802d234eb5ddf75fa197dd5f63d5",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/hardware-system-v1/target-binding.json",
+      "owner": "stable-target-binding-owner",
+      "bytes": 10437,
+      "sha256": "ccb6efefadc6b438646c69160bc882229465b3639c130aa044a08330de35e202",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/test-result-v1/schema.json",
+      "owner": "stable-test-result-owner",
+      "bytes": 14442,
+      "sha256": "1b05c0d36be60133976785ae97b2666307852c9bc7129f1e66b49a77b793d6c4",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/release-gates-v1/catalog.json",
+      "owner": "stable-release-gate-owner",
+      "bytes": 31010,
+      "sha256": "a57777a0e9cb6487de00c91c8c45317eeb700ebcc279b84fcce9d9b9e5d31561",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    },
+    {
+      "path": "hardware/evt0/evidence-capture-v1/profile.json",
+      "owner": "stable-evidence-capture-owner",
+      "bytes": 2699,
+      "sha256": "b3fc802d6b94e830f7db6b1776120fb76bce5dcfc511b37acfc757c37d66a0f1",
+      "state": "AUDIT_SNAPSHOT_AT_CAPTURE"
+    }
+  ],
+  "officialSources": [
+    {
+      "sourceId": "SRC-METHOD-GAP-USB-COMPLIANCE-PAGE",
+      "gapRefs": [
+        "GAP-IF-USB-DATA-METHOD"
+      ],
+      "publisher": "USB-IF",
+      "title": "USB 2.0 Electrical Compliance Test Specification",
+      "url": "https://www.usb.org/document-library/usb-20-electrical-compliance-test-specification",
+      "retrievedAt": "2026-08-04T17:25:59.872+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": "Version 1.08; page date 2026-04-21",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 41422,
+      "sha256": "5adb045d7a628acad82e22681ba2689464df6b6276a7115e65502b920f7f252c",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/usb-if-usb20-electrical-compliance-landing.html",
+      "claimBoundary": "USB-IF defines USB 2.0 electrical test criteria as assertions about product characteristics or behavior; it does not identify this target, USB class, VID/PID, pins, connectors, or project thresholds.",
+      "licenseBoundary": "OFFICIAL_PAGE_ONLY"
+    },
+    {
+      "sourceId": "SRC-METHOD-GAP-USB-COMPLIANCE-PDF",
+      "gapRefs": [
+        "GAP-IF-USB-DATA-METHOD"
+      ],
+      "publisher": "USB-IF",
+      "title": "USB2 Electrical Compliance Specification v1.08",
+      "url": "https://www.usb.org/sites/default/files/USB2%20Electrical%20Compliance%20Specification%20v1.08.pdf",
+      "retrievedAt": "2026-08-04T17:26:02.133+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": "Version 1.08; USB-IF page date 2026-04-21",
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "bytes": 836863,
+      "sha256": "04c8f4bd54fd8669b538cf648d9b41eb3417771ac0544877272bc207ce543508",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/usb-if-usb20-electrical-compliance.pdf",
+      "claimBoundary": "The official test specification supports a source-bound compliance/test-assertion input and raw electrical/transport evidence boundary; it is not a license to copy target electrical limits into this audit.",
+      "licenseBoundary": "PUBLIC_INTERNAL_SNAPSHOT"
+    },
+    {
+      "sourceId": "SRC-METHOD-GAP-USB-BASE-PAGE",
+      "gapRefs": [
+        "GAP-IF-USB-DATA-METHOD"
+      ],
+      "publisher": "USB-IF",
+      "title": "USB 2.0 Specification",
+      "url": "https://www.usb.org/document-library/usb-20-specification",
+      "retrievedAt": "2026-08-04T17:26:02.392+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": "USB-IF page date 2025-06-03; original specification released 2000-04-27",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 44664,
+      "sha256": "6124bdcafece22b95679065937a70c415486793827a8291367f10488156338ea",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/usb-if-usb20-specification-landing.html",
+      "claimBoundary": "The USB 2.0 base specification is an official revision anchor; the target adapter must bind the actual revision and mode after evidence, without inferring class, endpoint, identity, or physical connector details.",
+      "licenseBoundary": "OFFICIAL_PAGE_ONLY"
+    },
+    {
+      "sourceId": "SRC-METHOD-GAP-STORAGE-MICRON-PLP",
+      "gapRefs": [
+        "GAP-IF-STORAGE-POWER-LOSS-METHOD"
+      ],
+      "publisher": "Micron Technology",
+      "title": "How Micron SSDs Handle Unexpected Power Loss",
+      "url": "https://www.micron.com/content/dam/micron/global/public/products/white-paper/ssd-power-loss-protection-white-paper-lo.pdf",
+      "retrievedAt": "2026-08-04T17:26:05.564+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": null,
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "bytes": 379488,
+      "sha256": "dcc0f5234e738505f53919d92d70fb621eab5ba21b1e2c9671e5f4686577926b",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/micron-ssd-power-loss-protection.pdf",
+      "claimBoundary": "Micron describes unexpected-power-loss and SSD data-protection behavior; it supports testing interruption, in-flight data, metadata integrity, and recovery as concepts, but does not identify this product storage technology or acceptance threshold.",
+      "licenseBoundary": "PUBLIC_INTERNAL_SNAPSHOT"
+    },
+    {
+      "sourceId": "SRC-METHOD-GAP-STORAGE-KIOXIA-DATA-LOSS",
+      "gapRefs": [
+        "GAP-IF-STORAGE-POWER-LOSS-METHOD"
+      ],
+      "publisher": "KIOXIA",
+      "title": "Data Loss Mitigation with KIOXIA Enterprise and Data Center NVMe SSD",
+      "url": "https://americas.kioxia.com/content/dam/kioxia/en-us/business/ssd/asset/KIOXIA_NVMe_SSDs_Data_Loss_Mitigation_Tech_Brief.pdf",
+      "retrievedAt": "2026-08-04T17:26:05.977+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": null,
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "bytes": 712488,
+      "sha256": "999908bb12ab65385fa47c2f39b6a4c026e4d54b2b637df894d4225dc3c39e33",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/kioxia-nvme-data-loss-mitigation.pdf",
+      "claimBoundary": "KIOXIA describes NVMe SSD data-loss mitigation; it is technology-specific evidence for a future NVMe branch only and cannot establish that this target uses NVMe or define project durability thresholds.",
+      "licenseBoundary": "PUBLIC_INTERNAL_SNAPSHOT"
+    },
+    {
+      "sourceId": "SRC-METHOD-GAP-STORAGE-NVME-SPECIFICATIONS",
+      "gapRefs": [
+        "GAP-IF-STORAGE-POWER-LOSS-METHOD"
+      ],
+      "publisher": "NVM Express",
+      "title": "Specifications - NVM Express",
+      "url": "https://www.nvmexpress.org/specifications/",
+      "retrievedAt": "2026-08-04T17:26:07.444+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": "Latest NVMe specification set release stated as 2025-08-05",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 88200,
+      "sha256": "f7af2d174ef871b0659a113b4d4c60575cb63f42c084b6001f9f78262e5eda3a",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/nvme-specifications-landing.html",
+      "claimBoundary": "NVM Express identifies the NVMe specification set and its transport/command layers; it supports conditional storage-source selection only after target storage identity is proven.",
+      "licenseBoundary": "OFFICIAL_PAGE_ONLY"
+    },
+    {
+      "sourceId": "SRC-METHOD-GAP-STORAGE-SD-SPECS",
+      "gapRefs": [
+        "GAP-IF-STORAGE-POWER-LOSS-METHOD"
+      ],
+      "publisher": "SD Association",
+      "title": "Simplified Specifications",
+      "url": "https://www.sdcard.org/downloads/pls/",
+      "retrievedAt": "2026-08-04T17:39:34.071+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": null,
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 77520,
+      "sha256": "4f0a206b5530d1ae011f36a159f920a07cac0ddf59bfe5213cb500a46ef636ec",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/sd-association-simplified-specifications.html",
+      "claimBoundary": "The SD Association publishes storage-family specifications and developer access paths; this page does not establish that the target uses SD or provide a project power-loss pass threshold.",
+      "licenseBoundary": "OFFICIAL_PAGE_ONLY"
+    },
+    {
+      "sourceId": "SRC-METHOD-GAP-HIL-NI-VERISTAND",
+      "gapRefs": [
+        "GAP-CONTROL-STATUS-METHOD"
+      ],
+      "publisher": "NI",
+      "title": "What Is NI VeriStand? - HIL Validation & Test Software",
+      "url": "https://www.ni.com/en/shop/data-acquisition-and-control/application-software-for-data-acquisition-and-control-category/what-is-veristand.html",
+      "retrievedAt": "2026-08-04T17:26:09.449+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": null,
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 562394,
+      "sha256": "5f8dc71c582b08f3a519dd11424def92e26823ee261618a614a791327f7c1354",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/ni-veristand-hil.html",
+      "claimBoundary": "NI describes HIL systems that integrate simulation, log test data, automate embedded validation, and generate real-time stimulus/fault injection; it does not define this target I/O or thresholds.",
+      "licenseBoundary": "OFFICIAL_PAGE_ONLY"
+    },
+    {
+      "sourceId": "SRC-METHOD-GAP-HIL-OPENHTF",
+      "gapRefs": [
+        "GAP-CONTROL-STATUS-METHOD"
+      ],
+      "publisher": "OpenHTF project",
+      "title": "OpenHTF README - open-source hardware testing framework",
+      "url": "https://raw.githubusercontent.com/google/openhtf/master/README.md",
+      "retrievedAt": "2026-08-04T17:27:37.134+08:00",
+      "timezone": "Asia/Shanghai",
+      "sourceVersionOrDate": null,
+      "httpStatus": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "bytes": 6330,
+      "sha256": "323d8743680b870e568abc60009a28c0bf899179f0dbe93fecb5cc9344c23c82",
+      "localRawPath": "hardware/evt0/method-gap-evidence-v1/raw/openhtf-readme.md",
+      "claimBoundary": "OpenHTF documents phases, measurements, attachments, plugs, DUT interaction, and test records; its README also disclaims being an official Google product, so it is process-pattern evidence only.",
+      "licenseBoundary": "PUBLIC_PROJECT_SOURCE"
+    }
+  ],
+  "unavailableOfficialSources": [
+    {
+      "sourceId": "SRC-METHOD-GAP-UNAVAILABLE-JEDEC-POWER-LOSS",
+      "gapRefs": [
+        "GAP-IF-STORAGE-POWER-LOSS-METHOD"
+      ],
+      "publisher": "JEDEC",
+      "title": "Standards Documents",
+      "url": "https://www.jedec.org/standards-documents",
+      "retrievedAt": "2026-08-04T17:39:00.000+08:00",
+      "timezone": "Asia/Shanghai",
+      "httpStatus": 403,
+      "contentType": null,
+      "localRawPath": null,
+      "accessState": "INACCESSIBLE",
+      "claimBoundary": "The official JEDEC landing URL returned HTTP 403 during capture; no JEDEC power-loss text, standard number, or threshold was used or fabricated."
+    }
+  ],
+  "gaps": [
+    {
+      "gapId": "GAP-IF-USB-DATA-METHOD",
+      "interfaceRefs": [
+        "IF-USB-DATA",
+        "IF-USB-MECHANICAL"
+      ],
+      "supportingInterfaceRefs": [],
+      "existingMethodRefs": [],
+      "existingInstrumentSlotRefs": [],
+      "proposedMethodId": "PROPOSED-USB-DATA-OBSERVATION-001",
+      "methodStatus": "PROPOSED_ONLY",
+      "acceptedInMethodCatalog": false,
+      "instrumentCoverage": {
+        "existingSlotRefs": [],
+        "dedicatedSlotState": "MISSING",
+        "proposedInstrumentRole": "Host-side USB transport trace capture or equivalent; model, mode, and electrical profile remain pending.",
+        "registryEffect": "NONE"
+      },
+      "targetNeutralSkeleton": {
+        "state": "JUSTIFIED_DRAFT",
+        "steps": [
+          {
+            "id": "STEP-01",
+            "action": "Bind the run to the exact profile, adapter, instance, host/device role, and official USB revision only after target evidence exists.",
+            "targetDependentFields": [
+              "USB_ROLE",
+              "USB_REVISION",
+              "USB_MODE",
+              "DEVICE_IDENTITY",
+              "CABLE_OR_FIXTURE_ID"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-02",
+            "action": "Run enumeration and representative read/write transaction scenarios selected by the accepted target software contract; preserve event order and timestamps.",
+            "targetDependentFields": [
+              "CLASS",
+              "VID_PID",
+              "ENDPOINTS",
+              "TRANSFER_TYPES",
+              "PAYLOAD_SET"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-03",
+            "action": "Repeat disconnect, reconnect, and interrupted-transfer observations; preserve raw traces and recovery outcomes without assigning a target pass threshold.",
+            "targetDependentFields": [
+              "CONNECTOR",
+              "PIN_MAPPING",
+              "FRAMING",
+              "RECOVERY_POLICY",
+              "TIMING_THRESHOLDS"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-04",
+            "action": "Hash the raw capture, bind it to the existing session/TestResult/evidence owners, and leave ReleaseGate disposition to those owners.",
+            "targetDependentFields": [
+              "SESSION_ID",
+              "TEST_RESULT_ID",
+              "RAW_EVIDENCE_INDEX",
+              "RELEASE_GATE_RECEIPT"
+            ],
+            "physicalThresholdState": "PENDING"
+          }
+        ],
+        "rawOutputs": [
+          "enumeration_trace",
+          "transfer_trace",
+          "disconnect_reconnect_trace",
+          "raw_capture_manifest",
+          "session_binding_ref"
+        ],
+        "targetDependentFields": "PENDING",
+        "physicalThresholds": "PENDING"
+      },
+      "targetSpecificParameters": [
+        "USB_ROLE",
+        "USB_REVISION",
+        "USB_MODE",
+        "CLASS",
+        "VID_PID",
+        "ENDPOINTS",
+        "TRANSFER_TYPES",
+        "PAYLOAD_SET",
+        "FRAMING",
+        "CONNECTOR",
+        "PIN_MAPPING",
+        "TIMING_THRESHOLDS"
+      ],
+      "physicalAcceptanceThresholdState": "PENDING",
+      "evidenceRefs": [
+        "SRC-METHOD-GAP-USB-COMPLIANCE-PAGE",
+        "SRC-METHOD-GAP-USB-COMPLIANCE-PDF",
+        "SRC-METHOD-GAP-USB-BASE-PAGE"
+      ],
+      "decision": "FREEZE_TARGET_NEUTRAL_SKELETON",
+      "confidence": "HIGH"
+    },
+    {
+      "gapId": "GAP-IF-STORAGE-POWER-LOSS-METHOD",
+      "interfaceRefs": [
+        "IF-STORAGE"
+      ],
+      "supportingInterfaceRefs": [],
+      "existingMethodRefs": [
+        "OID-FUNCTION-001"
+      ],
+      "existingInstrumentSlotRefs": [
+        "DMM-01",
+        "MACRO-01"
+      ],
+      "proposedMethodId": "PROPOSED-STORAGE-POWER-LOSS-DURABILITY-001",
+      "methodStatus": "PROPOSED_ONLY",
+      "acceptedInMethodCatalog": false,
+      "instrumentCoverage": {
+        "existingSlotRefs": [
+          "DMM-01",
+          "MACRO-01"
+        ],
+        "dedicatedSlotState": "PENDING_OWNER_DECISION",
+        "proposedInstrumentRole": "Controlled power-interruption and storage-state observation path; exact fixture, switching instrument, storage interface, and timing remain pending.",
+        "registryEffect": "NONE"
+      },
+      "targetNeutralSkeleton": {
+        "state": "PENDING_DRAFT_NOT_FREEZABLE",
+        "steps": [
+          {
+            "id": "STEP-01",
+            "action": "Record the target storage technology, filesystem, commit model, capacity, and recovery contract from primary target evidence before selecting an interruption procedure.",
+            "targetDependentFields": [
+              "STORAGE_TECHNOLOGY",
+              "FILESYSTEM",
+              "CAPACITY",
+              "COMMIT_MODEL",
+              "RECOVERY_CONTRACT"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-02",
+            "action": "Create known content and metadata states with a content-addressed pre-interruption manifest and a reproducible checkpoint sequence.",
+            "targetDependentFields": [
+              "CONTENT_SET",
+              "METADATA_SET",
+              "CHECKPOINT_RULE",
+              "SYNC_BOUNDARY"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-03",
+            "action": "Interrupt power at target-defined write and idle phases, restart through the target recovery path, and retain every power, log, and filesystem observation.",
+            "targetDependentFields": [
+              "INTERRUPTION_PHASES",
+              "POWER_PATH",
+              "RESTART_SEQUENCE",
+              "RECOVERY_WINDOW"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-04",
+            "action": "Compare post-recovery bytes, metadata, active-generation identity, and error/status records against the pre-interruption manifest; do not convert a vendor claim into a pass gate.",
+            "targetDependentFields": [
+              "INTEGRITY_RULE",
+              "ALLOWED_LOSS_RULE",
+              "RETRY_RULE",
+              "DURABILITY_CYCLES",
+              "PASS_THRESHOLD"
+            ],
+            "physicalThresholdState": "PENDING"
+          }
+        ],
+        "rawOutputs": [
+          "pre_interrupt_manifest",
+          "power_interrupt_trace",
+          "post_recovery_manifest",
+          "corruption_or_recovery_log",
+          "hash_comparison"
+        ],
+        "targetDependentFields": "PENDING",
+        "physicalThresholds": "PENDING"
+      },
+      "targetSpecificParameters": [
+        "STORAGE_TECHNOLOGY",
+        "FILESYSTEM",
+        "CAPACITY",
+        "COMMIT_MODEL",
+        "POWER_PATH",
+        "INTERRUPTION_PHASES",
+        "RESTART_SEQUENCE",
+        "RECOVERY_WINDOW",
+        "INTEGRITY_RULE",
+        "ALLOWED_LOSS_RULE",
+        "DURABILITY_CYCLES",
+        "PASS_THRESHOLD"
+      ],
+      "physicalAcceptanceThresholdState": "PENDING",
+      "evidenceRefs": [
+        "SRC-METHOD-GAP-STORAGE-MICRON-PLP",
+        "SRC-METHOD-GAP-STORAGE-KIOXIA-DATA-LOSS",
+        "SRC-METHOD-GAP-STORAGE-NVME-SPECIFICATIONS",
+        "SRC-METHOD-GAP-STORAGE-SD-SPECS",
+        "SRC-METHOD-GAP-UNAVAILABLE-JEDEC-POWER-LOSS"
+      ],
+      "decision": "KEEP_PENDING_MORE_PRIMARY_EVIDENCE",
+      "confidence": "MEDIUM"
+    },
+    {
+      "gapId": "GAP-CONTROL-STATUS-METHOD",
+      "interfaceRefs": [
+        "IF-CONTROL",
+        "IF-STATUS"
+      ],
+      "supportingInterfaceRefs": [
+        "IF-DIAGNOSTIC"
+      ],
+      "existingMethodRefs": [
+        "LAB-SETUP-001",
+        "PWR-BOARD-BOOT-001",
+        "OID-FUNCTION-001"
+      ],
+      "existingInstrumentSlotRefs": [
+        "PSU-01",
+        "DMM-01",
+        "MACRO-01",
+        "USBPWR-01"
+      ],
+      "proposedMethodId": "PROPOSED-CONTROL-STATUS-HIL-001",
+      "methodStatus": "PROPOSED_ONLY",
+      "acceptedInMethodCatalog": false,
+      "instrumentCoverage": {
+        "existingSlotRefs": [
+          "PSU-01",
+          "DMM-01",
+          "MACRO-01",
+          "USBPWR-01"
+        ],
+        "dedicatedSlotState": "PENDING_OWNER_DECISION",
+        "proposedInstrumentRole": "Logical stimulus/observation and diagnostic trace capture path; exact I/O hardware, debug transport, and target adapter remain pending.",
+        "registryEffect": "NONE"
+      },
+      "targetNeutralSkeleton": {
+        "state": "JUSTIFIED_DRAFT",
+        "steps": [
+          {
+            "id": "STEP-01",
+            "action": "Bind the run to a firmware build identity, logical control/status channel names, diagnostic route, fixture instance, and existing lab session owner.",
+            "targetDependentFields": [
+              "FIRMWARE_VERSION",
+              "CONTROL_CHANNELS",
+              "STATUS_CHANNELS",
+              "DEBUG_TRANSPORT",
+              "FIXTURE_INSTANCE"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-02",
+            "action": "Declare a stimulus sequence and observation predicates in logical terms; keep physical levels, debounce, timing, and state-code mapping unresolved.",
+            "targetDependentFields": [
+              "STIMULUS_LEVELS",
+              "TIMING",
+              "DEBOUNCE",
+              "STATE_CODES",
+              "PIN_MAPPING"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-03",
+            "action": "Execute the HIL sequence, capture stimulus/observation ordering, diagnostic logs, build/flash witness, and fault-injection outcome as raw artifacts.",
+            "targetDependentFields": [
+              "TRACE_CLOCK",
+              "FAULT_MODEL",
+              "FLASH_ROUTE",
+              "LOG_ROUTE",
+              "EXPECTED_SEQUENCE"
+            ],
+            "physicalThresholdState": "PENDING"
+          },
+          {
+            "id": "STEP-04",
+            "action": "Attach measurements and raw traces to the existing TestResult/evidence owners; leave qualification and ReleaseGate decisions outside the proposed method.",
+            "targetDependentFields": [
+              "MEASUREMENT_SET",
+              "ACCEPTANCE_PREDICATES",
+              "RAW_EVIDENCE_INDEX",
+              "RELEASE_GATE_RECEIPT"
+            ],
+            "physicalThresholdState": "PENDING"
+          }
+        ],
+        "rawOutputs": [
+          "stimulus_trace",
+          "observation_trace",
+          "diagnostic_log",
+          "measurement_manifest",
+          "attachment_manifest"
+        ],
+        "targetDependentFields": "PENDING",
+        "physicalThresholds": "PENDING"
+      },
+      "targetSpecificParameters": [
+        "FIRMWARE_VERSION",
+        "CONTROL_CHANNELS",
+        "STATUS_CHANNELS",
+        "DEBUG_TRANSPORT",
+        "STIMULUS_LEVELS",
+        "TIMING",
+        "DEBOUNCE",
+        "STATE_CODES",
+        "PIN_MAPPING",
+        "TRACE_CLOCK",
+        "FAULT_MODEL",
+        "FLASH_ROUTE",
+        "LOG_ROUTE",
+        "EXPECTED_SEQUENCE",
+        "ACCEPTANCE_PREDICATES"
+      ],
+      "physicalAcceptanceThresholdState": "PENDING",
+      "evidenceRefs": [
+        "SRC-METHOD-GAP-HIL-NI-VERISTAND",
+        "SRC-METHOD-GAP-HIL-OPENHTF"
+      ],
+      "decision": "FREEZE_TARGET_NEUTRAL_SKELETON",
+      "confidence": "HIGH"
+    }
+  ],
+  "decisions": [
+    {
+      "gapId": "GAP-IF-USB-DATA-METHOD",
+      "classification": "FREEZE_TARGET_NEUTRAL_SKELETON",
+      "rationale": "USB-IF provides an official revision/test-assertion anchor; a logical enumeration, transfer, disconnect/reconnect, raw-trace and owner-binding skeleton is justified without selecting class, identity, mode, pins, connector, or thresholds.",
+      "nextOwner": "hardware/evt0/lab-v1/method-catalog.json",
+      "scoreForLaterMethodPackage": 74
+    },
+    {
+      "gapId": "GAP-IF-STORAGE-POWER-LOSS-METHOD",
+      "classification": "KEEP_PENDING_MORE_PRIMARY_EVIDENCE",
+      "rationale": "Micron and KIOXIA evidence is product/technology-specific, NVMe and SD are conditional families, and the JEDEC landing page was inaccessible; storage technology, filesystem, recovery semantics, and thresholds are not established.",
+      "nextOwner": "hardware/evt0/lab-v1/method-catalog.json",
+      "scoreForLaterMethodPackage": 58
+    },
+    {
+      "gapId": "GAP-CONTROL-STATUS-METHOD",
+      "classification": "FREEZE_TARGET_NEUTRAL_SKELETON",
+      "rationale": "NI HIL and OpenHTF primary project material support phased stimulus, observation, measurements, attachments, and trace records; physical I/O, debug transport, firmware behavior, and thresholds remain pending.",
+      "nextOwner": "hardware/evt0/lab-v1/method-catalog.json",
+      "scoreForLaterMethodPackage": 72
+    }
+  ],
+  "softwareReadOnly": {
+    "anchorPath": "docs/codex/tasks/system-product-rd/active-task.md",
+    "anchorSha256": "bfe6fb9c02065246ee6d4485f34d6f6f29c9a0f2f5da50d7386e3168b759d763",
+    "anchorStateAtCapture": "SW-AUTHORING-TASK-RECOVERY-01_COMPLETE",
+    "acceptedFormalReportPath": "build/companion-authoring-task-recovery-validation/report.json",
+    "acceptedFormalReportSha256": "7c9535fc585c2593f0215c6ec37dfc54c706896361db4dc68e5393d2fbc76059",
+    "acceptedFormalReportChecks": 22,
+    "acceptedFormalReportRole": "AUDIT_TIME_ACCEPTED_REPORT_NOT_NEWEST_REQUIRED",
+    "explicitHardwareImpactReportPath": "build/companion-tts-source-adapter-validation/report.json",
+    "explicitHardwareImpactReportSha256": "3421b0de9614162cb20c02d5320c162beaa84b7547f5ee62ff5ba6b83d0cdd5b",
+    "provenanceState": "AUDIT_SNAPSHOT_AT_CAPTURE",
+    "liveSemanticRule": "LIVE_BOUNDARY_SEMANTICS_ONLY_NO_HASH_OR_TASK_NAME",
+    "hardwareImpact": "NONE",
+    "boardTarget": "UNRESOLVED",
+    "sessionCoreModified": false,
+    "familyWorkspaceModified": false,
+    "productionProviderQualified": false,
+    "offlineReady": false
+  },
+  "effects": {
+    "methodCatalog": "NONE",
+    "instrumentRegistry": "NONE",
+    "targetBinding": "NONE",
+    "physicalEvidence": "NONE",
+    "releaseGate": "NONE",
+    "promotion": "NONE",
+    "software": "NONE"
+  },
+  "implementation": [
+    {
+      "path": "hardware/evt0/method-gap-evidence-v1/schema.json",
+      "revision": "1.1.0",
+      "bytes": 18847,
+      "sha256": "be01a82a8f5dd6bc64a9b91f332aad119f869c0860a9a02610a45ba76cfb1d32"
+    },
+    {
+      "path": "hardware/evt0/method-gap-evidence-v1/README.md",
+      "revision": "1.1.0",
+      "bytes": 7117,
+      "sha256": "371cf71aee7cca190951bf3ca517144592affd2c2692ea35e163151fac2165dd"
+    },
+    {
+      "path": "scripts/validate-hardware-method-gap-evidence.mjs",
+      "revision": "1.1.0",
+      "bytes": 48098,
+      "sha256": "0a762a4506b9ccb86f3f2e3c7c44852df088f2b0a5e44b335695e3aeb65444df"
+    },
+    {
+      "path": "scripts/test-hardware-method-gap-evidence.mjs",
+      "revision": "1.1.0",
+      "bytes": 7382,
+      "sha256": "9d390374a623eee2becf26089db30591b4dbf6c69a0434cc55b8b2d6a251ce01"
+    }
+  ]
+}

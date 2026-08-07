@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/family-build-plan-v1.json",
+  "title": "Yimi confirmation-free Family BuildPlan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "buildPlanId",
+    "buildSubjectSha256",
+    "requestedAt",
+    "familyRevisionId",
+    "outputMode",
+    "expectedCompilerProfile",
+    "targetProfile",
+    "physicalMap",
+    "codecProfile",
+    "assetCatalog",
+    "expectedProjection"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "family-build-plan-v1" },
+    "buildPlanId": {
+      "type": "string",
+      "pattern": "^PLAN-[A-Z0-9][A-Z0-9._-]{2,127}$"
+    },
+    "buildSubjectSha256": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256" },
+    "requestedAt": { "type": "string", "format": "date-time" },
+    "familyRevisionId": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256Id" },
+    "outputMode": { "enum": ["design-fixture", "release-candidate"] },
+    "expectedCompilerProfile": { "const": "family-alpha-draft-v1" },
+    "targetProfile": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/targetProfile" },
+    "physicalMap": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/physicalMap" },
+    "codecProfile": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/codecProfile" },
+    "assetCatalog": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/assetCatalog" },
+    "expectedProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceSha256"],
+      "properties": {
+        "sourceSha256": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "outputMode": { "const": "design-fixture" } },
+        "required": ["outputMode"]
+      },
+      "then": {
+        "properties": {
+          "physicalMap": {
+            "type": "object",
+            "properties": { "status": { "const": "unassigned" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "outputMode": { "const": "release-candidate" } },
+        "required": ["outputMode"]
+      },
+      "then": {
+        "properties": {
+          "physicalMap": {
+            "type": "object",
+            "properties": { "status": { "const": "assigned" } }
+          }
+        }
+      }
+    }
+  ]
+}

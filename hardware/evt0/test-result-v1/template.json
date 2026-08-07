@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "recordType": "point-read-latency-v1",
+  "resultId": "RESULT-PENDING-EVT0",
+  "fixtureOnly": false,
+  "evidenceState": "PENDING",
+  "recordedAt": null,
+  "verdict": "BLOCKED",
+  "testDefinition": {
+    "testId": "EVT0-FW-LATENCY",
+    "catalogVersion": 1
+  },
+  "specimen": {
+    "candidateId": null,
+    "boardMpn": null,
+    "pcbRevision": null,
+    "boardSerial": null,
+    "headMpn": null,
+    "headRevision": null,
+    "headSerial": null,
+    "firmware": {
+      "version": null,
+      "gitCommit": null,
+      "binarySha256": null,
+      "rustcVersion": null,
+      "targetTriple": null,
+      "cargoLockSha256": null,
+      "features": []
+    },
+    "snapshotId": null,
+    "oidTool": null,
+    "oidToolVersion": null,
+    "printProfile": null,
+    "printBatch": null
+  },
+  "method": {
+    "procedureId": "PENDING",
+    "audioStartTimeClass": "unavailable",
+    "clockDomains": [
+      {
+        "clockId": "PENDING",
+        "kind": "device-monotonic",
+        "tickHz": 1,
+        "wrapBits": 64
+      }
+    ],
+    "synchronization": [],
+    "instruments": [],
+    "environment": {
+      "temperatureC": null,
+      "relativeHumidityPct": null,
+      "notes": "Populate only from the sealed physical measurement run."
+    }
+  },
+  "rawArtifacts": [],
+  "samples": [],
+  "queueEvidence": {
+    "oid": {
+      "nextSequence": 0,
+      "droppedEvents": 0,
+      "queuedEvents": 0
+    },
+    "audio": {
+      "nextSequence": 0,
+      "droppedEvents": 0,
+      "queuedEvents": 0
+    }
+  },
+  "summary": {
+    "total": 0,
+    "correct": 0,
+    "wrong": 0,
+    "noRead": 0,
+    "timeout": 0,
+    "readError": 0,
+    "oidQueueDrops": 0,
+    "audioQueueDrops": 0,
+    "eligibleLatencySamples": 0,
+    "p50Us": null,
+    "p95Us": null,
+    "p99Us": null,
+    "maxUs": null
+  },
+  "acceptance": {
+    "profileId": "EVT0-FW-LATENCY",
+    "startStage": "event",
+    "endStage": "audioStart",
+    "minSamples": 1000,
+    "minSuccessRate": 1,
+    "maxWrongCodes": 0,
+    "maxNoReads": 0,
+    "maxP95Us": 200000
+  }
+}

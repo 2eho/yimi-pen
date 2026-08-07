@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-07-26",
+  "host": "windows-x86_64",
+  "tools": [
+    {
+      "name": "uv",
+      "version": "0.11.32",
+      "source": "https://github.com/astral-sh/uv/releases/download/0.11.32/uv-x86_64-pc-windows-msvc.zip",
+      "sha256": "acfde570451cfdb8689fa159a138ee805ba4e241c466432750302c86254b0984",
+      "installed_path": "D:\\DevTools\\uv\\0.11.32"
+    },
+    {
+      "name": "ffmpeg",
+      "version": "8.1.2-essentials_build-www.gyan.dev",
+      "source": "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip",
+      "sha256": "db580001caa24ac104c8cb856cd113a87b0a443f7bdf47d8c12b1d740584a2ec",
+      "installed_path": "D:\\DevTools\\ffmpeg\\gyan-release-20260627",
+      "executables_captured_at": "2026-08-04",
+      "executables": {
+        "ffmpeg": {
+          "relative_path": "ffmpeg-8.1.2-essentials_build/bin/ffmpeg.exe",
+          "sha256": "1326dde4c84ff1f96fe6b8916c5bed29e163e9b5dccf995f6f3db069d143ec5e"
+        },
+        "ffprobe": {
+          "relative_path": "ffmpeg-8.1.2-essentials_build/bin/ffprobe.exe",
+          "sha256": "b49ccc7c6547b141ad5a2f6ec69cc04323d7133d7704d70b331b904c63eecb07"
+        },
+        "ffplay": {
+          "relative_path": "ffmpeg-8.1.2-essentials_build/bin/ffplay.exe",
+          "sha256": "c5072709d93eee7b40891109e282486b5089e84ea7ce02010a48ff1b79e5b11a"
+        }
+      },
+      "redistribution": "not included in this repository; GPL-enabled external build"
+    },
+    {
+      "name": "playwright-cli",
+      "version": "0.1.17",
+      "source": "npm:@playwright/cli@0.1.17",
+      "integrity": "sha512-VBw6y3p8eqOqmjKg07IkWSPGKJkpIhMRNDFI6DOYsDD6fAfcI1XYEWMLWyhSZQ0B/Oc2KN49eq4XqE64PUPHBg==",
+      "lock_file": "../../package-lock.json"
+    },
+    {
+      "name": "python",
+      "version": "3.12.9",
+      "role": "hardware-test interpreter"
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1",
+      "lock_file": "../tests/uv.lock"
+    },
+    {
+      "name": "pyserial",
+      "version": "3.5",
+      "lock_file": "../tests/uv.lock"
+    }
+  ]
+}

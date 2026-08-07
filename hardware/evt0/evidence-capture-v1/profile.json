@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "profileId": "HW-EVIDENCE-CAPTURE-ADAPTER-V1",
+  "purpose": "Capture externally supplied hardware evidence bytes once, verify exact identities, and emit lane-specific owner fragments without promoting any hardware or procurement state.",
+  "lanes": [
+    {
+      "id": "VENDOR_CONTACT",
+      "workspacePattern": "^build/vendor-contact-receipts/[A-Za-z0-9][A-Za-z0-9._-]{2,80}$",
+      "ownerFile": "receipt.draft.json",
+      "ownerRecordKind": "vendor-outbound-send-receipt",
+      "ownerIdentityField": "receiptId",
+      "rawPathPattern": "^build/vendor-contact-receipts/[^/\\\\]+/raw/[^/\\\\]+$",
+      "routeKind": "vendor-contact-route-v1"
+    },
+    {
+      "id": "BENCHMARK_SELLER",
+      "workspacePattern": "^build/benchmark-seller-evidence/[A-Z0-9][A-Z0-9-]{2,95}$",
+      "ownerFile": "record.draft.json",
+      "ownerRecordKind": "benchmark-seller-evidence",
+      "ownerIdentityField": "recordId",
+      "rawPathPattern": "^build/benchmark-seller-evidence/[^/\\\\]+/raw/[^/\\\\]+$",
+      "routeKind": "benchmark-seller-route-v1"
+    },
+    {
+      "id": "LAB_REGISTRY",
+      "workspacePattern": "^build/hardware-lab/instruments/EVT0-LAB-REGISTRY-[A-Z0-9-]+$",
+      "ownerFile": "registry.draft.json",
+      "ownerRecordKind": "evt0-lab-instrument-registry",
+      "ownerIdentityField": "registryId",
+      "rawPathPattern": "^build/hardware-lab/instruments/[^/\\\\]+/raw/[^/\\\\]+$",
+      "routeKind": "lab-registry-route-v1"
+    },
+    {
+      "id": "VENDOR_RESPONSE",
+      "workspacePattern": "^build/vendor-evidence/[A-Z0-9][A-Z0-9._-]{2,95}/[A-Z0-9][A-Z0-9._-]{2,95}$",
+      "ownerFile": "response.draft.json",
+      "ownerRecordKind": "mb1-prepay-response",
+      "ownerIdentityField": "responseId",
+      "rawPathPattern": "^build/vendor-evidence/[^/\\\\]+/[^/\\\\]+/raw/[^/\\\\]+$",
+      "routeKind": "vendor-response-route-v1"
+    }
+  ],
+  "effects": {
+    "targetBindingEffect": "NONE",
+    "adapterEffect": "EVIDENCE_CAPTURE_ONLY",
+    "bomRevisionEffect": "NONE",
+    "releaseGateEffect": "NONE",
+    "purchaseAuthorizationEffect": "NONE",
+    "recordStateEffect": "NONE_OWNER_RECORD_UNCHANGED",
+    "sourceArtifactEffect": "NONE_READ_ONLY"
+  },
+  "policies": {
+    "sourcePathPolicy": "REGULAR_FILE_NO_SYMLINK_OR_REPARSE",
+    "destinationPolicy": "EXISTING_OWNER_WORKSPACE_RAW_ROOT_SINGLE_SEGMENT",
+    "metadataPolicy": "EXPLICIT_ONLY_NO_MIME_OR_FACT_INFERENCE",
+    "copyPolicy": "EXCLUSIVE_COPY_AND_DESTINATION_HASH_READBACK",
+    "rollbackPolicy": "REMOVE_ONLY_NEW_FILES_WITH_MATCHING_CAPTURE_HASH",
+    "ownerPolicy": "HASH_BEFORE_AND_AFTER_OWNER_RECORD_BYTE_IDENTICAL",
+    "indexPolicy": "ONE_IMMUTABLE_INDEX_PER_CAPTURE_ID"
+  }
+}

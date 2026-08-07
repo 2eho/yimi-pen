@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "hardware-hil-raw-evidence-capture-index",
+  "packageId": "HW-HIL-RAW-EVIDENCE-CAPTURE-LANE-V1",
+  "packageRevision": "1.0.0",
+  "captureIndexId": null,
+  "status": "TEMPLATE_ONLY",
+  "laneId": "HIL_RAW_TEST",
+  "laneState": "PENDING_OWNER_EXTENSION",
+  "methodId": null,
+  "allowedMethodIds": [
+    "PROPOSED-USB-DATA-OBSERVATION-001",
+    "PROPOSED-CONTROL-STATUS-HIL-001"
+  ],
+  "targetState": "UNRESOLVED",
+  "contractRef": {
+    "path": "hardware/evt0/fixture-method-contract-v1/manifest.json",
+    "packageId": "HW-FIXTURE-METHOD-CONTRACT-USB-CONTROL-HIL-V1",
+    "revision": "1.0.0",
+    "sha256": null
+  },
+  "fixtureAdapterRef": {
+    "path": "hardware/evt0/test-fixture-v1/adapter.template.json",
+    "id": "EVT0-TARGET-ADAPTER-TEMPLATE",
+    "revision": "1.0.0",
+    "bindingId": null
+  },
+  "fixtureProfileRef": {
+    "path": "hardware/evt0/test-fixture-v1/profile.json",
+    "profileId": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1",
+    "revision": "1.0.0",
+    "sha256": null
+  },
+  "fixtureInstanceRef": {
+    "path": "hardware/evt0/test-fixture-v1/instance.template.json",
+    "templateId": "HW-REUSABLE-TEST-FIXTURE-INSTANCE-TEMPLATE-V1",
+    "status": "TEMPLATE_ONLY",
+    "id": null
+  },
+  "runBindingRef": {
+    "path": "hardware/evt0/fixture-method-contract-v1/run.template.json",
+    "templateId": "RUN-TEMPLATE-USB-CONTROL-HIL-V1",
+    "revision": "1.0.0",
+    "methodId": null
+  },
+  "labSessionRef": {
+    "ownerPath": "hardware/evt0/lab-v1",
+    "sessionId": null,
+    "sha256": null
+  },
+  "testResultRef": {
+    "ownerPath": "hardware/evt0/test-result-v1/schema.json",
+    "resultId": null,
+    "sha256": null,
+    "rawArtifactsField": "rawArtifacts"
+  },
+  "evidenceCaptureRef": {
+    "ownerPath": "hardware/evt0/evidence-capture-v1/profile.json",
+    "captureRouteState": "PENDING_OWNER_EXTENSION",
+    "laneId": null,
+    "captureIndexId": null
+  },
+  "releaseGateRef": {
+    "ownerPath": "hardware/evt0/release-gates-v1/catalog.json",
+    "receiptId": null,
+    "effect": "NONE"
+  },
+  "softwareRef": {
+    "contractId": null,
+    "scenarioId": null,
+    "hardwareImpact": "NONE"
+  },
+  "firmwareRef": {
+    "artifactRole": null,
+    "implementationLane": null,
+    "version": null,
+    "evidenceRef": null
+  },
+  "captureTool": {
+    "identity": null,
+    "version": null,
+    "configSha256": null,
+    "state": "PENDING_EVIDENCE"
+  },
+  "chainOfCustody": {
+    "operatorId": null,
+    "source": null,
+    "custodyState": "PENDING_EVIDENCE",
+    "readbackState": "PENDING_EVIDENCE",
+    "events": []
+  },
+  "artifacts": [],
+  "resultProjection": {
+    "testResultId": null,
+    "verdict": null,
+    "physicalEvidenceState": "NONE",
+    "qualificationState": "NONE"
+  },
+  "effects": {
+    "targetBinding": "NONE",
+    "methodCatalog": "NONE",
+    "physicalEvidence": "NONE",
+    "testResult": "NONE_REFERENCE_OWNER_UNCHANGED",
+    "evidenceCaptureProfile": "NONE_PROFILE_UNCHANGED",
+    "releaseGate": "NONE",
+    "software": "NONE",
+    "qualification": "NONE",
+    "promotion": "NONE"
+  }
+}

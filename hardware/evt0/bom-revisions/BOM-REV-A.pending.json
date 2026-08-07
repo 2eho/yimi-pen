@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "profile": "bom-revision-v1",
+  "bomRevisionId": "BOM-REV-A",
+  "state": "PENDING",
+  "createdAt": "2026-08-04T00:00:00Z",
+  "activeBranch": "UNRESOLVED",
+  "sourceCsv": {
+    "path": "hardware/evt0/bom-lock.csv",
+    "sha256": "9b84be30cc1174c4c6553ce3f683793336ec4ce113edca9f427fd0f588d08a5d",
+    "rowCount": 13
+  },
+  "targetBinding": {
+    "path": "hardware/evt0/hardware-system-v1/target-binding.json",
+    "sha256": "ccb6efefadc6b438646c69160bc882229465b3639c130aa044a08330de35e202"
+  },
+  "targetIdentity": {
+    "BOARD_MPN": null,
+    "PCB_REV": null,
+    "HEAD_MPN": null,
+    "HEAD_REV": null,
+    "FW_VERSION": null
+  },
+  "vendorEvidence": {
+    "recordsDirectory": "hardware/evt0/vendor-evidence-v1/records",
+    "candidateId": "MB1-CANDIDATE-A",
+    "requiredDecision": "READY_TO_BUY"
+  },
+  "physicalIntake": {
+    "recordsDirectory": "hardware/evt0/intake-v1/records",
+    "candidateId": "MB1-CANDIDATE-A",
+    "requiredDisposition": "ACCEPTED_BOARD_TARGET",
+    "minimumMatchingSamples": 2
+  },
+  "releaseReceiptRefs": [],
+  "change": {
+    "previousRevisionId": null,
+    "reason": "Initial Gen1 EVT-0 pending baseline; target board and active branch remain unresolved.",
+    "affectedInterfaces": ["ALL"]
+  },
+  "approval": {
+    "status": "PENDING",
+    "approvedBy": null,
+    "approvedAt": null
+  },
+  "requirements": ["RQ-HW-001", "RQ-HW-002", "RQ-HW-003"]
+}

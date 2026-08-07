@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "catalogId": "BENCHMARK-SELLER-EVIDENCE-GATES-V1",
+  "targetBindingEffect": "NONE_BENCHMARK_ONLY",
+  "adapterEffect": "NONE",
+  "releaseGateEffect": "NONE",
+  "purchaseAuthorizationEffect": "NONE_HUMAN_DECISION_REQUIRED",
+  "intakeEffect": "NONE_UNTIL_RECEIVED_UNIT",
+  "profiles": [
+    {
+      "profileId": "REF2-BABYBUS-G4-446637-SAME-ITEM-V1",
+      "purchasePlanItemId": "REF2",
+      "candidateId": "BABYBUS-G4-9JI-446637-PENDING-SAME-ITEM",
+      "preparationStatus": "SELLER_PHOTO_REQUIRED",
+      "sourceRefs": [
+        "SRC-BENCH-JOJO-O-001",
+        "SRC-BENCH-JOJO-R-001"
+      ],
+      "sourceBaselines": [
+        {
+          "id": "SRC-BENCH-JOJO-O-001",
+          "grade": "O",
+          "bytes": 56144,
+          "sha256": "9815C1B1BB723C86D793285BDFD5607332BAF1D7ADE1FD923DBE20BC6406A0A5",
+          "allowedClaim": "官方产品线资料把 G4 列为当前唯一在售代际；不证明零售订单或待发实物身份。"
+        },
+        {
+          "id": "SRC-BENCH-JOJO-R-001",
+          "grade": "R",
+          "bytes": 659857,
+          "sha256": "37E341DE29807F7027B3A3B216E79417D27C8C71BF961CE3F10791A1FDC1254E",
+          "allowedClaim": "已归档零售响应含商品 446637 与基础认知套装 32GB 文字；不证明 G4、库存或待发实物。"
+        }
+      ],
+      "retailListingBarcodeField": {
+        "value": "110329",
+        "classification": "RETAIL_LISTING_FIELD_ONLY",
+        "physicalPackageBarcodeEffect": "NONE"
+      },
+      "disambiguationNote": "官方表中 G3 与 G4 都公开为 32G、2.4GHz WiFi、Type-C；这些消费参数不足以单独排除 G3。",
+      "requestedIdentity": {
+        "productGeneration": "G4",
+        "sourceOrderSku": "446637",
+        "bundleCapacityLabel": "32GB"
+      },
+      "requirements": [
+        {
+          "id": "SELLER_LISTING_AND_FULFILLMENT",
+          "title": "商品、库存与发货主体",
+          "description": "提供当前商品完整标题、实际店内 SKU 或链接、待发库存状态、卖家与发货主体。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "ORDER_PAGE_CAPTURE",
+            "SELLER_CHAT_EXPORT",
+            "SELLER_CONFIRMATION_EXPORT"
+          ],
+          "acceptedProvenance": [
+            "PLATFORM_EXPORT",
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "PACKAGE_SIX_SIDES",
+          "title": "待发实物包装六面",
+          "description": "提供同一待发实物的外包装六面原图或连续原视频，避免混用不同批次宣传图。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "PACKAGE_PHOTO",
+            "SELLER_ORIGINAL_VIDEO"
+          ],
+          "acceptedProvenance": [
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "PACKAGE_BARCODE_AND_LOT",
+          "title": "包装条码与生产批次",
+          "description": "包装原件中清晰显示完整条码以及生产日期或批次。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "PACKAGE_PHOTO",
+            "SELLER_ORIGINAL_VIDEO"
+          ],
+          "acceptedProvenance": [
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "PEN_NAMEPLATE_AND_SERIAL",
+          "title": "笔身背标与序列号",
+          "description": "提供同一支笔的正反面和型号铭牌；序列号中段可遮挡，但前后缀须可追溯。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "PEN_LABEL_PHOTO",
+            "SELLER_ORIGINAL_VIDEO"
+          ],
+          "acceptedProvenance": [
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "BOOT_MODEL_AND_FIRMWARE",
+          "title": "开机型号与版本页",
+          "description": "提供同一支笔开机后的型号、系统或固件版本原图或连续原视频。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "BOOT_VERSION_PHOTO",
+            "SELLER_ORIGINAL_VIDEO"
+          ],
+          "acceptedProvenance": [
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "INCLUDED_READABLE_MEDIA",
+          "title": "原配可点读物同框",
+          "description": "提供本订单全部点读书、码卡或录音贴纸、线材和说明书与待发笔同框原件。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "BUNDLE_PHOTO",
+            "SELLER_ORIGINAL_VIDEO"
+          ],
+          "acceptedProvenance": [
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "NO_SUBSTITUTION_CONFIRMATION",
+          "title": "照片即待发物且不替代",
+          "description": "卖家书面确认实际发货物与本次原图或原视频完全一致，不使用功能相同或随机版本替代。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "SELLER_CHAT_EXPORT",
+            "SELLER_CONFIRMATION_EXPORT"
+          ],
+          "acceptedProvenance": [
+            "PLATFORM_EXPORT",
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "SAME_ITEM_CONTINUOUS_BINDING",
+          "title": "同一待发物连续绑定",
+          "description": "一个连续原始短视频依次显示订单或待发说明、包装六面与条码、开箱、笔身背标、开机版本页以及全部套装物，降低不同实物串线风险。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "SELLER_ORIGINAL_VIDEO"
+          ],
+          "acceptedProvenance": [
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "REF2_G4_VISIBLE",
+          "title": "G4 代际可见",
+          "description": "让包装、笔身标识或开机页中的 G4 与同一待发实物形成可复核关系，并确认不是 G1/G3。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "PACKAGE_PHOTO",
+            "PEN_LABEL_PHOTO",
+            "BOOT_VERSION_PHOTO",
+            "SELLER_ORIGINAL_VIDEO"
+          ],
+          "acceptedProvenance": [
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "REF2_446637_MAPPING",
+          "title": "商品号 446637 对应关系",
+          "description": "卖家书面或订单原件把当前待发商品与来源商品号 446637 绑定；若店内 SKU 已变更，写明新旧对应关系。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "ORDER_PAGE_CAPTURE",
+            "SELLER_CHAT_EXPORT",
+            "SELLER_CONFIRMATION_EXPORT"
+          ],
+          "acceptedProvenance": [
+            "PLATFORM_EXPORT",
+            "SELLER_ORIGINAL"
+          ]
+        },
+        {
+          "id": "REF2_32GB_BUNDLE_BINDING",
+          "title": "基础认知套装 32GB 绑定",
+          "description": "让 32GB 套装标识、实际所含点读物和同一待发 G4 笔形成一件商品的证据。",
+          "minArtifactRefs": 1,
+          "acceptedArtifactKinds": [
+            "ORDER_PAGE_CAPTURE",
+            "PACKAGE_PHOTO",
+            "BUNDLE_PHOTO",
+            "SELLER_ORIGINAL_VIDEO",
+            "SELLER_CONFIRMATION_EXPORT"
+          ],
+          "acceptedProvenance": [
+            "PLATFORM_EXPORT",
+            "SELLER_ORIGINAL"
+          ]
+        }
+      ]
+    }
+  ]
+}

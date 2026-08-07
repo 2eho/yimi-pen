@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "physicalMapStatus": "unassigned",
+  "entries": [
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-ORDER-003",
+      "actionId": "action-zeta"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-ORDER-010",
+      "actionId": "action-alpha"
+    },
+    {
+      "physicalCode": null,
+      "logicalOid": "YIMI-ORDER-021",
+      "actionId": "action-mike"
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "profile": "family-alpha-draft-v1",
+  "fixtureOnly": true,
+  "familyLibraryId": "family-alpha-golden",
+  "contentRevision": "family-alpha-golden@0.1.0",
+  "createdAt": "2026-08-03T00:00:00Z",
+  "releaseState": "design-fixture",
+  "sourceProducer": {
+    "name": "family-alpha-golden-fixture",
+    "version": "0.1.0"
+  },
+  "target": {
+    "boardTarget": "UNFROZEN",
+    "firmwareMin": "UNFROZEN",
+    "physicalMapStatus": "unassigned",
+    "capabilities": [
+      "oid-map:logical-only",
+      "snapshot:staged-atomic",
+      "audio:board-negotiated"
+    ]
+  },
+  "bindings": [
+    {
+      "bindingId": "binding-013",
+      "logicalOid": "YIMI-EVT0-013",
+      "physicalCode": null,
+      "actionId": "action-013",
+      "label": "妈妈的问候",
+      "kind": "object",
+      "playPolicy": "replace",
+      "cooldownMs": 0,
+      "revision": 1,
+      "clips": [
+        {
+          "clipId": "clip-013-1",
+          "assetPath": "assets/clip-013-1.wav",
+          "sourceKind": "family-recording",
+          "transcript": "宝贝，妈妈在这里。",
+          "mediaType": "voice",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        }
+      ]
+    },
+    {
+      "bindingId": "binding-014",
+      "logicalOid": "YIMI-EVT0-014",
+      "physicalCode": null,
+      "actionId": "action-014",
+      "label": "认识香蕉",
+      "kind": "object",
+      "playPolicy": "replace",
+      "cooldownMs": 0,
+      "revision": 1,
+      "clips": [
+        {
+          "clipId": "clip-014-1",
+          "assetPath": "assets/clip-014-1.wav",
+          "sourceKind": "system-tts",
+          "transcript": "这是香蕉，黄黄的，香香的。",
+          "mediaType": "voice",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        }
+      ]
+    },
+    {
+      "bindingId": "binding-015",
+      "logicalOid": "YIMI-EVT0-015",
+      "physicalCode": null,
+      "actionId": "action-015",
+      "label": "家庭鼓励",
+      "kind": "character",
+      "playPolicy": "random_one",
+      "cooldownMs": 0,
+      "revision": 1,
+      "clips": [
+        {
+          "clipId": "clip-015-1",
+          "assetPath": "assets/clip-015-1.wav",
+          "sourceKind": "family-recording",
+          "transcript": "你做得真棒！",
+          "mediaType": "voice",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        },
+        {
+          "clipId": "clip-015-2",
+          "assetPath": "assets/clip-015-2.wav",
+          "sourceKind": "family-recording",
+          "transcript": "慢慢来，我陪着你。",
+          "mediaType": "voice",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        }
+      ]
+    },
+    {
+      "bindingId": "binding-016",
+      "logicalOid": "YIMI-EVT0-016",
+      "physicalCode": null,
+      "actionId": "action-016",
+      "label": "洗手提醒",
+      "kind": "object",
+      "playPolicy": "replace",
+      "cooldownMs": 0,
+      "revision": 1,
+      "clips": [
+        {
+          "clipId": "clip-016-1",
+          "assetPath": "assets/clip-016-1.wav",
+          "sourceKind": "system-tts",
+          "transcript": "小手洗干净，再来吃东西。",
+          "mediaType": "voice",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        }
+      ]
+    },
+    {
+      "bindingId": "binding-017",
+      "logicalOid": "YIMI-EVT0-017",
+      "physicalCode": null,
+      "actionId": "action-017",
+      "label": "睡前晚安",
+      "kind": "story",
+      "playPolicy": "queue",
+      "cooldownMs": 0,
+      "revision": 1,
+      "clips": [
+        {
+          "clipId": "clip-017-1",
+          "assetPath": "assets/clip-017-1.wav",
+          "sourceKind": "family-recording",
+          "transcript": "今天辛苦啦。",
+          "mediaType": "narration",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        },
+        {
+          "clipId": "clip-017-2",
+          "assetPath": "assets/clip-017-2.wav",
+          "sourceKind": "family-recording",
+          "transcript": "晚安，做个甜甜的梦。",
+          "mediaType": "narration",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        }
+      ]
+    },
+    {
+      "bindingId": "binding-018",
+      "logicalOid": "YIMI-EVT0-018",
+      "physicalCode": null,
+      "actionId": "action-018",
+      "label": "生活发现",
+      "kind": "object",
+      "playPolicy": "random_one",
+      "cooldownMs": 0,
+      "revision": 1,
+      "clips": [
+        {
+          "clipId": "clip-018-1",
+          "assetPath": "assets/clip-018-1.wav",
+          "sourceKind": "system-tts",
+          "transcript": "你发现了什么？",
+          "mediaType": "voice",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        },
+        {
+          "clipId": "clip-018-2",
+          "assetPath": "assets/clip-018-2.wav",
+          "sourceKind": "system-tts",
+          "transcript": "摸一摸，再听一次。",
+          "mediaType": "voice",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        },
+        {
+          "clipId": "clip-018-3",
+          "assetPath": "assets/clip-018-3.wav",
+          "sourceKind": "system-tts",
+          "transcript": "把它讲给家人听吧。",
+          "mediaType": "voice",
+          "language": "zh-CN",
+          "codec": "WAV_PCM16_16K_MONO"
+        }
+      ]
+    }
+  ]
+}

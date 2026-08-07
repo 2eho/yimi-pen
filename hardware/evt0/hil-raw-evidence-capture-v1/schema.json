@@ -1,0 +1,364 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/hardware-hil-raw-evidence-capture-lane-v1.json",
+  "title": "Hardware HIL raw-evidence capture lane v1 manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "packageId",
+    "revision",
+    "status",
+    "boardTargetState",
+    "lane",
+    "methodRefs",
+    "ownerRefs",
+    "provenancePolicy",
+    "softwareBoundary",
+    "effects",
+    "implementation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "hardware-hil-raw-evidence-capture-lane-v1"
+    },
+    "packageId": {
+      "const": "HW-HIL-RAW-EVIDENCE-CAPTURE-LANE-V1"
+    },
+    "revision": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "PROPOSED_PENDING_OWNER_EXTENSION"
+    },
+    "boardTargetState": {
+      "const": "UNRESOLVED"
+    },
+    "lane": {
+      "$ref": "#/$defs/lane"
+    },
+    "methodRefs": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/methodRef"
+      }
+    },
+    "ownerRefs": {
+      "$ref": "#/$defs/ownerRefs"
+    },
+    "provenancePolicy": {
+      "$ref": "#/$defs/provenancePolicy"
+    },
+    "softwareBoundary": {
+      "$ref": "#/$defs/softwareBoundary"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    },
+    "implementation": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "$ref": "#/$defs/implementation"
+      }
+    }
+  },
+  "$defs": {
+    "lane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "laneId",
+        "status",
+        "acceptedInEvidenceCaptureProfile",
+        "captureRouteState",
+        "adoptionId",
+        "existingProfilePath",
+        "ownerExtensionKind"
+      ],
+      "properties": {
+        "laneId": {
+          "const": "HIL_RAW_TEST"
+        },
+        "status": {
+          "const": "PROPOSED_ONLY"
+        },
+        "acceptedInEvidenceCaptureProfile": {
+          "const": false
+        },
+        "captureRouteState": {
+          "const": "PENDING_OWNER_EXTENSION"
+        },
+        "adoptionId": {
+          "type": "null"
+        },
+        "existingProfilePath": {
+          "const": "hardware/evt0/evidence-capture-v1/profile.json"
+        },
+        "ownerExtensionKind": {
+          "const": "NEW_HARDWARE_OWNED_CONTRACT_PENDING_PROFILE_ADOPTION"
+        }
+      }
+    },
+    "methodRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodId",
+        "gapId",
+        "status",
+        "acceptedInMethodCatalog",
+        "contractPath",
+        "contractRevision",
+        "sourceIds",
+        "rawArtifactKinds"
+      ],
+      "properties": {
+        "methodId": {
+          "enum": [
+            "PROPOSED-USB-DATA-OBSERVATION-001",
+            "PROPOSED-CONTROL-STATUS-HIL-001"
+          ]
+        },
+        "gapId": {
+          "enum": [
+            "GAP-IF-USB-DATA-METHOD",
+            "GAP-CONTROL-STATUS-METHOD"
+          ]
+        },
+        "status": {
+          "const": "PROPOSED_ONLY"
+        },
+        "acceptedInMethodCatalog": {
+          "const": false
+        },
+        "contractPath": {
+          "const": "hardware/evt0/fixture-method-contract-v1/manifest.json"
+        },
+        "contractRevision": {
+          "const": "1.0.0"
+        },
+        "sourceIds": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-METHOD-GAP-[A-Z0-9-]+$"
+          }
+        },
+        "rawArtifactKinds": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]+$"
+          }
+        }
+      }
+    },
+    "ownerRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodContractManifestPath",
+        "methodContractRunTemplatePath",
+        "methodGapManifestPath",
+        "evidenceCaptureProfilePath",
+        "testResultSchemaPath",
+        "fixtureAdapterTemplatePath",
+        "targetBindingPath",
+        "releaseGateCatalogPath",
+        "testResultRawArtifactsField"
+      ],
+      "properties": {
+        "methodContractManifestPath": {
+          "const": "hardware/evt0/fixture-method-contract-v1/manifest.json"
+        },
+        "methodContractRunTemplatePath": {
+          "const": "hardware/evt0/fixture-method-contract-v1/run.template.json"
+        },
+        "methodGapManifestPath": {
+          "const": "hardware/evt0/method-gap-evidence-v1/manifest.json"
+        },
+        "evidenceCaptureProfilePath": {
+          "const": "hardware/evt0/evidence-capture-v1/profile.json"
+        },
+        "testResultSchemaPath": {
+          "const": "hardware/evt0/test-result-v1/schema.json"
+        },
+        "fixtureAdapterTemplatePath": {
+          "const": "hardware/evt0/test-fixture-v1/adapter.template.json"
+        },
+        "targetBindingPath": {
+          "const": "hardware/evt0/hardware-system-v1/target-binding.json"
+        },
+        "releaseGateCatalogPath": {
+          "const": "hardware/evt0/release-gates-v1/catalog.json"
+        },
+        "testResultRawArtifactsField": {
+          "const": "rawArtifacts"
+        }
+      }
+    },
+    "provenancePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactMetadataFields",
+        "pathPolicy",
+        "digestPolicy",
+        "originalDerivedPolicy",
+        "chainOfCustodyPolicy",
+        "rawSourceAuthority",
+        "syntheticEvidencePolicy"
+      ],
+      "properties": {
+        "artifactMetadataFields": {
+          "type": "array",
+          "minItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9]+$"
+          }
+        },
+        "pathPolicy": {
+          "const": "REPOSITORY_RELATIVE_NO_ABSOLUTE_NO_DOT_SEGMENTS"
+        },
+        "digestPolicy": {
+          "const": "SHA256_AND_BYTE_LENGTH_REQUIRED_WITH_READBACK"
+        },
+        "originalDerivedPolicy": {
+          "const": "ORIGINAL_OR_DERIVED_RELATION_EXPLICIT_NO_IMPLICIT_PROMOTION"
+        },
+        "chainOfCustodyPolicy": {
+          "const": "OPERATOR_CUSTODY_READBACK_STATE_EXPLICIT"
+        },
+        "rawSourceAuthority": {
+          "const": "METHOD_GAP_MANIFEST_OFFICIAL_SNAPSHOTS_ONLY_NO_DUPLICATION"
+        },
+        "syntheticEvidencePolicy": {
+          "const": "SYNTHETIC_OR_TEMPLATE_NEVER_PHYSICAL"
+        }
+      }
+    },
+    "softwareBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hardwareImpact",
+        "boardTarget",
+        "sessionCoreModified",
+        "familyWorkspaceModified",
+        "productionProviderQualified",
+        "offlineReady",
+        "sourceMode"
+      ],
+      "properties": {
+        "hardwareImpact": {
+          "const": "NONE"
+        },
+        "boardTarget": {
+          "const": "UNRESOLVED"
+        },
+        "sessionCoreModified": {
+          "const": false
+        },
+        "familyWorkspaceModified": {
+          "const": false
+        },
+        "productionProviderQualified": {
+          "const": false
+        },
+        "offlineReady": {
+          "const": false
+        },
+        "sourceMode": {
+          "const": "READ_ONLY_SEMANTIC_BOUNDARY_NO_TASK_NAME_OR_HASH_GATE"
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetBinding",
+        "methodCatalog",
+        "physicalEvidence",
+        "testResult",
+        "evidenceCaptureProfile",
+        "releaseGate",
+        "software",
+        "qualification",
+        "promotion"
+      ],
+      "properties": {
+        "targetBinding": {
+          "const": "NONE"
+        },
+        "methodCatalog": {
+          "const": "NONE"
+        },
+        "physicalEvidence": {
+          "const": "NONE"
+        },
+        "testResult": {
+          "const": "NONE_REFERENCE_OWNER_UNCHANGED"
+        },
+        "evidenceCaptureProfile": {
+          "const": "NONE_PROFILE_UNCHANGED"
+        },
+        "releaseGate": {
+          "const": "NONE"
+        },
+        "software": {
+          "const": "NONE"
+        },
+        "qualification": {
+          "const": "NONE"
+        },
+        "promotion": {
+          "const": "NONE"
+        }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "revision",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

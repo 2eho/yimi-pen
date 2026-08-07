@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/hardware-evidence-capture-profile-v1.json",
+  "title": "Hardware evidence capture adapter profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "purpose",
+    "lanes",
+    "effects",
+    "policies"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profileId": { "const": "HW-EVIDENCE-CAPTURE-ADAPTER-V1" },
+    "purpose": { "type": "string", "minLength": 1 },
+    "lanes": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/lane" },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": { "id": { "const": "VENDOR_CONTACT" } },
+            "required": ["id"]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": { "id": { "const": "BENCHMARK_SELLER" } },
+            "required": ["id"]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": { "id": { "const": "LAB_REGISTRY" } },
+            "required": ["id"]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": { "id": { "const": "VENDOR_RESPONSE" } },
+            "required": ["id"]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ]
+    },
+    "effects": { "$ref": "#/$defs/effects" },
+    "policies": { "$ref": "#/$defs/policies" }
+  },
+  "$defs": {
+    "lane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "workspacePattern",
+        "ownerFile",
+        "ownerRecordKind",
+        "ownerIdentityField",
+        "rawPathPattern",
+        "routeKind"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "VENDOR_CONTACT",
+            "BENCHMARK_SELLER",
+            "LAB_REGISTRY",
+            "VENDOR_RESPONSE"
+          ]
+        },
+        "workspacePattern": { "type": "string", "minLength": 1 },
+        "ownerFile": { "type": "string", "pattern": "^[^/\\\\]+\\.json$" },
+        "ownerRecordKind": { "type": "string", "minLength": 1 },
+        "ownerIdentityField": {
+          "enum": ["receiptId", "recordId", "registryId", "responseId"]
+        },
+        "rawPathPattern": { "type": "string", "minLength": 1 },
+        "routeKind": {
+          "enum": [
+            "vendor-contact-route-v1",
+            "benchmark-seller-route-v1",
+            "lab-registry-route-v1",
+            "vendor-response-route-v1"
+          ]
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetBindingEffect",
+        "adapterEffect",
+        "bomRevisionEffect",
+        "releaseGateEffect",
+        "purchaseAuthorizationEffect",
+        "recordStateEffect",
+        "sourceArtifactEffect"
+      ],
+      "properties": {
+        "targetBindingEffect": { "const": "NONE" },
+        "adapterEffect": { "const": "EVIDENCE_CAPTURE_ONLY" },
+        "bomRevisionEffect": { "const": "NONE" },
+        "releaseGateEffect": { "const": "NONE" },
+        "purchaseAuthorizationEffect": { "const": "NONE" },
+        "recordStateEffect": { "const": "NONE_OWNER_RECORD_UNCHANGED" },
+        "sourceArtifactEffect": { "const": "NONE_READ_ONLY" }
+      }
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourcePathPolicy",
+        "destinationPolicy",
+        "metadataPolicy",
+        "copyPolicy",
+        "rollbackPolicy",
+        "ownerPolicy",
+        "indexPolicy"
+      ],
+      "properties": {
+        "sourcePathPolicy": { "const": "REGULAR_FILE_NO_SYMLINK_OR_REPARSE" },
+        "destinationPolicy": { "const": "EXISTING_OWNER_WORKSPACE_RAW_ROOT_SINGLE_SEGMENT" },
+        "metadataPolicy": { "const": "EXPLICIT_ONLY_NO_MIME_OR_FACT_INFERENCE" },
+        "copyPolicy": { "const": "EXCLUSIVE_COPY_AND_DESTINATION_HASH_READBACK" },
+        "rollbackPolicy": { "const": "REMOVE_ONLY_NEW_FILES_WITH_MATCHING_CAPTURE_HASH" },
+        "ownerPolicy": { "const": "HASH_BEFORE_AND_AFTER_OWNER_RECORD_BYTE_IDENTICAL" },
+        "indexPolicy": { "const": "ONE_IMMUTABLE_INDEX_PER_CAPTURE_ID" }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "profile": "family-alpha-confirmation-v1",
+  "fixtureOnly": true,
+  "confirmationId": "CONF-FAMILY-ALPHA-GOLDEN-001",
+  "previewId": "sha256:78efcd30f6c5ee105bd595d9b5def2265475cc0cb0a5658fbc77592f50406109",
+  "sourceSha256": "145544952205cb02285a3c510f9c76dd349ff44666a2c6336431f61a859d275f",
+  "decision": "confirmed",
+  "scope": "all-bindings",
+  "guardianRole": "parent",
+  "policyVersion": "family-alpha-v1",
+  "confirmedAt": "2026-08-03T00:05:00Z"
+}

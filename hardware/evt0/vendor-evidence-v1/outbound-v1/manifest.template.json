@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "documentKind": "mb1-outbound-manifest",
+  "bundleId": "MB1-OUTBOUND-V1",
+  "bundleStatus": "PREPARED_NOT_SENT",
+  "deliveryMode": "MANUAL_OFFICIAL_ENTRY_ONLY",
+  "sourceDocuments": [
+    {
+      "id": "PREPAY_PACK",
+      "path": "docs/research/gen1-mb1-prepay-pack.md",
+      "purpose": "MB1 payment-before-inquiry baseline and payment gate",
+      "distribution": "INCLUDE_IN_BUNDLE"
+    },
+    {
+      "id": "OID_RFQ",
+      "path": "docs/research/gen1-p0-oid-rfq.md",
+      "purpose": "Detailed RFQ appendix; use only after the recipient agrees to the MB1 pre-inquiry",
+      "distribution": "INCLUDE_IN_BUNDLE"
+    },
+    {
+      "id": "EVIDENCE_LEDGER",
+      "path": "hardware/evt0/evidence-sources.json",
+      "purpose": "Official-source identifiers used to constrain the inquiry",
+      "distribution": "MANIFEST_ONLY"
+    },
+    {
+      "id": "VENDOR_RESPONSE_TEMPLATE",
+      "path": "hardware/evt0/vendor-evidence-v1/candidate.template.json",
+      "purpose": "Internal reply-record contract; never treat this blank template as supplier evidence",
+      "distribution": "MANIFEST_ONLY"
+    }
+  ],
+  "messageTemplatePaths": [
+    "hardware/evt0/vendor-evidence-v1/outbound-v1/messages/ref-chunmiao-local.template.json",
+    "hardware/evt0/vendor-evidence-v1/outbound-v1/messages/ref-ztron-local.template.json",
+    "hardware/evt0/vendor-evidence-v1/outbound-v1/messages/sonix-oid-component.template.json"
+  ]
+}

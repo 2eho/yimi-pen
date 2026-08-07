@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "profileId": "HW-EDA-SYSTEM-SKELETON-V1",
+  "sources": {
+    "topology": {
+      "path": "hardware/evt0/hardware-system-v1/topology.json",
+      "topologyId": "hwt:sha256:98a87a1de9ee8dfa52ec68ebd00afbbf23fa3c18e0c2a75e34ba09da4a9c4e5f",
+      "bytes": 15420,
+      "sha256": "96431fecb220882b16745082d803e9349675802d234eb5ddf75fa197dd5f63d5"
+    },
+    "targetBinding": {
+      "path": "hardware/evt0/hardware-system-v1/target-binding.json",
+      "requiredTargetState": "UNRESOLVED",
+      "requiredEdaReadiness": "SYSTEM_SKELETON_ONLY",
+      "requiredSystemSkeletonReady": true,
+      "requiredChipLevelReady": false
+    },
+    "edaManifest": {
+      "path": "hardware/eda/manifest.json",
+      "requiredProjectName": "UNSET",
+      "requiredProjectRevision": "UNFROZEN",
+      "requiredDesignWrite": false,
+      "requiredArtifactCount": 0
+    },
+    "officialEvidence": {
+      "path": "hardware/evt0/eda-system-skeleton-v1/evidence.json",
+      "evidenceSetId": "HW-EDA-SYSTEM-SKELETON-EVIDENCE-20260804"
+    }
+  },
+  "scope": {
+    "artifactClass": "LOGICAL_SYSTEM_SKELETON",
+    "executionMode": "OFFLINE_PREVIEW_AND_WRITE_PLAN_ONLY",
+    "nativeSourceGenerated": false,
+    "nativeExportGenerated": false,
+    "permittedWork": [
+      "HIERARCHY",
+      "BLOCK_DIAGRAM",
+      "INTERFACE_LABELS"
+    ],
+    "blockedWork": [
+      "SYMBOL_SELECTION",
+      "PIN_MAPPING",
+      "PHYSICAL_NET_NAMING",
+      "POWER_RAIL_VALUES",
+      "CONNECTOR_SELECTION",
+      "PCB_LAYOUT"
+    ]
+  },
+  "hierarchy": {
+    "rootSheetId": "SYS-00",
+    "leafSheetPolicy": {
+      "onePer": "TOPOLOGY_BLOCK",
+      "idFormat": "SYS-{ORDINAL_2}-{BLOCK_ID}",
+      "incidentInterfaceOrder": "TOPOLOGY_INTERFACE_ORDER"
+    }
+  },
+  "diagramLayout": {
+    "coordinateSystem": "LOGICAL_PREVIEW_GRID_V1",
+    "unit": "PREVIEW_PIXEL",
+    "canvas": {
+      "width": 1900,
+      "height": 1120
+    },
+    "rolePlacements": [
+      { "role": "OID_MEDIA", "x": 40, "y": 120, "width": 220, "height": 100 },
+      { "role": "OID_HEAD", "x": 320, "y": 120, "width": 220, "height": 100 },
+      { "role": "TARGET_ADAPTER", "x": 600, "y": 300, "width": 260, "height": 120 },
+      { "role": "CONTENT_STORAGE", "x": 1080, "y": 120, "width": 240, "height": 100 },
+      { "role": "AUDIO_OUTPUT", "x": 1080, "y": 320, "width": 240, "height": 100 },
+      { "role": "USB_DEVICE_PORT", "x": 40, "y": 340, "width": 220, "height": 100 },
+      { "role": "BATTERY_PACK", "x": 40, "y": 560, "width": 220, "height": 100 },
+      { "role": "POWER_SYSTEM", "x": 320, "y": 560, "width": 220, "height": 100 },
+      { "role": "USER_IO", "x": 320, "y": 260, "width": 220, "height": 100 },
+      { "role": "DIAGNOSTICS", "x": 1080, "y": 540, "width": 240, "height": 100 },
+      { "role": "OPTIONAL_WIRELESS", "x": 1080, "y": 760, "width": 240, "height": 100 },
+      { "role": "ENCLOSURE", "x": 600, "y": 760, "width": 260, "height": 120 }
+    ]
+  },
+  "outputs": {
+    "logicalSkeleton": "build/eda-system-skeleton-v1/logical-skeleton.json",
+    "writePlan": "build/eda-system-skeleton-v1/write-plan.json",
+    "preview": "build/eda-system-skeleton-v1/system-overview.svg",
+    "validationReport": "build/eda-system-skeleton-v1/validation.json"
+  },
+  "applyPolicy": {
+    "status": "PENDING_CONTROLLED_WRITE_WINDOW",
+    "prerequisites": [
+      "bridge.edaConnected=true",
+      "isolated JLCEDA project and revision assigned",
+      "schematic design-write scope enabled for this operation",
+      "active schematic page identity captured",
+      "pre-write project snapshot and rollback point captured",
+      "pinned API version readback test prepared"
+    ],
+    "permittedFuturePrimitives": [
+      "RECTANGLE",
+      "TEXT"
+    ],
+    "interfaceRendering": "TEXT_REGISTER_ONLY_NO_EDA_WIRE"
+  },
+  "effects": {
+    "targetBindingEffect": "NONE",
+    "adapterEffect": "NONE",
+    "bomRevisionEffect": "NONE",
+    "releaseGateEffect": "NONE",
+    "purchaseAuthorizationEffect": "NONE",
+    "liveEdaEffect": "NONE_OFFLINE_ONLY"
+  }
+}

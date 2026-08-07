@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "profile": "family-confirmation-proof-v1",
+  "proofId": "proof:sha256:6930cc98cec12c19c1a0dd079294d3bee0b524b38c4c24a228495a5db47b3b09",
+  "claims": {
+    "type": "YIMI_CONFIRMATION_TRUST_V1",
+    "signatureProfile": "Ed25519+JCS-prefix-v1",
+    "algorithm": "Ed25519",
+    "issuerId": "confirmation-trust-provider",
+    "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k",
+    "trustPolicyId": "policy:sha256:4ff61fe05afc95b297c9e9f5cc668c28afdb67ef06e34b05267c937738089134",
+    "fixtureOnly": true,
+    "purpose": "snapshot-build",
+    "audience": "yimi-family-alpha-compiler",
+    "familyLibraryId": "family-alpha-golden",
+    "familyRevisionId": "sha256:39c95b3b12cbe4abc84ac86b77f3aaeaea2f915b8c0bd105ea2ea3b1b25e263c",
+    "buildPlanId": "PLAN-FAMILY-ALPHA-GOLDEN-001",
+    "buildSubjectSha256": "cdb45e96a1350404483a6172cb1dacde62602f240120ca006eb5c2a0f5b1070f",
+    "previewId": "sha256:78efcd30f6c5ee105bd595d9b5def2265475cc0cb0a5658fbc77592f50406109",
+    "sourceSha256": "145544952205cb02285a3c510f9c76dd349ff44666a2c6336431f61a859d275f",
+    "presentationPolicyVersion": "family-alpha-v1",
+    "presentationTranscriptSha256": "252ac5aa4048c2b7e884a5272252e7dee0a9393460ccf7858db1535052dc127c",
+    "confirmationId": "CONF-FAMILY-ALPHA-GOLDEN-001",
+    "confirmationSemanticSha256": "0b66146967e64118906bb8739bf6725ea7445336126733cde99b5fb9defca87c",
+    "decision": "confirmed",
+    "scope": "all-bindings",
+    "guardianAuthority": {
+      "authorityRevisionId": "authority-revision:sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "guardianSubjectRef": "guardian:sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "role": "parent"
+    },
+    "challengeId": "challenge:sha256:cafb53db39ec65c4f5062dd329730576541f981f5d4f036fadb2feaf5b4353aa",
+    "challengeNonce": "AAECAwQFBgcICQoLDA0ODw",
+    "issuedAt": "2026-08-03T00:05:01Z",
+    "confirmedAt": "2026-08-03T00:05:00Z",
+    "expiresAt": "2026-08-03T00:10:01Z"
+  },
+  "signature": "5nJ83FZJX8n7AJ3ee9ERjDo61YfL5RnTddtpWuF7wrUyc6gnO1iTsHBztWF0nBPFGECo0TGusLzoQpovBhxsBQ"
+}

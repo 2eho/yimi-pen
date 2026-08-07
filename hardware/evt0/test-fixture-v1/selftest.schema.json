@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/evt0-test-fixture-selftest-v1.json",
+  "title": "Yimi Pen EVT-0 fixture-only selftest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "selftestId",
+    "revision",
+    "status",
+    "profileRef",
+    "adapterRef",
+    "instanceRef",
+    "ownerRefs",
+    "fixtureOnly",
+    "evidenceState",
+    "evidence",
+    "checks",
+    "promotionBoundary",
+    "claims",
+    "blockers"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "evt0-test-fixture-selftest"
+    },
+    "selftestId": {
+      "type": "string",
+      "pattern": "^EVT0-FIXTURE-SELFTEST-[A-Z0-9-]+$"
+    },
+    "revision": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "TEMPLATE",
+        "PENDING",
+        "FIXTURE_ONLY"
+      ]
+    },
+    "profileRef": {
+      "$ref": "#/$defs/profileRef"
+    },
+    "adapterRef": {
+      "$ref": "#/$defs/adapterRef"
+    },
+    "instanceRef": {
+      "$ref": "#/$defs/instanceRef"
+    },
+    "ownerRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodCatalog",
+        "instrumentRegistrySchema",
+        "labSessionTemplate",
+        "testResultSchema",
+        "evidenceCaptureProfile",
+        "releaseGateCatalog"
+      ],
+      "properties": {
+        "methodCatalog": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "instrumentRegistrySchema": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "labSessionTemplate": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "testResultSchema": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "evidenceCaptureProfile": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "releaseGateCatalog": {
+          "$ref": "#/$defs/ownerRef"
+        }
+      }
+    },
+    "fixtureOnly": {
+      "const": true
+    },
+    "evidenceState": {
+      "const": "SYNTHETIC_FIXTURE_ONLY"
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "physicalEvidence",
+        "syntheticFixtureOnly",
+        "rawArtifactRefs"
+      ],
+      "properties": {
+        "physicalEvidence": {
+          "const": false
+        },
+        "syntheticFixtureOnly": {
+          "const": true
+        },
+        "rawArtifactRefs": {
+          "type": "array",
+          "maxItems": 0,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    },
+    "promotionBoundary": {
+      "$ref": "#/$defs/promotionBoundary"
+    },
+    "claims": {
+      "$ref": "#/$defs/claims"
+    },
+    "blockers": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+    },
+    "ownerRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "identity"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "profileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "profileId",
+        "revision"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/profile.json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "profileId": {
+          "const": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1"
+        },
+        "revision": {
+          "const": "1.0.0"
+        }
+      }
+    },
+    "adapterRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "adapterId",
+        "revision"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/adapter.template.json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "adapterId": {
+          "type": "string",
+          "pattern": "^EVT0-TARGET-ADAPTER-[A-Z0-9-]+$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "instanceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "instanceId",
+        "revision"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/instance.template.json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "instanceId": {
+          "type": "string",
+          "pattern": "^EVT0-FIXTURE-INSTANCE-[A-Z0-9-]+$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "status",
+        "evidenceKind",
+        "promotes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CHECK-[A-Z0-9-]+$"
+        },
+        "status": {
+          "enum": [
+            "PENDING",
+            "PASS",
+            "FAIL",
+            "NOT_RUN"
+          ]
+        },
+        "evidenceKind": {
+          "const": "SYNTHETIC_FIXTURE_ONLY"
+        },
+        "promotes": {
+          "const": false
+        }
+      }
+    },
+    "promotionBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetBindingEffect",
+        "releaseGateEffect",
+        "boardStateEffect",
+        "physicalReadinessEffect",
+        "canCloseReleaseGate",
+        "canPromoteBoardState"
+      ],
+      "properties": {
+        "targetBindingEffect": {
+          "const": "NONE"
+        },
+        "releaseGateEffect": {
+          "const": "NONE"
+        },
+        "boardStateEffect": {
+          "const": "NONE"
+        },
+        "physicalReadinessEffect": {
+          "const": "NONE"
+        },
+        "canCloseReleaseGate": {
+          "const": false
+        },
+        "canPromoteBoardState": {
+          "const": false
+        }
+      }
+    },
+    "claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "physicalFixture",
+        "serialKnown",
+        "calibrationKnown",
+        "qualified",
+        "physicalReady",
+        "releaseGateClosed",
+        "boardStatePromoted"
+      ],
+      "properties": {
+        "physicalFixture": {
+          "const": false
+        },
+        "serialKnown": {
+          "const": false
+        },
+        "calibrationKnown": {
+          "const": false
+        },
+        "qualified": {
+          "const": false
+        },
+        "physicalReady": {
+          "const": false
+        },
+        "releaseGateClosed": {
+          "const": false
+        },
+        "boardStatePromoted": {
+          "const": false
+        }
+      }
+    }
+  }
+}

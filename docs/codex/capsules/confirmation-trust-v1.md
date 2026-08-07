@@ -1,0 +1,24 @@
+# Capsule: confirmation-trust-v1
+
+- Date: 2026-08-03
+- Project: yimi-pen
+- Memory ID: confirmation-trust-v1
+- Memory class: durable-fact
+- Scope: 家庭预听确认、签名证明、一次性 challenge、防重放与逐构建授权
+- Aliases/keywords: Confirmation Trust, BuildPlan, BuildAuthorization, Ed25519, JCS, challenge, presentation transcript, proof, authority revision, replay store
+- Wake-up route: `index.md` -> `confirmation-trust-v1`
+- Version: v1
+- Phase/mode: scoped-build
+- Module: `contracts/confirmation-trust-v1.mjs`、`contracts/family-build-plan-v1.mjs`、`hardware/evt0/confirmation-trust-v1/`、`tools/confirmation-trust/`
+- Question: 如何打断旧 BuildRequest 的确认循环，并把产品 provider 资格与每次家庭构建授权分开。
+- Baseline: 新主流程是 confirmation-free `BuildPlan → preview → challenge/presentation/confirmation/proof → BuildAuthorization`。`BuildAuthorization` 只授权一个 `buildPlanId / buildSubjectSha256`；旧 `BuildRequest v1` 仅保留逐字节兼容输入，其 `release-candidate` 路径封闭。
+- Trust profile: plain Ed25519；签名输入为固定域 `org.yimi.pen/family-confirmation-proof/v1\0` 字节加 RFC 8785 JCS claims；`kid` 使用 RFC 7638/9278 JWK thumbprint URI；verifier 只从本地 policy keyring 取公钥。
+- Evidence: RFC 7517/7519/7638/8032/8037/8410/8725/8785/9278/9449 与 Node crypto 文档的 URL、字节数和 SHA-256 锁在 `evidence-lock.json`；黄金 proof/authorization 逐字节一致；17/17 负向与零副作用；报告 SHA-256 `e5dbed3b527e7703a06654ab9927254f0a24ead65ce309a3f47b61c16d7a1fdc`。
+- Replay semantics: nonce 为 128-bit base64url；成功验证后原子写入 `CONSUMED + verificationResult + operationJournal`；同 proof/subject 重试返回首次结果；同 challenge 的不同 proof 并发只有一个赢家。Memory 与 Atomic JSON adapter 共用语义，Atomic 读取使用拒绝重复键的严格 JSON 边界。
+- Product boundary: `RG-HOST-CONFIRMATION-TRUST-CONTRACT-PASSED` 只关闭 host fixture；`RG-PRODUCTION-CONFIRMATION-TRUST-VERIFIED` 是产品 release 的 provider qualification；每次构建还必须有非 fixture `BuildAuthorization`。两者互不替代。
+- Rejected hypotheses: 把 confirmation 预先塞入 BuildRequest；调用方布尔回调或单 receipt 自报生产信任；proof 自带公钥改变信任根；host fixture 关闭产品 provider gate；可跨 BuildPlan 复用的“已确认”状态。
+- Stable behavior: Family Alpha 既有 draft/preview/fixture confirmation/Snapshot 字节与 27/27 回归保持；新能力位于独立合同、provider port、replay adapter 和 build adapter，不触碰稳定 App/包运行时。
+- Regression guards: BuildPlan 不含 confirmation/receipt；BuildSubject、preview、presentation、confirmation、authority、key 和时间窗必须交叉绑定；失败保持 ledger/输出零副作用；生产 confirmation gate 对普通自洽 receipt fail-closed。
+- Judgment: host 合同已关闭；生产账号权威、私钥生命周期、产品数据库多进程/崩溃证据、provider qualification receipt 与真实 release-candidate 编译仍为开放证据。
+- Next step: 在家庭协调层实现生产 authority resolver、密钥/吊销审计和原子数据库 replay adapter，产出当前产品 release 的 provider qualification receipt，再接真实 BuildAuthorization/ReleaseDecision 编译。
+- Links: `../../confirmation-trust-v1.md`、`../../../hardware/evt0/confirmation-trust-v1/README.md`、`../../family-alpha-v1.md`

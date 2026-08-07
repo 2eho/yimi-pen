@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/confirmation-trust-replay-ledger-v1.json",
+  "title": "Yimi atomic confirmation challenge ledger v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profile", "revision", "challenges"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "confirmation-trust-replay-ledger-v1" },
+    "revision": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "challenges": {
+      "type": "array",
+      "maxItems": 1000000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "challenge", "state", "issuedOperationId", "consumedAt", "consumedProofId",
+          "consumedBuildSubjectSha256", "verificationResult", "operationJournal"
+        ],
+        "properties": {
+          "challenge": { "$ref": "https://yimi.local/schemas/confirmation-trust-challenge-v1.json" },
+          "state": { "enum": ["ISSUED", "CONSUMED", "EXPIRED", "SUPERSEDED"] },
+          "issuedOperationId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/operationId" },
+          "consumedAt": { "oneOf": [{ "type": "null" }, { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/rfc3339" }] },
+          "consumedProofId": { "oneOf": [{ "type": "null" }, { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/proofId" }] },
+          "consumedBuildSubjectSha256": { "oneOf": [{ "type": "null" }, { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" }] },
+          "verificationResult": { "oneOf": [{ "type": "null" }, { "$ref": "https://yimi.local/schemas/confirmation-trust-verification-result-v1.json" }] },
+          "operationJournal": {
+            "type": "array",
+            "maxItems": 1000,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["operationId", "proofId", "buildSubjectSha256", "verificationId", "completedAt"],
+              "properties": {
+                "operationId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/operationId" },
+                "proofId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/proofId" },
+                "buildSubjectSha256": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/sha256" },
+                "verificationId": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/verificationId" },
+                "completedAt": { "$ref": "https://yimi.local/schemas/confirmation-trust-common-v1.json#/$defs/rfc3339" }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "state": { "const": "CONSUMED" } }, "required": ["state"] },
+            "then": {
+              "properties": {
+                "consumedAt": { "type": "string" },
+                "consumedProofId": { "type": "string" },
+                "consumedBuildSubjectSha256": { "type": "string" },
+                "verificationResult": { "type": "object" },
+                "operationJournal": { "type": "array", "minItems": 1 }
+              }
+            },
+            "else": {
+              "properties": {
+                "consumedAt": { "type": "null" },
+                "consumedProofId": { "type": "null" },
+                "consumedBuildSubjectSha256": { "type": "null" },
+                "verificationResult": { "type": "null" },
+                "operationJournal": { "type": "array", "maxItems": 0 }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

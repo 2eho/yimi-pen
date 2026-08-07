@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "evt0-test-fixture-target-adapter",
+  "adapterId": "EVT0-TARGET-ADAPTER-TEMPLATE",
+  "revision": "1.0.0",
+  "status": "PENDING_TARGET_EVIDENCE",
+  "profileRef": {
+    "path": "hardware/evt0/test-fixture-v1/profile.json",
+    "sha256": "b177a6641f3c0e7b8199904d94d6121c19dfd8cb5deb408ac86c5f54016c896d",
+    "profileId": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1",
+    "revision": "1.0.0"
+  },
+  "topologyRef": {
+    "path": "hardware/evt0/hardware-system-v1/topology.json",
+    "sha256": "98a87a1de9ee8dfa52ec68ebd00afbbf23fa3c18e0c2a75e34ba09da4a9c4e5f",
+    "topologyId": "hwt:sha256:98a87a1de9ee8dfa52ec68ebd00afbbf23fa3c18e0c2a75e34ba09da4a9c4e5f"
+  },
+  "targetBindingRef": {
+    "path": "hardware/evt0/hardware-system-v1/target-binding.json",
+    "sha256": "ccb6efefadc6b438646c69160bc882229465b3639c130aa044a08330de35e202",
+    "identity": "hardware-system-target-binding-v1"
+  },
+  "targetIdentity": {
+    "state": "UNRESOLVED",
+    "evidenceState": "TARGET_EVIDENCE_PENDING",
+    "fullFiveTuple": {
+      "BOARD_MPN": null,
+      "PCB_REV": null,
+      "HEAD_MPN": null,
+      "HEAD_REV": null,
+      "FW_VERSION": null
+    },
+    "evidenceRefs": []
+  },
+  "capabilityRefs": [
+    "CAP-FIXTURE-EVIDENCE-ANCHOR",
+    "CAP-OPTICAL-PRESENTATION-DATUM",
+    "CAP-OID-EVENT-TIMING-OBSERVATION",
+    "CAP-POWER-SAFE-INJECTION",
+    "CAP-CONTENT-STORAGE-OFFLINE",
+    "CAP-USB-DATA-TRANSPORT",
+    "CAP-AUDIO-ACOUSTIC-OBSERVATION",
+    "CAP-CONTROL-STATUS-DIAGNOSTIC-HIL"
+  ],
+  "targetDependent": {
+    "state": "PENDING",
+    "voltageV": null,
+    "currentA": null,
+    "pinMappings": [],
+    "connectorMappings": [],
+    "pogoMappings": [],
+    "mechanical": {
+      "lengthMm": null,
+      "widthMm": null,
+      "heightMm": null,
+      "workingDistanceMm": null,
+      "angleDeg": null,
+      "mountingDatums": []
+    }
+  },
+  "claims": {
+    "physicalAdapter": false,
+    "qualified": false,
+    "readyForPhysicalUse": false,
+    "releaseGateClosed": false,
+    "boardStatePromoted": false
+  },
+  "effects": {
+    "targetBinding": "NONE",
+    "physicalEvidence": "NONE",
+    "releaseGate": "NONE",
+    "promotion": "NONE"
+  },
+  "blockers": [
+    "BOARD_TARGET_UNRESOLVED",
+    "FULL_FIVE_TUPLE_PENDING",
+    "TARGET_DEPENDENT_ELECTRICAL_AND_MECHANICAL_FIELDS_PENDING",
+    "NO_PHYSICAL_ADAPTER_EVIDENCE"
+  ]
+}

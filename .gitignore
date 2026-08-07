@@ -1,6 +1,7 @@
 node_modules/
 dist/
 build/
+firmware/target/
 .turbo/
 *.log
 .DS_Store
@@ -12,6 +13,7 @@ coverage/
 .idea/
 .vscode/*
 !.vscode/extensions.json
+.playwright-cli/
 *.tsbuildinfo
 content/audio/**/*.mp3
 content/audio/**/*.wav

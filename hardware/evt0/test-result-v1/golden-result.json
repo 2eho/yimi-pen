@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "recordType": "point-read-latency-v1",
+  "resultId": "RESULT-SYNTHETIC-001",
+  "fixtureOnly": true,
+  "evidenceState": "SYNTHETIC",
+  "recordedAt": "2026-08-03T00:00:00Z",
+  "verdict": "PASS",
+  "testDefinition": {
+    "testId": "CONTRACT-LATENCY-FIXTURE",
+    "catalogVersion": 1
+  },
+  "specimen": {
+    "candidateId": "SYNTHETIC-CONTRACT-FIXTURE",
+    "boardMpn": "SYNTHETIC",
+    "pcbRevision": "SYNTHETIC",
+    "boardSerial": "SYNTHETIC",
+    "headMpn": "SYNTHETIC",
+    "headRevision": "SYNTHETIC",
+    "headSerial": "SYNTHETIC",
+    "firmware": {
+      "version": "0.1.0-contract-fixture",
+      "gitCommit": "0000000000000000000000000000000000000000",
+      "binarySha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "rustcVersion": "rustc 1.97.1",
+      "targetTriple": "x86_64-pc-windows-gnu",
+      "cargoLockSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "features": []
+    },
+    "snapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "oidTool": "SYNTHETIC",
+    "oidToolVersion": "SYNTHETIC",
+    "printProfile": "SYNTHETIC",
+    "printBatch": "SYNTHETIC"
+  },
+  "method": {
+    "procedureId": "synthetic-contract-vector-v1",
+    "audioStartTimeClass": "dma-first-buffer",
+    "clockDomains": [
+      {
+        "clockId": "device-boot-001",
+        "kind": "device-monotonic",
+        "tickHz": 1000000,
+        "wrapBits": 64
+      }
+    ],
+    "synchronization": [],
+    "instruments": [],
+    "environment": {
+      "temperatureC": null,
+      "relativeHumidityPct": null,
+      "notes": "Synthetic values validate percentile and evidence plumbing only."
+    }
+  },
+  "rawArtifacts": [
+    {
+      "role": "raw-samples",
+      "path": "hardware/evt0/test-result-v1/golden/latency-samples.jsonl",
+      "size": 2460,
+      "sha256": "33c385c02b467441706bc33d90ceed827ce8910922d8d483c1fd12f6e4617d7f"
+    }
+  ],
+  "samples": [
+    {
+      "schemaVersion": 1,
+      "runId": "RUN-SYNTHETIC-001",
+      "ordinal": 1,
+      "expectedPhysicalCode": "101",
+      "observedPhysicalCode": "101",
+      "outcome": "correct",
+      "oidSequence": 10,
+      "oidDroppedEvents": 0,
+      "audioSequence": 20,
+      "audioDroppedEvents": 0,
+      "stages": {
+        "sensor": null,
+        "event": {
+          "clockId": "device-boot-001",
+          "tUs": "1000000"
+        },
+        "resolved": {
+          "clockId": "device-boot-001",
+          "tUs": "1020000"
+        },
+        "pcmQueued": {
+          "clockId": "device-boot-001",
+          "tUs": "1080000"
+        },
+        "audioStart": {
+          "clockId": "device-boot-001",
+          "tUs": "1100000"
+        },
+        "acousticStart": null
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "runId": "RUN-SYNTHETIC-001",
+      "ordinal": 2,
+      "expectedPhysicalCode": "102",
+      "observedPhysicalCode": "102",
+      "outcome": "correct",
+      "oidSequence": 11,
+      "oidDroppedEvents": 0,
+      "audioSequence": 21,
+      "audioDroppedEvents": 0,
+      "stages": {
+        "sensor": null,
+        "event": {
+          "clockId": "device-boot-001",
+          "tUs": "2000000"
+        },
+        "resolved": {
+          "clockId": "device-boot-001",
+          "tUs": "2020000"
+        },
+        "pcmQueued": {
+          "clockId": "device-boot-001",
+          "tUs": "2090000"
+        },
+        "audioStart": {
+          "clockId": "device-boot-001",
+          "tUs": "2120000"
+        },
+        "acousticStart": null
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "runId": "RUN-SYNTHETIC-001",
+      "ordinal": 3,
+      "expectedPhysicalCode": "103",
+      "observedPhysicalCode": "103",
+      "outcome": "correct",
+      "oidSequence": 12,
+      "oidDroppedEvents": 0,
+      "audioSequence": 22,
+      "audioDroppedEvents": 0,
+      "stages": {
+        "sensor": null,
+        "event": {
+          "clockId": "device-boot-001",
+          "tUs": "3000000"
+        },
+        "resolved": {
+          "clockId": "device-boot-001",
+          "tUs": "3030000"
+        },
+        "pcmQueued": {
+          "clockId": "device-boot-001",
+          "tUs": "3110000"
+        },
+        "audioStart": {
+          "clockId": "device-boot-001",
+          "tUs": "3140000"
+        },
+        "acousticStart": null
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "runId": "RUN-SYNTHETIC-001",
+      "ordinal": 4,
+      "expectedPhysicalCode": "104",
+      "observedPhysicalCode": "104",
+      "outcome": "correct",
+      "oidSequence": 13,
+      "oidDroppedEvents": 0,
+      "audioSequence": 23,
+      "audioDroppedEvents": 0,
+      "stages": {
+        "sensor": null,
+        "event": {
+          "clockId": "device-boot-001",
+          "tUs": "4000000"
+        },
+        "resolved": {
+          "clockId": "device-boot-001",
+          "tUs": "4030000"
+        },
+        "pcmQueued": {
+          "clockId": "device-boot-001",
+          "tUs": "4120000"
+        },
+        "audioStart": {
+          "clockId": "device-boot-001",
+          "tUs": "4160000"
+        },
+        "acousticStart": null
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "runId": "RUN-SYNTHETIC-001",
+      "ordinal": 5,
+      "expectedPhysicalCode": "105",
+      "observedPhysicalCode": "105",
+      "outcome": "correct",
+      "oidSequence": 14,
+      "oidDroppedEvents": 0,
+      "audioSequence": 24,
+      "audioDroppedEvents": 0,
+      "stages": {
+        "sensor": null,
+        "event": {
+          "clockId": "device-boot-001",
+          "tUs": "5000000"
+        },
+        "resolved": {
+          "clockId": "device-boot-001",
+          "tUs": "5040000"
+        },
+        "pcmQueued": {
+          "clockId": "device-boot-001",
+          "tUs": "5150000"
+        },
+        "audioStart": {
+          "clockId": "device-boot-001",
+          "tUs": "5180000"
+        },
+        "acousticStart": null
+      }
+    }
+  ],
+  "queueEvidence": {
+    "oid": {
+      "nextSequence": 15,
+      "droppedEvents": 0,
+      "queuedEvents": 0
+    },
+    "audio": {
+      "nextSequence": 25,
+      "droppedEvents": 0,
+      "queuedEvents": 0
+    }
+  },
+  "summary": {
+    "total": 5,
+    "correct": 5,
+    "wrong": 0,
+    "noRead": 0,
+    "timeout": 0,
+    "readError": 0,
+    "oidQueueDrops": 0,
+    "audioQueueDrops": 0,
+    "eligibleLatencySamples": 5,
+    "p50Us": 140000,
+    "p95Us": 180000,
+    "p99Us": 180000,
+    "maxUs": 180000
+  },
+  "acceptance": {
+    "profileId": "CONTRACT-LATENCY-FIXTURE",
+    "startStage": "event",
+    "endStage": "audioStart",
+    "minSamples": 5,
+    "minSuccessRate": 1,
+    "maxWrongCodes": 0,
+    "maxNoReads": 0,
+    "maxP95Us": 200000
+  }
+}

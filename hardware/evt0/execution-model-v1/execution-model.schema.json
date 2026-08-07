@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/snapshot-execution-model-v1.json",
+  "title": "Yimi target-neutral Snapshot ExecutionModel v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "source",
+    "oidIndex",
+    "actions",
+    "clips"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "profile": {
+      "const": "snapshot-execution-model-v1"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "logicalIndexSha256",
+        "actionsSha256",
+        "physicalMapSource",
+        "physicalEvidence",
+        "clipCatalogSource"
+      ],
+      "properties": {
+        "logicalIndexSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "actionsSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "physicalMapSource": {
+          "enum": [
+            "snapshot-assigned",
+            "host-surrogate-not-oid"
+          ]
+        },
+        "physicalEvidence": {
+          "const": false
+        },
+        "clipCatalogSource": {
+          "enum": [
+            "snapshot-catalog",
+            "derived-design-fixture"
+          ]
+        }
+      }
+    },
+    "oidIndex": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "physicalCode",
+          "logicalOid",
+          "actionSlot"
+        ],
+        "properties": {
+          "physicalCode": {
+            "$ref": "#/$defs/u64"
+          },
+          "logicalOid": {
+            "$ref": "#/$defs/logicalOid"
+          },
+          "actionSlot": {
+            "$ref": "#/$defs/slot"
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "actionKey",
+          "actionSlot",
+          "playPolicy",
+          "cooldownUs",
+          "clipSlots"
+        ],
+        "properties": {
+          "actionKey": {
+            "$ref": "#/$defs/actionKey"
+          },
+          "actionSlot": {
+            "$ref": "#/$defs/slot"
+          },
+          "playPolicy": {
+            "$ref": "#/$defs/playPolicy"
+          },
+          "cooldownUs": {
+            "$ref": "#/$defs/u64"
+          },
+          "clipSlots": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/slot"
+            }
+          }
+        }
+      }
+    },
+    "clips": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "clipKey",
+          "clipSlot"
+        ],
+        "properties": {
+          "clipKey": {
+            "$ref": "#/$defs/clipKey"
+          },
+          "clipSlot": {
+            "$ref": "#/$defs/slot"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "u64": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,19})$"
+    },
+    "slot": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "logicalOid": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]{2,63}$"
+    },
+    "actionKey": {
+      "type": "string",
+      "pattern": "^action-[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "clipKey": {
+      "type": "string",
+      "pattern": "^clip-[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "playPolicy": {
+      "enum": [
+        "replace",
+        "queue",
+        "random_one"
+      ]
+    }
+  }
+}

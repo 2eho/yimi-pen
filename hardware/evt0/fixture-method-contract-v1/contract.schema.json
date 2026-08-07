@@ -1,0 +1,716 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/fixture-method-contract-v1.json",
+  "title": "USB and control/status HIL fixture method contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "packageId",
+    "revision",
+    "status",
+    "boardTargetState",
+    "effects",
+    "dependencyPolicy",
+    "sourceRefs",
+    "ownerRefs",
+    "contracts",
+    "implementation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "hardware-fixture-method-contract-v1"
+    },
+    "packageId": {
+      "const": "HW-FIXTURE-METHOD-CONTRACT-USB-CONTROL-HIL-V1"
+    },
+    "revision": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "PROPOSED_CONTRACT_COMPLETE"
+    },
+    "boardTargetState": {
+      "const": "UNRESOLVED"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    },
+    "dependencyPolicy": {
+      "$ref": "#/$defs/dependencyPolicy"
+    },
+    "sourceRefs": {
+      "$ref": "#/$defs/sourceRefs"
+    },
+    "ownerRefs": {
+      "$ref": "#/$defs/ownerRefs"
+    },
+    "contracts": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/contract"
+      }
+    },
+    "implementation": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/implementation"
+      }
+    }
+  },
+  "$defs": {
+    "noneString": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "NONE"
+        },
+        {
+          "type": "string",
+          "const": "NONE_NO_PROMOTION"
+        }
+      ]
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodCatalog",
+        "instrumentRegistry",
+        "targetBinding",
+        "physicalEvidence",
+        "releaseGate",
+        "promotion",
+        "software"
+      ],
+      "properties": {
+        "methodCatalog": {
+          "const": "NONE"
+        },
+        "instrumentRegistry": {
+          "const": "NONE"
+        },
+        "targetBinding": {
+          "const": "NONE"
+        },
+        "physicalEvidence": {
+          "const": "NONE"
+        },
+        "releaseGate": {
+          "const": "NONE"
+        },
+        "promotion": {
+          "const": "NONE"
+        },
+        "software": {
+          "const": "NONE"
+        }
+      }
+    },
+    "dependencyPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodGapRule",
+        "fixtureRule",
+        "softwareRule",
+        "canonicalArtifactRule"
+      ],
+      "properties": {
+        "methodGapRule": {
+          "const": "AUDIT_PROVENANCE_PLUS_LIVE_SEMANTIC_VALIDATION"
+        },
+        "fixtureRule": {
+          "const": "CURRENT_SEMANTIC_VALIDATION_ONLY"
+        },
+        "softwareRule": {
+          "const": "LIVE_BOUNDARY_SEMANTICS_ONLY_NO_HASH_OR_TASK_NAME"
+        },
+        "canonicalArtifactRule": {
+          "const": "NO_CHURN_FOR_HARDWARE_IMPACT_NONE"
+        }
+      }
+    },
+    "sourceRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodGapManifestPath",
+        "methodGapPackageId",
+        "methodGapRevision",
+        "sourceIds"
+      ],
+      "properties": {
+        "methodGapManifestPath": {
+          "const": "hardware/evt0/method-gap-evidence-v1/manifest.json"
+        },
+        "methodGapPackageId": {
+          "const": "HW-FIXTURE-METHOD-GAP-EVIDENCE-AUDIT-V1"
+        },
+        "methodGapRevision": {
+          "const": "1.1.0"
+        },
+        "sourceIds": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-METHOD-GAP-[A-Z0-9-]+$"
+          }
+        }
+      }
+    },
+    "ownerRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodCatalogPath",
+        "registrationPlanPath",
+        "topologyPath",
+        "targetBindingPath",
+        "testResultSchemaPath",
+        "releaseGateCatalogPath",
+        "evidenceCaptureProfilePath",
+        "fixtureProfilePath",
+        "fixtureInstanceTemplatePath"
+      ],
+      "properties": {
+        "methodCatalogPath": {
+          "const": "hardware/evt0/lab-v1/method-catalog.json"
+        },
+        "registrationPlanPath": {
+          "const": "hardware/evt0/lab-v1/registration-capture-plan.json"
+        },
+        "topologyPath": {
+          "const": "hardware/evt0/hardware-system-v1/topology.json"
+        },
+        "targetBindingPath": {
+          "const": "hardware/evt0/hardware-system-v1/target-binding.json"
+        },
+        "testResultSchemaPath": {
+          "const": "hardware/evt0/test-result-v1/schema.json"
+        },
+        "releaseGateCatalogPath": {
+          "const": "hardware/evt0/release-gates-v1/catalog.json"
+        },
+        "evidenceCaptureProfilePath": {
+          "const": "hardware/evt0/evidence-capture-v1/profile.json"
+        },
+        "fixtureProfilePath": {
+          "const": "hardware/evt0/test-fixture-v1/profile.json"
+        },
+        "fixtureInstanceTemplatePath": {
+          "const": "hardware/evt0/test-fixture-v1/instance.template.json"
+        }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodId",
+        "gapId",
+        "status",
+        "acceptedInMethodCatalog",
+        "interfaceRefs",
+        "supportingInterfaceRefs",
+        "sourceIds",
+        "purpose",
+        "roles",
+        "phases",
+        "rawArtifactKinds",
+        "fieldOwnership",
+        "existingFixturePaths",
+        "ownerReferencePaths",
+        "runBindingPaths",
+        "ownerProjection",
+        "failureSemantics"
+      ],
+      "properties": {
+        "methodId": {
+          "enum": [
+            "PROPOSED-USB-DATA-OBSERVATION-001",
+            "PROPOSED-CONTROL-STATUS-HIL-001"
+          ]
+        },
+        "gapId": {
+          "enum": [
+            "GAP-IF-USB-DATA-METHOD",
+            "GAP-CONTROL-STATUS-METHOD"
+          ]
+        },
+        "status": {
+          "const": "PROPOSED_ONLY"
+        },
+        "acceptedInMethodCatalog": {
+          "const": false
+        },
+        "interfaceRefs": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^IF-[A-Z0-9-]+$"
+          }
+        },
+        "supportingInterfaceRefs": {
+          "type": "array",
+          "maxItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^IF-[A-Z0-9-]+$"
+          }
+        },
+        "sourceIds": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-METHOD-GAP-[A-Z0-9-]+$"
+          }
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 20
+        },
+        "roles": {
+          "$ref": "#/$defs/roles"
+        },
+        "phases": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/phase"
+          }
+        },
+        "rawArtifactKinds": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]+$"
+          }
+        },
+        "ownerProjection": {
+          "$ref": "#/$defs/ownerProjection"
+        },
+        "failureSemantics": {
+          "$ref": "#/$defs/failureSemantics"
+        },
+        "fieldOwnership": {
+          "$ref": "#/$defs/fieldOwnership"
+        },
+        "runBindingPaths": {
+          "$ref": "#/$defs/runBindingPaths"
+        },
+        "ownerReferencePaths": {
+          "$ref": "#/$defs/ownerReferencePaths"
+        },
+        "existingFixturePaths": {
+          "$ref": "#/$defs/existingFixturePaths"
+        }
+      }
+    },
+    "roles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputRoles",
+        "outputRoles"
+      ],
+      "properties": {
+        "inputRoles": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]+$"
+          }
+        },
+        "outputRoles": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]+$"
+          }
+        }
+      }
+    },
+    "phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "skeletonStepId",
+        "action",
+        "targetDependentFields",
+        "physicalThresholdState"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "PHASE-01",
+            "PHASE-02",
+            "PHASE-03",
+            "PHASE-04"
+          ]
+        },
+        "skeletonStepId": {
+          "enum": [
+            "STEP-01",
+            "STEP-02",
+            "STEP-03",
+            "STEP-04"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "minLength": 20
+        },
+        "targetDependentFields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          }
+        },
+        "physicalThresholdState": {
+          "const": "PENDING"
+        }
+      }
+    },
+    "ownerProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodCatalog",
+        "labSession",
+        "testResult",
+        "evidenceCapture",
+        "releaseGate"
+      ],
+      "properties": {
+        "methodCatalog": {
+          "$ref": "#/$defs/methodOwner"
+        },
+        "labSession": {
+          "$ref": "#/$defs/refOwner"
+        },
+        "testResult": {
+          "$ref": "#/$defs/refOwner"
+        },
+        "evidenceCapture": {
+          "$ref": "#/$defs/evidenceOwner"
+        },
+        "releaseGate": {
+          "$ref": "#/$defs/releaseOwner"
+        }
+      }
+    },
+    "methodOwner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "methodId",
+        "acceptedInMethodCatalog",
+        "effect"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/lab-v1/method-catalog.json"
+        },
+        "methodId": {
+          "enum": [
+            "PROPOSED-USB-DATA-OBSERVATION-001",
+            "PROPOSED-CONTROL-STATUS-HIL-001"
+          ]
+        },
+        "acceptedInMethodCatalog": {
+          "const": false
+        },
+        "effect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "refOwner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "refFields",
+        "effect"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "refFields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9]+$"
+          }
+        },
+        "effect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "releaseOwner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "disposition",
+        "effect"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/release-gates-v1/catalog.json"
+        },
+        "disposition": {
+          "const": "NONE"
+        },
+        "effect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "failureSemantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "onMissingTargetEvidence",
+        "verdictState",
+        "physicalEvidenceEffect",
+        "releaseGateEffect",
+        "targetPromotionEffect",
+        "qualificationEffect"
+      ],
+      "properties": {
+        "onMissingTargetEvidence": {
+          "const": "PENDING_EVIDENCE"
+        },
+        "verdictState": {
+          "const": "NOT_SET"
+        },
+        "physicalEvidenceEffect": {
+          "const": "NONE"
+        },
+        "releaseGateEffect": {
+          "const": "NONE"
+        },
+        "targetPromotionEffect": {
+          "const": "NONE"
+        },
+        "qualificationEffect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "revision",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "fieldOwnership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "METHOD_ADAPTER",
+        "RUN_BINDING",
+        "EXISTING_FIXTURE_ADAPTER",
+        "OWNER_REFERENCE"
+      ],
+      "properties": {
+        "METHOD_ADAPTER": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          }
+        },
+        "RUN_BINDING": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          }
+        },
+        "EXISTING_FIXTURE_ADAPTER": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          }
+        },
+        "OWNER_REFERENCE": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          }
+        }
+      }
+    },
+    "evidenceOwner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "captureRouteState",
+        "laneId",
+        "captureIndexId",
+        "effect"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/evidence-capture-v1/profile.json"
+        },
+        "captureRouteState": {
+          "const": "PENDING_OWNER_EXTENSION"
+        },
+        "laneId": {
+          "type": "null"
+        },
+        "captureIndexId": {
+          "type": "null"
+        },
+        "effect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "runBindingPaths": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "FIXTURE_INSTANCE": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*(?:\\.[a-z][a-zA-Z0-9]*)+$"
+        },
+        "CABLE_OR_FIXTURE_ID": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*(?:\\.[a-z][a-zA-Z0-9]*)+$"
+        },
+        "PAYLOAD_SET": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*(?:\\.[a-z][a-zA-Z0-9]*)+$"
+        },
+        "FAULT_MODEL": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*(?:\\.[a-z][a-zA-Z0-9]*)+$"
+        },
+        "EXPECTED_SEQUENCE": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*(?:\\.[a-z][a-zA-Z0-9]*)+$"
+        },
+        "MEASUREMENT_SET": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*(?:\\.[a-z][a-zA-Z0-9]*)+$"
+        },
+        "ACCEPTANCE_PREDICATES": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*(?:\\.[a-z][a-zA-Z0-9]*)+$"
+        }
+      }
+    },
+    "ownerReferencePaths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "SESSION_ID",
+        "TEST_RESULT_ID",
+        "RAW_EVIDENCE_INDEX",
+        "RELEASE_GATE_RECEIPT"
+      ],
+      "properties": {
+        "SESSION_ID": {
+          "const": "labSession.sessionId"
+        },
+        "TEST_RESULT_ID": {
+          "const": "testResult.resultId"
+        },
+        "RAW_EVIDENCE_INDEX": {
+          "const": "evidenceCapture.captureIndexId"
+        },
+        "RELEASE_GATE_RECEIPT": {
+          "const": "releaseGate.receiptId"
+        }
+      }
+    },
+    "existingFixturePaths": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CONNECTOR": {
+          "const": "targetDependent.connectorMappings"
+        },
+        "PIN_MAPPING": {
+          "const": "targetDependent.pinMappings"
+        },
+        "FIRMWARE_VERSION": {
+          "const": "targetIdentity.fullFiveTuple.FW_VERSION"
+        }
+      }
+    }
+  }
+}

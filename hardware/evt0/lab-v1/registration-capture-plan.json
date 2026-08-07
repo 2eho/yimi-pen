@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "planId": "EVT0-LAB-REGISTRATION-CAPTURE-V1",
+  "qualificationEffect": "NONE_PREPARATION_ONLY",
+  "serialPolicy": "MANUFACTURER_SERIAL_OR_PHOTOGRAPHED_LOCAL_ASSET_TAG",
+  "sourceRefs": [
+    "hardware/evt0/purchase-plan.csv#LAB1-LAB6",
+    "hardware/evt0/lab-v1/method-catalog.json#LAB-SETUP-001"
+  ],
+  "slots": [
+    {
+      "id": "PSU-01",
+      "purchasePlanItemId": "LAB1",
+      "role": "current-limited bench supply",
+      "assets": [
+        {
+          "assetKind": "BENCH_SUPPLY",
+          "identityEvidence": ["overall photo", "nameplate/model", "manufacturer serial or photographed local asset tag"],
+          "qualificationEvidence": ["calibration certificate or traceable no-load/known-load/current-limit self-check", "reference-standard evidence", "raw readings"]
+        }
+      ]
+    },
+    {
+      "id": "DMM-01",
+      "purchasePlanItemId": "LAB2",
+      "role": "true-RMS multimeter",
+      "assets": [
+        {
+          "assetKind": "MULTIMETER",
+          "identityEvidence": ["overall photo", "nameplate/model", "manufacturer serial or photographed local asset tag", "current-range fuse identity"],
+          "qualificationEvidence": ["calibration certificate or traceable voltage/resistance/continuity/current-range self-check", "reference-standard evidence", "raw readings"]
+        }
+      ]
+    },
+    {
+      "id": "MECH-01",
+      "purchasePlanItemId": "LAB3",
+      "role": "caliper and scale",
+      "assets": [
+        {
+          "assetKind": "CALIPER",
+          "identityEvidence": ["overall photo", "nameplate/model", "manufacturer serial or photographed local asset tag"],
+          "qualificationEvidence": ["zero and traceable known-dimension self-check", "reference gauge evidence", "raw readings"]
+        },
+        {
+          "assetKind": "SCALE",
+          "identityEvidence": ["overall photo", "nameplate/model", "manufacturer serial or photographed local asset tag"],
+          "qualificationEvidence": ["zero and traceable known-mass self-check", "reference mass evidence", "raw readings"]
+        }
+      ]
+    },
+    {
+      "id": "MACRO-01",
+      "purchasePlanItemId": "LAB4",
+      "role": "macro inspection camera",
+      "assets": [
+        {
+          "assetKind": "MACRO_CAMERA",
+          "identityEvidence": ["camera/lens/support photo", "nameplate/model", "manufacturer serial or photographed local asset tag"],
+          "qualificationEvidence": ["repeatable 0402/silkscreen/OID-dot photos with physical scale", "working-distance setup photo", "unmodified image files"]
+        }
+      ]
+    },
+    {
+      "id": "USBPWR-01",
+      "purchasePlanItemId": "LAB5",
+      "role": "USB-C power meter",
+      "assets": [
+        {
+          "assetKind": "USB_C_POWER_METER",
+          "identityEvidence": ["overall photo", "nameplate/model", "manufacturer serial or photographed local asset tag", "connector direction photo"],
+          "qualificationEvidence": ["calibration certificate or traceable known-load cross-check", "reference-standard evidence", "raw/exported readings"]
+        }
+      ]
+    },
+    {
+      "id": "SPL-01",
+      "purchasePlanItemId": "LAB6",
+      "role": "A-weighted sound level meter",
+      "assets": [
+        {
+          "assetKind": "SOUND_LEVEL_METER",
+          "identityEvidence": ["overall photo", "nameplate/model", "manufacturer serial or photographed local asset tag", "A/Fast/Slow capability evidence"],
+          "qualificationEvidence": ["valid calibration certificate or traceable acoustic calibrator/self-check", "reference-standard evidence", "fixed-setup repeatability readings"]
+        }
+      ]
+    }
+  ]
+}

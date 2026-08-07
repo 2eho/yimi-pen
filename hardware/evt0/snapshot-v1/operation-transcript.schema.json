@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/snapshot-operation-transcript-v1.json",
+  "title": "Yimi Snapshot v1 operation transcript",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profile", "snapshots", "devices", "scenarios"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "snapshot-operation-transcript-v1" },
+    "snapshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "sourceDirectory",
+          "snapshotId",
+          "contentRevision",
+          "releaseState",
+          "firstActionCooldownMs",
+          "requiredBytes"
+        ],
+        "properties": {
+          "key": { "$ref": "#/$defs/key" },
+          "sourceDirectory": { "type": "string", "minLength": 1 },
+          "snapshotId": { "type": "string", "minLength": 1 },
+          "contentRevision": { "type": "string", "minLength": 1 },
+          "releaseState": { "enum": ["design-fixture", "release-candidate"] },
+          "firstActionCooldownMs": { "type": "integer", "minimum": 0 },
+          "requiredBytes": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "devices": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "storageFreeBytes", "allowDesignFixtures"],
+        "properties": {
+          "id": { "$ref": "#/$defs/key" },
+          "storageFreeBytes": { "type": "integer", "minimum": 0 },
+          "allowDesignFixtures": { "type": "boolean" }
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description", "device", "operation", "expected"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^SCN-[0-9]{2}$" },
+          "description": { "type": "string", "minLength": 1 },
+          "device": { "$ref": "#/$defs/key" },
+          "operation": { "$ref": "#/$defs/operation" },
+          "expected": { "$ref": "#/$defs/outcome" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "key": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "operation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["op", "snapshot"],
+          "properties": {
+            "op": { "const": "provision" },
+            "snapshot": { "$ref": "#/$defs/key" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["op", "snapshot"],
+          "properties": {
+            "op": { "const": "install" },
+            "snapshot": { "$ref": "#/$defs/key" },
+            "fault": { "$ref": "#/$defs/fault" },
+            "recoverAfterError": { "enum": ["status", "boot-repair", "none"] }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["op", "filePath"],
+          "properties": {
+            "op": { "const": "corrupt-active-and-boot" },
+            "filePath": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "fault": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "filePath"],
+          "properties": {
+            "type": { "const": "corrupt-file" },
+            "filePath": { "type": "string", "minLength": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "afterFileCount"],
+          "properties": {
+            "type": { "const": "power-loss-during-staging" },
+            "afterFileCount": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "const": "power-loss-before-head-commit" }
+          }
+        }
+      ]
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["active", "lastGood", "generation", "snapshot", "error"],
+      "properties": {
+        "active": { "type": ["string", "null"], "enum": ["A", "B", null] },
+        "lastGood": { "type": ["string", "null"], "enum": ["A", "B", null] },
+        "generation": { "type": "integer", "minimum": 0 },
+        "snapshot": { "type": ["string", "null"] },
+        "error": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

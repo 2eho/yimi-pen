@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "profile": "family-confirmation-presentation-v1",
+  "transcriptSha256": "252ac5aa4048c2b7e884a5272252e7dee0a9393460ccf7858db1535052dc127c",
+  "buildPlanId": "PLAN-FAMILY-ALPHA-GOLDEN-001",
+  "buildSubjectSha256": "cdb45e96a1350404483a6172cb1dacde62602f240120ca006eb5c2a0f5b1070f",
+  "previewId": "sha256:78efcd30f6c5ee105bd595d9b5def2265475cc0cb0a5658fbc77592f50406109",
+  "sourceSha256": "145544952205cb02285a3c510f9c76dd349ff44666a2c6336431f61a859d275f",
+  "presentationPolicyVersion": "family-alpha-v1",
+  "challengeId": "challenge:sha256:cafb53db39ec65c4f5062dd329730576541f981f5d4f036fadb2feaf5b4353aa",
+  "openedAt": "2026-08-03T00:04:20Z",
+  "completedAt": "2026-08-03T00:05:00Z",
+  "events": [
+    {
+      "sequence": 0,
+      "kind": "PREVIEW_OPENED",
+      "clipId": null,
+      "clipSha256": null,
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:20Z"
+    },
+    {
+      "sequence": 1,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-013-1",
+      "clipSha256": "a0da8246cbb78ee748f1e2e57c779c65c0b1c32872b67c51985b7de32c4da55c",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:22Z"
+    },
+    {
+      "sequence": 2,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-014-1",
+      "clipSha256": "aceaeed1978fe121efc3bd793defbd9d712b3619193d3a5a38b177f4de7d7d7c",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:24Z"
+    },
+    {
+      "sequence": 3,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-015-1",
+      "clipSha256": "2ca5fb9200f8cbe39edf1b7cde40b81babf1bd9a8c639a125dcb23d0fc381725",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:26Z"
+    },
+    {
+      "sequence": 4,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-015-2",
+      "clipSha256": "f930229bfd3ecc7fd8d1113a708666fa30d0ab78edb79a38ea0786ac7eb6c354",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:28Z"
+    },
+    {
+      "sequence": 5,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-016-1",
+      "clipSha256": "5f550fc0f7a24f4f12847859d921a7a1d801aef89190f205fd04db20b760e916",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:30Z"
+    },
+    {
+      "sequence": 6,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-017-1",
+      "clipSha256": "52b7b9c7193e31e930b37ed528ee90b06ef34c694b41c3dc1e2a30eb7e50786a",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:32Z"
+    },
+    {
+      "sequence": 7,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-017-2",
+      "clipSha256": "48c02fd4a03938299794040e65ba6905b9a8250d302053dce62f63bd341b81a2",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:34Z"
+    },
+    {
+      "sequence": 8,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-018-1",
+      "clipSha256": "b0322f22a2846117848b4dc8fd384be5f7e5d82c86f857da795206dd4ce6e66e",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:36Z"
+    },
+    {
+      "sequence": 9,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-018-2",
+      "clipSha256": "5ca2de6dc14cc211cbe2d50ef6cb5128289e91ec1e5bffd49a1adece5b149ef2",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:38Z"
+    },
+    {
+      "sequence": 10,
+      "kind": "CLIP_PLAYBACK_COMPLETED",
+      "clipId": "clip-018-3",
+      "clipSha256": "940d67a770819dd24f7a881015b93424deab7987a96a393c0694565fe07666b2",
+      "confirmationId": null,
+      "occurredAt": "2026-08-03T00:04:40Z"
+    },
+    {
+      "sequence": 11,
+      "kind": "CONFIRM_ACTION",
+      "clipId": null,
+      "clipSha256": null,
+      "confirmationId": "CONF-FAMILY-ALPHA-GOLDEN-001",
+      "occurredAt": "2026-08-03T00:05:00Z"
+    }
+  ]
+}

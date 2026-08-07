@@ -1,0 +1,15 @@
+[package]
+name = "yimi-device-link-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Target-neutral stateful DeviceLink v1 transaction core"
+
+[dependencies]
+yimi-fw-contract = { path = "../yimi-fw-contract" }
+yimi-snapshot-core = { path = "../yimi-snapshot-core" }
+
+[lints]
+workspace = true

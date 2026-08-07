@@ -1,0 +1,421 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/evt0-test-fixture-profile-v1.json",
+  "title": "Yimi Pen EVT-0 reusable test-fixture profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "profileId",
+    "revision",
+    "status",
+    "boardTargetState",
+    "topologyRef",
+    "targetBindingRef",
+    "ownerRefs",
+    "capabilities",
+    "coverageGaps",
+    "policies",
+    "implementation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "evt0-test-fixture-profile"
+    },
+    "profileId": {
+      "const": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1"
+    },
+    "revision": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "RECOMMENDED"
+    },
+    "boardTargetState": {
+      "const": "UNRESOLVED"
+    },
+    "topologyRef": {
+      "$ref": "#/$defs/topologyRef"
+    },
+    "targetBindingRef": {
+      "$ref": "#/$defs/ownerRef"
+    },
+    "ownerRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodCatalog",
+        "registrationPlan",
+        "instrumentRegistrySchema",
+        "labSessionTemplate",
+        "testResultSchema",
+        "evidenceCaptureProfile",
+        "releaseGateCatalog"
+      ],
+      "properties": {
+        "methodCatalog": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "registrationPlan": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "instrumentRegistrySchema": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "labSessionTemplate": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "testResultSchema": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "evidenceCaptureProfile": {
+          "$ref": "#/$defs/ownerRef"
+        },
+        "releaseGateCatalog": {
+          "$ref": "#/$defs/ownerRef"
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "coverageGaps": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "$ref": "#/$defs/coverageGap"
+      }
+    },
+    "policies": {
+      "$ref": "#/$defs/policies"
+    },
+    "implementation": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/implementationIdentity"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+    },
+    "ownerRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "identity"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "topologyRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "topologyId"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/hardware-system-v1/topology.json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "topologyId": {
+          "type": "string",
+          "pattern": "^hwt:sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role",
+        "status",
+        "description",
+        "interfaceRefs",
+        "methodRefs",
+        "instrumentSlotRefs",
+        "assetKindRefs",
+        "releaseGateRefs",
+        "coverage"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "CAP-FIXTURE-EVIDENCE-ANCHOR",
+            "CAP-OPTICAL-PRESENTATION-DATUM",
+            "CAP-OID-EVENT-TIMING-OBSERVATION",
+            "CAP-POWER-SAFE-INJECTION",
+            "CAP-CONTENT-STORAGE-OFFLINE",
+            "CAP-USB-DATA-TRANSPORT",
+            "CAP-AUDIO-ACOUSTIC-OBSERVATION",
+            "CAP-CONTROL-STATUS-DIAGNOSTIC-HIL"
+          ]
+        },
+        "role": {
+          "enum": [
+            "CROSS_CUTTING",
+            "OPERATIONAL"
+          ]
+        },
+        "status": {
+          "enum": [
+            "RECOMMENDED",
+            "PARTIAL_COVERAGE",
+            "PENDING_METHOD_COVERAGE"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interfaceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^IF-[A-Z0-9-]+$"
+          }
+        },
+        "methodRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9-]+$"
+          }
+        },
+        "instrumentSlotRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9-]+$"
+          }
+        },
+        "assetKindRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$"
+          }
+        },
+        "releaseGateRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^RG-[A-Z0-9-]+$"
+          }
+        },
+        "coverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "interfaceRole",
+            "methodState",
+            "instrumentState",
+            "notes"
+          ],
+          "properties": {
+            "interfaceRole": {
+              "enum": [
+                "CROSS_CUTTING",
+                "OPERATIONAL"
+              ]
+            },
+            "methodState": {
+              "enum": [
+                "READY_NOW",
+                "PARTIAL_COVERAGE",
+                "NO_DEDICATED_METHOD",
+                "PENDING_METHOD_COVERAGE"
+              ]
+            },
+            "instrumentState": {
+              "enum": [
+                "COVERED",
+                "NONE_EXISTING_SLOT",
+                "PENDING_INSTRUMENT_COVERAGE"
+              ]
+            },
+            "notes": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "coverageGap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "interfaceRefs",
+        "state",
+        "methodRefs",
+        "instrumentSlotRefs",
+        "reason",
+        "nextOwner"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^GAP-[A-Z0-9-]+$"
+        },
+        "interfaceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^IF-[A-Z0-9-]+$"
+          }
+        },
+        "state": {
+          "enum": [
+            "RECOMMENDED",
+            "PARTIAL_COVERAGE",
+            "PENDING_METHOD_COVERAGE"
+          ]
+        },
+        "methodRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9-]+$"
+          }
+        },
+        "instrumentSlotRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9-]+$"
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextOwner": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "effects",
+        "syntheticEvidence",
+        "targetDependentFields",
+        "ownership"
+      ],
+      "properties": {
+        "effects": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "targetBinding",
+            "adapter",
+            "physicalFixture",
+            "releaseGate",
+            "promotion"
+          ],
+          "properties": {
+            "targetBinding": {
+              "const": "NONE"
+            },
+            "adapter": {
+              "const": "NONE"
+            },
+            "physicalFixture": {
+              "const": "NONE"
+            },
+            "releaseGate": {
+              "const": "NONE"
+            },
+            "promotion": {
+              "const": "NONE"
+            }
+          }
+        },
+        "syntheticEvidence": {
+          "const": "NEVER_REPRESENTED_AS_PHYSICAL"
+        },
+        "targetDependentFields": {
+          "const": "PENDING_OR_NULL_ONLY_BEFORE_TARGET_LOCK"
+        },
+        "ownership": {
+          "const": "REFER_EXISTING_OWNERS_DO_NOT_DUPLICATE_FIELDS"
+        }
+      }
+    },
+    "implementationIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "revision",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

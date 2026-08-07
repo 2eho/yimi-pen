@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "documentKind": "mb1-outbound-message",
+  "messageId": "MB1-OUT-ZTRON-LOCAL",
+  "candidateId": "REF-ZTRON-LOCAL",
+  "candidateRole": "PCBA_CANDIDATE",
+  "messageStatus": "PREPARED_NOT_SENT",
+  "recipientEntry": {
+    "entryType": "OFFICIAL_ENTRY_MANUAL_SELECTION",
+    "officialEntryUrl": "https://www.ztrontech.com/contact/",
+    "listedAddresses": ["market3@ztrontech.com", "market2@ztrontech.com"],
+    "manualSelectionRequired": true,
+    "note": "官方联系页当前把 market3@ztrontech.com 暴露为 mailto 路径，并列出 market2@ztrontech.com；发送当日仍须复核页面并建立 Contact Receipt v1。"
+  },
+  "sourceRefs": ["SRC-OID-001", "SRC-MB1-CONTACT-ZTRON-001"],
+  "subject": "益米 Gen1 离线 OID 点读笔——两套同版 PCBA/OID 工程样品预询证",
+  "body": "您好，\n\n我们正在开发面向 3–6 岁家庭的无屏、离线优先点读笔。当前仅进行付款前技术询证，希望确认是否可提供 2 套完整、同版的一体主板 + OID 光头工程样品。\n\n本邮件不是订单、付款确认、板号冻结或量产承诺。请以可保存的书面材料逐项回复 M01–M08，并按附件请求清单提供原始文件。\n\n关键要求：两套待发样品必须具有完全一致的 BOARD_MPN / PCB_REV / HEAD_MPN / HEAD_REV / FW_VERSION；不接受随机 revision 或仅写“功能相同”的替代发货。\n\n如方案使用松翰 OID，请写明实际 Decoder 与 Sensor Module 完整 MPN。SN95310/SN95350/SN95360、SNM9S5X30BC2100A、SNM9S5430BC2100A 与 SNM9S5630BC2100A 仅作原厂目录交叉核对，不预设贵司方案。若使用“95500/SN95500/三代/四代”等简称，请补充完整 MPN、revision 与比较/替代关系。\n\n收到相互一致的书面资料后，我们才会依据现有付款门确认是否购买两套样品。谢谢。",
+  "requiredAnswers": [
+    { "id": "M01", "request": "OID 读码与许可校验能否完全离线，不依赖云端心跳？" },
+    { "id": "M02", "request": "能否提供 2 套完全相同的 BOARD_MPN / PCB_REV / HEAD_MPN / HEAD_REV / FW_VERSION，并随附至少 24 码码卡和空白负样？" },
+    { "id": "M03", "request": "能否书面说明码制、可分配码段、保留段与冲突管理？" },
+    { "id": "M04", "request": "能否提供原创书页/贴纸的离线码生成工具或稳定代生成服务？" },
+    { "id": "M05", "request": "能否提供 DPI、网点、颜色/分色、RIP、纸张、覆膜、工作距和角度要求？" },
+    { "id": "M06", "request": "能否提供板/头电气与机械资料、功耗、事件/日志、版本化 SDK/C 示例、build/flash/log 工具和命令？" },
+    { "id": "M07", "request": "请分列两套样品、后续 100/1,000 台的一次性费用、单价、版税、MOQ、交期。" },
+    { "id": "M08", "request": "量产供货与固件授权是否独立于第三方商业点读内容库？" }
+  ],
+  "attachmentRequests": [
+    { "id": "A01", "request": "完整身份五元组" },
+    { "id": "A02", "request": "两套待发样品正反面、标签和 serial 原图" },
+    { "id": "A03", "request": "板与光头 2D 图、连接器和工作距" },
+    { "id": "A04", "request": "MCU、BSP、RTOS、SDK、C compiler/linker 版本" },
+    { "id": "A05", "request": "build、flash、log 命令、软件包版本和 SHA-256" },
+    { "id": "A06", "request": "OID 事件 API 或帧协议、错误码、sequence、drop 和时间戳定义" },
+    { "id": "A07", "request": "离线码工具、24 码、空白区、码段和授权" },
+    { "id": "A08", "request": "印刷 profile 与两个独立打样批次安排" },
+    { "id": "A09", "request": "音频、存储、USB、供电和离线能力表" },
+    { "id": "A10", "request": "当前同 revision 数量、同版承诺、PCN/EOL 与替代规则" }
+  ],
+  "replyIntake": {
+    "rawArchiveRoot": "build/vendor-evidence/REF-ZTRON-LOCAL/<received-at>/raw/",
+    "responseRecordTemplate": "hardware/evt0/vendor-evidence-v1/candidate.template.json",
+    "responseRecordDestination": "hardware/evt0/vendor-evidence-v1/records/<ztron-response>.json",
+    "targetBindingEffect": "NONE_VENDOR_CLAIM_ONLY",
+    "paymentGate": "REPLY_EVIDENCE_REQUIRED_BEFORE_PAYMENT",
+    "note": "原始邮件、图片、PDF 和压缩包先归档并计算字节数/SHA-256；再建立独立 candidate response。READY_TO_BUY 仍只代表付款门。"
+  }
+}

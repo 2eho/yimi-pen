@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "catalogId": "EVT0-LAB-METHODS-V1",
+  "evidencePolicy": {
+    "rule": "只接受带仪器身份、方法版本、原始文件和可复算计算过程的结果；缺项保持 PENDING。",
+    "thresholdSources": [
+      "docs/hardware-gen1-p0.md#8-1-功能与性能",
+      "docs/hardware-gen1-p0.md#8-2-质量与可靠性",
+      "hardware/evt0/purchase-plan.csv"
+    ]
+  },
+  "methods": [
+    {
+      "id": "LAB-SETUP-001",
+      "title": "仪器登记与台架自检",
+      "readiness": "READY_NOW",
+      "subject": "bench",
+      "requiredInstruments": ["PSU-01", "DMM-01", "MECH-01", "MACRO-01", "USBPWR-01", "SPL-01"],
+      "procedure": [
+        "登记每件仪器的制造商、完整型号、序列号、固件（如有）和校准/自检证据。",
+        "用已知电压、电阻、尺寸、质量和校准声源检查读数链。",
+        "确认照片/CSV/日志的时间戳、文件名和原始数据目录可追溯。"
+      ],
+      "recordFields": ["instrumentId", "model", "serial", "calibrationEvidence", "selfCheckResult", "artifactRefs"],
+      "acceptance": "所有必需仪器都有精确身份和有效校准或自检记录；否则会话保持 PENDING。",
+      "sourceRefs": ["hardware/evt0/purchase-plan.csv#LAB1-LAB6", "hardware/tests/README.md"]
+    },
+    {
+      "id": "MECH-INTAKE-001",
+      "title": "整机尺寸、重量与接口观察",
+      "readiness": "READY_NOW",
+      "subject": "benchmark-product",
+      "requiredInstruments": ["MECH-01", "MACRO-01"],
+      "procedure": [
+        "固定同一测量方向和零点，记录总长、最大宽高、笔尖/护口包络、按键/USB/扬声器位置。",
+        "记录整机质量、铭牌、包装条码、生产批次和配套码书。",
+        "对 PCB 丝印、光头、线束、声腔和固定结构拍带标尺的原始照片。"
+      ],
+      "recordFields": ["dimensionsMm", "massG", "interfaceObservations", "photoRefs", "serialOrLot"],
+      "acceptance": "完成可复核的观察和测量记录；不把竞品尺寸直接当作 Gen1 目标尺寸。",
+      "sourceRefs": ["docs/hardware-gen1-p0.md#2-目标产品合同", "docs/research/gen1-evt0-single-buy.md#5-来料与验收"]
+    },
+    {
+      "id": "OID-OPTICS-INTAKE-001",
+      "title": "OID 光学头与印刷样观察",
+      "readiness": "READY_NOW",
+      "subject": "benchmark-or-board-kit",
+      "requiredInstruments": ["MECH-01", "MACRO-01"],
+      "procedure": [
+        "记录光头/镜头/补光/护口的身份、机械工作距和笔尖同轴观察。",
+        "记录码卡/贴纸的纸张、覆膜、颜色、点阵可见性和空白负样。",
+        "只引用供应方声明的 Wmin/Wnom/Wmax、角度和印刷窗口；没有声明就标记缺口。"
+      ],
+      "recordFields": ["headIdentity", "workingDistanceMm", "angleWindow", "printBatch", "negativeSamples", "artifactRefs"],
+      "acceptance": "所有观察项有照片或供应方原件；未知工作距、码制或印刷参数保持缺口。",
+      "sourceRefs": ["docs/hardware-gen1-p0.md#4-1-当前主板oid-套件锁定门", "docs/research/gen1-evt0-single-buy.md#3-2-供应商资料清单"]
+    },
+    {
+      "id": "USB-POWER-INTAKE-001",
+      "title": "USB 供电与充电功耗基线",
+      "readiness": "READY_NOW",
+      "subject": "benchmark-or-board-kit",
+      "requiredInstruments": ["USBPWR-01", "DMM-01"],
+      "procedure": [
+        "在断电、待机、播放和充电四种状态分别记录输入电压、电流、时间和连接方向。",
+        "记录无线开关、电脑连接和内容写入状态，避免把不同工况混成一个数。",
+        "原始记录保留采样间隔、仪器量程和异常事件。"
+      ],
+      "recordFields": ["mode", "voltageV", "currentA", "durationS", "wirelessState", "hostConnection", "artifactRefs"],
+      "acceptance": "每种工况都有原始时间序列或仪器导出；不以单点读数推断续航或热设计。",
+      "sourceRefs": ["docs/hardware-gen1-p0.md#8-2-质量与可靠性", "hardware/evt0/purchase-plan.csv#LAB5"]
+    },
+    {
+      "id": "AUD-REFERENCE-001",
+      "title": "竞品声学相对基线",
+      "readiness": "READY_NOW",
+      "subject": "benchmark-product",
+      "requiredInstruments": ["SPL-01", "USBPWR-01"],
+      "procedure": [
+        "固定 50cm 距离、同一方向、同一环境噪声和 A/Fast/Slow 设置。",
+        "记录提示音、连续播放和最大音量的声压、音频文件/内容、音量档位和功耗。",
+        "手机 App 只作相对比较，不能替代可核验声级计。"
+      ],
+      "recordFields": ["distanceCm", "weighting", "response", "volumeStep", "splDba", "noiseFloorDba", "artifactRefs"],
+      "acceptance": "形成可重复的相对基线；目标样机的 `<=85dBA @ 50cm` 仍须按目标板、目标扬声器和声腔单独验证。",
+      "sourceRefs": ["docs/hardware-gen1-p0.md#8-2-质量与可靠性", "hardware/evt0/purchase-plan.csv#LAB6"]
+    },
+    {
+      "id": "PWR-BOARD-BOOT-001",
+      "title": "目标主板限流上电与轨线记录",
+      "readiness": "WAIT_BOARD_LOCK",
+      "subject": "board-oid-kit",
+      "requiredInstruments": ["PSU-01", "DMM-01", "USBPWR-01"],
+      "procedure": [
+        "核对 BOARD_MPN、PCB_REV、HEAD_MPN、HEAD_REV、FW_VERSION 后再连接。",
+        "电池断开，先用限流电源按供应方资料设置并记录对地阻抗、启动电流和稳态电流。",
+        "再分别接入 USB、OID 头、扬声器和电池，记录每一步的电压、电流、日志和异常。"
+      ],
+      "recordFields": ["boardIdentityTuple", "currentLimitA", "railMeasurements", "startupTrace", "faults", "artifactRefs"],
+      "acceptance": "身份五元组和供电边界来自同版资料/实物；没有资料时不填写设置值，不进入目标通过判定。",
+      "sourceRefs": ["docs/hardware-gen1-p0.md#4-1-当前主板oid-套件锁定门", "docs/research/gen1-mb1-prepay-pack.md#5-付款门"]
+    },
+    {
+      "id": "OID-FUNCTION-001",
+      "title": "真实 OID 24 码与离线负样",
+      "readiness": "WAIT_BOARD_LOCK",
+      "subject": "board-oid-kit",
+      "requiredInstruments": ["MACRO-01", "DMM-01"],
+      "procedure": [
+        "用同源码卡和空白区逐码记录物理码、原始事件、逻辑映射、音频文件和时间戳。",
+        "关闭 Wi-Fi/BLE、断开电脑，重复有效码、白纸、无 OID 插画和邻区边界。",
+        "把两块同版主板与两只同版光头的原始事件和错误码分别归档。"
+      ],
+      "recordFields": ["codeId", "rawEvent", "logicalMapping", "offlineState", "negativeResult", "headId", "artifactRefs"],
+      "acceptance": "目标完成门：24 码映射正确；离线 `100/100`；负样和邻区按 `docs/hardware-gen1-p0.md` 的矩阵计算，错码为 0。",
+      "sourceRefs": ["docs/hardware-gen1-p0.md#8-1-功能与性能", "docs/research/gen1-evt0-single-buy.md#6-来料验收"]
+    },
+    {
+      "id": "TARGET-ACOUSTIC-001",
+      "title": "目标扬声器/声腔声学门",
+      "readiness": "RELEASE_GATE",
+      "subject": "assembled-evt0",
+      "requiredInstruments": ["SPL-01", "USBPWR-01"],
+      "procedure": [
+        "目标外壳、声腔、扬声器、固件音量和内容固定后，在 50cm 位置记录全部提示音与内容峰值。",
+        "同时记录环境噪声、音量档位、供电状态和原始音频/声级计文件。"
+      ],
+      "recordFields": ["speakerMpn", "enclosureRevision", "distanceCm", "peakSplDba", "volumeStep", "artifactRefs"],
+      "acceptance": "所有内容与提示音 `<=85dBA @ 50cm`；结果必须可由原始文件复算。",
+      "sourceRefs": ["docs/hardware-gen1-p0.md#8-2-质量与可靠性"]
+    },
+    {
+      "id": "TARGET-BATTERY-001",
+      "title": "目标电池/充电/续航门",
+      "readiness": "RELEASE_GATE",
+      "subject": "assembled-evt0",
+      "requiredInstruments": ["USBPWR-01", "DMM-01"],
+      "procedure": [
+        "记录电芯完整型号、保护、NTC、极性、尺寸、批次和初始电压/内阻。",
+        "执行输入、恒流/恒压、终止、边充边用和低电关机，并记录时间序列。",
+        "按 50% 音量、每分钟 6 次点读的混合工况记录续航直到规定终止状态。"
+      ],
+      "recordFields": ["cellMpn", "ntc", "chargeTrace", "mixedUseProfile", "runtimeH", "lowBatteryBehavior", "artifactRefs"],
+      "acceptance": "混合点读工况 `>=6h`，NTC/终止/低电行为可解释且原始记录完整。",
+      "sourceRefs": ["docs/hardware-gen1-p0.md#8-2-质量与可靠性", "docs/research/gen1-evt0-single-buy.md#6-3-电池与充电"]
+    }
+  ]
+}

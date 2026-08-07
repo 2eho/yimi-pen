@@ -1,0 +1,27 @@
+# Capsule: release-gates-v1
+
+- Date: 2026-08-04
+- Project: yimi-pen
+- Memory ID: release-gates-v1
+- Memory class: durable-fact
+- Scope: 全产品ReleaseGateCatalog、EvidenceReceipt与ReleaseDecision
+- Aliases/keywords: ReleaseGateCatalog, EvidenceReceipt, ReleaseDecision, RG-, catalogId, decisionId, releaseReady, host receipt, physical receipt
+- Wake-up route: `index.md` -> `release-gates-v1`
+- Version: v1.2.0
+- Phase/mode: scoped-build
+- Module: `contracts/release-gates-v1.mjs`、`hardware/evt0/release-gates-v1/`、`hardware/evt0/release-evidence/`、`tools/release-gates/`
+- Question: 如何消除各报告重复blocker和同名异义，让发布状态只由可复算证据决定。
+- Baseline: 34项肯定式稳定gate、31个legacy alias、15个host report adapter；receipt绑定catalog/producer/subject/revision/artifact，decision按排序receipt确定性生成并检查缺失、FAIL/PASS冲突和subject多样性。Host receipt只来自一次源码零漂移、15份报告均本轮刷新的密封full run；catalog hash/identity 由可复用refresh/check工具生成。
+- Evidence: catalog `rgc:sha256:0fcab5f025687078ebe3f834721164602c6c756d37ef02f5b3943ddd782e5d7b`；conformance 22/22负向与零副作用，报告SHA-256 `9637fab1d788bd7da17f850d562b5d1a3feec0c0d570fa5279c9caac054c0c0d`。最新sealed host/source/decision身份由`build/release-gate-host-run.json`、`build/release-gate-current/release-decision.json`与`report.json`权威持有；预期判定为15 pass/0 fail/19 missing、`releaseReady=false`。记忆文件本身属于source set，因此不在本文件固化“写入本文件之前”的run ID。
+- Rejected hypotheses: report里的私有blocker数组；synthetic/host结果关闭物理门；JSON自声明hash代替真实工件；catalog把自身实施状态列成产品gate。
+- Stable behavior: 所有发布布尔值从同一decision推导；legacy ID只作输入迁移alias；外部工件持久化在`hardware/evt0/`并读取实际字节复算size/SHA；adapter registry、legacy inventory、receipt/decision Schema、判定/operator、源码集合、密封runner和evaluator原始字节均进入catalog身份。
+- 稳定模块保护判断: 发布聚合通过独立adapter读取既有报告，稳定产品源码和App保持。
+- Memory hygiene: “不要猜”和成熟产品证据要求由任务RQ持有；当前缺证据只记录为gate状态。
+- Run audit: green；陈旧报告复用、重复评价ID漂移、catalog语义覆盖不足、Family Alpha嵌套catalog漏检及生产 confirmation 自报 PASS 均已进入实现和22条负向回归；产品发布状态仍为false。
+- Artifact discipline: `build/release-gate-host-run.json`、`build/release-gate-current/release-decision.json`与`report.json`已读取；当前external receipt为0、physical intake记录为0。
+- Encoding check: 纳入全源严格UTF-8/JSON/Markdown审计。
+- Regression guards: receipt输入顺序和同一密封run的评价时间不改变decision ID；源码集合漂移、未本轮刷新/密封后漂移的host report、semantic file漂移和嵌套catalog漂移均拒绝；physical/production gate拒绝synthetic；生产 confirmation gate 还要求 gate-specific verifier，不接受普通自洽 receipt；artifact漂移、旧catalog、重复冲突receipt与未知legacy ID均拒绝且失败零副作用。
+- Judgment: 统一发布门合同已关闭；19项物理/量产证据保持开放，host绿灯只说明软件合同满足。
+- Open questions: 生产确认 provider qualification 与真实逐构建授权、真实物料/供应/打印/OID/音频/存储/传输/可靠性、目标toolchain/HIL，以及加权随机的目标RNG/双板量产证据。
+- Next step: 软件线程先推进capture adapter，随后单独推进production confirmation provider；物理receipt继续由独立硬件线程产生。
+- Links: `../../../hardware/evt0/release-gates-v1/README.md`、`../../../hardware/evt0/release-evidence/README.md`

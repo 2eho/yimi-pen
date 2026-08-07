@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/weighted-random-transcript-v2.json",
+  "title": "Yimi weighted random transcript v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "algorithmId",
+    "hostFixture",
+    "physicalEvidence",
+    "productionEvidence",
+    "algorithm",
+    "scenarios"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "profile": { "const": "weighted-random-transcript-v2" },
+    "algorithmId": { "const": "yimi-weighted-random-v2" },
+    "hostFixture": { "const": true },
+    "physicalEvidence": { "const": false },
+    "productionEvidence": { "const": false },
+    "algorithm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "randomWordBits",
+        "weightType",
+        "minClips",
+        "maxClips",
+        "rejectionRule",
+        "ticketRule",
+        "selectionRule"
+      ],
+      "properties": {
+        "randomWordBits": { "const": 64 },
+        "weightType": { "const": "positive-u32" },
+        "minClips": { "const": 2 },
+        "maxClips": { "const": 32 },
+        "rejectionRule": { "const": "reject rawWord < (2^64 mod totalWeight)" },
+        "ticketRule": { "const": "acceptedRawWord mod totalWeight" },
+        "selectionRule": { "const": "first half-open cumulative interval in clip array order" }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scenario" }
+    }
+  },
+  "$defs": {
+    "u64": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,19})$"
+    },
+    "u128": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,38})$"
+    },
+    "clip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clipSlot", "weight"],
+      "properties": {
+        "clipSlot": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "weight": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectedIndex",
+        "selectedClipSlot",
+        "totalWeight",
+        "rejectionThreshold",
+        "acceptedRawWord",
+        "ticket",
+        "consumedWords",
+        "acceptedWordCount",
+        "bucketPreimageCount"
+      ],
+      "properties": {
+        "selectedIndex": { "type": "integer", "minimum": 0, "maximum": 31 },
+        "selectedClipSlot": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "totalWeight": { "$ref": "#/$defs/u64" },
+        "rejectionThreshold": { "$ref": "#/$defs/u64" },
+        "acceptedRawWord": { "$ref": "#/$defs/u64" },
+        "ticket": { "$ref": "#/$defs/u64" },
+        "consumedWords": { "type": "integer", "minimum": 1, "maximum": 4294967295 },
+        "acceptedWordCount": { "$ref": "#/$defs/u128" },
+        "bucketPreimageCount": { "$ref": "#/$defs/u128" }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "covers", "clips", "rawWords", "expected"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^WR2-[A-Z0-9-]{2,31}$" },
+        "covers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,47}$" }
+        },
+        "clips": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/clip" }
+        },
+        "rawWords": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/u64" }
+        },
+        "expected": { "$ref": "#/$defs/expected" }
+      }
+    }
+  }
+}

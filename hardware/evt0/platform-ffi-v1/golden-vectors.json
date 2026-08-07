@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "contract": "yimi-platform-ffi-v1",
+  "fixtureOnly": true,
+  "expectedInfo": {
+    "abiVersion": 1,
+    "infoSize": 56,
+    "oidEventSize": 48,
+    "audioEventSize": 32,
+    "capabilityBits": "31",
+    "maxPathBytes": 240,
+    "transportMtu": 1024,
+    "audioStartTimeClass": 0,
+    "oidQueueStatsSize": 16,
+    "storageWriteAlignment": 1,
+    "storageMaxTransfer": 4096,
+    "storageAtomicWriteBytes": 1,
+    "audioQueueStatsSize": 16
+  },
+  "oidVectors": [
+    {
+      "id": "OID-VALID-PARTIAL",
+      "raw": {
+        "physicalCode": "123456",
+        "eventAtUs": "1000",
+        "sensorAtUs": "900",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 10,
+        "droppedEvents": 0,
+        "quality": 77,
+        "status": 0,
+        "flags": 11,
+        "reserved0": 0
+      },
+      "expected": {
+        "physicalCode": "123456",
+        "eventAtUs": "1000",
+        "sensorAtUs": "900",
+        "readyAtUs": null,
+        "quality": 77,
+        "status": "valid",
+        "sequence": 10,
+        "droppedEvents": 0
+      },
+      "expectedError": null
+    },
+    {
+      "id": "OID-NO-CODE",
+      "raw": {
+        "physicalCode": "0",
+        "eventAtUs": "2000",
+        "sensorAtUs": "18446744073709551615",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 11,
+        "droppedEvents": 0,
+        "quality": 0,
+        "status": 2,
+        "flags": 0,
+        "reserved0": 0
+      },
+      "expected": {
+        "physicalCode": null,
+        "eventAtUs": "2000",
+        "sensorAtUs": null,
+        "readyAtUs": null,
+        "quality": null,
+        "status": "no-code",
+        "sequence": 11,
+        "droppedEvents": 0
+      },
+      "expectedError": null
+    },
+    {
+      "id": "OID-LOW-QUALITY-FULL",
+      "raw": {
+        "physicalCode": "9999999999",
+        "eventAtUs": "3000",
+        "sensorAtUs": "2850",
+        "readyAtUs": "2950",
+        "sequence": 13,
+        "droppedEvents": 1,
+        "quality": 12,
+        "status": 1,
+        "flags": 15,
+        "reserved0": 0
+      },
+      "expected": {
+        "physicalCode": "9999999999",
+        "eventAtUs": "3000",
+        "sensorAtUs": "2850",
+        "readyAtUs": "2950",
+        "quality": 12,
+        "status": "low-quality",
+        "sequence": 13,
+        "droppedEvents": 1
+      },
+      "expectedError": null
+    },
+    {
+      "id": "OID-SENSOR-FAULT",
+      "raw": {
+        "physicalCode": "0",
+        "eventAtUs": "4000",
+        "sensorAtUs": "18446744073709551615",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 14,
+        "droppedEvents": 1,
+        "quality": 0,
+        "status": 3,
+        "flags": 0,
+        "reserved0": 0
+      },
+      "expected": {
+        "physicalCode": null,
+        "eventAtUs": "4000",
+        "sensorAtUs": null,
+        "readyAtUs": null,
+        "quality": null,
+        "status": "sensor-fault",
+        "sequence": 14,
+        "droppedEvents": 1
+      },
+      "expectedError": null
+    },
+    {
+      "id": "OID-EVENT-TIME-SENTINEL-REJECT",
+      "raw": {
+        "physicalCode": "0",
+        "eventAtUs": "18446744073709551615",
+        "sensorAtUs": "18446744073709551615",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 15,
+        "droppedEvents": 1,
+        "quality": 0,
+        "status": 3,
+        "flags": 0,
+        "reserved0": 0
+      },
+      "expected": null,
+      "expectedError": "provider-violation"
+    },
+    {
+      "id": "OID-PRESENT-SENSOR-SENTINEL-REJECT",
+      "raw": {
+        "physicalCode": "123456",
+        "eventAtUs": "5000",
+        "sensorAtUs": "18446744073709551615",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 16,
+        "droppedEvents": 1,
+        "quality": 0,
+        "status": 0,
+        "flags": 3,
+        "reserved0": 0
+      },
+      "expected": null,
+      "expectedError": "provider-violation"
+    },
+    {
+      "id": "OID-UNKNOWN-FLAG-REJECT",
+      "raw": {
+        "physicalCode": "123456",
+        "eventAtUs": "5100",
+        "sensorAtUs": "18446744073709551615",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 17,
+        "droppedEvents": 1,
+        "quality": 0,
+        "status": 0,
+        "flags": 129,
+        "reserved0": 0
+      },
+      "expected": null,
+      "expectedError": "provider-violation"
+    },
+    {
+      "id": "OID-NO-CODE-WITH-CODE-REJECT",
+      "raw": {
+        "physicalCode": "123456",
+        "eventAtUs": "5200",
+        "sensorAtUs": "18446744073709551615",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 18,
+        "droppedEvents": 1,
+        "quality": 0,
+        "status": 2,
+        "flags": 1,
+        "reserved0": 0
+      },
+      "expected": null,
+      "expectedError": "provider-violation"
+    },
+    {
+      "id": "OID-RESERVED-REJECT",
+      "raw": {
+        "physicalCode": "123456",
+        "eventAtUs": "5300",
+        "sensorAtUs": "18446744073709551615",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 19,
+        "droppedEvents": 1,
+        "quality": 0,
+        "status": 0,
+        "flags": 1,
+        "reserved0": 1
+      },
+      "expected": null,
+      "expectedError": "provider-violation"
+    },
+    {
+      "id": "OID-TIME-ORDER-REJECT",
+      "raw": {
+        "physicalCode": "123456",
+        "eventAtUs": "5400",
+        "sensorAtUs": "5500",
+        "readyAtUs": "18446744073709551615",
+        "sequence": 20,
+        "droppedEvents": 1,
+        "quality": 0,
+        "status": 0,
+        "flags": 3,
+        "reserved0": 0
+      },
+      "expected": null,
+      "expectedError": "provider-violation"
+    }
+  ],
+  "audioVectors": [
+    {
+      "id": "AUDIO-MP3-OK",
+      "path": "audio/clip-001.mp3",
+      "requestId": 42,
+      "expectedStatus": "ok"
+    },
+    {
+      "id": "AUDIO-WAV-OK",
+      "path": "voices/family_A/hello-01.wav",
+      "requestId": 43,
+      "expectedStatus": "ok"
+    },
+    {
+      "id": "AUDIO-PARENT-REJECT",
+      "path": "../outside.mp3",
+      "requestId": 44,
+      "expectedStatus": "invalid-argument"
+    },
+    {
+      "id": "AUDIO-DOT-SEGMENT-REJECT",
+      "path": "audio/./clip.mp3",
+      "requestId": 45,
+      "expectedStatus": "invalid-argument"
+    },
+    {
+      "id": "AUDIO-ABSOLUTE-REJECT",
+      "path": "/audio/clip.mp3",
+      "requestId": 46,
+      "expectedStatus": "invalid-argument"
+    },
+    {
+      "id": "AUDIO-DRIVE-REJECT",
+      "path": "C:/audio/clip.mp3",
+      "requestId": 47,
+      "expectedStatus": "invalid-argument"
+    },
+    {
+      "id": "AUDIO-EMPTY-SEGMENT-REJECT",
+      "path": "audio//clip.mp3",
+      "requestId": 48,
+      "expectedStatus": "invalid-argument"
+    },
+    {
+      "id": "AUDIO-NONASCII-REJECT",
+      "path": "audio/你好.mp3",
+      "requestId": 49,
+      "expectedStatus": "invalid-argument"
+    }
+  ],
+  "storageVectors": [
+    {
+      "id": "STORAGE-ROUNDTRIP",
+      "offset": "100",
+      "hex": "736e617073686f74",
+      "expectedStatus": "ok"
+    },
+    {
+      "id": "STORAGE-BINARY-ROUNDTRIP",
+      "offset": "4088",
+      "hex": "0001027f80fdfeff",
+      "expectedStatus": "ok"
+    },
+    {
+      "id": "STORAGE-RANGE-REJECT",
+      "offset": "4095",
+      "hex": "746f6f2d6c6f6e67",
+      "expectedStatus": "invalid-argument"
+    }
+  ],
+  "transportVectors": [
+    {
+      "id": "TRANSPORT-HOST-TO-DEVICE",
+      "direction": "host-to-device",
+      "hex": "686f73742d746f2d646576696365"
+    },
+    {
+      "id": "TRANSPORT-DEVICE-TO-HOST",
+      "direction": "device-to-host",
+      "hex": "6465766963652d746f2d686f7374"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "sampleId": "SAMPLE-ID",
+  "serialNumber": null,
+  "lot": null,
+  "boardIdentityTuple": {
+    "BOARD_MPN": null,
+    "PCB_REV": null,
+    "HEAD_MPN": null,
+    "HEAD_REV": null,
+    "FW_VERSION": null
+  },
+  "artifacts": [],
+  "artifactRefs": []
+}

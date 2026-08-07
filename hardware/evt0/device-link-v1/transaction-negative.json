@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "profile": "device-link-v1-host-transaction-transcript",
+  "class": "negative",
+  "hostSimulation": true,
+  "fixture": {
+    "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "generation": "7"
+  },
+  "scenarios": [
+    {
+      "id": "DLTX-NEG-REQUEST-ID-CONFLICT",
+      "title": "Reused request ID with changed body is rejected",
+      "steps": [
+        {
+          "id": "STEP-FIRST",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N1-BEGIN",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N1",
+              "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "totalBytes": "3",
+              "fileCount": 1,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "manifestByteLength": "3"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-CONFLICT",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N1-BEGIN",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N1",
+              "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "totalBytes": "4",
+              "fileCount": 1,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "manifestByteLength": "3"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "REQUEST_ID_CONFLICT",
+            "semanticMutation": "unchanged"
+          }
+        }
+      ],
+      "expectedFinal": {
+        "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "generation": "7",
+        "transactions": {
+          "TX-N1": {
+            "status": "Staging",
+            "committedBytes": "0",
+            "committedFiles": 0
+          }
+        }
+      },
+      "covers": [
+        "request-id-conflict"
+      ]
+    },
+    {
+      "id": "DLTX-NEG-BEGIN-METADATA-CONFLICT",
+      "title": "Existing transaction begin with changed metadata is rejected",
+      "steps": [
+        {
+          "id": "STEP-FIRST",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N2-BEGIN-1",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N2",
+              "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "totalBytes": "3",
+              "fileCount": 1,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "manifestByteLength": "3"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-CONFLICT",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N2-BEGIN-2",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N2",
+              "snapshotId": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+              "totalBytes": "3",
+              "fileCount": 1,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "manifestByteLength": "3"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "TRANSACTION_ID_CONFLICT",
+            "semanticMutation": "unchanged"
+          }
+        }
+      ],
+      "expectedFinal": {
+        "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "generation": "7",
+        "transactions": {
+          "TX-N2": {
+            "status": "Staging",
+            "committedBytes": "0",
+            "committedFiles": 0
+          }
+        }
+      },
+      "covers": [
+        "transaction-metadata-conflict"
+      ]
+    },
+    {
+      "id": "DLTX-NEG-CHUNK-CONFLICT",
+      "title": "Same path and offset with different durable chunk is rejected",
+      "steps": [
+        {
+          "id": "STEP-BEGIN",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N3-BEGIN",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N3",
+              "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "totalBytes": "3",
+              "fileCount": 1,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "manifestByteLength": "3"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-WRITE",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N3-WRITE-1",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N3",
+              "path": "manifest.json",
+              "offset": "0",
+              "byteLength": 3,
+              "dataBase64": "YWJj",
+              "chunkSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-CONFLICT",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N3-WRITE-2",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N3",
+              "path": "manifest.json",
+              "offset": "0",
+              "byteLength": 3,
+              "dataBase64": "YWJY",
+              "chunkSha256": "8a0fe5e48dfe39ae4ca34b375ea03e76b51413f2967034a8bf08d61270bd9462"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "CHUNK_CONFLICT",
+            "semanticMutation": "unchanged"
+          }
+        }
+      ],
+      "expectedFinal": {
+        "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "generation": "7",
+        "transactions": {
+          "TX-N3": {
+            "status": "Staging",
+            "committedBytes": "3",
+            "committedFiles": 1
+          }
+        }
+      },
+      "covers": [
+        "chunk-conflict"
+      ]
+    },
+    {
+      "id": "DLTX-NEG-OFFSET-AND-RANGE",
+      "title": "Offset gap overlap and transaction total overflow are rejected",
+      "steps": [
+        {
+          "id": "STEP-BEGIN",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N4-BEGIN",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N4",
+              "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "totalBytes": "9",
+              "fileCount": 2,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "manifestByteLength": "6"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-WRITE",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N4-WRITE-1",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N4",
+              "path": "manifest.json",
+              "offset": "0",
+              "byteLength": 3,
+              "dataBase64": "YWJj",
+              "chunkSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-GAP",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N4-GAP",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N4",
+              "path": "manifest.json",
+              "offset": "4",
+              "byteLength": 2,
+              "dataBase64": "V1g=",
+              "chunkSha256": "43b7c239d8bfd2f3c62d5bac183d1a1d1c1e665c5c4caf301e51e9f674ca186a"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "OFFSET_MISMATCH",
+            "semanticMutation": "unchanged"
+          }
+        },
+        {
+          "id": "STEP-OVERLAP",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N4-OVERLAP",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N4",
+              "path": "manifest.json",
+              "offset": "2",
+              "byteLength": 2,
+              "dataBase64": "V1g=",
+              "chunkSha256": "43b7c239d8bfd2f3c62d5bac183d1a1d1c1e665c5c4caf301e51e9f674ca186a"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "OFFSET_MISMATCH",
+            "semanticMutation": "unchanged"
+          }
+        },
+        {
+          "id": "STEP-MANIFEST-COMPLETE",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N4-WRITE-2",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N4",
+              "path": "manifest.json",
+              "offset": "3",
+              "byteLength": 3,
+              "dataBase64": "ZGVm",
+              "chunkSha256": "cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-OUT-OF-RANGE",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N4-RANGE",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N4",
+              "path": "audio/a.bin",
+              "offset": "0",
+              "byteLength": 7,
+              "dataBase64": "YWJjZGVmZw==",
+              "chunkSha256": "7d1a54127b222502f5b79b5fb0803061152a44f92b37e23c6527baf665d4da9a"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "CHUNK_OUT_OF_RANGE",
+            "semanticMutation": "unchanged"
+          }
+        }
+      ],
+      "expectedFinal": {
+        "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "generation": "7",
+        "transactions": {
+          "TX-N4": {
+            "status": "Staging",
+            "committedBytes": "6",
+            "committedFiles": 1
+          }
+        }
+      },
+      "covers": [
+        "offset-gap",
+        "offset-overlap",
+        "out-of-range"
+      ]
+    },
+    {
+      "id": "DLTX-NEG-VERIFY-INCOMPLETE",
+      "title": "Verify rejects incomplete byte and file totals",
+      "steps": [
+        {
+          "id": "STEP-BEGIN",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N5-BEGIN",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N5",
+              "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "totalBytes": "6",
+              "fileCount": 2,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "manifestByteLength": "3"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-WRITE",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N5-WRITE",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N5",
+              "path": "manifest.json",
+              "offset": "0",
+              "byteLength": 3,
+              "dataBase64": "YWJj",
+              "chunkSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-MISSING-FILE-HASH",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N5-MISSING-HASH",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N5",
+              "path": "audio/missing.bin",
+              "offset": "0",
+              "byteLength": 3,
+              "dataBase64": "ZGVm",
+              "chunkSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "CHUNK_HASH_MISMATCH",
+            "semanticMutation": "unchanged"
+          }
+        },
+        {
+          "id": "STEP-VERIFY",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N5-VERIFY",
+            "op": "snapshot.verify",
+            "payload": {
+              "transactionId": "TX-N5"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "STAGING_INCOMPLETE",
+            "semanticMutation": "unchanged"
+          }
+        }
+      ],
+      "expectedFinal": {
+        "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "generation": "7",
+        "transactions": {
+          "TX-N5": {
+            "status": "Staging",
+            "committedBytes": "3",
+            "committedFiles": 1
+          }
+        }
+      },
+      "covers": [
+        "verify-incomplete"
+      ]
+    },
+    {
+      "id": "DLTX-NEG-BEGIN-CAS",
+      "title": "Begin compare-and-swap rejects stale active snapshot",
+      "steps": [
+        {
+          "id": "STEP-BEGIN",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N6-BEGIN",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N6",
+              "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "totalBytes": "3",
+              "fileCount": 1,
+              "expectedActiveSnapshotId": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+              "manifestByteLength": "3"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "EXPECTED_ACTIVE_MISMATCH",
+            "semanticMutation": "unchanged"
+          }
+        }
+      ],
+      "expectedFinal": {
+        "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "generation": "7",
+        "transactions": {}
+      },
+      "covers": [
+        "begin-cas"
+      ]
+    },
+    {
+      "id": "DLTX-NEG-ACTIVATE-CAS",
+      "title": "Activate compare-and-swap rejects request metadata that differs from staged expectation",
+      "steps": [
+        {
+          "id": "STEP-BEGIN",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N7-BEGIN",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N7",
+              "snapshotId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "totalBytes": "3",
+              "fileCount": 1,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "manifestByteLength": "3"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-WRITE",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N7-WRITE",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N7",
+              "path": "manifest.json",
+              "offset": "0",
+              "byteLength": 3,
+              "dataBase64": "YWJj",
+              "chunkSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-VERIFY",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N7-VERIFY",
+            "op": "snapshot.verify",
+            "payload": {
+              "transactionId": "TX-N7"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-ACTIVATE",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N7-ACTIVATE",
+            "op": "snapshot.activate",
+            "payload": {
+              "transactionId": "TX-N7",
+              "expectedActiveSnapshotId": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "EXPECTED_ACTIVE_MISMATCH",
+            "semanticMutation": "unchanged"
+          }
+        }
+      ],
+      "expectedFinal": {
+        "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "generation": "7",
+        "transactions": {
+          "TX-N7": {
+            "status": "ReadyToActivate",
+            "committedBytes": "3",
+            "committedFiles": 1
+          }
+        }
+      },
+      "covers": [
+        "activate-cas"
+      ]
+    },
+    {
+      "id": "DLTX-NEG-MANIFEST-FIRST",
+      "title": "Content is rejected before the manifest becomes durable",
+      "covers": [
+        "manifest-first"
+      ],
+      "steps": [
+        {
+          "id": "STEP-BEGIN",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N8-BEGIN",
+            "op": "snapshot.stage.begin",
+            "payload": {
+              "transactionId": "TX-N8",
+              "snapshotId": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+              "manifestByteLength": "3",
+              "totalBytes": "6",
+              "fileCount": 2,
+              "expectedActiveSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+            }
+          },
+          "expected": {
+            "ok": true,
+            "semanticMutation": "changed"
+          }
+        },
+        {
+          "id": "STEP-CONTENT-EARLY",
+          "request": {
+            "schemaVersion": 1,
+            "profile": "loopback-json-v1",
+            "kind": "request",
+            "requestId": "REQ-N8-WRITE",
+            "op": "snapshot.stage.write",
+            "payload": {
+              "transactionId": "TX-N8",
+              "path": "audio/early.bin",
+              "offset": "0",
+              "byteLength": 3,
+              "dataBase64": "YWJj",
+              "chunkSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+            }
+          },
+          "expected": {
+            "ok": false,
+            "errorCode": "INVALID_STATE",
+            "semanticMutation": "unchanged"
+          }
+        }
+      ],
+      "expectedFinal": {
+        "activeSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "lastGoodSnapshotId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "generation": "7",
+        "transactions": {
+          "TX-N8": {
+            "status": "Staging",
+            "committedBytes": "0",
+            "committedFiles": 0
+          }
+        }
+      }
+    }
+  ]
+}

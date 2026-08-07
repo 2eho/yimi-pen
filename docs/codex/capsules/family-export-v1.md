@@ -1,0 +1,22 @@
+# Capsule: family-export-v1
+
+- Date: 2026-08-04
+- Project: yimi-pen
+- Memory ID: family-export-v1
+- Memory class: durable-fact
+- Scope: 完整家庭内容目录包、历史资产闭包与干净目录 portable restore
+- Aliases/keywords: Family Export,完整家庭导出,asset vault,portable restore,distinct replica epoch,exact file closure
+- Wake-up route: `index.md` -> `family-export-v1`
+- Version: v1
+- Phase/mode: scoped-build
+- Module: `contracts/family-export-v1.mjs`、`hardware/evt0/family-export-v1/`、`apps/companion-app/src/local-family-export.mjs`
+- Question: 如何让 FamilyRepository 的事实备份连同全部录音资产可迁移，同时不绑定 SQLite、云账号、UI 或设备传输。
+- Baseline: `RepositoryBackup + all historical (assetId, sha256, bytes) + manifest`；资产路径严格为 `assets/<sha256>.bin`，根目录与资产目录实行精确文件闭包。
+- Restore semantics: 调用方先提供显式资源策略；schema/身份/scope/历史引用/文件字节全部通过后，在 staging 中执行 FamilyRepository `restorePortable`，验证 head、asset vault 与 distinct replica epoch，再发布目标目录。
+- Historical identity: 同一 assetId 可在不同 revision 对应不同 sha256；export 保存两个组合身份，恢复后 head 按当前 `(assetId, sha256)` 投影路径。
+- Evidence: companion host 26/26 gate、6/6授权负例、6/6导出负例；干净恢复 revision/assets/preview 等价；源 epoch `epoch:sha256:669886442b6dd7045f98fefe6842df5367b202f6e208251b01e3e34f0e64d5b5` 与恢复 epoch `epoch:sha256:cbee8e0efe6c5227d3802d6c97e33979a6715b7d276702b32823d09bfbab131c` 不同；报告 SHA-256 `ec67d9a09c97293deec1c068b4703f994b9c49de7b90c23625f17802b17740c9`。
+- Negative guards: 资产字节篡改、路径哈希伪装、额外文件、源/目标重叠、已有输出覆盖和读取前资源超限均拒绝且保持目标/既有输出。
+- Stable boundary: 不修改 Family Alpha compiler、Snapshot 字节或旧 App；FamilyRepository 原 restore/recovery 行为保持，新增 portable restore 入口单独回归。
+- Evidence boundary: 当前只证明主机目录与进程内 staging/rename；异常退出 staging 回收、父目录 fsync、真实录音 callback 和目标介质掉电耐久保持开放。
+- Historical next step: `SW-REAL-PRELISTEN-01` 与 asset-vault maintenance 均已完成；后者直接复用本合同的全历史引用收集器，当前事实由 `asset-vault-maintenance-v1` capsule 持有。
+- Links: `../../../hardware/evt0/family-export-v1/README.md`、`../../family-coordination-consumer-audit.md`、`../../research/evidence-gate-audit-2026-08-03.md`

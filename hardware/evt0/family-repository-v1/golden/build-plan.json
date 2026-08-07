@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "profile": "family-build-plan-v1",
+  "buildPlanId": "PLAN-FAMILY-ALPHA-GOLDEN-001",
+  "buildSubjectSha256": "cdb45e96a1350404483a6172cb1dacde62602f240120ca006eb5c2a0f5b1070f",
+  "requestedAt": "2026-08-03T00:04:00Z",
+  "familyRevisionId": "sha256:39c95b3b12cbe4abc84ac86b77f3aaeaea2f915b8c0bd105ea2ea3b1b25e263c",
+  "outputMode": "design-fixture",
+  "expectedCompilerProfile": "family-alpha-draft-v1",
+  "targetProfile": {
+    "ref": "target-profile:unfrozen-fixture-v1",
+    "boardTarget": "UNFROZEN",
+    "firmwareMin": "UNFROZEN",
+    "capabilities": [
+      "oid-map:logical-only",
+      "snapshot:staged-atomic",
+      "audio:board-negotiated"
+    ]
+  },
+  "physicalMap": {
+    "revisionRef": "physical-map:golden-24-unassigned-v1",
+    "status": "unassigned",
+    "entries": [
+      {
+        "logicalOid": "YIMI-EVT0-013",
+        "physicalCode": null
+      },
+      {
+        "logicalOid": "YIMI-EVT0-014",
+        "physicalCode": null
+      },
+      {
+        "logicalOid": "YIMI-EVT0-015",
+        "physicalCode": null
+      },
+      {
+        "logicalOid": "YIMI-EVT0-016",
+        "physicalCode": null
+      },
+      {
+        "logicalOid": "YIMI-EVT0-017",
+        "physicalCode": null
+      },
+      {
+        "logicalOid": "YIMI-EVT0-018",
+        "physicalCode": null
+      }
+    ]
+  },
+  "codecProfile": {
+    "ref": "codec-profile:wav-pcm16-16k-mono-fixture-v1",
+    "acceptedSourceCodecs": [
+      "WAV_PCM16_16K_MONO"
+    ],
+    "snapshotCodec": "WAV_PCM16_16K_MONO"
+  },
+  "assetCatalog": {
+    "revisionRef": "asset-catalog:family-alpha-golden-v1",
+    "assets": [
+      {
+        "assetId": "asset-clip-013-1",
+        "path": "assets/clip-013-1.wav",
+        "bytes": 3884,
+        "sha256": "a0da8246cbb78ee748f1e2e57c779c65c0b1c32872b67c51985b7de32c4da55c",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-014-1",
+        "path": "assets/clip-014-1.wav",
+        "bytes": 3884,
+        "sha256": "aceaeed1978fe121efc3bd793defbd9d712b3619193d3a5a38b177f4de7d7d7c",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-015-1",
+        "path": "assets/clip-015-1.wav",
+        "bytes": 3884,
+        "sha256": "2ca5fb9200f8cbe39edf1b7cde40b81babf1bd9a8c639a125dcb23d0fc381725",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-015-2",
+        "path": "assets/clip-015-2.wav",
+        "bytes": 3884,
+        "sha256": "f930229bfd3ecc7fd8d1113a708666fa30d0ab78edb79a38ea0786ac7eb6c354",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-016-1",
+        "path": "assets/clip-016-1.wav",
+        "bytes": 3884,
+        "sha256": "5f550fc0f7a24f4f12847859d921a7a1d801aef89190f205fd04db20b760e916",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-017-1",
+        "path": "assets/clip-017-1.wav",
+        "bytes": 3884,
+        "sha256": "52b7b9c7193e31e930b37ed528ee90b06ef34c694b41c3dc1e2a30eb7e50786a",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-017-2",
+        "path": "assets/clip-017-2.wav",
+        "bytes": 3884,
+        "sha256": "48c02fd4a03938299794040e65ba6905b9a8250d302053dce62f63bd341b81a2",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-018-1",
+        "path": "assets/clip-018-1.wav",
+        "bytes": 3884,
+        "sha256": "b0322f22a2846117848b4dc8fd384be5f7e5d82c86f857da795206dd4ce6e66e",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-018-2",
+        "path": "assets/clip-018-2.wav",
+        "bytes": 3884,
+        "sha256": "5ca2de6dc14cc211cbe2d50ef6cb5128289e91ec1e5bffd49a1adece5b149ef2",
+        "codec": "WAV_PCM16_16K_MONO"
+      },
+      {
+        "assetId": "asset-clip-018-3",
+        "path": "assets/clip-018-3.wav",
+        "bytes": 3884,
+        "sha256": "940d67a770819dd24f7a881015b93424deab7987a96a393c0694565fe07666b2",
+        "codec": "WAV_PCM16_16K_MONO"
+      }
+    ]
+  },
+  "expectedProjection": {
+    "sourceSha256": "145544952205cb02285a3c510f9c76dd349ff44666a2c6336431f61a859d275f"
+  }
+}

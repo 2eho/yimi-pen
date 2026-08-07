@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "evidenceSetId": "HW-EDA-SYSTEM-SKELETON-EVIDENCE-20260804",
+  "retrievedAt": "2026-08-04T00:29:05Z",
+  "repositories": [
+    {
+      "repository": "https://github.com/easyeda/easyeda-api-skill.git",
+      "commit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "workingTreeState": "CLEAN"
+    },
+    {
+      "repository": "https://github.com/easyeda/pro-api-sdk.git",
+      "commit": "a1b5457da2e402b91ffa46bb7545963b09664e36",
+      "workingTreeState": "CLEAN"
+    }
+  ],
+  "artifacts": [
+    {
+      "sourceId": "EASYEDA-FORMAT-V3-INDEX",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "format/index.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/format/index.md",
+      "bytes": 6268,
+      "sha256": "8b2fe73bea0c50c550479ddc3968accbce1c14948262defd9c06c20ce4940fcc"
+    },
+    {
+      "sourceId": "EASYEDA-SCH-RECTANGLE-API",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "references/classes/SCH_PrimitiveRectangle.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/references/classes/SCH_PrimitiveRectangle.md",
+      "bytes": 8544,
+      "sha256": "78b6476103d248547046ac1551811c85f615aee123819e746160a47836251c1d"
+    },
+    {
+      "sourceId": "EASYEDA-SCH-TEXT-API",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "references/classes/SCH_PrimitiveText.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/references/classes/SCH_PrimitiveText.md",
+      "bytes": 8721,
+      "sha256": "b9edd4447b8128ef7fc39a3653dc53c8b1bc0513bf039612394fe8a6c15b3ad7"
+    },
+    {
+      "sourceId": "EASYEDA-SCH-WIRE-FORMAT",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "format/schematic/wire.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/format/schematic/wire.md",
+      "bytes": 4754,
+      "sha256": "fdfc27b6895db90a60c032716a029b30dc7baa6644007e4145379dc96175af94"
+    },
+    {
+      "sourceId": "EASYEDA-PRO-API-SDK-README",
+      "repositoryCommit": "a1b5457da2e402b91ffa46bb7545963b09664e36",
+      "path": "README.md",
+      "url": "https://github.com/easyeda/pro-api-sdk/blob/a1b5457da2e402b91ffa46bb7545963b09664e36/README.md",
+      "bytes": 4015,
+      "sha256": "b1fc14b5794aaa47d4b7c90a9ebd702f99d416fcf4a505e91d4efbcf789f2b4c"
+    },
+    {
+      "sourceId": "EASYEDA-DMT-SCHEMATIC-API",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "references/classes/DMT_Schematic.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/references/classes/DMT_Schematic.md",
+      "bytes": 17892,
+      "sha256": "1820718f602bc51de48c91608e9ec9e6d53fc40da44799ea2ce4adb2c63d8773"
+    },
+    {
+      "sourceId": "EASYEDA-DMT-SELECT-CONTROL-API",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "references/classes/DMT_SelectControl.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/references/classes/DMT_SelectControl.md",
+      "bytes": 1305,
+      "sha256": "9b1f75f1f04ba71171a7f5af5715aeccaa1e2db08a98643b01d8c49cdbfadad0"
+    },
+    {
+      "sourceId": "EASYEDA-DMT-PROJECT-API",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "references/classes/DMT_Project.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/references/classes/DMT_Project.md",
+      "bytes": 7109,
+      "sha256": "374bc6d462467b5df24885ab6951c6cec626789693b6c968a8a51db8d6998457"
+    },
+    {
+      "sourceId": "EASYEDA-SCH-DOCUMENT-API",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "references/classes/SCH_Document.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/references/classes/SCH_Document.md",
+      "bytes": 5040,
+      "sha256": "02984be35332b2ecb6eeb49b02fd96798330c6726c506fc94df3fcbb820cbc92"
+    },
+    {
+      "sourceId": "EASYEDA-SCH-EXPORT-API",
+      "repositoryCommit": "72d3ce97b6bf3ece54b75806933df12980e83b7d",
+      "path": "references/classes/SCH_ManufactureData.md",
+      "url": "https://github.com/easyeda/easyeda-api-skill/blob/72d3ce97b6bf3ece54b75806933df12980e83b7d/references/classes/SCH_ManufactureData.md",
+      "bytes": 15483,
+      "sha256": "09a5fdd2abc64b52b2e9109a246da6ca937820dfe103603e77265969c91bfd42"
+    }
+  ],
+  "conclusions": [
+    {
+      "claimId": "EDA-OFFICIAL-001",
+      "classification": "OFFICIAL_FACT",
+      "statement": "The official V3 source format is a project log with document identity, client identity, tickets, and unique primitive identifiers.",
+      "sourceRefs": ["EASYEDA-FORMAT-V3-INDEX"]
+    },
+    {
+      "claimId": "EDA-OFFICIAL-002",
+      "classification": "OFFICIAL_FACT",
+      "statement": "The official extension API exposes schematic rectangle and text creation; text creation is marked beta in the pinned reference.",
+      "sourceRefs": ["EASYEDA-SCH-RECTANGLE-API", "EASYEDA-SCH-TEXT-API"]
+    },
+    {
+      "claimId": "EDA-OFFICIAL-003",
+      "classification": "OFFICIAL_FACT",
+      "statement": "A schematic wire carries electrical network semantics through its associated network attribute.",
+      "sourceRefs": ["EASYEDA-SCH-WIRE-FORMAT"]
+    },
+    {
+      "claimId": "EDA-OFFICIAL-004",
+      "classification": "OFFICIAL_FACT",
+      "statement": "The official API exposes current-document inspection, schematic/page creation, document save, and SVG/PDF export operations; creation and export calls used by the future plan include beta surfaces.",
+      "sourceRefs": [
+        "EASYEDA-DMT-SCHEMATIC-API",
+        "EASYEDA-DMT-SELECT-CONTROL-API",
+        "EASYEDA-DMT-PROJECT-API",
+        "EASYEDA-SCH-DOCUMENT-API",
+        "EASYEDA-SCH-EXPORT-API"
+      ]
+    }
+  ],
+  "limitations": [
+    "No native JLCEDA source or export was generated in this work package.",
+    "No connected design-write session or version-pinned import-save-export-readback loop was available.",
+    "The preview uses independent logical coordinates and has no PCB or enclosure dimensional meaning."
+  ]
+}

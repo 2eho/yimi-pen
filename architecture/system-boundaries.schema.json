@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/system-boundaries-v1.json",
+  "title": "Yimi system reuse and maintenance boundaries v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "objective",
+    "nodeWorkspaces",
+    "rustWorkspace",
+    "contractOwners",
+    "evolutionRules",
+    "integrationGates",
+    "qualityGates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "yimi-system-boundaries-v1" },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reuseStrategy", "maintenanceStrategy", "abstractionGate"],
+      "properties": {
+        "reuseStrategy": { "const": "stable-kernel-ports-adapters" },
+        "maintenanceStrategy": { "const": "single-owner-contracts-and-conformance" },
+        "abstractionGate": { "const": "extract-after-second-real-consumer" }
+      }
+    },
+    "nodeWorkspaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/nodeWorkspace" }
+    },
+    "rustWorkspace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest",
+        "crates",
+        "pureCoreCrates",
+        "hostOnlyCrates",
+        "ffiBoundaryCrates",
+        "allowedUnsafeRustFiles",
+        "forbiddenVendorTokensInPureCore"
+      ],
+      "properties": {
+        "manifest": { "$ref": "#/$defs/path" },
+        "crates": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/rustCrate" }
+        },
+        "pureCoreCrates": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "hostOnlyCrates": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "ffiBoundaryCrates": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "allowedUnsafeRustFiles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/path" }
+        },
+        "forbiddenVendorTokensInPureCore": { "$ref": "#/$defs/nonEmptyStringArray" }
+      }
+    },
+    "contractOwners": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/contractOwner" }
+    },
+    "evolutionRules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["change", "reuse", "acceptance"],
+        "properties": {
+          "change": { "$ref": "#/$defs/nonEmptyString" },
+          "reuse": { "$ref": "#/$defs/nonEmptyString" },
+          "acceptance": { "$ref": "#/$defs/nonEmptyString" }
+        }
+      }
+    },
+    "integrationGates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "blocks", "ownerDocs", "closureEvidence"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+          "status": { "enum": ["DESIGN_FROZEN_IMPLEMENTATION_PENDING", "EVIDENCE_PENDING", "CLOSED"] },
+          "blocks": { "$ref": "#/$defs/nonEmptyString" },
+          "ownerDocs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/path" }
+          },
+          "closureEvidence": { "$ref": "#/$defs/nonEmptyStringArray" }
+        }
+      }
+    },
+    "qualityGates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiredDocs", "requiredAutomation", "requiredRootScripts", "aggregateScript", "protectedStableRoots"],
+      "properties": {
+        "requiredDocs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/path" }
+        },
+        "requiredAutomation": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/path" }
+        },
+        "requiredRootScripts": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "aggregateScript": { "const": "validate:product-rd" },
+        "protectedStableRoots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/path" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[A-Za-z0-9._/-]+$"
+    },
+    "nodeWorkspace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "root", "role", "allowedInternalDependencies", "allowNodeBuiltins"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^@yimi-pen/[a-z0-9-]+$" },
+        "root": { "$ref": "#/$defs/path" },
+        "role": { "enum": ["stable-core", "stable-capability", "composition-root", "placeholder"] },
+        "allowedInternalDependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^@yimi-pen/[a-z0-9-]+$" }
+        },
+        "allowedCompositionImports": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/path" }
+        },
+        "allowNodeBuiltins": { "type": "boolean" }
+      }
+    },
+    "rustCrate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "root", "allowedProductionPathDependencies", "allowExternalProductionDependencies"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^yimi-[a-z0-9-]+$" },
+        "root": { "$ref": "#/$defs/path" },
+        "allowedProductionPathDependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^yimi-[a-z0-9-]+$" }
+        },
+        "allowExternalProductionDependencies": { "type": "boolean" }
+      }
+    },
+    "contractOwner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "canonicalPaths", "consumers", "conformanceGate"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]+-v[0-9]+$" },
+        "canonicalPaths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/path" }
+        },
+        "consumers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/path" }
+        },
+        "conformanceGate": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "benchmark-seller-evidence",
+  "recordId": "BENCHMARK-SELLER-EVIDENCE-TEMPLATE",
+  "profileId": null,
+  "purchasePlanItemId": null,
+  "candidateId": null,
+  "preparedAt": null,
+  "sourceRefs": [],
+  "requestedIdentity": {
+    "productGeneration": null,
+    "sourceOrderSku": null,
+    "bundleCapacityLabel": null
+  },
+  "observedIdentity": {
+    "listingUrl": null,
+    "sellerOrderSku": null,
+    "skuRelation": null,
+    "sellerName": null,
+    "fulfilmentParty": null,
+    "stockStatement": null,
+    "productGeneration": null,
+    "packageBarcode": null,
+    "productionLotOrDate": null,
+    "deviceModel": null,
+    "serialPrefix": null,
+    "serialSuffix": null,
+    "bootVersionDisplay": null,
+    "bundleCapacityLabel": null,
+    "includedReadableMedia": []
+  },
+  "requestTemplate": {
+    "path": null,
+    "bytes": null,
+    "sha256": null
+  },
+  "request": {
+    "state": "PREPARED_NOT_SENT",
+    "sentAt": null,
+    "channel": null,
+    "sellerEndpoint": null,
+    "transportReference": null,
+    "artifactRefs": []
+  },
+  "response": {
+    "state": "PENDING",
+    "receivedAt": null,
+    "senderIdentity": null,
+    "artifactRefs": []
+  },
+  "rawArtifacts": [],
+  "requirementResults": [],
+  "review": {
+    "reviewedAt": null,
+    "reviewer": null,
+    "notes": null
+  },
+  "decision": {
+    "status": "EVIDENCE_REQUIRED",
+    "reason": "Template only; no seller request, response or same-item evidence exists.",
+    "blockers": [
+      "PROFILE_NOT_SELECTED",
+      "REQUEST_NOT_SENT",
+      "SELLER_RESPONSE_PENDING"
+    ]
+  },
+  "targetBindingEffect": "NONE_BENCHMARK_ONLY",
+  "adapterEffect": "NONE",
+  "releaseGateEffect": "NONE",
+  "purchaseAuthorizationEffect": "NONE_HUMAN_DECISION_REQUIRED",
+  "purchasePlanEffect": "NONE_RECORD_ONLY",
+  "intakeEffect": "NONE_UNTIL_RECEIVED_UNIT",
+  "requirements": [
+    "RQ-HW-001",
+    "RQ-HW-002",
+    "RQ-HW-003",
+    "RQ-HW-005"
+  ]
+}

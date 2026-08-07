@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/vendor-contact-receipt-v1.json",
+  "title": "Vendor contact send receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "receiptId",
+    "messageId",
+    "candidateId",
+    "sourceRefs",
+    "outboundBundle",
+    "contactEndpoint",
+    "submission",
+    "rawArtifacts",
+    "targetBindingEffect",
+    "paymentEffect",
+    "decision",
+    "requirements"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "recordKind": { "const": "vendor-outbound-send-receipt" },
+    "receiptId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,80}$"
+    },
+    "messageId": { "type": "string", "minLength": 1 },
+    "candidateId": { "type": "string", "minLength": 1 },
+    "sourceRefs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "outboundBundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bundleId",
+        "reproducibleId",
+        "manifestPath",
+        "manifestBytes",
+        "manifestSha256",
+        "messageArtifactPath",
+        "messageArtifactBytes",
+        "messageArtifactSha256",
+        "recipientArtifactPath",
+        "recipientArtifactBytes",
+        "recipientArtifactSha256"
+      ],
+      "properties": {
+        "bundleId": { "type": ["string", "null"] },
+        "reproducibleId": {
+          "type": ["string", "null"],
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "manifestPath": { "type": ["string", "null"] },
+        "manifestBytes": { "type": ["integer", "null"], "minimum": 1 },
+        "manifestSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "messageArtifactPath": { "type": ["string", "null"] },
+        "messageArtifactBytes": { "type": ["integer", "null"], "minimum": 1 },
+        "messageArtifactSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "recipientArtifactPath": { "type": ["string", "null"] },
+        "recipientArtifactBytes": { "type": ["integer", "null"], "minimum": 1 },
+        "recipientArtifactSha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "contactEndpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "officialEntryUrl",
+        "verifiedAt",
+        "recipientKind",
+        "recipientValue",
+        "verificationArtifactRefs"
+      ],
+      "properties": {
+        "officialEntryUrl": { "type": ["string", "null"] },
+        "verifiedAt": { "type": ["string", "null"] },
+        "recipientKind": {
+          "type": ["string", "null"],
+          "enum": ["EMAIL", "WEB_FORM", "FAE_ROUTING", "OTHER_OFFICIAL_CHANNEL", null]
+        },
+        "recipientValue": { "type": ["string", "null"] },
+        "verificationArtifactRefs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "submission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "sentAt",
+        "channel",
+        "transportReference",
+        "submissionArtifactRefs"
+      ],
+      "properties": {
+        "state": { "enum": ["PENDING", "SUBMITTED"] },
+        "sentAt": { "type": ["string", "null"] },
+        "channel": {
+          "type": ["string", "null"],
+          "enum": ["EMAIL", "WEB_FORM", "FAE_ROUTING", "OTHER_OFFICIAL_CHANNEL", null]
+        },
+        "transportReference": { "type": ["string", "null"] },
+        "submissionArtifactRefs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "rawArtifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "bytes", "sha256", "mediaType"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "path": {
+            "type": "string",
+            "pattern": "^build/vendor-contact-receipts/"
+          },
+          "bytes": { "type": "integer", "minimum": 1 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "mediaType": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "targetBindingEffect": { "const": "NONE_CONTACT_ONLY" },
+    "paymentEffect": { "const": "NONE_AWAIT_VENDOR_RESPONSE" },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason", "blockers"],
+      "properties": {
+        "status": { "enum": ["PENDING_SEND", "AWAITING_RESPONSE"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "blockers": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true,
+      "minItems": 1
+    }
+  }
+}

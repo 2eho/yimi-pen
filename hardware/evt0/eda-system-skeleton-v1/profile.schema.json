@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/eda-system-skeleton-profile-v1.json",
+  "title": "Yimi EDA system skeleton profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "sources",
+    "scope",
+    "hierarchy",
+    "diagramLayout",
+    "outputs",
+    "applyPolicy",
+    "effects"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profileId": { "const": "HW-EDA-SYSTEM-SKELETON-V1" },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topology", "targetBinding", "edaManifest", "officialEvidence"],
+      "properties": {
+        "topology": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "topologyId", "bytes", "sha256"],
+          "properties": {
+            "path": { "const": "hardware/evt0/hardware-system-v1/topology.json" },
+            "topologyId": { "type": "string", "pattern": "^hwt:sha256:[0-9a-f]{64}$" },
+            "bytes": { "type": "integer", "minimum": 1 },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        },
+        "targetBinding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "requiredTargetState",
+            "requiredEdaReadiness",
+            "requiredSystemSkeletonReady",
+            "requiredChipLevelReady"
+          ],
+          "properties": {
+            "path": { "const": "hardware/evt0/hardware-system-v1/target-binding.json" },
+            "requiredTargetState": { "const": "UNRESOLVED" },
+            "requiredEdaReadiness": { "const": "SYSTEM_SKELETON_ONLY" },
+            "requiredSystemSkeletonReady": { "const": true },
+            "requiredChipLevelReady": { "const": false }
+          }
+        },
+        "edaManifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "requiredProjectName",
+            "requiredProjectRevision",
+            "requiredDesignWrite",
+            "requiredArtifactCount"
+          ],
+          "properties": {
+            "path": { "const": "hardware/eda/manifest.json" },
+            "requiredProjectName": { "const": "UNSET" },
+            "requiredProjectRevision": { "const": "UNFROZEN" },
+            "requiredDesignWrite": { "const": false },
+            "requiredArtifactCount": { "const": 0 }
+          }
+        },
+        "officialEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "evidenceSetId"],
+          "properties": {
+            "path": { "const": "hardware/evt0/eda-system-skeleton-v1/evidence.json" },
+            "evidenceSetId": { "const": "HW-EDA-SYSTEM-SKELETON-EVIDENCE-20260804" }
+          }
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactClass",
+        "executionMode",
+        "nativeSourceGenerated",
+        "nativeExportGenerated",
+        "permittedWork",
+        "blockedWork"
+      ],
+      "properties": {
+        "artifactClass": { "const": "LOGICAL_SYSTEM_SKELETON" },
+        "executionMode": { "const": "OFFLINE_PREVIEW_AND_WRITE_PLAN_ONLY" },
+        "nativeSourceGenerated": { "const": false },
+        "nativeExportGenerated": { "const": false },
+        "permittedWork": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "HIERARCHY" },
+            { "const": "BLOCK_DIAGRAM" },
+            { "const": "INTERFACE_LABELS" }
+          ],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "blockedWork": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "SYMBOL_SELECTION" },
+            { "const": "PIN_MAPPING" },
+            { "const": "PHYSICAL_NET_NAMING" },
+            { "const": "POWER_RAIL_VALUES" },
+            { "const": "CONNECTOR_SELECTION" },
+            { "const": "PCB_LAYOUT" }
+          ],
+          "items": false,
+          "minItems": 6,
+          "maxItems": 6
+        }
+      }
+    },
+    "hierarchy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rootSheetId", "leafSheetPolicy"],
+      "properties": {
+        "rootSheetId": { "const": "SYS-00" },
+        "leafSheetPolicy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["onePer", "idFormat", "incidentInterfaceOrder"],
+          "properties": {
+            "onePer": { "const": "TOPOLOGY_BLOCK" },
+            "idFormat": { "const": "SYS-{ORDINAL_2}-{BLOCK_ID}" },
+            "incidentInterfaceOrder": { "const": "TOPOLOGY_INTERFACE_ORDER" }
+          }
+        }
+      }
+    },
+    "diagramLayout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinateSystem", "unit", "canvas", "rolePlacements"],
+      "properties": {
+        "coordinateSystem": { "const": "LOGICAL_PREVIEW_GRID_V1" },
+        "unit": { "const": "PREVIEW_PIXEL" },
+        "canvas": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": {
+            "width": { "type": "integer", "minimum": 800, "maximum": 2400 },
+            "height": { "type": "integer", "minimum": 600, "maximum": 1800 }
+          }
+        },
+        "rolePlacements": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["role", "x", "y", "width", "height"],
+            "properties": {
+              "role": {
+                "enum": [
+                  "OID_MEDIA",
+                  "OID_HEAD",
+                  "TARGET_ADAPTER",
+                  "CONTENT_STORAGE",
+                  "AUDIO_OUTPUT",
+                  "USB_DEVICE_PORT",
+                  "BATTERY_PACK",
+                  "POWER_SYSTEM",
+                  "USER_IO",
+                  "DIAGNOSTICS",
+                  "OPTIONAL_WIRELESS",
+                  "ENCLOSURE"
+                ]
+              },
+              "x": { "type": "integer", "minimum": 0 },
+              "y": { "type": "integer", "minimum": 0 },
+              "width": { "type": "integer", "minimum": 100 },
+              "height": { "type": "integer", "minimum": 60 }
+            }
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logicalSkeleton", "writePlan", "preview", "validationReport"],
+      "properties": {
+        "logicalSkeleton": { "const": "build/eda-system-skeleton-v1/logical-skeleton.json" },
+        "writePlan": { "const": "build/eda-system-skeleton-v1/write-plan.json" },
+        "preview": { "const": "build/eda-system-skeleton-v1/system-overview.svg" },
+        "validationReport": { "const": "build/eda-system-skeleton-v1/validation.json" }
+      }
+    },
+    "applyPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "prerequisites", "permittedFuturePrimitives", "interfaceRendering"],
+      "properties": {
+        "status": { "const": "PENDING_CONTROLLED_WRITE_WINDOW" },
+        "prerequisites": {
+          "type": "array",
+          "minItems": 6,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "permittedFuturePrimitives": {
+          "type": "array",
+          "prefixItems": [{ "const": "RECTANGLE" }, { "const": "TEXT" }],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "interfaceRendering": { "const": "TEXT_REGISTER_ONLY_NO_EDA_WIRE" }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetBindingEffect",
+        "adapterEffect",
+        "bomRevisionEffect",
+        "releaseGateEffect",
+        "purchaseAuthorizationEffect",
+        "liveEdaEffect"
+      ],
+      "properties": {
+        "targetBindingEffect": { "const": "NONE" },
+        "adapterEffect": { "const": "NONE" },
+        "bomRevisionEffect": { "const": "NONE" },
+        "releaseGateEffect": { "const": "NONE" },
+        "purchaseAuthorizationEffect": { "const": "NONE" },
+        "liveEdaEffect": { "const": "NONE_OFFLINE_ONLY" }
+      }
+    }
+  }
+}

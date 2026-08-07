@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "profile": "snapshot-execution-transcript-v1",
+  "sourceProfile": "golden-24-design-snapshot",
+  "fixtureOnly": true,
+  "physicalEvidence": false,
+  "hostSurrogateFormula": "9000000000000000 + logical OID numeric suffix; NOT AN OID CODE",
+  "physicalMap": [
+    {
+      "logicalOid": "YIMI-EVT0-001",
+      "physicalCode": "9000000000000001"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-002",
+      "physicalCode": "9000000000000002"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-003",
+      "physicalCode": "9000000000000003"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-004",
+      "physicalCode": "9000000000000004"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-005",
+      "physicalCode": "9000000000000005"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-006",
+      "physicalCode": "9000000000000006"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-007",
+      "physicalCode": "9000000000000007"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-008",
+      "physicalCode": "9000000000000008"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-009",
+      "physicalCode": "9000000000000009"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-010",
+      "physicalCode": "9000000000000010"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-011",
+      "physicalCode": "9000000000000011"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-012",
+      "physicalCode": "9000000000000012"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-013",
+      "physicalCode": "9000000000000013"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-014",
+      "physicalCode": "9000000000000014"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-015",
+      "physicalCode": "9000000000000015"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-016",
+      "physicalCode": "9000000000000016"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-017",
+      "physicalCode": "9000000000000017"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-018",
+      "physicalCode": "9000000000000018"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-019",
+      "physicalCode": "9000000000000019"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-020",
+      "physicalCode": "9000000000000020"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-021",
+      "physicalCode": "9000000000000021"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-022",
+      "physicalCode": "9000000000000022"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-023",
+      "physicalCode": "9000000000000023"
+    },
+    {
+      "logicalOid": "YIMI-EVT0-024",
+      "physicalCode": "9000000000000024"
+    }
+  ],
+  "taps": [
+    {
+      "id": "TAP-G24-01",
+      "status": "valid",
+      "physicalCode": "9000000000000021",
+      "eventAtUs": "1000000",
+      "randomIndex": null,
+      "expected": {
+        "decision": "play",
+        "actionKey": "action-021",
+        "actionSlot": 20,
+        "playPolicy": "replace",
+        "clipKeys": [
+          "clip-021-1"
+        ]
+      }
+    },
+    {
+      "id": "TAP-G24-02",
+      "status": "valid",
+      "physicalCode": "9000000000000021",
+      "eventAtUs": "1100000",
+      "randomIndex": null,
+      "expected": {
+        "decision": "suppress-cooldown",
+        "actionKey": "action-021",
+        "actionSlot": 20,
+        "playPolicy": "replace",
+        "clipKeys": []
+      }
+    },
+    {
+      "id": "TAP-G24-03",
+      "status": "valid",
+      "physicalCode": "9000000000000001",
+      "eventAtUs": "1200000",
+      "randomIndex": 2,
+      "expected": {
+        "decision": "play",
+        "actionKey": "action-001",
+        "actionSlot": 0,
+        "playPolicy": "random_one",
+        "clipKeys": [
+          "clip-001-3"
+        ]
+      }
+    },
+    {
+      "id": "TAP-G24-04",
+      "status": "valid",
+      "physicalCode": "9000000000000021",
+      "eventAtUs": "1300000",
+      "randomIndex": null,
+      "expected": {
+        "decision": "suppress-cooldown",
+        "actionKey": "action-021",
+        "actionSlot": 20,
+        "playPolicy": "replace",
+        "clipKeys": []
+      }
+    },
+    {
+      "id": "TAP-G24-05",
+      "status": "valid",
+      "physicalCode": "9000000000000021",
+      "eventAtUs": "1500000",
+      "randomIndex": null,
+      "expected": {
+        "decision": "play",
+        "actionKey": "action-021",
+        "actionSlot": 20,
+        "playPolicy": "replace",
+        "clipKeys": [
+          "clip-021-1"
+        ]
+      }
+    },
+    {
+      "id": "TAP-G24-06",
+      "status": "valid",
+      "physicalCode": "9000000000000009",
+      "eventAtUs": "1600000",
+      "randomIndex": null,
+      "expected": {
+        "decision": "play",
+        "actionKey": "action-009",
+        "actionSlot": 8,
+        "playPolicy": "queue",
+        "clipKeys": [
+          "clip-009-1",
+          "clip-009-2"
+        ]
+      }
+    },
+    {
+      "id": "TAP-G24-07",
+      "status": "valid",
+      "physicalCode": "9000000000000007",
+      "eventAtUs": "1700000",
+      "randomIndex": 1,
+      "expected": {
+        "decision": "play",
+        "actionKey": "action-007",
+        "actionSlot": 6,
+        "playPolicy": "random_one",
+        "clipKeys": [
+          "clip-007-2"
+        ]
+      }
+    },
+    {
+      "id": "TAP-G24-08",
+      "status": "valid",
+      "physicalCode": "9000000000000999",
+      "eventAtUs": "1800000",
+      "randomIndex": null,
+      "expected": {
+        "decision": "unbound",
+        "actionKey": null,
+        "actionSlot": null,
+        "playPolicy": null,
+        "clipKeys": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+[package]
+name = "yimi-runtime-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Target-neutral OID lookup and point-read runtime decisions"
+
+[dependencies]
+yimi-fw-contract = { path = "../yimi-fw-contract" }
+
+[lints]
+workspace = true
+

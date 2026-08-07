@@ -1,0 +1,27 @@
+# Capsule: weighted-random-v2
+
+- Date: 2026-08-03
+- Project: yimi-pen
+- Memory ID: weighted-random-v2
+- Memory class: durable-fact
+- Scope: `random_one`整数权重、原始随机词与Node/Rust共用选择语义
+- Aliases/keywords: WeightedRandom, weighted random, 加权随机, weight, raw u64, rejection sampling, random_one, RNG provider
+- Wake-up route: `index.md` -> `weighted-random-v2`
+- Version: v2
+- Phase/mode: scoped-build
+- Module: `hardware/evt0/weighted-random-v2/`、`tools/weighted-random/`、`firmware/crates/yimi-runtime-core/src/weighted_random_v2.rs`、`firmware/crates/yimi-fw-host/src/weighted_random.rs`
+- Question: 如何保持旧Pack的权重产品语义，又让不同MCU/RNG只换adapter，并以精确而非统计猜测证明无偏映射。
+- Baseline: 每个action含2..32个clip、每个weight为正`u32`；缺省weight=1只存在于旧Pack防腐adapter。核心接收均匀raw `u64`，拒绝`raw < 2^64 mod totalWeight`，再按数组顺序半开累计区间选择。
+- Evidence: 本地`Clip.weight`/`random_one`与JoJo/DIY两组`2:1`产品真值均由SHA-256锁定；上游`rust-random/rand` commit `bb1262f703ca04e4ce56be78e1dc4e204cd6a998`和arXiv `1805.10941v4`作为一手交叉依据；6/6黄金向量的Node/Rust结果逐字节一致，12/12负向与零副作用，报告SHA-256 `250d1b89960e8dc902ba75ed30c670cad33b14b873d87ceba48dd21afedfa071`。
+- Rejected hypotheses: `Math.random()*total`浮点路径作为固件合同；直接`raw % total`在非2幂总权重下天然无偏；clipSlot数值排序；host fixture关闭量产门；用统计抽样代替可复算的整数原像证明。
+- Stable behavior: 接受区间`[threshold,2^64)`大小整除total；ticket为accepted word模total；边界票进入下一个半开区间；数组顺序是权威；核心`no_std`、无分配、无RNG/HAL/RTOS依赖。
+- 稳定模块保护判断: 现有ExecutionModel路径/API未改；只新增隔离模块和host命令，`packages/*/src`与App保持。
+- Memory hygiene: 用户的Rust、高复用与证据优先要求由任务RQ持有；本capsule只持有v2已验证语义和证据边界。
+- Run audit: green；架构owner、host gate、密封runner与catalog generator/check均已接入；首次full run发现Clippy main长度门并以命令helper最小拆分修复，随后12/12 Rust步骤通过。
+- Artifact discipline: `evidence-lock.json`锁本地事实和一手来源；raw word用十进制字符串避免JS精度损失；报告只作为host receipt，未签发production receipt。
+- Encoding check: 严格UTF-8/JSON/Markdown/本地链接审计0错误。
+- Regression guards: 保留total=3拒绝前缀、2:1半开边界、2幂全空间、`u32::MAX+1`总权重、多次拒绝、`u64::MAX`高边界和12条失败输出不覆盖用例。
+- Judgment: `RG-HOST-WEIGHTED-RANDOM-CONTRACT-PASSED`已通过；`RG-SNAPSHOT-WEIGHTED-RANDOM-VERIFIED`仍缺目标RNG、双板原始词流/选择trace和非fixture Snapshot分布receipt。
+- Open questions: 目标板熵源/DRBG选择及一手资料、raw-u64 provider ABI、两块同版板卡的原始数据采集与量产阈值。
+- Next step: 板卡冻结后实现一个raw-word board adapter，并保存两板同向量的原始词流、选择trace和可复算分布工件。
+- Links: `../../../hardware/evt0/weighted-random-v2/README.md`、`../../reuse-maintainability.md`、`../../snapshot-v1.md`

@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/evidence-receipt-v1.json",
+  "title": "Yimi EvidenceReceipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "receiptId",
+    "catalogId",
+    "catalogVersion",
+    "gateId",
+    "releaseSubject",
+    "evidenceSubject",
+    "producer",
+    "executedAt",
+    "result",
+    "evidenceClass",
+    "syntheticEvidence",
+    "artifacts",
+    "claimRefs",
+    "diagnostic"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "evidence-receipt-v1" },
+    "receiptId": { "type": "string", "pattern": "^receipt:sha256:[a-f0-9]{64}$" },
+    "catalogId": { "type": "string", "pattern": "^rgc:sha256:[a-f0-9]{64}$" },
+    "catalogVersion": { "$ref": "#/$defs/semver" },
+    "gateId": { "$ref": "#/$defs/gateId" },
+    "releaseSubject": { "$ref": "#/$defs/releaseSubject" },
+    "evidenceSubject": { "$ref": "#/$defs/evidenceSubject" },
+    "producer": { "$ref": "#/$defs/producer" },
+    "executedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.+(?:Z|[+-][0-9]{2}:[0-9]{2})$" },
+    "result": { "enum": ["PASS", "FAIL"] },
+    "evidenceClass": { "enum": ["host", "physical", "production"] },
+    "syntheticEvidence": { "type": "boolean" },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "claimRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 200 }
+    },
+    "diagnostic": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/diagnostic" }
+      ]
+    }
+  },
+  "$defs": {
+    "semver": { "type": "string", "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$" },
+    "gateId": { "type": "string", "pattern": "^RG-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "safePath": {
+      "type": "string",
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\\/$)[A-Za-z0-9._/-]+$"
+    },
+    "releaseSubject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subjectType", "subjectId", "subjectRevisionSha256"],
+      "properties": {
+        "subjectType": { "const": "PRODUCT_RELEASE" },
+        "subjectId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,127}$" },
+        "subjectRevisionSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "evidenceSubject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subjectType", "subjectId", "subjectRevisionSha256"],
+      "properties": {
+        "subjectType": {
+          "enum": ["HOST_REPORT", "BOARD_TARGET", "OID_TOOLCHAIN", "PHYSICAL_MAP", "SNAPSHOT", "FIRMWARE_BUILD", "FAMILY_BUILD_REQUEST", "PRODUCT_RELEASE"]
+        },
+        "subjectId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._/-]{2,159}$" },
+        "subjectRevisionSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["producerId", "producerVersion"],
+      "properties": {
+        "producerId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$" },
+        "producerVersion": { "type": "string", "minLength": 1, "maxLength": 80 }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path", "size", "sha256"],
+      "properties": {
+        "role": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$" },
+        "path": { "$ref": "#/$defs/safePath" },
+        "size": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "errorDomain": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$" },
+        "errorCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,127}$" },
+        "reasonCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,127}$" }
+      },
+      "anyOf": [
+        { "required": ["errorCode"] },
+        { "required": ["reasonCode"] }
+      ]
+    }
+  }
+}

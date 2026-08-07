@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/vendor-evidence-v1.json",
+  "title": "Yimi MB1 Vendor Evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "responseId",
+    "candidateId",
+    "vendorName",
+    "receivedAt",
+    "channel",
+    "sourceRefs",
+    "rawArtifacts",
+    "identityTuple",
+    "answers",
+    "attachments",
+    "sampleOffers",
+    "targetBindingEffect",
+    "decision",
+    "requirements"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "recordKind": { "const": "mb1-prepay-response" },
+    "responseId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+    "candidateId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+    "vendorName": { "type": ["string", "null"], "minLength": 1 },
+    "receivedAt": { "type": ["string", "null"], "format": "date-time" },
+    "channel": { "type": ["string", "null"], "minLength": 1 },
+    "sourceRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "rawArtifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/rawArtifact" }
+    },
+    "identityTuple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["BOARD_MPN", "PCB_REV", "HEAD_MPN", "HEAD_REV", "FW_VERSION"],
+      "properties": {
+        "BOARD_MPN": { "$ref": "#/$defs/evidenceField" },
+        "PCB_REV": { "$ref": "#/$defs/evidenceField" },
+        "HEAD_MPN": { "$ref": "#/$defs/evidenceField" },
+        "HEAD_REV": { "$ref": "#/$defs/evidenceField" },
+        "FW_VERSION": { "$ref": "#/$defs/evidenceField" }
+      }
+    },
+    "answers": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/answer" }
+    },
+    "attachments": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/attachment" }
+    },
+    "sampleOffers": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/sampleOffer" }
+    },
+    "targetBindingEffect": { "const": "NONE_VENDOR_CLAIM_ONLY" },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason", "blockers"],
+      "properties": {
+        "status": { "enum": ["EVIDENCE_REQUIRED", "READY_TO_BUY", "REJECTED"] },
+        "reason": { "type": ["string", "null"] },
+        "blockers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "rawArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "bytes", "sha256", "mediaType"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+        "path": { "type": "string", "minLength": 1 },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "mediaType": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidenceField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "value", "artifactRefs", "notes"],
+      "properties": {
+        "state": { "enum": ["PENDING", "PROVIDED", "CONFLICTING"] },
+        "value": { "type": ["string", "null"] },
+        "artifactRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "state", "answer", "artifactRefs"],
+      "properties": {
+        "id": { "enum": ["M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08"] },
+        "state": { "enum": ["PENDING", "ANSWERED", "CONTRADICTED"] },
+        "answer": { "type": ["string", "null"] },
+        "artifactRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "attachment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "state", "artifactRefs"],
+      "properties": {
+        "id": { "enum": ["A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A10"] },
+        "description": { "type": "string", "minLength": 1 },
+        "state": { "enum": ["PENDING", "RECEIVED", "CONFLICTING"] },
+        "artifactRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "sampleOffer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sampleId", "BOARD_MPN", "PCB_REV", "HEAD_MPN", "HEAD_REV", "FW_VERSION", "artifactRefs"],
+      "properties": {
+        "sampleId": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$" },
+        "BOARD_MPN": { "type": ["string", "null"] },
+        "PCB_REV": { "type": ["string", "null"] },
+        "HEAD_MPN": { "type": ["string", "null"] },
+        "HEAD_REV": { "type": ["string", "null"] },
+        "FW_VERSION": { "type": ["string", "null"] },
+        "artifactRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

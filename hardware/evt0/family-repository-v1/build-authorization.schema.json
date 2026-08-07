@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/family-build-authorization-v1.json",
+  "title": "Yimi verified Family BuildAuthorization v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "fixtureOnly",
+    "authorizationId",
+    "buildPlanId",
+    "buildSubjectSha256",
+    "familyRevisionId",
+    "confirmationId",
+    "confirmationSemanticSha256",
+    "confirmationProofId",
+    "presentationTranscriptSha256",
+    "providerVerificationId",
+    "trustPolicyId",
+    "productReleaseDecisionId",
+    "productReleaseSubjectRevisionSha256",
+    "authorizedAt",
+    "authorizationExpiresAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "profile": { "const": "family-build-authorization-v1" },
+    "fixtureOnly": { "type": "boolean" },
+    "authorizationId": {
+      "type": "string",
+      "pattern": "^authorization:sha256:[a-f0-9]{64}$"
+    },
+    "buildPlanId": {
+      "type": "string",
+      "pattern": "^PLAN-[A-Z0-9][A-Z0-9._-]{2,127}$"
+    },
+    "buildSubjectSha256": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256" },
+    "familyRevisionId": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256Id" },
+    "confirmationId": {
+      "type": "string",
+      "pattern": "^CONF-[A-Z0-9][A-Z0-9-]{2,63}$"
+    },
+    "confirmationSemanticSha256": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256" },
+    "confirmationProofId": {
+      "type": "string",
+      "pattern": "^proof:sha256:[a-f0-9]{64}$"
+    },
+    "presentationTranscriptSha256": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256" },
+    "providerVerificationId": {
+      "type": "string",
+      "pattern": "^verification:sha256:[a-f0-9]{64}$"
+    },
+    "trustPolicyId": {
+      "type": "string",
+      "pattern": "^policy:sha256:[a-f0-9]{64}$"
+    },
+    "productReleaseDecisionId": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^decision:sha256:[a-f0-9]{64}$" }
+      ]
+    },
+    "productReleaseSubjectRevisionSha256": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256" }
+      ]
+    },
+    "authorizedAt": { "type": "string", "format": "date-time" },
+    "authorizationExpiresAt": { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "fixtureOnly": { "const": true } }, "required": ["fixtureOnly"] },
+      "then": {
+        "properties": {
+          "productReleaseDecisionId": { "type": "null" },
+          "productReleaseSubjectRevisionSha256": { "type": "null" }
+        }
+      },
+      "else": {
+        "properties": {
+          "productReleaseDecisionId": { "type": "string", "pattern": "^decision:sha256:[a-f0-9]{64}$" },
+          "productReleaseSubjectRevisionSha256": { "$ref": "https://yimi.local/schemas/family-build-request-v1.json#/$defs/sha256" }
+        }
+      }
+    }
+  ]
+}

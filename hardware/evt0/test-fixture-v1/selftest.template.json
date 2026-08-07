@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "evt0-test-fixture-selftest",
+  "selftestId": "EVT0-FIXTURE-SELFTEST-TEMPLATE",
+  "revision": "1.0.0",
+  "status": "TEMPLATE",
+  "profileRef": {
+    "path": "hardware/evt0/test-fixture-v1/profile.json",
+    "sha256": "b177a6641f3c0e7b8199904d94d6121c19dfd8cb5deb408ac86c5f54016c896d",
+    "profileId": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1",
+    "revision": "1.0.0"
+  },
+  "adapterRef": {
+    "path": "hardware/evt0/test-fixture-v1/adapter.template.json",
+    "sha256": "801e9c34627141543fed437d932d99facce249ec67ad995a0ee185a9f254eb95",
+    "adapterId": "EVT0-TARGET-ADAPTER-TEMPLATE",
+    "revision": "1.0.0"
+  },
+  "instanceRef": {
+    "path": "hardware/evt0/test-fixture-v1/instance.template.json",
+    "sha256": "dd043d4a746232269b954b2d44269d8aaedaaf7e76cead30f7d5ba77d3db6fcb",
+    "instanceId": "EVT0-FIXTURE-INSTANCE-TEMPLATE",
+    "revision": "1.0.0"
+  },
+  "ownerRefs": {
+    "methodCatalog": {
+      "path": "hardware/evt0/lab-v1/method-catalog.json",
+      "sha256": "dbd51a9ff845070b6432015f6a68d6577121871c938afb0705290c21a9343aba",
+      "identity": "EVT0-LAB-METHODS-V1"
+    },
+    "instrumentRegistrySchema": {
+      "path": "hardware/evt0/lab-v1/instrument-registry.schema.json",
+      "sha256": "64286d233372c8609bb38c18aaec4c314fa74ffdeafafdd475895bd00c83eb51",
+      "identity": "https://yimi.local/schemas/evt0-lab-instrument-registry-v1.json"
+    },
+    "labSessionTemplate": {
+      "path": "hardware/evt0/lab-v1/session.template.json",
+      "sha256": "e98f1e545a1192f0ea84cb05e72fa35d6ca50d8441bd06ac0166b4c4660b10f5",
+      "identity": "EVT0-LAB-SESSION-TEMPLATE-V1"
+    },
+    "testResultSchema": {
+      "path": "hardware/evt0/test-result-v1/schema.json",
+      "sha256": "1b05c0d36be60133976785ae97b2666307852c9bc7129f1e66b49a77b793d6c4",
+      "identity": "https://yimi.local/schemas/test-result-v1.json"
+    },
+    "evidenceCaptureProfile": {
+      "path": "hardware/evt0/evidence-capture-v1/profile.json",
+      "sha256": "b3fc802d6b94e830f7db6b1776120fb76bce5dcfc511b37acfc757c37d66a0f1",
+      "identity": "HW-EVIDENCE-CAPTURE-ADAPTER-V1"
+    },
+    "releaseGateCatalog": {
+      "path": "hardware/evt0/release-gates-v1/catalog.json",
+      "sha256": "a57777a0e9cb6487de00c91c8c45317eeb700ebcc279b84fcce9d9b9e5d31561",
+      "identity": "rgc:sha256:0fcab5f025687078ebe3f834721164602c6c756d37ef02f5b3943ddd782e5d7b"
+    }
+  },
+  "fixtureOnly": true,
+  "evidenceState": "SYNTHETIC_FIXTURE_ONLY",
+  "evidence": {
+    "physicalEvidence": false,
+    "syntheticFixtureOnly": true,
+    "rawArtifactRefs": []
+  },
+  "checks": [
+    {
+      "id": "CHECK-PROFILE-IDENTITY",
+      "status": "PENDING",
+      "evidenceKind": "SYNTHETIC_FIXTURE_ONLY",
+      "promotes": false
+    },
+    {
+      "id": "CHECK-ADAPTER-UNRESOLVED",
+      "status": "PENDING",
+      "evidenceKind": "SYNTHETIC_FIXTURE_ONLY",
+      "promotes": false
+    },
+    {
+      "id": "CHECK-INSTANCE-NOT-PHYSICAL",
+      "status": "PENDING",
+      "evidenceKind": "SYNTHETIC_FIXTURE_ONLY",
+      "promotes": false
+    },
+    {
+      "id": "CHECK-LAB-OWNER-REFERENCES",
+      "status": "PENDING",
+      "evidenceKind": "SYNTHETIC_FIXTURE_ONLY",
+      "promotes": false
+    },
+    {
+      "id": "CHECK-SESSION-TESTRESULT-EVIDENCE-SEAM",
+      "status": "PENDING",
+      "evidenceKind": "SYNTHETIC_FIXTURE_ONLY",
+      "promotes": false
+    },
+    {
+      "id": "CHECK-NO-RELEASEGATE-PROMOTION",
+      "status": "PENDING",
+      "evidenceKind": "SYNTHETIC_FIXTURE_ONLY",
+      "promotes": false
+    }
+  ],
+  "promotionBoundary": {
+    "targetBindingEffect": "NONE",
+    "releaseGateEffect": "NONE",
+    "boardStateEffect": "NONE",
+    "physicalReadinessEffect": "NONE",
+    "canCloseReleaseGate": false,
+    "canPromoteBoardState": false
+  },
+  "claims": {
+    "physicalFixture": false,
+    "serialKnown": false,
+    "calibrationKnown": false,
+    "qualified": false,
+    "physicalReady": false,
+    "releaseGateClosed": false,
+    "boardStatePromoted": false
+  },
+  "blockers": [
+    "FIXTURE_ONLY_SELFTEST",
+    "NO_PHYSICAL_FIXTURE_INSTANCE",
+    "NO_TARGET_ADAPTER_EVIDENCE",
+    "NO_LAB_SESSION_OR_TESTRESULT_RECORD",
+    "SELFTEST_CANNOT_CLOSE_RELEASEGATE_OR_PROMOTE_BOARD"
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi.local/schemas/release-gate-catalog-v1.json",
+  "title": "Yimi ReleaseGateCatalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profile",
+    "catalogId",
+    "catalogVersion",
+    "releaseProfile",
+    "hostAdapterRegistrySha256",
+    "legacyInventorySha256",
+    "semanticFiles",
+    "gates"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "profile": {
+      "const": "release-gate-catalog-v1"
+    },
+    "catalogId": {
+      "$ref": "#/$defs/catalogId"
+    },
+    "catalogVersion": {
+      "$ref": "#/$defs/semver"
+    },
+    "releaseProfile": {
+      "const": "yimi-gen1-evt0-release"
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/gate"
+      }
+    },
+    "hostAdapterRegistrySha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "legacyInventorySha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "semanticFiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contracts/confirmation-trust-v1.mjs",
+        "contracts/family-build-plan-v1.mjs",
+        "contracts/release-gates-v1.mjs",
+        "contracts/rfc3339.mjs",
+        "contracts/strict-json-v1.mjs",
+        "hardware/evt0/confirmation-trust-v1/challenge.schema.json",
+        "hardware/evt0/confirmation-trust-v1/common.schema.json",
+        "hardware/evt0/confirmation-trust-v1/evidence-lock.json",
+        "hardware/evt0/confirmation-trust-v1/evidence-lock.schema.json",
+        "hardware/evt0/confirmation-trust-v1/presentation-transcript.schema.json",
+        "hardware/evt0/confirmation-trust-v1/proof.schema.json",
+        "hardware/evt0/confirmation-trust-v1/replay-ledger.schema.json",
+        "hardware/evt0/confirmation-trust-v1/trust-policy.schema.json",
+        "hardware/evt0/confirmation-trust-v1/verification-result.schema.json",
+        "hardware/evt0/family-repository-v1/build-authorization.schema.json",
+        "hardware/evt0/family-repository-v1/build-plan.schema.json",
+        "hardware/evt0/family-repository-v1/golden/build-plan.json",
+        "hardware/evt0/release-gates-v1/catalog.schema.json",
+        "hardware/evt0/release-gates-v1/evidence-receipt.schema.json",
+        "hardware/evt0/release-gates-v1/host-report-adapters.schema.json",
+        "hardware/evt0/release-gates-v1/host-validation-run.schema.json",
+        "hardware/evt0/release-gates-v1/release-decision.schema.json",
+        "scripts/snapshot-jcs.mjs",
+        "tools/confirmation-trust/ed25519-verifier.mjs",
+        "tools/confirmation-trust/provider.mjs",
+        "tools/confirmation-trust/replay-store.mjs",
+        "tools/confirmation-trust/run-validation.mjs",
+        "tools/confirmation-trust/schema-validator.mjs",
+        "tools/release-gates/catalog-semantics.mjs",
+        "tools/release-gates/evaluate-current.mjs",
+        "tools/release-gates/gate-specific-verifiers.mjs",
+        "tools/release-gates/host-run-provenance.mjs",
+        "tools/release-gates/refresh-catalog.mjs",
+        "tools/release-gates/report-adapter.mjs",
+        "tools/release-gates/run-product-rd.mjs",
+        "tools/release-gates/source-set.mjs"
+      ],
+      "properties": {
+        "contracts/confirmation-trust-v1.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "contracts/family-build-plan-v1.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "contracts/release-gates-v1.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "contracts/rfc3339.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "contracts/strict-json-v1.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/challenge.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/common.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/evidence-lock.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/evidence-lock.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/presentation-transcript.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/proof.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/replay-ledger.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/trust-policy.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/confirmation-trust-v1/verification-result.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/family-repository-v1/build-authorization.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/family-repository-v1/build-plan.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/family-repository-v1/golden/build-plan.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/release-gates-v1/catalog.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/release-gates-v1/evidence-receipt.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/release-gates-v1/host-report-adapters.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/release-gates-v1/host-validation-run.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hardware/evt0/release-gates-v1/release-decision.schema.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "scripts/snapshot-jcs.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/confirmation-trust/ed25519-verifier.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/confirmation-trust/provider.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/confirmation-trust/replay-store.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/confirmation-trust/run-validation.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/confirmation-trust/schema-validator.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/release-gates/catalog-semantics.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/release-gates/evaluate-current.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/release-gates/gate-specific-verifiers.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/release-gates/host-run-provenance.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/release-gates/refresh-catalog.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/release-gates/report-adapter.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/release-gates/run-product-rd.mjs": {
+          "$ref": "#/$defs/sha256"
+        },
+        "tools/release-gates/source-set.mjs": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "catalogId": {
+      "type": "string",
+      "pattern": "^rgc:sha256:[a-f0-9]{64}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
+    },
+    "gateId": {
+      "type": "string",
+      "pattern": "^RG-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "producerId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "artifactRole": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "scope": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "evidenceSubjectType": {
+      "enum": [
+        "HOST_REPORT",
+        "BOARD_TARGET",
+        "OID_TOOLCHAIN",
+        "PHYSICAL_MAP",
+        "SNAPSHOT",
+        "FIRMWARE_BUILD",
+        "FAMILY_BUILD_REQUEST",
+        "PRODUCT_RELEASE",
+        "CONFIRMATION_TRUST_PROVIDER_RELEASE"
+      ]
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gateId",
+        "title",
+        "domain",
+        "evidenceClass",
+        "evidenceSubjectTypes",
+        "acceptedProducerIds",
+        "requiredArtifactRoles",
+        "minReceipts",
+        "minDistinctEvidenceSubjects",
+        "allowSyntheticEvidence",
+        "evidenceRule",
+        "legacyAliases",
+        "reportScopes"
+      ],
+      "properties": {
+        "gateId": {
+          "$ref": "#/$defs/gateId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120
+        },
+        "domain": {
+          "enum": [
+            "architecture",
+            "content",
+            "family",
+            "firmware",
+            "hardware",
+            "manufacturing",
+            "product"
+          ]
+        },
+        "evidenceClass": {
+          "enum": [
+            "host",
+            "physical",
+            "production"
+          ]
+        },
+        "evidenceSubjectTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/evidenceSubjectType"
+          }
+        },
+        "acceptedProducerIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/producerId"
+          }
+        },
+        "requiredArtifactRoles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/artifactRole"
+          }
+        },
+        "minReceipts": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "minDistinctEvidenceSubjects": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "allowSyntheticEvidence": {
+          "type": "boolean"
+        },
+        "evidenceRule": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 500
+        },
+        "legacyAliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{2,127}$"
+          }
+        },
+        "reportScopes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/scope"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,795 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yimi-pen.local/schemas/hardware-hil-raw-evidence-capture-index-v1.json",
+  "title": "Hardware HIL raw evidence capture index v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordKind",
+    "packageId",
+    "packageRevision",
+    "captureIndexId",
+    "status",
+    "laneId",
+    "laneState",
+    "methodId",
+    "allowedMethodIds",
+    "targetState",
+    "contractRef",
+    "fixtureAdapterRef",
+    "fixtureProfileRef",
+    "fixtureInstanceRef",
+    "runBindingRef",
+    "labSessionRef",
+    "testResultRef",
+    "evidenceCaptureRef",
+    "releaseGateRef",
+    "softwareRef",
+    "firmwareRef",
+    "captureTool",
+    "chainOfCustody",
+    "artifacts",
+    "resultProjection",
+    "effects"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "recordKind": {
+      "const": "hardware-hil-raw-evidence-capture-index"
+    },
+    "packageId": {
+      "const": "HW-HIL-RAW-EVIDENCE-CAPTURE-LANE-V1"
+    },
+    "packageRevision": {
+      "const": "1.0.0"
+    },
+    "captureIndexId": {
+      "type": "null"
+    },
+    "status": {
+      "const": "TEMPLATE_ONLY"
+    },
+    "laneId": {
+      "const": "HIL_RAW_TEST"
+    },
+    "laneState": {
+      "const": "PENDING_OWNER_EXTENSION"
+    },
+    "methodId": {
+      "type": "null"
+    },
+    "allowedMethodIds": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "PROPOSED-USB-DATA-OBSERVATION-001",
+          "PROPOSED-CONTROL-STATUS-HIL-001"
+        ]
+      }
+    },
+    "targetState": {
+      "const": "UNRESOLVED"
+    },
+    "contractRef": {
+      "$ref": "#/$defs/contractRef"
+    },
+    "fixtureAdapterRef": {
+      "$ref": "#/$defs/fixtureAdapterRef"
+    },
+    "fixtureProfileRef": {
+      "$ref": "#/$defs/fixtureProfileRef"
+    },
+    "fixtureInstanceRef": {
+      "$ref": "#/$defs/fixtureInstanceRef"
+    },
+    "runBindingRef": {
+      "$ref": "#/$defs/runBindingRef"
+    },
+    "labSessionRef": {
+      "$ref": "#/$defs/sessionRef"
+    },
+    "testResultRef": {
+      "$ref": "#/$defs/testResultRef"
+    },
+    "evidenceCaptureRef": {
+      "$ref": "#/$defs/evidenceCaptureRef"
+    },
+    "releaseGateRef": {
+      "$ref": "#/$defs/releaseGateRef"
+    },
+    "softwareRef": {
+      "$ref": "#/$defs/softwareRef"
+    },
+    "firmwareRef": {
+      "$ref": "#/$defs/firmwareRef"
+    },
+    "captureTool": {
+      "$ref": "#/$defs/captureTool"
+    },
+    "chainOfCustody": {
+      "$ref": "#/$defs/chainOfCustody"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "resultProjection": {
+      "$ref": "#/$defs/resultProjection"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    }
+  },
+  "$defs": {
+    "sha256OrNull": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "contractRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "packageId",
+        "revision",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/fixture-method-contract-v1/manifest.json"
+        },
+        "packageId": {
+          "const": "HW-FIXTURE-METHOD-CONTRACT-USB-CONTROL-HIL-V1"
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "sha256": {
+          "type": "null"
+        }
+      }
+    },
+    "fixtureAdapterRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "id",
+        "revision",
+        "bindingId"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/adapter.template.json"
+        },
+        "id": {
+          "const": "EVT0-TARGET-ADAPTER-TEMPLATE"
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "bindingId": {
+          "type": "null"
+        }
+      }
+    },
+    "fixtureProfileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "profileId",
+        "revision",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/profile.json"
+        },
+        "profileId": {
+          "const": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1"
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "sha256": {
+          "type": "null"
+        }
+      }
+    },
+    "fixtureInstanceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "templateId",
+        "status",
+        "id"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/test-fixture-v1/instance.template.json"
+        },
+        "templateId": {
+          "const": "HW-REUSABLE-TEST-FIXTURE-INSTANCE-TEMPLATE-V1"
+        },
+        "status": {
+          "const": "TEMPLATE_ONLY"
+        },
+        "id": {
+          "type": "null"
+        }
+      }
+    },
+    "runBindingRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "templateId",
+        "revision",
+        "methodId"
+      ],
+      "properties": {
+        "path": {
+          "const": "hardware/evt0/fixture-method-contract-v1/run.template.json"
+        },
+        "templateId": {
+          "const": "RUN-TEMPLATE-USB-CONTROL-HIL-V1"
+        },
+        "revision": {
+          "const": "1.0.0"
+        },
+        "methodId": {
+          "type": "null"
+        }
+      }
+    },
+    "sessionRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "sessionId",
+        "sha256"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/lab-v1"
+        },
+        "sessionId": {
+          "type": "null"
+        },
+        "sha256": {
+          "type": "null"
+        }
+      }
+    },
+    "testResultRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "resultId",
+        "sha256",
+        "rawArtifactsField"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/test-result-v1/schema.json"
+        },
+        "resultId": {
+          "type": "null"
+        },
+        "sha256": {
+          "type": "null"
+        },
+        "rawArtifactsField": {
+          "const": "rawArtifacts"
+        }
+      }
+    },
+    "evidenceCaptureRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "captureRouteState",
+        "laneId",
+        "captureIndexId"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/evidence-capture-v1/profile.json"
+        },
+        "captureRouteState": {
+          "const": "PENDING_OWNER_EXTENSION"
+        },
+        "laneId": {
+          "type": "null"
+        },
+        "captureIndexId": {
+          "type": "null"
+        }
+      }
+    },
+    "releaseGateRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPath",
+        "receiptId",
+        "effect"
+      ],
+      "properties": {
+        "ownerPath": {
+          "const": "hardware/evt0/release-gates-v1/catalog.json"
+        },
+        "receiptId": {
+          "type": "null"
+        },
+        "effect": {
+          "const": "NONE"
+        }
+      }
+    },
+    "softwareRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractId",
+        "scenarioId",
+        "hardwareImpact"
+      ],
+      "properties": {
+        "contractId": {
+          "type": "null"
+        },
+        "scenarioId": {
+          "type": "null"
+        },
+        "hardwareImpact": {
+          "const": "NONE"
+        }
+      }
+    },
+    "firmwareRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactRole",
+        "implementationLane",
+        "version",
+        "evidenceRef"
+      ],
+      "properties": {
+        "artifactRole": {
+          "type": "null"
+        },
+        "implementationLane": {
+          "type": "null"
+        },
+        "version": {
+          "type": "null"
+        },
+        "evidenceRef": {
+          "type": "null"
+        }
+      }
+    },
+    "captureTool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "version",
+        "configSha256",
+        "state"
+      ],
+      "properties": {
+        "identity": {
+          "type": "null"
+        },
+        "version": {
+          "type": "null"
+        },
+        "configSha256": {
+          "type": "null"
+        },
+        "state": {
+          "const": "PENDING_EVIDENCE"
+        }
+      }
+    },
+    "chainOfCustody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operatorId",
+        "source",
+        "custodyState",
+        "readbackState",
+        "events"
+      ],
+      "properties": {
+        "operatorId": {
+          "type": "null"
+        },
+        "source": {
+          "type": "null"
+        },
+        "custodyState": {
+          "const": "PENDING_EVIDENCE"
+        },
+        "readbackState": {
+          "const": "PENDING_EVIDENCE"
+        },
+        "events": {
+          "type": "array",
+          "maxItems": 0
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactId",
+        "role",
+        "relativePath",
+        "byteLength",
+        "sha256",
+        "mediaType",
+        "format",
+        "capturedAt",
+        "sourceUrl",
+        "source",
+        "captureTool",
+        "references",
+        "clockMetadata",
+        "custody",
+        "originalDerived"
+      ],
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "pattern": "^HIL-ART-[A-Z0-9][A-Z0-9._-]{2,95}$"
+        },
+        "role": {
+          "enum": [
+            "USB_ENUMERATION_TRACE",
+            "USB_TRANSFER_TRACE",
+            "USB_DISCONNECT_RECONNECT_TRACE",
+            "USB_RAW_CAPTURE_MANIFEST",
+            "USB_SESSION_BINDING_REF",
+            "HIL_STIMULUS_TRACE",
+            "HIL_OBSERVATION_TRACE",
+            "HIL_DIAGNOSTIC_LOG",
+            "HIL_MEASUREMENT_MANIFEST",
+            "HIL_ATTACHMENT_MANIFEST"
+          ]
+        },
+        "relativePath": {
+          "type": "string",
+          "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[A-Za-z0-9._/-]+$"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "mediaType": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+$"
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "capturedAt": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,9})?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "sourceUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^https?://[^\\s]+$"
+        },
+        "source": {
+          "$ref": "#/$defs/artifactSource"
+        },
+        "captureTool": {
+          "$ref": "#/$defs/artifactCaptureTool"
+        },
+        "references": {
+          "$ref": "#/$defs/artifactReferences"
+        },
+        "clockMetadata": {
+          "$ref": "#/$defs/clockMetadata"
+        },
+        "custody": {
+          "$ref": "#/$defs/artifactCustody"
+        },
+        "originalDerived": {
+          "$ref": "#/$defs/originalDerived"
+        }
+      }
+    },
+    "artifactSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "sourceId",
+        "sourcePath"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "DEVICE_CAPTURE",
+            "INSTRUMENT_CAPTURE",
+            "OPERATOR_CAPTURE",
+            "DERIVED",
+            "PENDING_EVIDENCE"
+          ]
+        },
+        "sourceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourcePath": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "artifactCaptureTool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "version",
+        "configSha256"
+      ],
+      "properties": {
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "configSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "artifactReferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sessionId",
+        "runId",
+        "testResultId"
+      ],
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "testResultId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "clockMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timebaseId",
+        "kind",
+        "units",
+        "sampleRate",
+        "channelCount",
+        "channelLabels"
+      ],
+      "properties": {
+        "timebaseId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "DEVICE_MONOTONIC",
+            "INSTRUMENT_CLOCK",
+            "HOST_MONOTONIC"
+          ]
+        },
+        "units": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sampleRate": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "channelCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "channelLabels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "artifactCustody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operatorId",
+        "custodyState",
+        "readbackState"
+      ],
+      "properties": {
+        "operatorId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "custodyState": {
+          "enum": [
+            "RECEIVED",
+            "COPIED",
+            "SEALED"
+          ]
+        },
+        "readbackState": {
+          "enum": [
+            "VERIFIED"
+          ]
+        }
+      }
+    },
+    "originalDerived": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relation",
+        "sourceArtifactId",
+        "derivationTool",
+        "derivationConfigSha256"
+      ],
+      "properties": {
+        "relation": {
+          "enum": [
+            "ORIGINAL",
+            "DERIVED"
+          ]
+        },
+        "sourceArtifactId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "derivationTool": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "derivationConfigSha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "resultProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "testResultId",
+        "verdict",
+        "physicalEvidenceState",
+        "qualificationState"
+      ],
+      "properties": {
+        "testResultId": {
+          "type": "null"
+        },
+        "verdict": {
+          "type": "null"
+        },
+        "physicalEvidenceState": {
+          "const": "NONE"
+        },
+        "qualificationState": {
+          "const": "NONE"
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetBinding",
+        "methodCatalog",
+        "physicalEvidence",
+        "testResult",
+        "evidenceCaptureProfile",
+        "releaseGate",
+        "software",
+        "qualification",
+        "promotion"
+      ],
+      "properties": {
+        "targetBinding": {
+          "const": "NONE"
+        },
+        "methodCatalog": {
+          "const": "NONE"
+        },
+        "physicalEvidence": {
+          "const": "NONE"
+        },
+        "testResult": {
+          "const": "NONE_REFERENCE_OWNER_UNCHANGED"
+        },
+        "evidenceCaptureProfile": {
+          "const": "NONE_PROFILE_UNCHANGED"
+        },
+        "releaseGate": {
+          "const": "NONE"
+        },
+        "software": {
+          "const": "NONE"
+        },
+        "qualification": {
+          "const": "NONE"
+        },
+        "promotion": {
+          "const": "NONE"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "evt0-lab-instrument-registry",
+  "registryId": "EVT0-LAB-REGISTRY-TEMPLATE",
+  "status": "TEMPLATE",
+  "recordedAt": null,
+  "operator": null,
+  "discoveryReportRef": null,
+  "instruments": [
+    {
+      "id": "PSU-01",
+      "purchasePlanItemId": "LAB1",
+      "role": "current-limited bench supply",
+      "assets": [],
+      "disposition": "PENDING",
+      "blockers": ["INSTRUMENT_NOT_INVENTORIED"]
+    },
+    {
+      "id": "DMM-01",
+      "purchasePlanItemId": "LAB2",
+      "role": "true-RMS multimeter",
+      "assets": [],
+      "disposition": "PENDING",
+      "blockers": ["INSTRUMENT_NOT_INVENTORIED"]
+    },
+    {
+      "id": "MECH-01",
+      "purchasePlanItemId": "LAB3",
+      "role": "caliper and scale",
+      "assets": [],
+      "disposition": "PENDING",
+      "blockers": ["INSTRUMENTS_NOT_INVENTORIED"]
+    },
+    {
+      "id": "MACRO-01",
+      "purchasePlanItemId": "LAB4",
+      "role": "macro inspection camera",
+      "assets": [],
+      "disposition": "PENDING",
+      "blockers": ["INSTRUMENT_NOT_INVENTORIED"]
+    },
+    {
+      "id": "USBPWR-01",
+      "purchasePlanItemId": "LAB5",
+      "role": "USB-C power meter",
+      "assets": [],
+      "disposition": "PENDING",
+      "blockers": ["INSTRUMENT_NOT_INVENTORIED"]
+    },
+    {
+      "id": "SPL-01",
+      "purchasePlanItemId": "LAB6",
+      "role": "A-weighted sound level meter",
+      "assets": [],
+      "disposition": "PENDING",
+      "blockers": ["INSTRUMENT_NOT_INVENTORIED"]
+    }
+  ],
+  "qualificationEffect": "NONE_UNTIL_ALL_REQUIRED_QUALIFIED",
+  "blockers": ["LAB1_LAB6_NOT_INVENTORIED"]
+}

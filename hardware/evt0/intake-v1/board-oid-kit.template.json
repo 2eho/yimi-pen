@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "intakeKind": "board-oid-kit",
+  "intakeId": "MB1-PENDING-EXACT-KIT",
+  "recordedAt": null,
+  "identity": {
+    "purchasePlanItemId": "MB1",
+    "candidateId": "MB1-CANDIDATE-A",
+    "sampleCountExpected": 2,
+    "samples": []
+  },
+  "observations": {
+    "vendor": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "boardMpn": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Must be printed or vendor-documented exact identity"
+    },
+    "pcbRev": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "headMpn": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "headRev": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "firmwareVersion": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "mcu": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [
+        "SRC-OID-001",
+        "SRC-OID-003"
+      ],
+      "artifactRefs": [],
+      "notes": "Vendor architecture references are not sample identity"
+    },
+    "storage": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [
+        "SRC-OID-001"
+      ],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "audioPath": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Codec DAC/PWM/I2S amplifier and speaker boundary"
+    },
+    "powerPath": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Battery charge NTC power-path and rail evidence"
+    },
+    "usbData": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [
+        "SRC-OID-001"
+      ],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "wireless": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [
+        "SRC-OID-002",
+        "SRC-OID-003"
+      ],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "eventInterface": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "SDK API or stable frame protocol"
+    },
+    "timestampObservability": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Same-clock event resolved audio-start or external test points"
+    },
+    "codeTool": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Name version offline operation and hash"
+    },
+    "printProfile": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Ink layer dot geometry paper lamination and tolerances"
+    },
+    "buildCli": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "flashCli": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "firmwareOwnership": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Source build static library or stable board API boundary"
+    },
+    "rustExecutionRoute": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Native no_std OpenVela static library ESP-IDF Rust app or stable C ABI"
+    },
+    "rustTargetTriple": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Exact compiler target and host toolchain"
+    },
+    "rustToolchain": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Version source install method and offline archive hash"
+    },
+    "halOrOs": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Exact HAL RTOS BSP and release revision"
+    },
+    "cAbiContract": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "OID storage audio USB logs callbacks ownership and error semantics"
+    },
+    "ffiConcurrencyContract": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Thread ISR callback DMA buffer lifetime and reentrancy rules"
+    },
+    "providerOwnership": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "C acquire/release atomic or interrupt-safe critical section; exactly one Rust-owned handle"
+    },
+    "abiLayoutProbe": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Final board C compiler passes platform-v1 sizeof align offsetof and real C/Rust link probe"
+    },
+    "oidQueueEvidence": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "ISR publication memory ordering sequence wrap cumulative dropped events and end-of-run stats"
+    },
+    "audioTimestampClass": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "request-accepted decoder-first-pcm dma-first-buffer or electrical-output; acoustic timing remains external"
+    },
+    "storageDurabilityContract": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Alignment max transfer atomic unit write acceptance sync durability and torn-write behavior"
+    },
+    "transportStreamContract": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Byte-stream partial reads retained remainder MTU backpressure and zero-side-effect BUSY"
+    },
+    "nativeRustPeripheralReach": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Rust can operate OID storage audio USB and diagnostics through the frozen route"
+    },
+    "unsafeBoundaryPolicy": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Unsafe remains inside the board adapter and has an audit record"
+    },
+    "supplyEvidence": {
+      "state": "PENDING",
+      "value": null,
+      "unit": null,
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Same revision available for later volume"
+    },
+    "boardDimensions": {
+      "state": "PENDING",
+      "value": null,
+      "unit": "mm",
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": null
+    },
+    "headMechanical": {
+      "state": "PENDING",
+      "value": null,
+      "unit": "mm",
+      "evidenceRefs": [],
+      "artifactRefs": [],
+      "notes": "Envelope work distance angle and connector"
+    }
+  },
+  "tests": [
+    {
+      "id": "KIT-IDENTITY",
+      "status": "PENDING",
+      "method": "Record both kit identities front/back labels tools and firmware before power",
+      "acceptance": "Both kits match BOARD_MPN PCB_REV HEAD_MPN HEAD_REV FW_VERSION",
+      "result": null,
+      "instrument": "Camera microscope and file hashes",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-POWER",
+      "status": "PENDING",
+      "method": "Current-limited power-up and rail/idle/peak capture",
+      "acceptance": "No unexplained overcurrent reset or rail violation",
+      "result": null,
+      "instrument": "Bench supply DMM oscilloscope",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-24CODE",
+      "status": "PENDING",
+      "method": "Read 24 unique generated codes with both heads and both print batches",
+      "acceptance": "Each of four head/print cells >=98 percent and zero wrong codes",
+      "result": null,
+      "instrument": "Board logs or synchronized capture",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-NEGATIVE",
+      "status": "PENDING",
+      "method": "Blank and ordinary-print negative matrix",
+      "acceptance": "Zero false triggers in the specified matrix",
+      "result": null,
+      "instrument": "Board logs",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-OFFLINE",
+      "status": "PENDING",
+      "method": "Disable wireless disconnect host and run 100 golden mappings",
+      "acceptance": "100/100 local events and audio",
+      "result": null,
+      "instrument": "Board logs and audio capture",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-TOOLCHAIN",
+      "status": "PENDING",
+      "method": "Rebuild flash log generate codes and print from sealed offline artifacts",
+      "acceptance": "Repeatable commands nonzero failures and recorded hashes",
+      "result": null,
+      "instrument": "Windows workstation",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-C-REFERENCE",
+      "status": "PENDING",
+      "method": "Build flash boot and exercise the supplier C reference on both matching samples",
+      "acceptance": "OID storage audio USB and logs complete with frozen source configuration and hashes",
+      "result": null,
+      "instrument": "Windows workstation and target probes",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-RUST-BOOT",
+      "status": "PENDING",
+      "method": "Build the locked Rust artifact then flash and boot it on both matching samples",
+      "acceptance": "Both samples boot the same binary hash and report matching board head and firmware identities",
+      "result": null,
+      "instrument": "Cargo board flash CLI and target logs",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-RUST-PERIPHERALS",
+      "status": "PENDING",
+      "method": "Exercise OID storage audio USB and diagnostic paths from Rust through the selected native or C ABI route",
+      "acceptance": "Every required peripheral path passes with bounded errors and recorded traces",
+      "result": null,
+      "instrument": "Target logs logic analyzer and audio capture",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-ABI-LAYOUT",
+      "status": "PENDING",
+      "method": "Compile the platform-v1 header with the final board C compiler then link and call it from the locked Rust target",
+      "acceptance": "All sizeof align and offsetof assertions pass and Rust reads the exact provider info structures",
+      "result": null,
+      "instrument": "Final C compiler linker rustc and map file",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-PROVIDER-OWNERSHIP",
+      "status": "PENDING",
+      "method": "Race two startup callers against acquire then release and reacquire under the selected RTOS or critical-section route",
+      "acceptance": "Exactly one caller owns the provider second returns BUSY and post-release reacquire succeeds",
+      "result": null,
+      "instrument": "Target trace and concurrency harness",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-QUEUE-OVERFLOW",
+      "status": "PENDING",
+      "method": "Fill OID and audio ISR queues force overflow wrap sequence and query end-of-run stats",
+      "acceptance": "Every loss appears as a sequence gap and cumulative dropped count with release/acquire or critical-section evidence",
+      "result": null,
+      "instrument": "Target trace logic analyzer and queue counters",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-AUDIO-TIMESTAMP",
+      "status": "PENDING",
+      "method": "Correlate request accepted decoder first PCM DMA first buffer electrical output and acoustic start where observable",
+      "acceptance": "Advertised timestamp class matches the measured stage and request-accepted is excluded from output P95",
+      "result": null,
+      "instrument": "Target trace logic analyzer oscilloscope and microphone",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-STORAGE-POWERLOSS",
+      "status": "PENDING",
+      "method": "Cut power before and after storage_sync across staged data and active-head commit boundaries",
+      "acceptance": "Unsynced writes never masquerade as durable synced content survives and boot selects active or last-good deterministically",
+      "result": null,
+      "instrument": "Programmable supply target logs and raw storage dump",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-TRANSPORT-STREAM",
+      "status": "PENDING",
+      "method": "Replay partial reads MTU boundaries BUSY retry disconnect and resume over the selected physical transport",
+      "acceptance": "Byte order is exact remainder is retained and non-OK calls have the frozen side-effect behavior",
+      "result": null,
+      "instrument": "Host DeviceLink harness and target trace",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-DEVICELINK-TRANSACTION",
+      "status": "PENDING",
+      "method": "Replay DeviceLink v1 transaction transcripts through the target manifest parser storage adapter and selected physical transport including response loss reconnect and power cut points",
+      "acceptance": "Node/Rust semantic results stay identical; durable offsets advance only after sync; manifest-first CAS idempotency and zero-side-effect failures hold; raw transport and storage traces are retained",
+      "result": null,
+      "instrument": "Host DeviceLink runner target trace storage fault injector and power cut fixture",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-C-RUST-DIFF",
+      "status": "PENDING",
+      "method": "Replay identical OID content power and fault vectors through the C reference and Rust product path",
+      "acceptance": "Normalized events state transitions audio selection and errors match the frozen differential contract",
+      "result": null,
+      "instrument": "TestResult v1 host harness",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-RUST-REPRO",
+      "status": "PENDING",
+      "method": "Rebuild the Rust firmware from the sealed toolchain Cargo.lock and source archive without network access",
+      "acceptance": "Binary or documented reproducible sections match and all dependency hashes verify",
+      "result": null,
+      "instrument": "Clean Windows workstation",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-LATENCY",
+      "status": "PENDING",
+      "method": "Capture event resolved first PCM and first acoustic output",
+      "acceptance": "P50 below 150 ms P95 below 200 ms P99 below 300 ms",
+      "result": null,
+      "instrument": "Same-clock log or synchronized logic/audio",
+      "artifactRefs": []
+    },
+    {
+      "id": "KIT-SUPPLY",
+      "status": "PENDING",
+      "method": "Obtain written same-revision sample and volume availability",
+      "acceptance": "Exact identities and lifecycle terms documented",
+      "result": null,
+      "instrument": null,
+      "artifactRefs": []
+    }
+  ],
+  "disposition": {
+    "status": "PENDING",
+    "reason": null
+  },
+  "blockers": [
+    "TWO_MATCHING_KITS_NOT_RECEIVED",
+    "IDENTITY_UNPROVEN",
+    "TOOLS_UNSEALED",
+    "OFFLINE_UNPROVEN",
+    "SUPPLY_UNPROVEN",
+    "RUST_EXECUTION_ROUTE_UNPROVEN",
+    "C_ABI_CONTRACT_UNPROVEN",
+    "PLATFORM_ABI_HIL_PENDING",
+    "C_RUST_DIFFERENTIAL_PENDING"
+  ],
+  "requirements": [
+    "RQ-SP-002",
+    "RQ-SP-003",
+    "RQ-SP-004",
+    "RQ-SP-005",
+    "PS-003",
+    "PS-004",
+    "PS-005",
+    "PS-006"
+  ]
+}

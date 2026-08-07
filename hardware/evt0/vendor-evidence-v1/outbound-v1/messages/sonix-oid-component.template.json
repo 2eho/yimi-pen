@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "documentKind": "mb1-outbound-message",
+  "messageId": "MB1-OUT-SONIX-OID-COMPONENT",
+  "candidateId": "SONIX-OID-COMPONENT",
+  "candidateRole": "OID_MANUFACTURER_CROSSCHECK",
+  "messageStatus": "PREPARED_NOT_SENT",
+  "recipientEntry": {
+    "entryType": "OFFICIAL_ENTRY_MANUAL_SELECTION",
+    "officialEntryUrl": "https://www.sonix.com.tw/page/FAE",
+    "listedAddresses": [],
+    "manualSelectionRequired": true,
+    "note": "松翰当前官方 FAE 路径为会员登录后的技术支持表单，包含联系邮箱与产品线字段；采购人员登录后选择 OID 类别并手动提交，同时建立 Contact Receipt v1。"
+  },
+  "sourceRefs": ["SRC-OID-004", "SRC-OID-005", "SRC-OID-006", "SRC-OID-007", "SRC-OID-008", "SRC-OID-009", "SRC-OID-010", "SRC-MB1-CONTACT-SONIX-PAGE-001", "SRC-MB1-CONTACT-SONIX-SCRIPT-001"],
+  "subject": "益米 Gen1 OID 光学组件与方案伙伴交叉核对（非报价/非下单）",
+  "body": "您好，\n\n我们正在评估离线 OID 点读笔的完整 PCBA/OID 方案。本邮件仅用于原厂目录、模组身份和方案伙伴路径的交叉核对；不是完整 PCBA 报价、订单、付款确认、元件选型或 BOARD_TARGET 冻结。\n\n请书面说明下列资料的当前准确身份与获取路径。若具体料号、revision 或授权边界需要由方案伙伴确认，请提供可核验的官方合作伙伴/FAE 路径。\n\n我们当前仅将 SN95310/SN95350/SN95360、SNM9S5X30BC2100A、SNM9S5430BC2100A 和 SNM9S5630BC2100A 作为原厂目录中的交叉核对基线，不预设任何一个对象为本项目的最终选择。\n\n原始回件将与其它供应商资料一并保留；它本身不触发付款、采购或板卡目标绑定。谢谢。",
+  "requiredAnswers": [
+    { "id": "S01", "request": "当前可订购的 OID Decoder 与 Sensor Module 完整 MPN、封装/变体、生命周期和地区供货核对路径。" },
+    { "id": "S02", "request": "建议的已验证 Decoder/Module/光学头/主机板组合，以及每个组合的 revision 识别方式。" },
+    { "id": "S03", "request": "与该组合对应的数据手册、接口手册、版本记录和已知替代关系的官方获取路径。" },
+    { "id": "S04", "request": "SDK、协议、码工具或 FAE 支持的交付边界与正式申请路径。" },
+    { "id": "S05", "request": "可提供完整点读笔 PCBA/OID 方案的授权伙伴或地区 FAE 联系路径，以及如何验证其同版样品身份。" }
+  ],
+  "attachmentRequests": [
+    { "id": "X01", "request": "准确料号、版本/封装标识与订购状态的原厂文件或可核验入口" },
+    { "id": "X02", "request": "推荐组合的兼容/验证矩阵或正式技术说明" },
+    { "id": "X03", "request": "数据手册、接口手册、版本记录和更替说明" },
+    { "id": "X04", "request": "PCN/EOL、替代料或生命周期资料" },
+    { "id": "X05", "request": "授权伙伴/FAE 路径与正式技术支持申请说明" }
+  ],
+  "replyIntake": {
+    "rawArchiveRoot": "build/vendor-evidence/SONIX-OID-COMPONENT/<received-at>/raw/",
+    "responseRecordTemplate": "hardware/evt0/vendor-evidence-v1/candidate.template.json",
+    "responseRecordDestination": "hardware/evt0/vendor-evidence-v1/records/<sonix-crosscheck-response>.json",
+    "targetBindingEffect": "NONE_VENDOR_CLAIM_ONLY",
+    "paymentGate": "CROSSCHECK_ONLY_NOT_A_PCBA_PAYMENT_GATE",
+    "note": "保存原厂回件、表单导出、PDF 和附件的原始字节/SHA-256。该交叉核对不替代完整 PCBA 候选的 M01–M08、A01–A10 或两套同版样品门。"
+  }
+}

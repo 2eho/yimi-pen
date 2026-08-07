@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "recordKind": "evt0-test-fixture-instance",
+  "instanceId": "EVT0-FIXTURE-INSTANCE-TEMPLATE",
+  "revision": "1.0.0",
+  "status": "TEMPLATE",
+  "profileRef": {
+    "path": "hardware/evt0/test-fixture-v1/profile.json",
+    "sha256": "b177a6641f3c0e7b8199904d94d6121c19dfd8cb5deb408ac86c5f54016c896d",
+    "profileId": "HW-REUSABLE-TEST-FIXTURE-ARCHITECTURE-V1",
+    "revision": "1.0.0"
+  },
+  "adapterRef": {
+    "path": "hardware/evt0/test-fixture-v1/adapter.template.json",
+    "sha256": "801e9c34627141543fed437d932d99facce249ec67ad995a0ee185a9f254eb95",
+    "adapterId": "EVT0-TARGET-ADAPTER-TEMPLATE",
+    "revision": "1.0.0"
+  },
+  "labRegistryRef": {
+    "path": "hardware/evt0/lab-v1/instrument-registry.template.json",
+    "sha256": "7709194ca957ee6b1d0b3ad5c8ca66b174b8fe4665b1255941218047cfd84a94",
+    "registryId": "EVT0-LAB-REGISTRY-TEMPLATE",
+    "status": "TEMPLATE"
+  },
+  "physicalIdentity": {
+    "registrationState": "NOT_REGISTERED",
+    "serial": null,
+    "localAssetTag": null,
+    "identityArtifactRefs": [],
+    "physicalEvidenceState": "PENDING"
+  },
+  "calibration": {
+    "state": "PENDING",
+    "certificateArtifactRefs": [],
+    "referenceArtifactRefs": [],
+    "result": "PENDING"
+  },
+  "qualification": {
+    "state": "NOT_CLAIMED",
+    "physicalReady": false,
+    "effect": "NONE"
+  },
+  "claims": {
+    "physicalFixture": false,
+    "serialKnown": false,
+    "calibrationKnown": false,
+    "qualified": false,
+    "releaseGateClosed": false,
+    "boardStatePromoted": false
+  },
+  "effects": {
+    "targetBinding": "NONE",
+    "adapter": "NONE",
+    "physicalEvidence": "NONE",
+    "releaseGate": "NONE",
+    "promotion": "NONE"
+  },
+  "blockers": [
+    "FIXTURE_NOT_REGISTERED",
+    "ADAPTER_TEMPLATE_ONLY",
+    "LAB_REGISTRY_TEMPLATE_ONLY",
+    "NO_SERIAL_OR_LOCAL_ASSET_TAG",
+    "NO_CALIBRATION_OR_QUALIFICATION_EVIDENCE"
+  ]
+}
